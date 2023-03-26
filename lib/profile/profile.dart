@@ -1,7 +1,8 @@
 import 'dart:ui';
 
-import 'package:appstore/color.dart';
-import 'package:appstore/search.dart';
+import 'package:appstore/color/color.dart';
+
+import 'package:appstore/search/search.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatelessWidget {

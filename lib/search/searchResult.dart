@@ -1,11 +1,9 @@
 import 'dart:ui';
 
-import 'package:appstore/Handbags.dart';
-
+import 'package:appstore/color/color.dart';
+import 'package:appstore/selectType/Handbags.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'color.dart';
 
 class Searchresult extends StatelessWidget {
   Searchresult({super.key, required this.select});

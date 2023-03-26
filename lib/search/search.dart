@@ -1,5 +1,6 @@
-import 'package:appstore/color.dart';
-import 'package:appstore/mainScreen.dart';
+import 'package:appstore/color/color.dart';
+import 'package:appstore/firstScreen/mainScreen.dart';
+
 import 'package:flutter/material.dart';
 
 class Search extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'dart:ffi';
 
-import 'package:appstore/color.dart';
+import 'package:appstore/color/color.dart';
 import 'package:expandable/expandable.dart';
 
 import 'package:flutter/material.dart';

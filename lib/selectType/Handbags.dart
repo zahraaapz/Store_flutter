@@ -1,18 +1,19 @@
-import 'package:appstore/Model.dart';
+import 'package:appstore/firstScreen/mainScreen.dart';
+import 'package:appstore/model/Model.dart';
 import 'package:flutter/widgets.dart';
 
 import 'dart:convert' as convert;
 
 import 'package:http/http.dart' as http;
 
-import 'package:appstore/color.dart';
-import 'package:appstore/mainScreen.dart';
-import 'package:appstore/main_handbag.dart';
+import 'package:appstore/color/color.dart';
+
+import 'package:appstore/selectType/main_handbag.dart';
 
 import 'package:flutter/material.dart';
 
 class Handbags extends StatefulWidget {
-  int select;
+  late int select;
 
   Handbags({super.key, required this.select});
 
@@ -29,39 +30,12 @@ class _HandbagsState extends State<Handbags> {
   List<Kala> jewellerylist = [];
   List<Kala> eyewearlist = [];
   List<Kala> shoeslist = [];
-  List<bool> fav = [];
-
-  getLike(select, fav) {
+  List fav = [];
+  Future like(select) async {
     if (select == 0) {
-      int c = skincarelist.length;
-      fav = List.filled(c, true);
-
-      return fav;
-    }
-    if (select == 1) {
-      fav = List.filled("${watcheslist.length}", true);
-
-      return fav;
-    }
-    if (select == 2) {
-      fav = List.filled(handbaglist.length, true);
-
-      return fav;
-    }
-    if (select == 3) {
-      fav = List.filled(jewellerylist.length, true);
-
-      return fav;
-    }
-    if (select == 4) {
-      fav = List.filled(eyewearlist.length, true);
-
-      return fav;
-    }
-    if (select == 0) {
-      fav = List.filled(shoeslist.length, true);
-
-      return fav;
+      setState(() {
+        fav = List.filled(skincarelist.length, true);
+      });
     }
   }
 
@@ -182,13 +156,12 @@ class _HandbagsState extends State<Handbags> {
     }
   }
 
-  _HandbagsState({
-    required this.select,
-  });
+  _HandbagsState({required this.select});
   @override
   void initState() {
     super.initState();
     getlist(context, select);
+    like(select);
   }
 
   @override

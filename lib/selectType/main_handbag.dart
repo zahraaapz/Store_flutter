@@ -1,11 +1,11 @@
 import 'dart:math';
 
-import 'package:appstore/Handbags.dart';
-import 'package:appstore/Model.dart';
-import 'package:appstore/getlist.dart';
+import 'package:appstore/review/review.dart';
+import 'package:appstore/selectType/Handbags.dart';
+import 'package:appstore/model/Model.dart';
+import 'package:appstore/getList/getlist.dart';
 
-import 'package:appstore/color.dart';
-import 'package:appstore/review.dart';
+import 'package:appstore/color/color.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

@@ -1,10 +1,12 @@
-import 'package:appstore/Handbags.dart';
-import 'package:appstore/Model.dart';
-import 'package:appstore/color.dart';
-import 'package:appstore/expandable.dart';
+import 'package:appstore/firstScreen/expandable.dart';
+import 'package:appstore/model/Model.dart';
+import 'package:appstore/color/color.dart';
+import 'package:appstore/search/search.dart';
+import 'package:appstore/selectType/Handbags.dart';
+
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
-import 'package:appstore/search.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

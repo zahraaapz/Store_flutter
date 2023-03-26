@@ -1,9 +1,7 @@
-import 'package:appstore/Handbags.dart';
-import 'package:appstore/chart.dart';
-import 'package:appstore/review.dart';
+import 'package:appstore/selectType/Handbags.dart';
 
-import 'package:appstore/splash-screen.dart';
-import 'package:appstore/wishlist.dart';
+import 'package:appstore/splash/splash-screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

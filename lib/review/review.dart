@@ -1,5 +1,7 @@
-import 'package:appstore/Model.dart';
-import 'package:appstore/main_handbag.dart';
+import 'package:appstore/color/color.dart';
+import 'package:appstore/model/Model.dart';
+import 'package:appstore/selectType/main_handbag.dart';
+
 import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +11,6 @@ import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 
 import 'chart.dart';
-import 'color.dart';
 
 class Review extends StatefulWidget {
   Review(

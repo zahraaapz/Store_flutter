@@ -1,15 +1,9 @@
-import 'package:appstore/Extracthomescreen.dart';
-import 'package:appstore/Handbags.dart';
-import 'package:appstore/Model.dart';
-import 'package:appstore/chart.dart';
-import 'package:appstore/review.dart';
-import 'package:appstore/color.dart';
+import 'package:appstore/firstScreen/extractMainScreen.dart';
+import 'package:appstore/model/Model.dart';
 
-import 'package:appstore/profile.dart';
-import 'package:appstore/review.dart';
-import 'package:appstore/search.dart';
+import 'package:appstore/profile/profile.dart';
 
-import 'package:appstore/wishlist.dart';
+import 'package:appstore/color/color.dart';
 
 import 'package:flutter/material.dart';
 
