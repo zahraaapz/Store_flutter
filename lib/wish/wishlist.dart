@@ -111,7 +111,7 @@ class _WishState extends State<Wish> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(wishList[index].name),
-                        Text(wishList[index].price),
+                        Text("${wishList[index].price}\$"),
                       ],
                     ),
                   ],

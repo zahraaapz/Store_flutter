@@ -3,6 +3,7 @@ import 'package:appstore/model/Model.dart';
 import 'package:appstore/color/color.dart';
 import 'package:appstore/search/search.dart';
 import 'package:appstore/selectType/Handbags.dart';
+import 'package:appstore/wish/wishlist.dart';
 
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
@@ -129,6 +130,18 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: ((context) => Handbags(select: select))));
+                      },
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    GestureDetector(
+                      child: const Text('Wishlist',
+                          style: TextStyle(color: Rang.blue)),
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: ((context) =>
+                                Wish(fav, suggestList, select))));
                       },
                     ),
                   ]),
@@ -591,6 +604,9 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                                                           height: 80,
                                                           width: 50,
                                                           decoration: BoxDecoration(
+                                                              border: Border.all(
+                                                                  color: Rang
+                                                                      .blue),
                                                               color: select ==
                                                                       index
                                                                   ? const Color
