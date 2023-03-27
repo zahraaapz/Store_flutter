@@ -2,7 +2,8 @@ import 'package:appstore/firstScreen/expandable.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/color/color.dart';
 import 'package:appstore/search/search.dart';
-import 'package:appstore/selectType/Handbags.dart';
+
+import 'package:appstore/selectType/select_kala.dart';
 import 'package:appstore/wish/wishlist.dart';
 
 import 'dart:convert' as convert;
@@ -122,7 +123,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: ((context) =>
-                                          Handbags(select: index))));
+                                          SelectKala(select: index))));
                                 },
                               ),
                             );
@@ -139,7 +140,8 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                           style: TextStyle(color: Rang.blue)),
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: ((context) => Handbags(select: select))));
+                            builder: ((context) =>
+                                SelectKala(select: select))));
                       },
                     ),
                     const SizedBox(
@@ -405,7 +407,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                             });
 
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Handbags(
+                                builder: (context) => SelectKala(
                                       select: select,
                                     )));
                           },
@@ -743,9 +745,11 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                               });
                             },
                             child: Icon(
-                              fav[index] == false
-                                  ? Icons.favorite
-                                  : Icons.favorite_border,
+                              fav.isEmpty
+                                  ? Icons.favorite_border
+                                  : fav[index] == false
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
                               size: 20,
                               color: Colors.black,
                             ),
