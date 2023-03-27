@@ -31,12 +31,15 @@ class _HandbagsState extends State<Handbags> {
   List<Kala> eyewearlist = [];
   List<Kala> shoeslist = [];
   List fav = [];
-  Future like(select) async {
-    if (select == 0) {
-      setState(() {
-        fav = List.filled(skincarelist.length, true);
-      });
-    }
+  void like(int length) {
+    setState(() {
+      fav.length = length;
+      fav = List.generate(
+        length,
+        growable: true,
+        (index) => true,
+      );
+    });
   }
 
   Future getlist(BuildContext context, select) async {
@@ -338,6 +341,19 @@ class _HandbagsState extends State<Handbags> {
                                                               .name),
                                       GestureDetector(
                                         onTap: () {
+                                          like(select == 0
+                                              ? skincarelist.length
+                                              : select == 1
+                                                  ? watcheslist.length
+                                                  : select == 2
+                                                      ? handbaglist.length
+                                                      : select == 3
+                                                          ? jewellerylist.length
+                                                          : select == 4
+                                                              ? eyewearlist
+                                                                  .length
+                                                              : shoeslist
+                                                                  .length);
                                           setState(() {
                                             fav[index] = !fav[index];
                                             if (fav[index] == false &&
