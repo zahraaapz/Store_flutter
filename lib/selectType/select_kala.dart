@@ -1,6 +1,8 @@
 import 'package:appstore/firstScreen/mainScreen.dart';
 import 'package:appstore/model/Model.dart';
+import 'package:appstore/selectType/detail_kala.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'dart:convert' as convert;
 
@@ -8,20 +10,18 @@ import 'package:http/http.dart' as http;
 
 import 'package:appstore/color/color.dart';
 
-import 'package:appstore/selectType/main_handbag.dart';
-
 import 'package:flutter/material.dart';
 
-class Handbags extends StatefulWidget {
+class SelectKala extends StatefulWidget {
   late int select;
 
-  Handbags({super.key, required this.select});
+  SelectKala({super.key, required this.select});
 
   @override
-  State<Handbags> createState() => _HandbagsState(select: select);
+  State<SelectKala> createState() => _SelectKalaState(select: select);
 }
 
-class _HandbagsState extends State<Handbags> {
+class _SelectKalaState extends State<SelectKala> {
   String? sel;
   int select;
   List<Kala> skincarelist = [];
@@ -159,7 +159,7 @@ class _HandbagsState extends State<Handbags> {
     }
   }
 
-  _HandbagsState({required this.select});
+  _SelectKalaState({required this.select});
   @override
   void initState() {
     super.initState();
@@ -273,8 +273,7 @@ class _HandbagsState extends State<Handbags> {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: ((context) =>
-                                                  Main_handbag(
+                                              builder: ((context) => DetailKala(
                                                     index: index,
                                                     select: select,
                                                     Kalalist: select == 0
@@ -464,7 +463,7 @@ class _HandbagsState extends State<Handbags> {
                             );
                           })),
                     )
-                  : const CircularProgressIndicator(
+                  : const SpinKitThreeBounce(
                       color: Rang.blue,
                     );
             },

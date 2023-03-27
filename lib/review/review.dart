@@ -1,6 +1,6 @@
 import 'package:appstore/color/color.dart';
 import 'package:appstore/model/Model.dart';
-import 'package:appstore/selectType/main_handbag.dart';
+import 'package:appstore/selectType/detail_kala.dart';
 
 import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
@@ -77,7 +77,7 @@ class _ReviewState extends State<Review> {
                               GestureDetector(
                                 onTap: (() {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: ((context) => Main_handbag(
+                                      builder: ((context) => DetailKala(
                                           index: index,
                                           select: select,
                                           Kalalist: listkala))));

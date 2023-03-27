@@ -1,7 +1,8 @@
 import 'dart:ui';
 
 import 'package:appstore/color/color.dart';
-import 'package:appstore/selectType/Handbags.dart';
+
+import 'package:appstore/selectType/select_kala.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -79,7 +80,7 @@ class Searchresult extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: ((context) => Handbags(
+                        builder: ((context) => SelectKala(
                               select: select,
                             ))));
               }),

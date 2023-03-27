@@ -1,5 +1,3 @@
-import 'package:appstore/selectType/Handbags.dart';
-
 import 'package:appstore/splash/splash-screen.dart';
 
 import 'package:flutter/material.dart';

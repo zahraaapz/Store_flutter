@@ -1,3 +1,5 @@
+// ignore_for_file: no_logic_in_create_state
+
 import 'package:appstore/color/color.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ class Wish extends StatefulWidget {
   List<bool>? fav = [];
   int? select;
   List<Kala>? Kalalist = [];
+  // ignore: use_key_in_widget_constructors
   Wish([this.fav, this.Kalalist, this.select]);
 
   @override

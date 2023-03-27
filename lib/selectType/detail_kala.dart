@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:appstore/review/review.dart';
-import 'package:appstore/selectType/Handbags.dart';
+
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/getList/getlist.dart';
 
@@ -10,24 +10,24 @@ import 'package:appstore/color/color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Main_handbag extends StatefulWidget {
+class DetailKala extends StatefulWidget {
   int index;
   int select;
   List<Kala> Kalalist;
-  Main_handbag(
+  DetailKala(
       {super.key,
       required this.index,
       required this.select,
       required this.Kalalist});
 
   @override
-  State<Main_handbag> createState() =>
+  State<DetailKala> createState() =>
       // ignore: no_logic_in_create_state
-      _Main_handbagState(select: select, index: index, Kalalist: Kalalist);
+      _DetailKalaState(select: select, index: index, Kalalist: Kalalist);
 }
 
-class _Main_handbagState extends State<Main_handbag> {
-  _Main_handbagState(
+class _DetailKalaState extends State<DetailKala> {
+  _DetailKalaState(
       {required this.select, required this.index, required this.Kalalist});
   List<Kala> Kalalist;
   int select;
