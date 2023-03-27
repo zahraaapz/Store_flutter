@@ -21,8 +21,18 @@ class Extractmainscreen extends StatefulWidget {
 class _ExtractmainscreenState extends State<Extractmainscreen> {
   static List<Kala> suggestList = [];
   int select = 0;
-  static List<bool> fav = List.filled(3, true);
+  List<bool> fav = [];
   GlobalKey<ScaffoldState> key = GlobalKey();
+  void like(int length) {
+    setState(() {
+      fav.length = length;
+      fav = List.generate(
+        length,
+        growable: true,
+        (index) => true,
+      );
+    });
+  }
 
   Future getsuggest() async {
     var url = 'http://api.npoint.io/a39a864e182d11ed355b';
@@ -428,7 +438,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
     );
   }
 
-  SizedBox suggList(Size size, List<bool> fav) {
+  SizedBox suggList(Size size, fav) {
     return SizedBox(
       height: size.height / 4.2,
       width: double.infinity,
@@ -719,6 +729,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                                   const TextStyle(fontWeight: FontWeight.bold)),
                           GestureDetector(
                             onTap: () {
+                              like(suggestList.length);
                               setState(() {
                                 fav[index] = !fav[index];
                                 if (fav[index] == false &&
