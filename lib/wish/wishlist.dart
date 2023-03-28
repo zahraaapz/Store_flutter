@@ -5,7 +5,7 @@ import 'package:appstore/model/Model.dart';
 import 'package:flutter/material.dart';
 
 class Wish extends StatefulWidget {
-  List<bool>? fav = [];
+  List? fav = [];
   int? select;
   List<Kala>? Kalalist = [];
   // ignore: use_key_in_widget_constructors
@@ -18,7 +18,7 @@ class Wish extends StatefulWidget {
 
 class _WishState extends State<Wish> {
   _WishState({required this.fav, required this.Kalalist, required this.select});
-  List<bool> fav = [];
+  List fav = [];
   int select;
   List<Kala> Kalalist = [];
 

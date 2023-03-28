@@ -4,6 +4,7 @@ import 'package:appstore/model/Model.dart';
 import 'package:appstore/profile/profile.dart';
 
 import 'package:appstore/color/color.dart';
+import 'package:appstore/review/review.dart';
 import 'package:appstore/wish/wishlist.dart';
 
 import 'package:flutter/material.dart';
@@ -26,7 +27,6 @@ class _HomeState extends State<Home> {
         body: Stack(children: [
           IndexedStack(index: selectpg, children: [
             Extractmainscreen(),
-            // Wish(),
             Profile(),
           ]),
           Buttonbar(

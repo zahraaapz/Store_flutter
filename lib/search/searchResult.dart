@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:appstore/color/color.dart';
+import 'package:appstore/search/search.dart';
 
 import 'package:appstore/selectType/select_kala.dart';
 import 'package:flutter/cupertino.dart';
@@ -77,12 +78,8 @@ class Searchresult extends StatelessWidget {
             width: 250,
             child: ElevatedButton(
               onPressed: (() {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: ((context) => SelectKala(
-                              select: select,
-                            ))));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: ((context) => Search())));
               }),
               child: const Text(
                 'Back to home',

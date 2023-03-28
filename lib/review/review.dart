@@ -27,7 +27,7 @@ class Review extends StatefulWidget {
 }
 
 class _ReviewState extends State<Review> {
-  static List<Comment> comment = [];
+  List<Comment> comment = [];
   List<Kala> listkala = [];
   int index, select;
   _ReviewState(
@@ -60,75 +60,73 @@ class _ReviewState extends State<Review> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return FutureBuilder(
       builder: (context, snapshot) {
         return snapshot.hasData
-            ? SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: SafeArea(
-                  child: Scaffold(
-                    backgroundColor: Colors.white,
-                    body: Column(children: [
-                      Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              GestureDetector(
-                                onTap: (() {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: ((context) => DetailKala(
-                                          index: index,
-                                          select: select,
-                                          Kalalist: listkala))));
-                                }),
-                                child: const Icon(
-                                  Icons.arrow_back_ios,
-                                  color: Rang.blue,
+            ? Scaffold(
+                backgroundColor: Colors.white,
+                body: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(3.0),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                    child: Row(children: [
+                                  IconButton(
+                                      onPressed: (() {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: ((context) =>
+                                                    DetailKala(
+                                                        index: index,
+                                                        select: select,
+                                                        Kalalist: listkala))));
+                                      }),
+                                      icon: Icon(
+                                        Icons.arrow_back_ios,
+                                        color: Rang.blue,
+                                      )),
+                                  Text(
+                                      "${(comment[0].score + comment[1].score + comment[2].score + comment[3].score + comment[4].score) / 5}"),
+                                  const Icon(
+                                    CupertinoIcons.star_fill,
+                                    color: Rang.orange,
+                                    size: 20,
+                                  ),
+                                ])),
+                                const SizedBox(
+                                  width: 12,
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 15,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(3.0),
-                                child: Row(
-                                  children: [
-                                    SizedBox(
-                                        child: Row(children: [
-                                      Text(
-                                          "${(comment[0].score + comment[1].score + comment[2].score + comment[3].score + comment[4].score) / 5}"),
-                                      const Icon(
-                                        CupertinoIcons.star_fill,
-                                        color: Rang.orange,
-                                        size: 20,
-                                      ),
-                                    ])),
-                                    const SizedBox(
-                                      width: 12,
-                                    ),
-                                    const Text(
-                                      'Avrage Rating',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              chart(
-                                comment: comment,
-                              ),
-                              ExpandableNotifier(
-                                  child: ScrollOnExpand(
-                                      child: Expandable(
-                                collapsed: collapseComment(context, comment),
-                                expanded: expandedComment(context, comment),
-                              ))),
-                            ],
-                          )),
-                    ]),
-                  ),
+                                const Text(
+                                  'Avrage Rating',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          ),
+                          chart(
+                            comment: comment,
+                          ),
+                          ExpandableNotifier(
+                              child: ScrollOnExpand(
+                                  child: Expandable(
+                            collapsed: collapseComment(context, comment),
+                            expanded: expandedComment(context, comment),
+                          ))),
+                        ],
+                      )),
                 ),
               )
             : const Center(
@@ -206,7 +204,7 @@ expandedComment(context, List<Comment> comment) {
     crossAxisAlignment: CrossAxisAlignment.end,
     children: [
       SizedBox(
-        height: 460,
+        height: 490,
         child: ListView.builder(
             physics: const ClampingScrollPhysics(),
             itemCount: 5,

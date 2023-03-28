@@ -21,17 +21,14 @@ class Extractmainscreen extends StatefulWidget {
 
 class _ExtractmainscreenState extends State<Extractmainscreen> {
   static List<Kala> suggestList = [];
-  int select = 0;
-  List<bool> fav = [];
   GlobalKey<ScaffoldState> key = GlobalKey();
-  void like(int length) {
+  int select = 0;
+  List fav = [];
+
+  void like(int length, int index) {
     setState(() {
       fav.length = length;
-      fav = List.generate(
-        length,
-        growable: true,
-        (index) => true,
-      );
+      fav[index] == true;
     });
   }
 
@@ -111,19 +108,20 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                     SizedBox(
                       height: 220,
                       child: ListView.builder(
-                          physics: ClampingScrollPhysics(),
+                          physics: const ClampingScrollPhysics(),
                           itemCount: type.length,
                           itemBuilder: ((context, index) {
                             return Padding(
                               padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
                               child: GestureDetector(
                                 child: Text(type[index],
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Rang.blue, fontSize: 15)),
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: ((context) =>
-                                          SelectKala(select: index))));
+                                      builder: ((context) => SelectKala(
+                                            select: index,
+                                          ))));
                                 },
                               ),
                             );
@@ -138,11 +136,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                     GestureDetector(
                       child: const Text('Help & Support',
                           style: TextStyle(color: Rang.blue)),
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: ((context) =>
-                                SelectKala(select: select))));
-                      },
+                      onTap: () {},
                     ),
                     const SizedBox(
                       height: 12,
@@ -440,7 +434,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
     );
   }
 
-  SizedBox suggList(Size size, fav) {
+  SizedBox suggList(size, fav) {
     return SizedBox(
       height: size.height / 4.2,
       width: double.infinity,
@@ -731,7 +725,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                                   const TextStyle(fontWeight: FontWeight.bold)),
                           GestureDetector(
                             onTap: () {
-                              like(suggestList.length);
+                              like(suggestList.length, index);
                               setState(() {
                                 fav[index] = !fav[index];
                                 if (fav[index] == false &&

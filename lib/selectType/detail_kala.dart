@@ -6,6 +6,7 @@ import 'package:appstore/model/Model.dart';
 import 'package:appstore/getList/getlist.dart';
 
 import 'package:appstore/color/color.dart';
+import 'package:appstore/selectType/select_kala.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,7 @@ class _DetailKalaState extends State<DetailKala> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
           body: SingleChildScrollView(
@@ -51,7 +53,10 @@ class _DetailKalaState extends State<DetailKala> {
                       color: Rang.blue,
                     ),
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: ((context) => SelectKala(
+                                select: select,
+                              ))));
                     },
                   ),
                 ],

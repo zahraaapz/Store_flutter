@@ -13,9 +13,9 @@ import 'package:appstore/color/color.dart';
 import 'package:flutter/material.dart';
 
 class SelectKala extends StatefulWidget {
-  late int select;
+  int select;
 
-  SelectKala({super.key, required this.select});
+  SelectKala({required this.select});
 
   @override
   State<SelectKala> createState() => _SelectKalaState(select: select);
@@ -24,6 +24,7 @@ class SelectKala extends StatefulWidget {
 class _SelectKalaState extends State<SelectKala> {
   String? sel;
   int select;
+
   List<Kala> skincarelist = [];
   List<Kala> watcheslist = [];
   List<Kala> handbaglist = [];
