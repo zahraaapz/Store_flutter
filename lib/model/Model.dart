@@ -53,14 +53,6 @@ List<IconData> ikon = [
 ];
 
 List<Kala> wishList = [];
-List<String> type = [
-  'Skincare',
-  'Watches',
-  'Handbag',
-  'Jewelley',
-  'Eyewear',
-  'Shoes'
-];
 
 class Comment {
   String name, date, time, review;

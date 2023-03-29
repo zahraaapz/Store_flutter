@@ -22,13 +22,11 @@ class Extractmainscreen extends StatefulWidget {
 class _ExtractmainscreenState extends State<Extractmainscreen> {
   static List<Kala> suggestList = [];
   GlobalKey<ScaffoldState> key = GlobalKey();
-  int select = 0;
-  List fav = [];
-
-  void like(int length, int index) {
+  int? select;
+  List<bool> fav = [];
+  like(int length) {
     setState(() {
-      fav.length = length;
-      fav[index] == true;
+      fav = List.generate(length, ((index) => true));
     });
   }
 
@@ -109,17 +107,17 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                       height: 220,
                       child: ListView.builder(
                           physics: const ClampingScrollPhysics(),
-                          itemCount: type.length,
+                          itemCount: Model.modelList.length,
                           itemBuilder: ((context, index) {
                             return Padding(
                               padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
                               child: GestureDetector(
-                                child: Text(type[index],
+                                child: Text(Model.modelList[index].title,
                                     style: const TextStyle(
                                         color: Rang.blue, fontSize: 15)),
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: ((context) => SelectKala(
+                                      builder: ((context) => Select_kala(
                                             select: index,
                                           ))));
                                 },
@@ -144,11 +142,11 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                     GestureDetector(
                       child: const Text('Wishlist',
                           style: TextStyle(color: Rang.blue)),
-                      onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: ((context) =>
-                                Wish(fav, suggestList, select))));
-                      },
+                      // onTap: () {
+                      //   Navigator.of(context).push(MaterialPageRoute(
+                      //       builder: ((context) =>
+                      //           Wish(fav, suggestList, select))));
+                      // },
                     ),
                   ]),
             ),
@@ -262,7 +260,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                   ),
                 ),
                 //////suggest List
-                suggList(size, fav),
+                suggList(size),
                 Container(
                   ///collection container
                   color: Rang.blue,
@@ -383,7 +381,6 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
         height: size.height / 6.6,
         width: double.infinity,
         child: ListView.builder(
-            ////first listview
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
             itemCount: Model.modelList.length,
@@ -401,8 +398,8 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                             });
 
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => SelectKala(
-                                      select: select,
+                                builder: (context) => Select_kala(
+                                      select: select!,
                                     )));
                           },
                           child: Container(
@@ -434,7 +431,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
     );
   }
 
-  SizedBox suggList(size, fav) {
+  SizedBox suggList(size) {
     return SizedBox(
       height: size.height / 4.2,
       width: double.infinity,
@@ -723,31 +720,13 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                           Text(suggestList[index].brand,
                               style:
                                   const TextStyle(fontWeight: FontWeight.bold)),
-                          GestureDetector(
-                            onTap: () {
-                              like(suggestList.length, index);
-                              setState(() {
-                                fav[index] = !fav[index];
-                                if (fav[index] == false &&
-                                    !wishList.contains(suggestList[index])) {
-                                  wishList.add(suggestList[index]);
-                                }
-                                if (wishList.contains(suggestList[index]) &&
-                                    fav[index] == true) {
-                                  wishList.remove(suggestList[index]);
-                                }
-                              });
-                            },
-                            child: Icon(
-                              fav.isEmpty
-                                  ? Icons.favorite_border
-                                  : fav[index] == false
-                                      ? Icons.favorite
-                                      : Icons.favorite_border,
-                              size: 20,
-                              color: Colors.black,
-                            ),
-                          )
+                          // Icon(
+                          //   f[index] == false
+                          //       ? Icons.favorite
+                          //       : Icons.favorite_border,
+                          //   size: 20,
+                          //   color: Colors.black,
+                          // )
                         ],
                       ),
                     ),

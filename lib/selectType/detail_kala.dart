@@ -54,7 +54,7 @@ class _DetailKalaState extends State<DetailKala> {
                     ),
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: ((context) => SelectKala(
+                          builder: ((context) => Select_kala(
                                 select: select,
                               ))));
                     },
