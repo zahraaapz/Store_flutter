@@ -48,8 +48,11 @@ class _BagState extends State<Bag> {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
-                              height: 190,
-                              color: Colors.white,
+                              height: 200,
+                              decoration: BoxDecoration(
+                                  boxShadow: [BoxShadow(blurRadius: 7)],
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15)),
                               child: Column(children: [
                                 Row(
                                   children: [
@@ -85,17 +88,19 @@ class _BagState extends State<Bag> {
                                             height: 40,
                                             child: Padding(
                                               padding:
-                                                  const EdgeInsets.all(2.0),
+                                                  const EdgeInsets.all(8.0),
                                               child: Row(
                                                 children: [
                                                   Text('Qnty: $i'.toString()),
-                                                  IconButton(
-                                                      onPressed: (() {
-                                                        setState(() {
-                                                          i = i + 1;
-                                                        });
-                                                      }),
-                                                      icon: Icon(Icons.add))
+                                                  InkWell(
+                                                      onTap: () {
+                                                        setState(
+                                                          () {
+                                                            i - i + 1;
+                                                          },
+                                                        );
+                                                      },
+                                                      child: Icon(Icons.add))
                                                 ],
                                               ),
                                             ),
@@ -103,7 +108,7 @@ class _BagState extends State<Bag> {
                                           SizedBox(
                                             height: 10,
                                           ),
-                                          Text('${i * 2000}'),
+                                          Text('${i * 2000}\$'),
                                         ],
                                       ),
                                     )
