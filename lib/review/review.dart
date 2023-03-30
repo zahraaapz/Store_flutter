@@ -37,7 +37,8 @@ class _ReviewState extends State<Review> {
     var value = await http.get(Uri.parse(url));
 
     List json = convert.jsonDecode(value.body);
-    if (2 + 2 == 4) {
+    if (2.isFinite) {
+      ///:(
       for (int i = 0; i < json.length; i++) {
         setState(() {
           comment.add(Comment(

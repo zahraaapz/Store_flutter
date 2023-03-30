@@ -132,6 +132,13 @@ packages:
       url: "https://mirror.flutterfarsi.ir"
     source: hosted
     version: "0.5.1"
+  flutter_custom_clippers:
+    dependency: "direct main"
+    description:
+      name: flutter_custom_clippers
+      url: "https://mirror.flutterfarsi.ir"
+    source: hosted
+    version: "2.1.0"
   flutter_lints:
     dependency: "direct dev"
     description:
