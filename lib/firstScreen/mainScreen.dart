@@ -1,3 +1,4 @@
+import 'package:appstore/bag.dart';
 import 'package:appstore/firstScreen/extractMainScreen.dart';
 import 'package:appstore/model/Model.dart';
 
@@ -25,10 +26,9 @@ class _HomeState extends State<Home> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Stack(children: [
-          IndexedStack(index: selectpg, children: [
-            Extractmainscreen(),
-            Profile(),
-          ]),
+          IndexedStack(
+              index: selectpg,
+              children: [Extractmainscreen(), Profile(), Bag()]),
           Buttonbar(
               selectpg: selectpg,
               changeScreen: (int newpg) {
