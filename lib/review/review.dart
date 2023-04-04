@@ -126,6 +126,12 @@ class _ReviewState extends State<Review> {
                             collapsed: collapseComment(context, comment),
                             expanded: expandedComment(context, comment),
                           ))),
+                          ExpandableNotifier(
+                              child: ScrollOnExpand(
+                                  child: Expandable(
+                            collapsed: write(),
+                            expanded: descripe(),
+                          ))),
                         ],
                       )),
                 ),
@@ -274,4 +280,90 @@ expandedComment(context, List<Comment> comment) {
       })
     ],
   );
+}
+
+write() {
+  return Column(children: [
+    Builder(builder: (context) {
+      var controller = ExpandableController.of(context, required: true)!;
+
+      return Container(
+        width: double.infinity,
+        height: 50,
+        child: ElevatedButton(
+            style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Rang.blue)),
+            onPressed: () {
+              controller.toggle();
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.add),
+                SizedBox(
+                  width: 8,
+                ),
+                Text('Write a Review'),
+              ],
+            )),
+      );
+    })
+  ]);
+}
+
+descripe() {
+  return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+    Builder(builder: (context) {
+      var controller = ExpandableController.of(context, required: true)!;
+      return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text('Review Description'),
+        SizedBox(
+          height: 12,
+        ),
+        Container(
+          width: double.infinity,
+          height: 100,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15), color: Rang.toosi),
+          child: TextField(
+            keyboardType: TextInputType.multiline,
+            maxLines: 3,
+            decoration: InputDecoration(
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Rang.toosi)),
+                hintText: 'Enter Description',
+                border: OutlineInputBorder(
+                    borderSide: BorderSide.none,
+                    borderRadius: BorderRadius.circular(15))),
+          ),
+        ),
+        Container(
+          width: double.infinity,
+          height: 50,
+          child: ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Rang.blue),
+              ),
+              onPressed: () {
+                controller.toggle();
+                _snackbar(context);
+              },
+              child: Row(
+                children: [
+                  Icon(Icons.add),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text('Save'),
+                ],
+              )),
+        )
+      ]);
+    })
+  ]);
+}
+
+_snackbar(context) {
+  ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(backgroundColor: Rang.blue, content: Text('Saved :)')));
 }
