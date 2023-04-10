@@ -13,6 +13,7 @@ class Model {
     Model(ima: 'assets/p5.png', title: 'Shoes'),
   ];
 }
+List<String> addresslist=['Office','Home','Other'];
 
 class Kala {
   String ima;

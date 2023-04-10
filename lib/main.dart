@@ -1,5 +1,5 @@
-import 'package:appstore/bag.dart';
-import 'package:appstore/splash/splash-screen.dart';
+import 'package:appstore/address.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,6 +18,6 @@ class AppStore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: splash());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: address());
   }
 }
