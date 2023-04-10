@@ -39,8 +39,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   font_awesome_flutter: ^10.2.1
   http: ^0.13.5
-
   d_chart: ^2.2.11
+
 
 dev_dependencies:
   flutter_test:
