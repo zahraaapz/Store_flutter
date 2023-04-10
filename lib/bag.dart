@@ -250,7 +250,7 @@ class _BagState extends State<Bag> {
                                 ),
                                 ElevatedButton(
                                     style: ButtonStyle(
-                                        elevation: MaterialStateProperty.all(9),
+                                       shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
                                         backgroundColor:
                                             MaterialStateProperty.all(
                                                 Rang.blue)),

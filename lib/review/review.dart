@@ -342,6 +342,7 @@ descripe() {
           height: 50,
           child: ElevatedButton(
               style: ButtonStyle(
+                 shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
                 backgroundColor: MaterialStateProperty.all(Rang.blue),
               ),
               onPressed: () {
