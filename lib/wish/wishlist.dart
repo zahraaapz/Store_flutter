@@ -64,12 +64,12 @@ class _WishState extends State<Wish> {
                           image: DecorationImage(
                               fit: BoxFit.fill,
                               alignment: Alignment.center,
-                              image: Image.asset(wishList[index].ima).image)),
+                              image: Image.asset(wishList[index].ima!).image)),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(wishList[index].brand),
+                        Text(wishList[index].brand!),
                         GestureDetector(
                           onTap: (() {
                             setState(
@@ -113,7 +113,7 @@ class _WishState extends State<Wish> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(wishList[index].name),
+                        Text(wishList[index].name!),
                         Text("${wishList[index].price}\$"),
                       ],
                     ),

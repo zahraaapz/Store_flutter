@@ -10,6 +10,9 @@ import 'package:appstore/selectType/select_kala.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../controller/homeScreenController.dart';
 
 class DetailKala extends StatefulWidget {
   int index;
@@ -33,7 +36,7 @@ class _DetailKalaState extends State<DetailKala> {
   List<Kala> Kalalist;
   int select;
   int index;
-
+HomeScreenController homeScreenController=Get.put(HomeScreenController());
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -55,7 +58,7 @@ class _DetailKalaState extends State<DetailKala> {
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: ((context) => Select_kala(
-                                select: select,
+                                select: select, homeScreenController: homeScreenController,
                               ))));
                     },
                   ),
@@ -72,16 +75,16 @@ class _DetailKalaState extends State<DetailKala> {
                         image: DecorationImage(
                             fit: BoxFit.fill,
                             image: Image.asset(select == 0
-                                    ? Kalalist[index].ima
+                                    ? Kalalist[index].ima!
                                     : select == 3
-                                        ? Kalalist[index].ima
+                                        ? Kalalist[index].ima!
                                         : select == 1
-                                            ? Kalalist[index].ima
+                                            ? Kalalist[index].ima!
                                             : select == 2
-                                                ? Kalalist[index].ima
+                                                ? Kalalist[index].ima!
                                                 : select == 4
-                                                    ? Kalalist[index].ima
-                                                    : Kalalist[index].ima)
+                                                    ? Kalalist[index].ima!
+                                                    : Kalalist[index].ima!)
                                 .image),
                         borderRadius: BorderRadius.circular(30)),
                   ),
@@ -107,30 +110,30 @@ class _DetailKalaState extends State<DetailKala> {
                 children: [
                   Text(
                     select == 0
-                        ? Kalalist[index].name
+                        ? Kalalist[index].name!
                         : select == 3
-                            ? Kalalist[index].name
+                            ? Kalalist[index].name!
                             : select == 1
-                                ? Kalalist[index].name
+                                ? Kalalist[index].name!
                                 : select == 2
-                                    ? Kalalist[index].name
+                                    ? Kalalist[index].name!
                                     : select == 4
-                                        ? Kalalist[index].name
-                                        : Kalalist[index].name,
+                                        ? Kalalist[index].name!
+                                        : Kalalist[index].name!,
                     textScaleFactor: 1.9,
                   ),
                   Text(
                     select == 0
-                        ? Kalalist[index].brand
+                        ? Kalalist[index].brand!
                         : select == 3
-                            ? Kalalist[index].brand
+                            ? Kalalist[index].brand!
                             : select == 1
-                                ? Kalalist[index].brand
+                                ? Kalalist[index].brand!
                                 : select == 2
-                                    ? Kalalist[index].brand
+                                    ? Kalalist[index].brand!
                                     : select == 4
-                                        ? Kalalist[index].brand
-                                        : Kalalist[index].brand,
+                                        ? Kalalist[index].brand!
+                                        : Kalalist[index].brand!,
                     textScaleFactor: 1.1,
                     style: const TextStyle(color: Rang.greylight),
                     strutStyle: const StrutStyle(height: 2),
@@ -353,7 +356,7 @@ class _DetailKalaState extends State<DetailKala> {
                                   borderRadius: BorderRadius.circular(20),
                                   image: DecorationImage(
                                       fit: BoxFit.fill,
-                                      image: AssetImage(Kalalist[index].ima))),
+                                      image: AssetImage(Kalalist[index].ima!))),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -364,7 +367,7 @@ class _DetailKalaState extends State<DetailKala> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(Kalalist[index].brand),
+                                      Text(Kalalist[index].brand!),
                                       const Icon(
                                         Icons.favorite_border,
                                         size: 20,
@@ -372,7 +375,7 @@ class _DetailKalaState extends State<DetailKala> {
                                     ],
                                   ),
                                   Text(
-                                    Kalalist[index].name,
+                                    Kalalist[index].name!,
                                     style: TextStyle(color: Rang.greylight),
                                   ),
                                   Text(

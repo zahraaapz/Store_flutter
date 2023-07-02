@@ -1,3 +1,4 @@
+import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/firstScreen/expandable.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/color/color.dart';
@@ -5,6 +6,7 @@ import 'package:appstore/search/search.dart';
 
 import 'package:appstore/selectType/select_kala.dart';
 import 'package:appstore/wish/wishlist.dart';
+import 'package:get/get.dart';
 
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
@@ -12,58 +14,29 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Extractmainscreen extends StatefulWidget {
-  const Extractmainscreen({super.key});
+class Extractmainscreen extends StatelessWidget {
 
-  @override
-  State<Extractmainscreen> createState() => _ExtractmainscreenState();
-}
 
-class _ExtractmainscreenState extends State<Extractmainscreen> {
-  static List<Kala> suggestList = [];
-  GlobalKey<ScaffoldState> key = GlobalKey();
-  int? select;
-  List<bool> fav = [];
+ 
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
+  RxInt  select=0.obs;
+  RxList<RxBool> fav = RxList();
   like(int length) {
-    setState(() {
-      fav = List.generate(length, ((index) => true));
-    });
+   
+      fav = RxList.generate(length, ((index) => true.obs));
   }
+  
 
-  Future getsuggest() async {
-    var url = 'http://api.npoint.io/a39a864e182d11ed355b';
-    var value = await http.get(Uri.parse(url));
 
-    List json = convert.jsonDecode(value.body);
-    if (suggestList.isEmpty) {
-      for (int i = 0; i < json.length; i++) {
-        setState(() {
-          suggestList.add(Kala(
-              name: json[i]['name'],
-              brand: json[i]['brand'],
-              filter: json[i]['filter'],
-              price: json[i]['price'],
-              ima: json[i]['ima']));
-        });
-      }
-
-      return value;
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getsuggest();
-  }
+HomeScreenController homeScreenController=Get.put(HomeScreenController());
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-
+    homeScreenController.getHomeItem();
     return SafeArea(
       child: Scaffold(
-          key: key,
+          key: _key,
           backgroundColor: Colors.white,
           drawer: Drawer(
             backgroundColor: Colors.white,
@@ -118,7 +91,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                                 onTap: () {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: ((context) => Select_kala(
-                                            select: index,
+                                            select: index,homeScreenController: homeScreenController,
                                           ))));
                                 },
                               ),
@@ -167,7 +140,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                         children: [
                           InkWell(
                             onTap: () {
-                              key.currentState?.openDrawer();
+                              _key.currentState?.openDrawer();
                             },
                             child: const Icon(
                               Icons.menu,
@@ -212,7 +185,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                 ),
 
                 ///Bannner
-                Bannner(),
+                const Bannner(),
 
                 const SizedBox(
                   height: 8,
@@ -373,378 +346,397 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
     );
   }
 
-  Padding typeList(Size size) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SizedBox(
-        //sizedbox main
-        height: size.height / 6.6,
-        width: double.infinity,
-        child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            physics: const BouncingScrollPhysics(),
-            itemCount: Model.modelList.length,
-            itemBuilder: ((context, index) {
-              return Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              select = index;
-                            });
-
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Select_kala(
-                                      select: select!,
-                                    )));
-                          },
-                          child: Container(
-                            //list container
-                            width: 60,
-                            height: 65,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage(Model.modelList[index].ima),
-                            )),
+SizedBox typeList(Size size) {
+   
+     return  SizedBox(
+         //sizedbox main
+         height: size.height / 6.6,
+         width: double.infinity,
+         child:
+          ListView.builder(
+               scrollDirection: Axis.horizontal,
+               physics: const BouncingScrollPhysics(),
+               itemCount: Model.modelList.length,
+               itemBuilder: ((context, index) {
+                 return Row(
+                   children: [
+                     Padding(
+                       padding: const EdgeInsets.all(8.0),
+                       child: Column(
+                         children: [
+                         
+                             InkWell(
+                                 onTap: () {
+                                
+                                     select.value = index;
+                                  
+                                 
+                                   Navigator.of(context).push(MaterialPageRoute(
+                                       builder: (context) => 
+                                          Select_kala(
+                                               select: index,homeScreenController: homeScreenController,
+                                             ),
+                                       ));
+                                 },
+                                 child: Container(
+                                   //list container
+                                   width: 60,
+                                   height: 65,
+                                   decoration: BoxDecoration(
+                                       image: DecorationImage(
+                                     fit: BoxFit.fill,
+                                     image: AssetImage(Model.modelList[index].ima),
+                                   )),
+                                 ),
+                              
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Text(
-                            Model.modelList[index].title,
-                            style: const TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.bold),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              );
-            })),
-      ),
-    );
+                   
+                           Padding(
+                             padding: const EdgeInsets.all(3.0),
+                             child: Text(
+                               Model.modelList[index].title,
+                               style: const TextStyle(
+                                   fontSize: 14, fontWeight: FontWeight.bold),
+                             ),
+                           )
+                         ],
+                       ),
+                     ),
+                   
+                 ]);
+               }
+         
+       
+          
+         )),
+     );
   }
 
-  SizedBox suggList(size) {
-    return SizedBox(
-      height: size.height / 4.2,
-      width: double.infinity,
-      child: ListView.builder(
-          physics: const BouncingScrollPhysics(),
-          scrollDirection: Axis.horizontal,
-          itemCount: suggestList.length,
-          itemBuilder: (context, index) {
-            return InkWell(
-              onTap: () {
-                showModalBottomSheet(
-                    context: context,
-                    backgroundColor: Colors.transparent,
-                    builder: ((context) {
-                      return StatefulBuilder(
-                        builder: (context, setState) {
-                          return Container(
-                            ////bottomsheet container
-                            height: size.height / 2.2,
-                            decoration: const BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(45),
-                                    topRight: Radius.circular(45))),
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: 120,
-                                          height: 115,
-                                          decoration: BoxDecoration(
-                                              color: Colors.black,
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              image: DecorationImage(
-                                                  fit: BoxFit.fill,
-                                                  image: Image.asset(
-                                                    suggestList[index].ima,
-                                                  ).image)),
-                                        ),
-                                        const SizedBox(
-                                          width: 15,
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(suggestList[index].brand,
-                                                style: const TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                            const SizedBox(
-                                              height: 12,
-                                            ),
-                                            Text(
-                                              suggestList[index].name,
-                                              style: const TextStyle(
-                                                color: Rang.toosi,
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 12,
-                                            ),
-                                            Text(
-                                                '${suggestList[index].price}\$',
-                                                style: const TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: 60,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                              color: Rang.toosi,
-                                              borderRadius:
-                                                  BorderRadius.circular(10)),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: const [
-                                              Text('4.5'),
-                                              Icon(
-                                                CupertinoIcons.star_fill,
-                                                color: Rang.orange,
-                                                size: 17,
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: const [
-                                            Text(
-                                              'Average Rating',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            SizedBox(
-                                              height: 8,
-                                            ),
-                                            Text(
-                                              '43 Ratings & 23 Reviews',
-                                              style: TextStyle(
-                                                color: Rang.greylight,
-                                              ),
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  //////filter
-                                  suggestList[index].filter == 'shoes'
-                                      ? Column(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Row(
-                                                children: const [
-                                                  Text(
-                                                    'Select Size',
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  Text(
-                                                    ' (Uk Size)',
-                                                    style: TextStyle(
-                                                        color: Rang.grey),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            ////size pa
-                                            SizedBox(
-                                              height: 55,
-                                              child: ListView.builder(
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  itemCount: sizepa.length,
-                                                  itemBuilder:
-                                                      ((context, index) {
-                                                    return Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              2.0),
-                                                      child: InkWell(
-                                                        onTap: () {
-                                                          setState(() {
-                                                            select = index;
-                                                          });
-                                                        },
-                                                        child:
-                                                            AnimatedContainer(
-                                                          height: 80,
-                                                          width: 50,
-                                                          decoration: BoxDecoration(
-                                                              border: Border.all(
-                                                                  color: Rang
-                                                                      .blue),
-                                                              color: select ==
-                                                                      index
-                                                                  ? const Color
-                                                                          .fromARGB(
-                                                                      82,
-                                                                      61,
-                                                                      123,
-                                                                      159)
-                                                                  : Colors
-                                                                      .white,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          45)),
-                                                          duration:
-                                                              const Duration(
-                                                                  milliseconds:
-                                                                      200),
-                                                          child: Center(
-                                                            child: Text(sizepa[
-                                                                    index]
-                                                                .toString()),
-                                                          ),
-                                                        ),
+SizedBox  suggList(size) {
+  
+      return SizedBox(
+        height: size.height / 4.2,
+        width: double.infinity,
+        child: 
+           
+              Obx(()=>ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: homeScreenController.suggestlist.length,
+                  itemBuilder: (context, index) {
+                   return InkWell(
+                      onTap: () {
+                        showModalBottomSheet(
+                            context: context,
+                            backgroundColor: Colors.transparent,
+                            builder: ((context) {
+                              return StatefulBuilder(
+                                builder: (context, setState) {
+                                  return Container(
+                                    ////bottomsheet container
+                                    height: size.height / 2.2,
+                                    decoration: const BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(45),
+                                            topRight: Radius.circular(45))),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(12.0),
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  width: 120,
+                                                  height: 115,
+                                                  decoration: BoxDecoration(
+                                                      
+                                                      borderRadius:
+                                                          BorderRadius.circular(15),
+                                                      image: DecorationImage(
+                                                          fit: BoxFit.fill,
+                                                          image: Image.asset(
+                                                            homeScreenController.suggestlist[index].ima!,
+                                                          ).image)),
+                                                ),
+                                                const SizedBox(
+                                                  width: 15,
+                                                ),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text( homeScreenController.suggestlist[index].brand!,
+                                                        style: const TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold)),
+                                                    const SizedBox(
+                                                      height: 12,
+                                                    ),
+                                                    Text(
+                                                      homeScreenController.suggestlist[index].name!,
+                                                      style: const TextStyle(
+                                                        color: Rang.toosi,
                                                       ),
-                                                    );
-                                                  })),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 12,
+                                                    ),
+                                                    Text(
+                                                        '${homeScreenController.suggestlist[index].price}\$',
+                                                        style: const TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold)),
+                                                  ],
+                                                )
+                                              ],
                                             ),
-                                          ],
-                                        )
-                                      : const SizedBox(
-                                          height: 30,
-                                        ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.qr_code_scanner,
-                                          color: Rang.blue,
-                                          size: 40,
-                                        ),
-                                        const SizedBox(
-                                          width: 20,
-                                        ),
-                                        ElevatedButton(
-                                            style: ButtonStyle(
-                                                shape: MaterialStateProperty
-                                                    .all(RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10))),
-                                                backgroundColor:
-                                                    MaterialStateProperty.all(
-                                                        Rang.blue)),
-                                            onPressed: () {},
-                                            child: SizedBox(
-                                              width: 270,
-                                              height: 50,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: const [
-                                                  Icon(Icons
-                                                      .shopping_bag_outlined),
-                                                  Text('Add to Bags')
-                                                ],
-                                              ),
-                                            )),
-                                      ],
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              children: [
+                                                Container(
+                                                  width: 60,
+                                                  height: 40,
+                                                  decoration: BoxDecoration(
+                                                      color: Rang.toosi,
+                                                      borderRadius:
+                                                          BorderRadius.circular(10)),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.spaceAround,
+                                                    children: const [
+                                                      Text('4.5'),
+                                                      Icon(
+                                                        CupertinoIcons.star_fill,
+                                                        color: Rang.orange,
+                                                        size: 17,
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: const [
+                                                    Text(
+                                                      'Average Rating',
+                                                      style: TextStyle(
+                                                          fontWeight: FontWeight.bold),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 8,
+                                                    ),
+                                                    Text(
+                                                      '43 Ratings & 23 Reviews',
+                                                      style: TextStyle(
+                                                        color: Rang.greylight,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          //////filter
+                                         homeScreenController.suggestlist[index].filter == 'shoes'
+                                              ? Column(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(8.0),
+                                                      child: Row(
+                                                        children: const [
+                                                          Text(
+                                                            'Select Size',
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight.bold),
+                                                          ),
+                                                          Text(
+                                                            ' (Uk Size)',
+                                                            style: TextStyle(
+                                                                color: Rang.grey),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    ////size pa
+                                                    SizedBox(
+                                                      height: 55,
+                                                      child: ListView.builder(
+                                                          scrollDirection:
+                                                              Axis.horizontal,
+                                                          itemCount: sizepa.length,
+                                                          itemBuilder:
+                                                              ((context, index) {
+                                                          return
+                                                             Padding(
+                                                                padding:
+                                                                    const EdgeInsets.all(
+                                                                        2.0),
+                                                                child: 
+                                                                  InkWell(
+                                                                    onTap: () {
+                                                                     
+                                                                        select.value = index;
+                                                                     
+                                                                    },
+                                                                    child:
+                                                                      AnimatedContainer(
+                                                                      height: 80,
+                                                                      width: 50,
+                                                                      decoration: BoxDecoration(
+                                                                          border: Border.all(
+                                                                              color: Rang
+                                                                                  .blue),
+                                                                          color: select ==
+                                                                                  index
+                                                                              ? const Color
+                                                                                      .fromARGB(
+                                                                                  82,
+                                                                                  61,
+                                                                                  123,
+                                                                                  159)
+                                                                              : Colors
+                                                                                  .white,
+                                                                          borderRadius:
+                                                                              BorderRadius
+                                                                                  .circular(
+                                                                                      45)),
+                                                                      duration:
+                                                                          const Duration(
+                                                                              milliseconds:
+                                                                                  200),
+                                                                      child: Center(
+                                                                        child: Text(sizepa[
+                                                                                index]
+                                                                            .toString()),
+                                                                      ),
+                                                                   
+                                                                                                                             
+                                                                                                                            ),
+                                                                ),
+                                                            );
+                                                          })),
+                                                    ),
+                                                  ],
+                                                )
+                                              : const SizedBox(
+                                                  height: 30,
+                                                ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(12.0),
+                                            child: Row(
+                                              children: [
+                                                const Icon(
+                                                  Icons.qr_code_scanner,
+                                                  color: Rang.blue,
+                                                  size: 40,
+                                                ),
+                                                const SizedBox(
+                                                  width: 20,
+                                                ),
+                                                ElevatedButton(
+                                                    style: ButtonStyle(
+                                                        shape: MaterialStateProperty
+                                                            .all(RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(10))),
+                                                        backgroundColor:
+                                                            MaterialStateProperty.all(
+                                                                Rang.blue)),
+                                                    onPressed: () {},
+                                                    child: SizedBox(
+                                                      width: 270,
+                                                      height: 50,
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment.center,
+                                                        children: const [
+                                                          Icon(Icons
+                                                              .shopping_bag_outlined),
+                                                          Text('Add to Bags')
+                                                        ],
+                                                      ),
+                                                    )),
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                  )
+                                  ); ////bottomsheet container
+                                },
+                              );
+                            }));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10.0, top: 8, right: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              ////container suggestlist
+                              decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(13),
+                                  image: DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: Image.asset(
+                                        homeScreenController.suggestlist[index].ima!,
+                                      ).image)),
+                              height: size.height / 9,
+                              width: size.width / 3.5,
+                            ),
+                            const SizedBox(
+                              height: 6,
+                            ),
+                            SizedBox(
+                              height: 30,
+                              width: 120,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text( homeScreenController.suggestlist[index].brand!,
+                                      style:
+                                          const TextStyle(fontWeight: FontWeight.bold)),
+                                  // Icon(
+                                  //   f[index] == false
+                                  //       ? Icons.favorite
+                                  //       : Icons.favorite_border,
+                                  //   size: 20,
+                                  //   color: Colors.black,
+                                  // )
                                 ],
                               ),
                             ),
-                          ); ////bottomsheet container
-                        },
-                      );
-                    }));
-              },
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10.0, top: 8, right: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      ////container suggestlist
-                      decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(13),
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: Image.asset(
-                                suggestList[index].ima,
-                              ).image)),
-                      height: size.height / 9,
-                      width: size.width / 3.5,
-                    ),
-                    const SizedBox(
-                      height: 6,
-                    ),
-                    SizedBox(
-                      height: 30,
-                      width: 120,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(suggestList[index].brand,
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.bold)),
-                          // Icon(
-                          //   f[index] == false
-                          //       ? Icons.favorite
-                          //       : Icons.favorite_border,
-                          //   size: 20,
-                          //   color: Colors.black,
-                          // )
-                        ],
+                            Padding(
+                              padding: const EdgeInsets.only(top: 3.0, bottom: 3),
+                              child: Text( homeScreenController.suggestlist[index].name!,
+                                  style: const TextStyle(
+                                    color: Rang.greylight,
+                                  )),
+                            ),
+                            Text("${ homeScreenController.suggestlist[index].price}\$",
+                                style: const TextStyle(fontWeight: FontWeight.bold)),
+                          ],
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 3.0, bottom: 3),
-                      child: Text(suggestList[index].name,
-                          style: const TextStyle(
-                            color: Rang.greylight,
-                          )),
-                    ),
-                    Text("${suggestList[index].price}\$",
-                        style: const TextStyle(fontWeight: FontWeight.bold)),
-                  ],
-                ),
+                    
+                  );}),
               ),
-            );
-          }),
-    );
+           
+        
+      );
+  
   }
 }
 

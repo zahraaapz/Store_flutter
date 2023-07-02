@@ -40,6 +40,8 @@ dependencies:
   font_awesome_flutter: ^10.2.1
   http: ^0.13.5
   d_chart: ^2.2.11
+  dio: ^5.2.1+1
+  get: ^4.6.5
 
 
 dev_dependencies:

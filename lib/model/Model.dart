@@ -16,11 +16,11 @@ class Model {
 List<String> addresslist=['Office','Home','Other'];
 
 class Kala {
-  String ima;
-  String name;
-  String filter;
-  String brand;
-  String price;
+  String? ima;
+  String ?name;
+  String? filter;
+  String? brand;
+  String ?price;
 
   Kala(
       {required this.name,
@@ -28,6 +28,14 @@ class Kala {
       required this.filter,
       required this.price,
       required this.ima});
+
+      Kala.fromJson(Map<String,dynamic>element){
+        ima=element['ima'];
+        name=element['name'];
+        filter=element['filter'];
+        brand=element['brand'];
+        price=element['price'];
+      }
 }
 
 List<Model> cateList = [

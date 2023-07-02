@@ -1,8 +1,10 @@
+import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/firstScreen/mainScreen.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/selectType/detail_kala.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
 
 import 'dart:convert' as convert;
 
@@ -14,23 +16,20 @@ import 'package:flutter/material.dart';
 
 class Select_kala extends StatefulWidget {
   int select;
-
-  Select_kala({super.key, required this.select});
+  final HomeScreenController homeScreenController;
+  Select_kala(
+      {super.key, required this.select, required this.homeScreenController});
 
   @override
-  State<Select_kala> createState() => _Select_kalaState(select: select);
+  State<Select_kala> createState() => _Select_kalaState(
+      select: select, homeScreenController: homeScreenController);
 }
 
 class _Select_kalaState extends State<Select_kala> {
   String? sel;
   int select;
+  final HomeScreenController homeScreenController;
 
-  List<Kala> skincarelist = [];
-  List<Kala> watcheslist = [];
-  List<Kala> handbaglist = [];
-  List<Kala> jewellerylist = [];
-  List<Kala> eyewearlist = [];
-  List<Kala> shoeslist = [];
   // List<bool> fav = [];
   // like(int length) {
   //   setState(() {
@@ -39,134 +38,17 @@ class _Select_kalaState extends State<Select_kala> {
   //   });
   // }
 
-  Future getlist(BuildContext context, select) async {
-    var url0 = 'http://api.npoint.io/ce2fbbca5a05260adb99';
-    var url1 = 'http://api.npoint.io/5b9b109ea434407496a5';
-    var url2 = 'http://api.npoint.io/60b30020ebf954e74d5c';
-    var url3 = 'http://api.npoint.io/9394e07c75e001f61872';
-    var url4 = 'http://api.npoint.io/da1523427aeb4ff86bc1';
-    var url5 = 'http://api.npoint.io/d5371a0feeef8aa1b43a';
-
-    var value0 = await http.get(Uri.parse(url0));
-    var value1 = await http.get(Uri.parse(url1));
-    var value2 = await http.get(Uri.parse(url2));
-    var value3 = await http.get(Uri.parse(url3));
-    var value4 = await http.get(Uri.parse(url4));
-    var value5 = await http.get(Uri.parse(url5));
-
-    if (select == 2) {
-      List json = convert.jsonDecode(value2.body);
-      if (handbaglist.isEmpty) {
-        for (int i = 0; i < json.length; i++) {
-          setState(() {
-            handbaglist.add(Kala(
-                name: json[i]['name'],
-                brand: json[i]['brand'],
-                filter: json[i]['filter'],
-                price: json[i]['price'],
-                ima: json[i]['ima']));
-          });
-        }
-      }
-      return value2;
-    }
-
-    if (select == 1) {
-      List json = convert.jsonDecode(value1.body);
-      if (watcheslist.isEmpty) {
-        for (int i = 0; i < json.length; i++) {
-          setState(() {
-            watcheslist.add(Kala(
-                name: json[i]['name'],
-                brand: json[i]['brand'],
-                filter: json[i]['filter'],
-                price: json[i]['price'],
-                ima: json[i]['ima']));
-          });
-        }
-      }
-      return value1;
-    }
-
-    if (select == 0) {
-      List json = convert.jsonDecode(value0.body);
-      if (skincarelist.isEmpty) {
-        for (int i = 0; i < json.length; i++) {
-          setState(() {
-            skincarelist.add(Kala(
-                name: json[i]['name'],
-                brand: json[i]['brand'],
-                filter: json[i]['filter'],
-                price: json[i]['price'],
-                ima: json[i]['ima']));
-          });
-        }
-      }
-      return value0;
-    }
-
-    if (select == 3) {
-      List json = convert.jsonDecode(value3.body);
-      if (jewellerylist.isEmpty) {
-        for (int i = 0; i < json.length; i++) {
-          setState(() {
-            jewellerylist.add(Kala(
-                name: json[i]['name'],
-                brand: json[i]['brand'],
-                filter: json[i]['filter'],
-                price: json[i]['price'],
-                ima: json[i]['ima']));
-          });
-        }
-      }
-      return value3;
-    }
-    if (select == 4) {
-      List json = convert.jsonDecode(value4.body);
-      if (eyewearlist.isEmpty) {
-        for (int i = 0; i < json.length; i++) {
-          setState(() {
-            eyewearlist.add(Kala(
-                name: json[i]['name'],
-                brand: json[i]['brand'],
-                filter: json[i]['filter'],
-                price: json[i]['price'],
-                ima: json[i]['ima']));
-          });
-        }
-      }
-      return value4;
-    }
-
-    if (select == 5) {
-      List json = convert.jsonDecode(value5.body);
-      if (shoeslist.isEmpty) {
-        for (int i = 0; i < json.length; i++) {
-          setState(() {
-            shoeslist.add(Kala(
-                name: json[i]['name'],
-                brand: json[i]['brand'],
-                filter: json[i]['filter'],
-                price: json[i]['price'],
-                ima: json[i]['ima']));
-          });
-        }
-      }
-      return value5;
-    }
-  }
-
-  _Select_kalaState({required this.select});
+  _Select_kalaState({required this.select, required this.homeScreenController});
   @override
   void initState() {
     super.initState();
-    getlist(context, select);
   }
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
+  
     return SafeArea(
         child: Scaffold(
       body: Stack(children: [
@@ -181,8 +63,8 @@ class _Select_kalaState extends State<Select_kala> {
                 GestureDetector(
                   onTap: () {
                     setState(() {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: ((context) => const Home())));
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: ((context) => Home())));
                     });
                   },
                   child: const Icon(
@@ -222,16 +104,16 @@ class _Select_kalaState extends State<Select_kala> {
                   width: 30,
                 ),
                 Text(select == 0
-                    ? '${skincarelist.length} products'
+                    ? '${homeScreenController.skincare.length} products'
                     : select == 1
-                        ? '${watcheslist.length} products'
+                        ? '${homeScreenController.watche.length} products'
                         : select == 2
-                            ? '${handbaglist.length} products'
+                            ? '${homeScreenController.bag.length} products'
                             : select == 3
-                                ? '${jewellerylist.length} products'
+                                ? '${homeScreenController.jewellery.length} products'
                                 : select == 4
-                                    ? '${eyewearlist.length} products'
-                                    : '${shoeslist.length} products'),
+                                    ? '${homeScreenController.eyewear.length} products'
+                                    : '${homeScreenController.shoes.length} products'),
               ],
             ),
           ),
@@ -240,230 +122,255 @@ class _Select_kalaState extends State<Select_kala> {
               return snapshot.hasData
                   ? SizedBox(
                       height: 670,
-                      child: GridView.builder(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: select == 0
-                              ? skincarelist.length
-                              : select == 1
-                                  ? watcheslist.length
-                                  : select == 2
-                                      ? handbaglist.length
-                                      : select == 3
-                                          ? jewellerylist.length
-                                          : select == 4
-                                              ? eyewearlist.length
-                                              : shoeslist.length,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                          ),
-                          itemBuilder: ((context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(right: 8, left: 8),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: ((context) => DetailKala(
-                                                    index: index,
-                                                    select: select,
-                                                    Kalalist: select == 0
-                                                        ? skincarelist
+                       child: Obx(()=> GridView.builder(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount: select == 0
+                                ? homeScreenController.skincare.length
+                                : select == 1
+                                    ? homeScreenController.watche.length
+                                    : select == 2
+                                        ? homeScreenController.bag.length
+                                        : select == 3
+                                            ? homeScreenController
+                                                .jewellery.length
+                                            : select == 4
+                                                ? homeScreenController
+                                                    .eyewear.length
+                                                : homeScreenController
+                                                    .shoes.length,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                            ),
+                            itemBuilder: ((context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(right: 8, left: 8),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: ((context) => DetailKala(
+                                                      index: index,
+                                                      select: select,
+                                                      Kalalist: select == 0
+                                                          ? homeScreenController
+                                                              .skincare
+                                                          : select == 1
+                                                              ? homeScreenController
+                                                                  .watche
+                                                              : select == 2
+                                                                  ? homeScreenController
+                                                                      .bag
+                                                                  : select == 3
+                                                                      ? homeScreenController
+                                                                          .jewellery
+                                                                      : select ==
+                                                                              4
+                                                                          ? homeScreenController
+                                                                              .eyewear
+                                                                          : homeScreenController
+                                                                              .shoes,
+                                                    ))));
+                                      },
+                                      child: Container(
+                                        height: 160,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            image: DecorationImage(
+                                                fit: BoxFit.fill,
+                                                image: Image.asset(select == 0
+                                                        ? homeScreenController
+                                                            .skincare[index].ima!
                                                         : select == 1
-                                                            ? watcheslist
+                                                            ? homeScreenController
+                                                                .watche[index]
+                                                                .ima!
                                                             : select == 2
-                                                                ? handbaglist
+                                                                ? homeScreenController
+                                                                    .bag[index]
+                                                                    .ima!
                                                                 : select == 3
-                                                                    ? jewellerylist
-                                                                    : select ==
-                                                                            4
-                                                                        ? eyewearlist
-                                                                        : shoeslist,
-                                                  ))));
-                                    },
-                                    child: Container(
-                                      height: 160,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          image: DecorationImage(
-                                              fit: BoxFit.fill,
-                                              image: Image.asset(select == 0
-                                                      ? skincarelist[index].ima
-                                                      : select == 1
-                                                          ? watcheslist[index]
-                                                              .ima
-                                                          : select == 2
-                                                              ? handbaglist[
-                                                                      index]
-                                                                  .ima
-                                                              : select == 3
-                                                                  ? jewellerylist[
-                                                                          index]
-                                                                      .ima
-                                                                  : select == 4
-                                                                      ? eyewearlist[
-                                                                              index]
-                                                                          .ima
-                                                                      : shoeslist[
-                                                                              index]
-                                                                          .ima)
-                                                  .image)),
+                                                                    ? homeScreenController
+                                                                        .jewellery[
+                                                                            index]
+                                                                        .ima!
+                                                                    : select == 4
+                                                                        ? homeScreenController
+                                                                            .eyewear[
+                                                                                index]
+                                                                            .ima!
+                                                                        : homeScreenController
+                                                                            .shoes[
+                                                                                index]
+                                                                            .ima!)
+                                                    .image)),
+                                      ),
                                     ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(select == 0
-                                          ? skincarelist[index].name
-                                          : select == 1
-                                              ? watcheslist[index].name
-                                              : select == 2
-                                                  ? handbaglist[index].name
-                                                  : select == 3
-                                                      ? jewellerylist[index]
-                                                          .name
-                                                      : select == 4
-                                                          ? eyewearlist[index]
-                                                              .name
-                                                          : shoeslist[index]
-                                                              .name),
-                                      // GestureDetector(
-                                      //   onTap: () {
-                                      //     like(select == 0
-                                      //         ? skincarelist.length
-                                      //         : select == 1
-                                      //             ? watcheslist.length
-                                      //             : select == 2
-                                      //                 ? handbaglist.length
-                                      //                 : select == 3
-                                      //                     ? jewellerylist.length
-                                      //                     : select == 4
-                                      //                         ? eyewearlist
-                                      //                             .length
-                                      //                         : shoeslist
-                                      //                             .length);
-                                      //     setState(() {
-                                      //       fav[index] = !fav[index];
-                                      //       if (fav[index] == false &&
-                                      //           !wishList.contains(select == 0
-                                      //               ? skincarelist[index]
-                                      //               : select == 1
-                                      //                   ? watcheslist[index]
-                                      //                   : select == 2
-                                      //                       ? handbaglist[index]
-                                      //                       : select == 3
-                                      //                           ? jewellerylist[
-                                      //                               index]
-                                      //                           : select == 4
-                                      //                               ? eyewearlist[
-                                      //                                   index]
-                                      //                               : shoeslist[
-                                      //                                   index])) {
-                                      //         wishList.add(select == 0
-                                      //             ? skincarelist[index]
-                                      //             : select == 1
-                                      //                 ? watcheslist[index]
-                                      //                 : select == 2
-                                      //                     ? handbaglist[index]
-                                      //                     : select == 3
-                                      //                         ? jewellerylist[
-                                      //                             index]
-                                      //                         : select == 4
-                                      //                             ? eyewearlist[
-                                      //                                 index]
-                                      //                             : shoeslist[
-                                      //                                 index]);
-                                      //       }
-                                      //       if (wishList.contains(select == 0
-                                      //               ? skincarelist[index]
-                                      //               : select == 1
-                                      //                   ? watcheslist[index]
-                                      //                   : select == 2
-                                      //                       ? handbaglist[index]
-                                      //                       : select == 3
-                                      //                           ? jewellerylist[
-                                      //                               index]
-                                      //                           : select == 4
-                                      //                               ? eyewearlist[
-                                      //                                   index]
-                                      //                               : shoeslist[
-                                      //                                   index]) &&
-                                      //           fav[index] == true) {
-                                      //         wishList.remove(select == 0
-                                      //             ? skincarelist[index]
-                                      //             : select == 1
-                                      //                 ? watcheslist[index]
-                                      //                 : select == 2
-                                      //                     ? handbaglist[index]
-                                      //                     : select == 3
-                                      //                         ? jewellerylist[
-                                      //                             index]
-                                      //                         : select == 4
-                                      //                             ? eyewearlist[
-                                      //                                 index]
-                                      //                             : shoeslist[
-                                      //                                 index]);
-                                      //       }
-                                      //     });
-                                      //   },
-                                      //   child: Icon(
-                                      //     fav[index] == false
-                                      //         ? Icons.favorite
-                                      //         : Icons.favorite_border,
-                                      //     size: 19,
-                                      //     color: Colors.black,
-                                      //   ),
-                                      // ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(select == 0
-                                          ? skincarelist[index].brand
-                                          : select == 1
-                                              ? watcheslist[index].brand
-                                              : select == 2
-                                                  ? handbaglist[index].brand
-                                                  : select == 3
-                                                      ? jewellerylist[index]
-                                                          .brand
-                                                      : select == 4
-                                                          ? eyewearlist[index]
-                                                              .brand
-                                                          : shoeslist[index]
-                                                              .brand),
-                                      Text(select == 0
-                                          ? '${skincarelist[index].price}\$'
-                                          : select == 1
-                                              ? '${watcheslist[index].price}\$'
-                                              : select == 2
-                                                  ? '${handbaglist[index].price}\$'
-                                                  : select == 3
-                                                      ? '${jewellerylist[index].price}\$'
-                                                      : select == 4
-                                                          ? '${eyewearlist[index].price}\$'
-                                                          : '${shoeslist[index].price}\$'),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            );
-                          })),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(select == 0
+                                            ? homeScreenController.skincare[index].name!
+                                            : select == 1
+                                                ? homeScreenController.watche[index].name!
+                                                : select == 2
+                                                    ? homeScreenController.bag[index].name!
+                                                    : select == 3
+                                                        ? homeScreenController.jewellery[index]
+                                                            .name!
+                                                        : select == 4
+                                                            ? homeScreenController.eyewear[index]
+                                                                .name!
+                                                            : homeScreenController.shoes[index]
+                                                                .name!),
+                                        // GestureDetector(
+                                        //   onTap: () {
+                                        //     like(select == 0
+                                        //         ? skincarelist.length
+                                        //         : select == 1
+                                        //             ? watcheslist.length
+                                        //             : select == 2
+                                        //                 ? handbaglist.length
+                                        //                 : select == 3
+                                        //                     ? jewellerylist.length
+                                        //                     : select == 4
+                                        //                         ? eyewearlist
+                                        //                             .length
+                                        //                         : shoeslist
+                                        //                             .length);
+                                        //     setState(() {
+                                        //       fav[index] = !fav[index];
+                                        //       if (fav[index] == false &&
+                                        //           !wishList.contains(select == 0
+                                        //               ? skincarelist[index]
+                                        //               : select == 1
+                                        //                   ? watcheslist[index]
+                                        //                   : select == 2
+                                        //                       ? handbaglist[index]
+                                        //                       : select == 3
+                                        //                           ? jewellerylist[
+                                        //                               index]
+                                        //                           : select == 4
+                                        //                               ? eyewearlist[
+                                        //                                   index]
+                                        //                               : shoeslist[
+                                        //                                   index])) {
+                                        //         wishList.add(select == 0
+                                        //             ? skincarelist[index]
+                                        //             : select == 1
+                                        //                 ? watcheslist[index]
+                                        //                 : select == 2
+                                        //                     ? handbaglist[index]
+                                        //                     : select == 3
+                                        //                         ? jewellerylist[
+                                        //                             index]
+                                        //                         : select == 4
+                                        //                             ? eyewearlist[
+                                        //                                 index]
+                                        //                             : shoeslist[
+                                        //                                 index]);
+                                        //       }
+                                        //       if (wishList.contains(select == 0
+                                        //               ? skincarelist[index]
+                                        //               : select == 1
+                                        //                   ? watcheslist[index]
+                                        //                   : select == 2
+                                        //                       ? handbaglist[index]
+                                        //                       : select == 3
+                                        //                           ? jewellerylist[
+                                        //                               index]
+                                        //                           : select == 4
+                                        //                               ? eyewearlist[
+                                        //                                   index]
+                                        //                               : shoeslist[
+                                        //                                   index]) &&
+                                        //           fav[index] == true) {
+                                        //         wishList.remove(select == 0
+                                        //             ? skincarelist[index]
+                                        //             : select == 1
+                                        //                 ? watcheslist[index]
+                                        //                 : select == 2
+                                        //                     ? handbaglist[index]
+                                        //                     : select == 3
+                                        //                         ? jewellerylist[
+                                        //                             index]
+                                        //                         : select == 4
+                                        //                             ? eyewearlist[
+                                        //                                 index]
+                                        //                             : shoeslist[
+                                        //                                 index]);
+                                        //       }
+                                        //     });
+                                        //   },
+                                        //   child: Icon(
+                                        //     fav[index] == false
+                                        //         ? Icons.favorite
+                                        //         : Icons.favorite_border,
+                                        //     size: 19,
+                                        //     color: Colors.black,
+                                        //   ),
+                                        // ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(select == 0
+                                            ? homeScreenController.skincare[index].brand!
+                                            : select == 1
+                                                ? homeScreenController.watche[index].brand!
+                                                : select == 2
+                                                    ? homeScreenController.bag[index].brand!
+                                                    : select == 3
+                                                        ? homeScreenController.jewellery[index]
+                                                            .brand!
+                                                        : select == 4
+                                                            ? homeScreenController.eyewear[index]
+                                                                .brand!
+                                                            : homeScreenController.shoes[index]
+                                                                .brand!),
+                                        Text(select == 0
+                                            ? '${homeScreenController.skincare[index].price}\$'
+                                            : select == 1
+                                                ? '${homeScreenController.watche[index].price}\$'
+                                                : select == 2
+                                                    ? '${homeScreenController.bag[index].price}\$'
+                                                    : select == 3
+                                                        ? '${homeScreenController.jewellery[index].price}\$'
+                                                        : select == 4
+                                                            ? '${homeScreenController.eyewear[index].price}\$'
+                                                            : '${homeScreenController.shoes[index].price}\$'),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              );
+                            })),
+                      ),
                     )
                   : const SpinKitThreeBounce(
                       color: Rang.blue,
                     );
             },
-            future: getlist(context, select),
+           future:   select == 0
+        ? homeScreenController.getSkincareItem()
+        : select == 1
+            ? homeScreenController.getWatcheItem()
+            : select == 2
+                ? homeScreenController.getHandBagItem()
+                : select == 3
+                    ? homeScreenController.getjewellery()
+                    : select == 4
+                        ? homeScreenController.getEyewearItem()
+                        : homeScreenController.getShoesItem(),
           ),
         ]),
         Positioned(

@@ -1,4 +1,5 @@
 import 'package:appstore/address.dart';
+import 'package:appstore/firstScreen/mainScreen.dart';
 
 
 import 'package:flutter/material.dart';
@@ -18,6 +19,6 @@ class AppStore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: address());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: Home());
   }
 }

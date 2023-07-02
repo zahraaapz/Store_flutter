@@ -9,16 +9,12 @@ import 'package:appstore/review/review.dart';
 import 'package:appstore/wish/wishlist.dart';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
+class Home extends StatelessWidget {
+ 
 
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  int selectpg = 0;
+  RxInt selectpg = 0.obs;
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -26,15 +22,23 @@ class _HomeState extends State<Home> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Stack(children: [
-          IndexedStack(
-              index: selectpg,
-              children: [Extractmainscreen(), Profile(), Bag()]),
+        
+            
+               Positioned.fill(
+                 child: Obx(()=>
+                  IndexedStack(
+                      index: selectpg.value,
+                      children: [Extractmainscreen(), Profile(), const Bag(),]),
+                 ),
+               ),
+             
+          
           Buttonbar(
               selectpg: selectpg,
               changeScreen: (int newpg) {
-                setState(() {
-                  selectpg = newpg;
-                });
+              
+                  selectpg.value = newpg;
+               
               }),
         ]),
       ),
@@ -42,17 +46,15 @@ class _HomeState extends State<Home> {
   }
 }
 
-class Buttonbar extends StatefulWidget {
-  Buttonbar({Key? key, required this.changeScreen, required this.selectpg})
-      : super(key: key);
+class Buttonbar extends StatelessWidget {
+
+
+
+  Buttonbar({Key? key, required this.changeScreen, required this.selectpg}): super(key: key);
   final Function(int n) changeScreen;
-  var selectpg;
+ RxInt  selectpg;
 
-  @override
-  State<Buttonbar> createState() => _ButtonbarState();
-}
 
-class _ButtonbarState extends State<Buttonbar> {
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -64,15 +66,16 @@ class _ButtonbarState extends State<Buttonbar> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             for (int i = 0; i < ikon.length; i++)
-              IconButton(
-                  onPressed: (() {
-                    widget.changeScreen(i);
-                  }),
-                  icon: Icon(
-                    ikon[i],
-                    color: widget.selectpg == i ? Rang.blue : Rang.greylight,
-                    size: widget.selectpg == i ? 27 : 23,
-                  )),
+              Obx(()=> IconButton(
+                    onPressed: (() {
+                     changeScreen(i);
+                    }),
+                    icon: Icon(
+                      ikon[i],
+                      color: selectpg.value == i ? Rang.blue : Rang.greylight,
+                      size: selectpg.value == i ? 27 : 23,
+                    )),
+              ),
           ],
         ),
       ),
