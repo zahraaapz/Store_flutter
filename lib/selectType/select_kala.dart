@@ -119,8 +119,7 @@ class _Select_kalaState extends State<Select_kala> {
           ),
           FutureBuilder(
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-              return snapshot.hasData
-                  ? SizedBox(
+              return snapshot.hasData ? SizedBox(
                       height: 670,
                        child: Obx(()=> GridView.builder(
                             scrollDirection: Axis.vertical,
