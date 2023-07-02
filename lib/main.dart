@@ -20,6 +20,6 @@ class AppStore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: splash());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: address());
   }
 }
