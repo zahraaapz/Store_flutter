@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 import 'dart:convert' as convert;
 
 import 'package:http/http.dart' as http;
-
 import 'package:appstore/color/color.dart';
 
 import 'package:flutter/material.dart';

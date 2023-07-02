@@ -49,7 +49,6 @@ getHandBagItem()  async{
   
   
   }
-
 );
 
 }

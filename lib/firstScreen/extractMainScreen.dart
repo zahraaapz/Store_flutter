@@ -7,7 +7,6 @@ import 'package:appstore/search/search.dart';
 import 'package:appstore/selectType/select_kala.dart';
 import 'package:appstore/wish/wishlist.dart';
 import 'package:get/get.dart';
-
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 
