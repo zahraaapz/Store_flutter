@@ -15,6 +15,8 @@ import 'package:get/get.dart';
 import '../controller/homeScreenController.dart';
 
 class DetailKala extends StatefulWidget {
+
+  
   int index;
   int select;
   List<Kala> Kalalist;
@@ -40,6 +42,7 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    bool isFavorite=false;
     return SafeArea(
       child: Scaffold(
           body: SingleChildScrollView(
@@ -270,9 +273,16 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
                       borderRadius: BorderRadius.circular(30),
                       color: Rang.toosi,
                     ),
-                    child: const Icon(
-                      Icons.favorite_border,
-                      color: Rang.blue,
+                    child:GestureDetector(
+                        onTap: () {
+                          setState(() =>isFavorite!=isFavorite );
+                         
+                        },
+                        child: Icon(isFavorite==false?
+                          Icons.favorite_border:Icons.favorite,
+                          color: Rang.blue,
+                        ),
+                      
                     ),
                   ),
                   SizedBox(

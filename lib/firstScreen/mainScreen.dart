@@ -1,3 +1,4 @@
+import 'package:appstore/address.dart';
 import 'package:appstore/bag.dart';
 import 'package:appstore/firstScreen/extractMainScreen.dart';
 import 'package:appstore/model/Model.dart';
@@ -5,8 +6,6 @@ import 'package:appstore/model/Model.dart';
 import 'package:appstore/profile/profile.dart';
 
 import 'package:appstore/color/color.dart';
-import 'package:appstore/review/review.dart';
-import 'package:appstore/wish/wishlist.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,7 +16,7 @@ class Home extends StatelessWidget {
   RxInt selectpg = 0.obs;
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    var size = MediaQuery.sizeOf(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -28,7 +27,7 @@ class Home extends StatelessWidget {
                  child: Obx(()=>
                   IndexedStack(
                       index: selectpg.value,
-                      children: [Extractmainscreen(), Profile(), const Bag(),]),
+                      children: [Extractmainscreen(), Profile(), const Bag(),address()]),
                  ),
                ),
              

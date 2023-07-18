@@ -1,5 +1,6 @@
 import 'package:appstore/color/color.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Bag extends StatefulWidget {
   const Bag({super.key});
@@ -17,13 +18,14 @@ class _BagState extends State<Bag> {
           backgroundColor: Rang.toosi,
           body: SingleChildScrollView(
             scrollDirection: Axis.vertical,
+            physics: const BouncingScrollPhysics(),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(children: const [
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Row(children: [
                       Icon(
                         Icons.close,
                         color: Rang.blue,
@@ -40,8 +42,9 @@ class _BagState extends State<Bag> {
                     ]),
                   ),
                   SizedBox(
-                    height: 450,
-                    child: ListView.builder(
+                   height: Get.height/1.5,    
+                                   child: ListView.builder(
+                                    physics: const BouncingScrollPhysics(),
                         itemCount: 3,
                         scrollDirection: Axis.vertical,
                         itemBuilder: ((context, index) {
@@ -96,7 +99,7 @@ class _BagState extends State<Bag> {
                                                       onTap: () {
                                                         setState(
                                                           () {
-                                                            i - i + 1;
+                                                            i =i + 1;
                                                           },
                                                         );
                                                       },

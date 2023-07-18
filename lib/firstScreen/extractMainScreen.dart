@@ -5,10 +5,9 @@ import 'package:appstore/color/color.dart';
 import 'package:appstore/search/search.dart';
 
 import 'package:appstore/selectType/select_kala.dart';
-import 'package:appstore/wish/wishlist.dart';
+
 import 'package:get/get.dart';
-import 'dart:convert' as convert;
-import 'package:http/http.dart' as http;
+
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -189,11 +188,11 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
                 const SizedBox(
                   height: 8,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text('Top Categories',
                           style: TextStyle(fontWeight: FontWeight.bold)),
                     ],
@@ -202,19 +201,19 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
                 ////type list
                 typeList(size),
 
-                Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
+                const Padding(
+                  padding: EdgeInsets.only(left: 10, right: 10),
                   child: SizedBox(
                     height: 30,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('New Arrivals',
+                        Text('New Arrivals',
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         SizedBox(
                             child: InkWell(
                           child: Row(
-                            children: const [
+                            children: [
                               Text(
                                 'View all',
                                 style: TextStyle(color: Rang.blue),
@@ -237,15 +236,15 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
                   ///collection container
                   color: Rang.blue,
                   width: double.infinity,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.all(6.0),
+                          padding: EdgeInsets.all(6.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: const [
+                            children: [
                               Text('Handpicked Collections',
                                   style: TextStyle(color: Colors.white)),
                             ],
@@ -256,18 +255,18 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
+                      Text(
                         'Shop by Brands',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
                         child: Row(
-                          children: const [
+                          children: [
                             Text(
                               'View all',
                               style: TextStyle(color: Rang.blue),
@@ -283,20 +282,20 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Column(
-                    children: const [
+                    children: [
                       Brand(),
                     ],
                   ),
                 ),
                 Shortcut(size: size),
-                Padding(
-                  padding: const EdgeInsets.only(left: 16.0, bottom: 8, top: 8),
+                const Padding(
+                  padding: EdgeInsets.only(left: 16.0, bottom: 8, top: 8),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text('Makeup & Skincare',
                             style: TextStyle(
                                 color: Colors.black,
@@ -333,7 +332,7 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
                     )
                   ]),
                 ),
-                Expandablee(),
+                const Expandablee(),
 
                 ///expandble box
                 const SizedBox(
@@ -345,7 +344,7 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
     );
   }
 
-SizedBox typeList(Size size) {
+SizedBox typeList(Size size) {//seslect clothes or...
    
      return  SizedBox(
          //sizedbox main
@@ -411,14 +410,12 @@ SizedBox typeList(Size size) {
      );
   }
 
-SizedBox  suggList(size) {
+SizedBox  suggList(size) {//suggestion List
   
       return SizedBox(
         height: size.height / 4.2,
         width: double.infinity,
-        child: 
-           
-              Obx(()=>ListView.builder(
+        child:  Obx(()=>ListView.builder(
                   physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   itemCount: homeScreenController.suggestlist.length,
@@ -504,10 +501,10 @@ SizedBox  suggList(size) {
                                                       color: Rang.toosi,
                                                       borderRadius:
                                                           BorderRadius.circular(10)),
-                                                  child: Row(
+                                                  child: const Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.spaceAround,
-                                                    children: const [
+                                                    children: [
                                                       Text('4.5'),
                                                       Icon(
                                                         CupertinoIcons.star_fill,
@@ -520,10 +517,10 @@ SizedBox  suggList(size) {
                                                 const SizedBox(
                                                   width: 10,
                                                 ),
-                                                Column(
+                                                const Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
-                                                  children: const [
+                                                  children: [
                                                     Text(
                                                       'Average Rating',
                                                       style: TextStyle(
@@ -547,11 +544,11 @@ SizedBox  suggList(size) {
                                          homeScreenController.suggestlist[index].filter == 'shoes'
                                               ? Column(
                                                   children: [
-                                                    Padding(
+                                                    const Padding(
                                                       padding:
-                                                          const EdgeInsets.all(8.0),
+                                                          EdgeInsets.all(8.0),
                                                       child: Row(
-                                                        children: const [
+                                                        children: [
                                                           Text(
                                                             'Select Size',
                                                             style: TextStyle(
@@ -653,13 +650,13 @@ SizedBox  suggList(size) {
                                                             MaterialStateProperty.all(
                                                                 Rang.blue)),
                                                     onPressed: () {},
-                                                    child: SizedBox(
+                                                    child: const SizedBox(
                                                       width: 270,
                                                       height: 50,
                                                       child: Row(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment.center,
-                                                        children: const [
+                                                        children: [
                                                           Icon(Icons
                                                               .shopping_bag_outlined),
                                                           Text('Add to Bags')

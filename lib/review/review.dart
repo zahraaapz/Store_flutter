@@ -5,6 +5,7 @@ import 'package:appstore/selectType/detail_kala.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'dart:convert' as convert;
 
@@ -136,8 +137,14 @@ class _ReviewState extends State<Review> {
                       )),
                 ),
               )
-            : const Center(
-                child: CircularProgressIndicator(),
+            : Scaffold(
+                backgroundColor: Colors.white,
+                body: const Center(
+                  child: SpinKitThreeBounce(
+                    color: Rang.blue,
+                    size: 30,
+                  ),
+                ),
               );
       },
       future: getcomment(),
@@ -342,7 +349,8 @@ descripe() {
           height: 50,
           child: ElevatedButton(
               style: ButtonStyle(
-                 shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15))),
                 backgroundColor: MaterialStateProperty.all(Rang.blue),
               ),
               onPressed: () {
