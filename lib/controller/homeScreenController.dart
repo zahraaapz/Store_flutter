@@ -24,6 +24,8 @@ class HomeScreenController extends GetxController {
     getEyewearItem();
   }
 
+
+
   getHomeItem() async {
     var response = await DioService().getList(ApiAddress().suggest);
 if (suggestlist.isEmpty) {

@@ -19,8 +19,8 @@ class Extractmainscreen extends StatelessWidget {
  HomeScreenController homeScreenController=Get.put(HomeScreenController());
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   RxInt  select=0.obs;
-
-  RxList<RxBool> fav = RxList.generate(3, ((index) => false.obs));
+ 
+ 
   Extractmainscreen({super.key});
 
 
@@ -29,6 +29,7 @@ class Extractmainscreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+      RxList<RxBool> fav = RxList.generate(3,((index) => false.obs));
     var size = MediaQuery.of(context).size;
     homeScreenController.getHomeItem();
  
@@ -231,7 +232,7 @@ class Extractmainscreen extends StatelessWidget {
                   ),
                 ),
                 //////suggest List
-                suggList(size),
+                suggList(size,fav),
                 Container(
                   ///collection container
                   color: Rang.blue,
@@ -410,7 +411,7 @@ SizedBox typeList(Size size) {//seslect clothes or...
      );
   }
 
-SizedBox  suggList(size) {//suggestion List
+SizedBox  suggList(size,fav) {//suggestion List
   
       return SizedBox(
         height: size.height / 4.2,
@@ -701,13 +702,15 @@ SizedBox  suggList(size) {//suggestion List
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
+
+                                  
                                   Text( homeScreenController.suggestlist[index].brand!,
                                       style:
                                           const TextStyle(fontWeight: FontWeight.bold)),
                                   InkWell(
                                     onTap:() {
 
-                                     
+                                    
                                      
                                       fav[index].value =! fav[index].value;
 
