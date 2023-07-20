@@ -1,11 +1,12 @@
 import 'package:appstore/address.dart';
 import 'package:appstore/bag.dart';
-import 'package:appstore/firstScreen/extractMainScreen.dart';
+import 'package:appstore/view/firstScreen/extractMainScreen.dart';
 import 'package:appstore/model/Model.dart';
 
-import 'package:appstore/profile/profile.dart';
+
 
 import 'package:appstore/color/color.dart';
+import 'package:appstore/view/profile/profile.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

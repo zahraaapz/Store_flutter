@@ -28,9 +28,9 @@ class _WishState extends State<Wish> {
     return SafeArea(
         child: Scaffold(
             body: Column(children: [
-      Row(
+      const Row(
         mainAxisAlignment: MainAxisAlignment.start,
-        children: const [
+        children: [
           SizedBox(
             width: 8,
           ),
@@ -75,30 +75,13 @@ class _WishState extends State<Wish> {
                             setState(
                               () {
                                 fav[index] = !fav[index];
-                                if (wishList.contains(select == 0
-                                        ? Kalalist[index]
-                                        : select == 3
-                                            ? Kalalist[index]
-                                            : select == 1
-                                                ? Kalalist[index]
-                                                : select == 2
-                                                    ? Kalalist[index]
-                                                    : select == 4
-                                                        ? Kalalist[index]
-                                                        : Kalalist[index]) &&
-                                    fav[index] == false) {
-                                  wishList.remove(select == 0
-                                      ? Kalalist[index]
-                                      : select == 3
-                                          ? Kalalist[index]
-                                          : select == 1
-                                              ? Kalalist[index]
-                                              : select == 2
-                                                  ? Kalalist[index]
-                                                  : select == 4
-                                                      ? Kalalist[index]
-                                                      : Kalalist[index]);
+
+
+                                if (wishList.contains(Kalalist[index])&&fav[index] == false) {
+                                  wishList.remove( Kalalist[index]);
                                 }
+
+                                
                               },
                             );
                           }),

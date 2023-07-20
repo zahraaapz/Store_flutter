@@ -1,7 +1,6 @@
 import 'package:appstore/color/color.dart';
 import 'package:appstore/model/Model.dart';
 
-import 'package:appstore/view/review/chart.dart';
 import 'package:appstore/view/selectType/detail_kala.dart';
 
 import 'package:expandable/expandable.dart';
@@ -13,7 +12,7 @@ import 'dart:convert' as convert;
 
 import 'package:http/http.dart' as http;
 
-
+import 'chart.dart';
 
 class Review extends StatefulWidget {
   Review(
@@ -26,7 +25,6 @@ class Review extends StatefulWidget {
 
   @override
   State<Review> createState() =>
-      // ignore: no_logic_in_create_state
       _ReviewState(index: index, select: select, listkala: listkala);
 }
 

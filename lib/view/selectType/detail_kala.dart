@@ -1,18 +1,20 @@
 import 'dart:math';
 
+import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/review/review.dart';
 
 import 'package:appstore/model/Model.dart';
-import 'package:appstore/getList/getlist.dart';
+
 
 import 'package:appstore/color/color.dart';
-import 'package:appstore/selectType/select_kala.dart';
+
+import 'package:appstore/view/selectType/select_kala.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../controller/homeScreenController.dart';
+
 
 class DetailKala extends StatefulWidget {
 
@@ -275,7 +277,19 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
                     ),
                     child:GestureDetector(
                         onTap: () {
-                          setState(() =>isFavorite!=isFavorite );
+                          setState(() {
+                          
+                            isFavorite=!isFavorite;
+                            
+                              if (isFavorite==false && wishList.contains(Kalalist[index])) {
+                                  wishList.remove( Kalalist[index]);
+                            } else{
+
+                                wishList.add( Kalalist[index]);
+                            }
+                            
+                            
+                            });
                          
                         },
                         child: Icon(isFavorite==false?

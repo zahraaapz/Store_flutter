@@ -1,6 +1,6 @@
 import 'package:appstore/address.dart';
-import 'package:appstore/firstScreen/mainScreen.dart';
-import 'package:appstore/splash/splash-screen.dart';
+import 'package:appstore/view/firstScreen/mainScreen.dart';
+import 'package:appstore/view/splash/splash-screen.dart';
 
 
 import 'package:flutter/material.dart';

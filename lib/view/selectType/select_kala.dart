@@ -1,17 +1,13 @@
+import 'package:appstore/color/color.dart';
 import 'package:appstore/controller/homeScreenController.dart';
-import 'package:appstore/firstScreen/mainScreen.dart';
-import 'package:appstore/model/Model.dart';
-import 'package:appstore/selectType/detail_kala.dart';
+import 'package:appstore/view/firstScreen/mainScreen.dart';
+
+import 'package:appstore/view/selectType/detail_kala.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 import 'package:get/get.dart';
 
-import 'dart:convert' as convert;
-
-import 'package:http/http.dart' as http;
-import 'package:appstore/color/color.dart';
-
-import 'package:flutter/material.dart';
 
 class Select_kala extends StatefulWidget {
   int select;
