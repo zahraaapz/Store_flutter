@@ -3,27 +3,26 @@
 import 'package:appstore/color/color.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Wish extends StatefulWidget {
-  List? fav = [];
-  int? select;
-  List<Kala>? Kalalist = [];
-  // ignore: use_key_in_widget_constructors
-  Wish([this.fav, this.Kalalist, this.select]);
+
+
 
   @override
   State<Wish> createState() =>
-      _WishState(fav: fav!, Kalalist: Kalalist!, select: select!);
+      _WishState();
 }
 
 class _WishState extends State<Wish> {
-  _WishState({required this.fav, required this.Kalalist, required this.select});
-  List fav = [];
-  int select;
-  List<Kala> Kalalist = [];
+
+
+
+  List<Kala> kalaList = [];
 
   @override
   Widget build(BuildContext context) {
+     RxList<RxBool> fav = RxList.generate(wishList.length,((index) => true.obs));
     var size = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
@@ -72,24 +71,24 @@ class _WishState extends State<Wish> {
                         Text(wishList[index].brand!),
                         GestureDetector(
                           onTap: (() {
-                            setState(
-                              () {
-                                fav[index] = !fav[index];
+                           
+                                fav[index].value = !fav[index].value;
 
 
-                                if (wishList.contains(Kalalist[index])&&fav[index] == false) {
-                                  wishList.remove( Kalalist[index]);
+                                if (wishList.contains(kalaList[index])&&fav[index].value == false) {
+                                  wishList.remove( kalaList[index]);
                                 }
 
                                 
-                              },
-                            );
+                           
                           }),
-                          child: Icon(
-                              fav[index] == false
-                                  ? Icons.favorite
-                                  : Icons.favorite_border,
-                              size: 20),
+                          child: Obx(()=>
+                           Icon(
+                                fav[index] .value== true
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
+                                size: 20),
+                          ),
                         ),
                       ],
                     ),

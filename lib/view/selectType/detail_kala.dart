@@ -44,7 +44,7 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    bool isFavorite=false;
+   RxBool  isFavorite=false.obs;
     return SafeArea(
       child: Scaffold(
           body: SingleChildScrollView(
@@ -268,33 +268,37 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                    width: 60,
+              GestureDetector   (
+                      onTap: () {
+                         
+                          
+                            isFavorite.value=!isFavorite.value;
+                            
+                            
+                            
+                         
+                           if (isFavorite.value==false && wishList.contains(Kalalist[index])) {
+                                  wishList.remove( Kalalist[index]);
+                            } if (isFavorite.value==true && !wishList.contains(Kalalist[index])){
+
+                                wishList.add( Kalalist[index]);
+                            }
+                            
+                debugPrint(wishList.length.toString())  ;      },
+                    child:Container(
+                      width: 60,
                     height: 60,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       color: Rang.toosi,
                     ),
-                    child:GestureDetector(
-                        onTap: () {
-                          setState(() {
-                          
-                            isFavorite=!isFavorite;
-                            
-                              if (isFavorite==false && wishList.contains(Kalalist[index])) {
-                                  wishList.remove( Kalalist[index]);
-                            } else{
 
-                                wishList.add( Kalalist[index]);
-                            }
-                            
-                            
-                            });
-                         
-                        },
-                        child: Icon(isFavorite==false?
-                          Icons.favorite_border:Icons.favorite,
-                          color: Rang.blue,
+                     
+                        child: Obx(()=>
+                          Icon(isFavorite.value==false?
+                            Icons.favorite_border:Icons.favorite,
+                            color: Rang.blue,
+                          ),
                         ),
                       
                     ),

@@ -7,6 +7,7 @@ import 'package:appstore/model/Model.dart';
 
 import 'package:appstore/color/color.dart';
 import 'package:appstore/view/profile/profile.dart';
+import 'package:appstore/view/wish/wishlist.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,7 +29,7 @@ class Home extends StatelessWidget {
                  child: Obx(()=>
                   IndexedStack(
                       index: selectpg.value,
-                      children: [Extractmainscreen(), Profile(), const Bag(),address()]),
+                      children: [Extractmainscreen(),Wish(), Profile(), const Bag(),]),
                  ),
                ),
              
