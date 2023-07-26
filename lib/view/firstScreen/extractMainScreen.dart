@@ -2,7 +2,7 @@ import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/view/firstScreen/expandable.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/color/color.dart';
-import 'package:appstore/search/search.dart';
+import 'package:appstore/view/search/search.dart';
 
 
 import 'package:appstore/view/selectType/select_kala.dart';
