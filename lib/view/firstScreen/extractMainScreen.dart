@@ -29,7 +29,7 @@ class Extractmainscreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      RxList<RxBool> fav = RxList.generate(3,((index) => false.obs));
+      RxList<RxBool> fav = RxList.generate(3,(index) => false.obs);
     var size = MediaQuery.of(context).size;
     homeScreenController.getHomeItem();
  
@@ -650,7 +650,10 @@ SizedBox  suggList(size,fav) {//suggestion List
                                                         backgroundColor:
                                                             MaterialStateProperty.all(
                                                                 Rang.blue)),
-                                                    onPressed: () {},
+                                                    onPressed: () {
+                                                      if(!myBagList.contains(homeScreenController.suggestlist[index]))
+                                                      myBagList.add(homeScreenController.suggestlist[index]);
+                                                    },
                                                     child: const SizedBox(
                                                       width: 270,
                                                       height: 50,

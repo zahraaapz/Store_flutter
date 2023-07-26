@@ -62,7 +62,21 @@ List<IconData> ikon = [
 ];
 
 List<Kala> wishList = [];
+List<Kala> myBagList = [];
+List<OrderDetail> orderDetail= [
+  OrderDetail(title:'Sub Total' ),
+  OrderDetail(title:'Discount' ),
+  OrderDetail(title: 'Delivery'),
+  OrderDetail(title:'Grand Total' ),
+];
 
+
+class OrderDetail{
+  String ? title;
+ String ? price;
+  OrderDetail({this.price,this.title});
+  
+}
 class Comment {
   String name, date, time, review;
   int score;

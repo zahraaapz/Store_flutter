@@ -5,7 +5,6 @@ import 'package:appstore/review/review.dart';
 
 import 'package:appstore/model/Model.dart';
 
-
 import 'package:appstore/color/color.dart';
 
 import 'package:appstore/view/selectType/select_kala.dart';
@@ -14,11 +13,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
-
 class DetailKala extends StatefulWidget {
-
-  
   int index;
   int select;
   List<Kala> Kalalist;
@@ -31,20 +26,20 @@ class DetailKala extends StatefulWidget {
   @override
   State<DetailKala> createState() =>
       // ignore: no_logic_in_create_state
-      _DetailKalaState(select: select, index: index, Kalalist: Kalalist);
+      _DetailKalaState(select: select, index: index, kalalist: Kalalist);
 }
 
 class _DetailKalaState extends State<DetailKala> {
   _DetailKalaState(
-      {required this.select, required this.index, required this.Kalalist});
-  List<Kala> Kalalist;
+      {required this.select, required this.index, required this.kalalist});
+  List<Kala> kalalist;
   int select;
   int index;
-HomeScreenController homeScreenController=Get.put(HomeScreenController());
+  HomeScreenController homeScreenController = Get.put(HomeScreenController());
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-   RxBool  isFavorite=false.obs;
+    RxBool isFavorite = false.obs;
     return SafeArea(
       child: Scaffold(
           body: SingleChildScrollView(
@@ -63,7 +58,8 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: ((context) => Select_kala(
-                                select: select, homeScreenController: homeScreenController,
+                                select: select,
+                                homeScreenController: homeScreenController,
                               ))));
                     },
                   ),
@@ -80,16 +76,16 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
                         image: DecorationImage(
                             fit: BoxFit.fill,
                             image: Image.asset(select == 0
-                                    ? Kalalist[index].ima!
+                                    ? kalalist[index].ima!
                                     : select == 3
-                                        ? Kalalist[index].ima!
+                                        ? kalalist[index].ima!
                                         : select == 1
-                                            ? Kalalist[index].ima!
+                                            ? kalalist[index].ima!
                                             : select == 2
-                                                ? Kalalist[index].ima!
+                                                ? kalalist[index].ima!
                                                 : select == 4
-                                                    ? Kalalist[index].ima!
-                                                    : Kalalist[index].ima!)
+                                                    ? kalalist[index].ima!
+                                                    : kalalist[index].ima!)
                                 .image),
                         borderRadius: BorderRadius.circular(30)),
                   ),
@@ -115,30 +111,30 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
                 children: [
                   Text(
                     select == 0
-                        ? Kalalist[index].name!
+                        ? kalalist[index].name!
                         : select == 3
-                            ? Kalalist[index].name!
+                            ? kalalist[index].name!
                             : select == 1
-                                ? Kalalist[index].name!
+                                ? kalalist[index].name!
                                 : select == 2
-                                    ? Kalalist[index].name!
+                                    ? kalalist[index].name!
                                     : select == 4
-                                        ? Kalalist[index].name!
-                                        : Kalalist[index].name!,
+                                        ? kalalist[index].name!
+                                        : kalalist[index].name!,
                     textScaleFactor: 1.9,
                   ),
                   Text(
                     select == 0
-                        ? Kalalist[index].brand!
+                        ? kalalist[index].brand!
                         : select == 3
-                            ? Kalalist[index].brand!
+                            ? kalalist[index].brand!
                             : select == 1
-                                ? Kalalist[index].brand!
+                                ? kalalist[index].brand!
                                 : select == 2
-                                    ? Kalalist[index].brand!
+                                    ? kalalist[index].brand!
                                     : select == 4
-                                        ? Kalalist[index].brand!
-                                        : Kalalist[index].brand!,
+                                        ? kalalist[index].brand!
+                                        : kalalist[index].brand!,
                     textScaleFactor: 1.1,
                     style: const TextStyle(color: Rang.greylight),
                     strutStyle: const StrutStyle(height: 2),
@@ -147,16 +143,16 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
                     children: [
                       Text(
                         select == 0
-                            ? '${Kalalist[index].price}\$'
+                            ? '${kalalist[index].price}\$'
                             : select == 3
-                                ? '${Kalalist[index].price}\$'
+                                ? '${kalalist[index].price}\$'
                                 : select == 1
-                                    ? '${Kalalist[index].price}\$'
+                                    ? '${kalalist[index].price}\$'
                                     : select == 2
-                                        ? '${Kalalist[index].price}\$'
+                                        ? '${kalalist[index].price}\$'
                                         : select == 4
-                                            ? '${Kalalist[index].price}\$'
-                                            : '${Kalalist[index].price}\$',
+                                            ? '${kalalist[index].price}\$'
+                                            : '${kalalist[index].price}\$',
                         textScaleFactor: 1.6,
                         strutStyle: const StrutStyle(height: 2),
                       ),
@@ -268,39 +264,36 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-              GestureDetector   (
-                      onTap: () {
-                         
-                          
-                            isFavorite.value=!isFavorite.value;
-                            
-                            
-                            
-                         
-                           if (isFavorite.value==false && wishList.contains(Kalalist[index])) {
-                                  wishList.remove( Kalalist[index]);
-                            } if (isFavorite.value==true && !wishList.contains(Kalalist[index])){
+                  GestureDetector(
+                    onTap: () {
+                      isFavorite.value = !isFavorite.value;
 
-                                wishList.add( Kalalist[index]);
-                            }
-                            
-                debugPrint(wishList.length.toString())  ;      },
-                    child:Container(
+                      if (isFavorite.value == false &&
+                          wishList.contains(kalalist[index])) {
+                        wishList.remove(kalalist[index]);
+                      }
+                      if (isFavorite.value == true &&
+                          !wishList.contains(kalalist[index])) {
+                        wishList.add(kalalist[index]);
+                      }
+
+                      debugPrint(wishList.length.toString());
+                    },
+                    child: Container(
                       width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Rang.toosi,
-                    ),
-
-                     
-                        child: Obx(()=>
-                          Icon(isFavorite.value==false?
-                            Icons.favorite_border:Icons.favorite,
-                            color: Rang.blue,
-                          ),
+                      height: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Rang.toosi,
+                      ),
+                      child: Obx(
+                        () => Icon(
+                          isFavorite.value == false
+                              ? Icons.favorite_border
+                              : Icons.favorite,
+                          color: Rang.blue,
                         ),
-                      
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -313,10 +306,18 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(15)))),
-                        onPressed: (() {}),
-                        child: Row(
+                        onPressed: (() {
+                          if (!myBagList.contains(kalalist[index])) {
+                            setState(() {
+                                    myBagList.add(kalalist[index]);
+                            debugPrint(myBagList.length.toString());
+                            });
+                         
+                          }
+                        }),
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
+                          children: [
                             Icon(
                               Icons.shopping_bag_outlined,
                               color: Colors.white,
@@ -343,7 +344,7 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
                           builder: ((context) => Review(
                               index: index,
                               select: select,
-                              listkala: Kalalist))));
+                              listkala: kalalist))));
                     }),
                     child: const Icon(
                       Icons.arrow_forward_ios_outlined,
@@ -354,10 +355,10 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(18.0),
+            const Padding(
+              padding: EdgeInsets.all(18.0),
               child: Row(
-                children: const [
+                children: [
                   Text('You might like also',
                       style:
                           TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
@@ -384,7 +385,7 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
                                   borderRadius: BorderRadius.circular(20),
                                   image: DecorationImage(
                                       fit: BoxFit.fill,
-                                      image: AssetImage(Kalalist[index].ima!))),
+                                      image: AssetImage(kalalist[index].ima!))),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -395,7 +396,7 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(Kalalist[index].brand!),
+                                      Text(kalalist[index].brand!),
                                       const Icon(
                                         Icons.favorite_border,
                                         size: 20,
@@ -403,11 +404,11 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
                                     ],
                                   ),
                                   Text(
-                                    Kalalist[index].name!,
+                                    kalalist[index].name!,
                                     style: TextStyle(color: Rang.greylight),
                                   ),
                                   Text(
-                                    '${Kalalist[index].price}\$',
+                                    '${kalalist[index].price}\$',
                                     strutStyle: StrutStyle(height: 2),
                                   ),
                                 ],

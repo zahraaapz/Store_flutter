@@ -79,7 +79,7 @@ class _WishState extends State<Wish> {
                                   wishList.remove( kalaList[index]);
                                 }
 
-                                
+                              
                            
                           }),
                           child: Obx(()=>

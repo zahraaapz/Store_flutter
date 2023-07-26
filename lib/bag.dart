@@ -2,17 +2,26 @@ import 'package:appstore/color/color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'model/Model.dart';
+
 class Bag extends StatefulWidget {
-  const Bag({super.key});
+  // ignore: use_key_in_widget_constructors
+ 
 
   @override
   State<Bag> createState() => _BagState();
 }
 
 class _BagState extends State<Bag> {
-  int i = 1;
+
+
+
+ 
   @override
   Widget build(BuildContext context) {
+ RxList i = RxList.filled(myBagList.length, 1);
+
+   
     return SafeArea(
       child: Scaffold(
           backgroundColor: Rang.toosi,
@@ -21,7 +30,7 @@ class _BagState extends State<Bag> {
             physics: const BouncingScrollPhysics(),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Column(
+              child:  myBagList.isEmpty ?  Text('data'):Column(
                 children: [
                   const Padding(
                     padding: EdgeInsets.all(8.0),
@@ -41,11 +50,11 @@ class _BagState extends State<Bag> {
                       )
                     ]),
                   ),
-                  SizedBox(
-                   height: Get.height/1.5,    
+           SizedBox(
+                    height:Get.height/2.5,
                                    child: ListView.builder(
                                     physics: const BouncingScrollPhysics(),
-                        itemCount: 3,
+                        itemCount: myBagList.length,
                         scrollDirection: Axis.vertical,
                         itemBuilder: ((context, index) {
                           return Padding(
@@ -53,7 +62,7 @@ class _BagState extends State<Bag> {
                             child: Container(
                               height: 200,
                               decoration: BoxDecoration(
-                                  boxShadow: [BoxShadow(blurRadius: 7)],
+                                  boxShadow: [BoxShadow(blurRadius:4)],
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(15)),
                               child: Column(children: [
@@ -67,7 +76,7 @@ class _BagState extends State<Bag> {
                                               BorderRadius.circular(15),
                                           image: DecorationImage(
                                               image:
-                                                  AssetImage('assets/w1.jpg'),
+                                                  AssetImage(myBagList[index].ima!),
                                               fit: BoxFit.fill)),
                                     ),
                                     Padding(
@@ -76,14 +85,14 @@ class _BagState extends State<Bag> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text('coach',
+                                          Text(myBagList[index].brand!,
                                               style: TextStyle(fontSize: 15)),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 10,
                                           ),
-                                          Text('coach VFR',
+                                          Text(myBagList[index].name!,
                                               style: TextStyle(fontSize: 15)),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 10,
                                           ),
                                           Container(
@@ -94,30 +103,31 @@ class _BagState extends State<Bag> {
                                                   const EdgeInsets.all(8.0),
                                               child: Row(
                                                 children: [
-                                                  Text('Qnty: $i'.toString()),
+                                                  Obx(()=> Text('Qnty: ${i[index]}')),
                                                   InkWell(
                                                       onTap: () {
-                                                        setState(
-                                                          () {
-                                                            i =i + 1;
-                                                          },
-                                                        );
-                                                      },
-                                                      child: Icon(Icons.add))
+                                                        
+                                                            i[index] =i[index] +1;
+   
+                                                      
+                                              
+ 
+   },
+                                                      child: const Icon(Icons.add))
                                                 ],
                                               ),
                                             ),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 10,
                                           ),
-                                          Text('${i * 2000}\$'),
+                                          Obx(()=> Text((int.parse(myBagList[index].price!)*i[index]).toString())),
                                         ],
                                       ),
                                     )
                                   ],
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 12,
                                 ),
                                 const Divider(
@@ -129,7 +139,7 @@ class _BagState extends State<Bag> {
                                 ),
                                 Row(
                                   children: [
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 60,
                                     ),
                                     Text('Move to Wishlist',
@@ -138,7 +148,7 @@ class _BagState extends State<Bag> {
                                     SizedBox(
                                       width: 8,
                                     ),
-                                    Container(
+                                    SizedBox(
                                       height: 20,
                                       child: VerticalDivider(
                                         color: Rang.blue,
@@ -150,9 +160,14 @@ class _BagState extends State<Bag> {
                                     SizedBox(
                                       width: 8,
                                     ),
-                                    Text('Remove',
-                                        style: TextStyle(
-                                            color: Rang.blue, fontSize: 16)),
+                                    InkWell(
+                                      onTap: () {
+                                  //      myBagList.remove(myBagList[index]);
+                                      },
+                                      child: const Text('Remove',
+                                          style: TextStyle(
+                                              color: Rang.blue, fontSize: 16)),
+                                    ),
                                   ],
                                 )
                               ]),
@@ -171,8 +186,8 @@ class _BagState extends State<Bag> {
                         child: TextField(
                           decoration: InputDecoration(
                               hintText: 'Apply Copon Code',
-                              suffixIcon: Padding(
-                                padding: const EdgeInsets.only(top: 12.0),
+                              suffixIcon: const Padding(
+                                padding: EdgeInsets.only(top: 12.0),
                                 child: Text(
                                   'Check',
                                   style: TextStyle(
@@ -197,71 +212,7 @@ class _BagState extends State<Bag> {
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(15)),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text('Order detail',
-                                style:
-                                    TextStyle(color: Rang.blue, fontSize: 16)),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text('Sub Total',
-                                    style: TextStyle(
-                                        fontSize: 16, color: Rang.greylight)),
-                                Text('\$200', style: TextStyle(fontSize: 16)),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text('Discount',
-                                    style: TextStyle(
-                                        fontSize: 16, color: Rang.greylight)),
-                                Text('\$200', style: TextStyle(fontSize: 16)),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text('Delivery',
-                                    style: TextStyle(
-                                        fontSize: 16, color: Rang.greylight)),
-                                Text('\$200', style: TextStyle(fontSize: 16)),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text('Grand Total',
-                                    style: TextStyle(fontSize: 16)),
-                                Text('\$200', style: TextStyle(fontSize: 16)),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Total Bag Amount',
-                                        style: TextStyle(fontSize: 16)),
-                                    Text('\$200',
-                                        style: TextStyle(fontSize: 13)),
-                                  ],
-                                ),
-                                ElevatedButton(
-                                    style: ButtonStyle(
-                                       shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                                Rang.blue)),
-                                    onPressed: (() {}),
-                                    child: Text('Place Order')),
-                              ],
-                            )
-                          ]),
+                      child: columnPrices(i),
                     ),
                   )
                 ],
@@ -270,6 +221,88 @@ class _BagState extends State<Bag> {
           )),
     );
   }
+
+  Column columnPrices(i) {
+    var sum=0.0;
+ 
+  setState(() {
+
+orderDetail[1].price='20%';
+orderDetail[2].price='20\$';
+myBagList.forEach((element) {
+  sum=(double.parse(element.price!)+sum);
+   
+  orderDetail[3].price=(sum*0.2+20).toString();
+  print(element.price);
+});
+myBagList.forEach((element) {
+  sum=(double.parse(element.price!)+sum);
+   
+  orderDetail[0].price=(sum).toString();
+  print(element.price);
+});
+    });
+    
+
+    return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [    
+                          SizedBox(height: 20,),
+                          const Text('Order detail',
+                              style:
+                                  TextStyle(color: Rang.blue, fontSize: 16)),
+                                  SizedBox(height: 20,),
+                          SizedBox(
+                            height: 270,
+                            child: ListView.builder(
+                              itemCount: orderDetail.length,
+                              physics: const ClampingScrollPhysics(),
+                              itemBuilder: (context, ix) => 
+                           Padding(
+                             padding: const EdgeInsets.all(8.0),
+                             child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(orderDetail[ix].title!,
+                                        style: const TextStyle(
+                                            fontSize: 16, color: Rang.greylight)),
+                                   Text(orderDetail[ix].price==null?'k':orderDetail[ix].price!, style: const TextStyle(fontSize: 16)),
+                                  ],
+                             ),
+                           )
+                            ),
+                          ),
+                        
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Total Bag Amount',
+                                      style: TextStyle(fontSize: 16)),
+                                  Text('\$200',
+                                      style: TextStyle(fontSize: 13)),
+                                ],
+                              ),
+                              ElevatedButton(
+                                  style: ButtonStyle(
+                                     shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              Rang.blue)),
+                                  onPressed: (() {}),
+                                  child: Text('Place Order')),
+                            ],
+                          )
+                        ]);
+  } totalPrice(index){
+orderDetail[0].price=myBagList[index].price;
+orderDetail[1].price=(int.parse(myBagList[index].price!)*0.2).toString();
+orderDetail[2].price='20\$';
+orderDetail[3].price=(int.parse(myBagList[index].price!)*0.2+(20)).toString();
+}
 }
 
 class cut extends CustomClipper<Path> {
@@ -305,3 +338,5 @@ class cut extends CustomClipper<Path> {
   @override
   bool shouldReclip(cut oldCLipper) => true;
 }
+
+
