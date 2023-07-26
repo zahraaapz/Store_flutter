@@ -223,23 +223,27 @@ class _BagState extends State<Bag> {
   }
 
   Column columnPrices(i) {
-    var sum=0.0;
- 
+   
+  var sum=0.0;
   setState(() {
 
 orderDetail[1].price='20%';
 orderDetail[2].price='20\$';
+
 myBagList.forEach((element) {
   sum=(double.parse(element.price!)+sum);
    
   orderDetail[3].price=(sum*0.2+20).toString();
-  print(element.price);
+ 
+  
+ 
 });
+  sum=0.0;
 myBagList.forEach((element) {
-  sum=(double.parse(element.price!)+sum);
    
-  orderDetail[0].price=(sum).toString();
-  print(element.price);
+      sum=(double.parse(element.price!)+sum);
+   orderDetail[0].price=(sum).toString();
+
 });
     });
     
@@ -248,13 +252,13 @@ myBagList.forEach((element) {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [    
-                          SizedBox(height: 20,),
+                         
                           const Text('Order detail',
                               style:
                                   TextStyle(color: Rang.blue, fontSize: 16)),
-                                  SizedBox(height: 20,),
+                                
                           SizedBox(
-                            height: 270,
+                            height: 140,
                             child: ListView.builder(
                               itemCount: orderDetail.length,
                               physics: const ClampingScrollPhysics(),
