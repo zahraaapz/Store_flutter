@@ -12,7 +12,7 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   var select = 0;
   TextEditingController textEditingController=TextEditingController();
-  List duplicate=List.generate(10, ((index) => 'item $index'));
+  List duplicate=List.generate(100, ((index) => 'item $index'));
   List item=[];
 
 
@@ -97,9 +97,9 @@ setState(() {
                   
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Container(
+                    child: SizedBox(
                       height: 50,
-                     color: Colors.amber,
+                   
                       child: Text('index ${index}')),
                   );
                 },),
