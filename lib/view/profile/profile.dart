@@ -40,10 +40,20 @@ class Profile extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  const CircleAvatar(
-                    backgroundImage: AssetImage('assets/avatar.png'),
-                    radius: 50,
-                  ),
+                   GestureDetector(
+                    onTap: () {
+                      
+                    },
+                     child: Container(
+                   
+                   decoration: BoxDecoration(
+                     shape: BoxShape.circle,
+                     image: DecorationImage(image: AssetImage('assets/image/avatar.png'))
+                   ),child: Text('upload your pic'),
+                      
+                                 
+                                     ),
+                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
