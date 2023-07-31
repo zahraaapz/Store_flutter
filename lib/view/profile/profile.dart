@@ -1,13 +1,18 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:appstore/color/color.dart';
+import 'package:appstore/controller/pick_file.dart';
 import 'package:appstore/view/search/search.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
 
 class Profile extends StatelessWidget {
-  const Profile({super.key});
-
+   Profile({super.key});
+PickFileController pickFileController=Get.put(PickFileController());
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -37,45 +42,66 @@ class Profile extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
                 color: Rang.grey,
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                   GestureDetector(
-                    onTap: () {
-                      
-                    },
-                     child: Container(
-                   
-                   decoration: BoxDecoration(
-                     shape: BoxShape.circle,
-                     image: DecorationImage(image: AssetImage('assets/image/avatar.png'))
-                   ),child: Text('upload your pic'),
-                      
-                                 
-                                     ),
-                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Padding(
-                        padding: EdgeInsets.all(3.0),
-                        child: Text('Zahra Pirooz'),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(3.0),
-                        child: Text('6690400 996'),
-                      ),
-                      Text(
-                        'zahrapirooo@jmnm.cpm',
-                        style: TextStyle(color: Rang.greylight),
-                      ),
-                    ],
-                  ),
-                  const Icon(
-                    Icons.arrow_forward_ios_outlined,
-                    color: Rang.greylight,
-                  )
-                ],
+              child: Obx(()=>
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                     Stack(
+                       children:[ GestureDetector(
+                        onTap: () {
+                         getFile(); 
+                        },
+                         child:pickFileController.file.value.name=='not'?
+                            Container(
+                                          height: 100,
+                                         width: 100,
+                                          decoration: BoxDecoration(
+                                         
+                                            shape: BoxShape.circle,
+                                           image: DecorationImage(image: AssetImage('assets/avatar.png',),fit:BoxFit.cover )
+                                          ),
+                                          )
+                         
+                                   
+                       
+                       : Container(
+                                          height: 100,
+                                         width: 100,
+                                          decoration: BoxDecoration(
+                                         
+                                            shape: BoxShape.circle,
+                                           image: DecorationImage(image:Image.file(File(pickFileController.file.value.path!)).image ,fit:BoxFit.cover )
+                                          ),
+                       )),
+                       Positioned(
+                        top: 60,
+                        left: 5,
+                        child: Text('upload your pic',style: TextStyle(fontSize: 13),)),
+                  ]),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Padding(
+                          padding: EdgeInsets.all(3.0),
+                          child: Text('Zahra Pirooz'),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(3.0),
+                          child: Text('6690400 996'),
+                        ),
+                        Text(
+                          'zahrapirooo@jmnm.cpm',
+                          style: TextStyle(color: Rang.greylight),
+                        ),
+                      ],
+                    ),
+                    const Icon(
+                      Icons.arrow_forward_ios_outlined,
+                      color: Rang.greylight,
+                    )
+                  ],
+                ),
               ),
             ),
           ),

@@ -43,6 +43,8 @@ dependencies:
   dio: ^5.2.1+1
   get: ^4.6.5
   file_picker: ^5.3.3
+  html_editor_enhanced: ^2.5.1
+  cached_network_image: ^3.2.3
 
 
 dev_dependencies:
