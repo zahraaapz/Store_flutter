@@ -1,15 +1,19 @@
 import 'dart:ui';
 
 import 'package:appstore/color/color.dart';
-import 'package:appstore/view/search/search.dart';
+import 'package:appstore/view/firstScreen/mainScreen.dart';
+
 import 'package:flutter/cupertino.dart';
 
 
 import 'package:flutter/material.dart';
 
+import '../../model/component.dart';
+import '../../model/string.dart';
+
 class Searchresult extends StatelessWidget {
-  Searchresult({super.key, required this.select});
-  int select;
+  Searchresult({super.key, });
+ 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -21,18 +25,16 @@ class Searchresult extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                const SizedBox(
-                  width: 15,
-                ),
+               
                 GestureDetector(
                   onTap: () {},
                   child: const Icon(
                     Icons.arrow_back_ios_new,
-                    color: Rang.blue,
+                    color: Rang.blue,size: 30,
                   ),
                 ),
                 const SizedBox(
-                  width: 25,
+                  width: 20,
                 ),
                 const Text(
                   'Search results',
@@ -51,26 +53,19 @@ class Searchresult extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 90,
           ),
-          Image.asset('assets/art.png'),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              'Whoops!',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-            ),
+          Image.asset('assets/search.png'),
+           Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: titleEmtypage(MyString.searchEmptytitle),
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 20, right: 20),
-            child: Text(
-              'We cccccccccccccccccc gjjjjjjjjj k ll ujl ghgjgj jyjj vbnbn hjh j jjll jljljl joj',
-              textAlign: TextAlign.center,
-              strutStyle: StrutStyle(height: 2),
-            ),
+           Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: contentEmptyPages(MyString.searchEmptyContent)
           ),
-          SizedBox(
+          const SizedBox(
             height: 100,
           ),
           SizedBox(
@@ -79,20 +74,19 @@ class Searchresult extends StatelessWidget {
             child: ElevatedButton(
               onPressed: (() {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: ((context) => Search())));
+                    MaterialPageRoute(builder: ((context) => Home())));
               }),
+              style: buttonModel(),
               child: const Text(
                 'Back to home',
                 style: TextStyle(color: Colors.white),
-              ),
-              style: ButtonStyle(
-                  backgroundColor: const MaterialStatePropertyAll(Rang.blue),
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12)))),
+              )
             ),
           )
         ]),
       ),
     );
   }
+
+
 }
