@@ -11,6 +11,7 @@ class HomeScreenController extends GetxController {
   RxList<Kala> eyewear = RxList();
   RxList<Kala> watche = RxList();
   RxList<Kala> skincare = RxList();
+  RxList<Kala> searchKala = RxList();
 
   @override
   void onInit() {
@@ -32,6 +33,8 @@ if (suggestlist.isEmpty) {
    response.data.forEach((element) {
       suggestlist.add(Kala.fromJson(element));
     });
+
+  
 }
    
   }
@@ -42,7 +45,7 @@ if (suggestlist.isEmpty) {
         response.data.forEach((element) {
       bag.add(Kala.fromJson(element));
     });
-    }
+   searchKala.addAll(bag); }
     
   }
 
@@ -56,7 +59,7 @@ if (suggestlist.isEmpty) {
       watche.add(Kala.fromJson(element));
     }); 
     
-   
+   searchKala.addAll(watche);
   
  
   
@@ -68,6 +71,8 @@ if (jewellery.isEmpty) {
     response.data.forEach((element) {
       jewellery.add(Kala.fromJson(element));
     });
+
+    searchKala.addAll(jewellery);
 }
   
   }
@@ -78,7 +83,7 @@ if (jewellery.isEmpty) {
         response.data.forEach((element) {
       skincare.add(Kala.fromJson(element));
     });
-    }
+   searchKala.addAll(skincare); }
   
   }
 
@@ -89,7 +94,8 @@ if (jewellery.isEmpty) {
     
     response.data.forEach((element) {
       shoes.add(Kala.fromJson(element));
-    });}
+    });
+    searchKala.addAll(shoes);}
   }
 
   getEyewearItem() async {
@@ -98,7 +104,9 @@ if (jewellery.isEmpty) {
        response.data.forEach((element) {
       eyewear.add(Kala.fromJson(element));
     });
-    }
-   
+   searchKala.addAll(eyewear); }
+    print(searchKala.length.toString());
   }
+
+
 }

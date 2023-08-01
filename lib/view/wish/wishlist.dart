@@ -2,8 +2,13 @@
 
 import 'package:appstore/color/color.dart';
 import 'package:appstore/model/Model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../model/component.dart';
+import '../../model/string.dart';
+import '../firstScreen/mainScreen.dart';
 
 class Wish extends StatefulWidget {
 
@@ -27,21 +32,55 @@ class _WishState extends State<Wish> {
     return SafeArea(
         child: Scaffold(
             body: Column(children: [
-      const Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 8,
-          ),
-          Text('Wishlist',
-              style: TextStyle(
-                  color: Rang.blue, fontWeight: FontWeight.bold, fontSize: 23)),
-        ],
-      ),
+ iconANDtitle('Wishlist', Icons.arrow_back_ios),
       const SizedBox(
         height: 20,
       ),
-      SizedBox(
+      wishList.isEmpty?
+      Column(children: [
+          
+          const SizedBox(
+            height: 90,
+          ),
+          Image.asset('assets/wish.png'),
+           Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: titleEmtypage(MyString.wishEmptytitle),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: contentEmptyPages(MyString.wishEmptyContent)
+          ),
+          const SizedBox(
+            height: 100,
+          ),
+          SizedBox(
+            height: 50,
+            width: 250,
+            child: ElevatedButton(
+              onPressed: (() {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: ((context) => Home())));
+              }),
+              style: buttonModel(),
+              child: const Text(
+                'start shopping',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          )
+
+
+
+
+
+
+
+
+
+
+      ],)
+      :SizedBox(
         height: 670,
         child: GridView.builder(
           shrinkWrap: true,
@@ -108,4 +147,6 @@ class _WishState extends State<Wish> {
       )
     ])));
   }
+
+
 }

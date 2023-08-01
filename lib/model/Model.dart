@@ -5,12 +5,12 @@ class Model {
   String title;
   Model({required this.ima, required this.title});
   static List<Model> modelList = [
-    Model(ima: 'assets/p0.png', title: 'Skincare'),
-    Model(ima: 'assets/p1.png', title: 'Watches'),
-    Model(ima: 'assets/p2.png', title: 'HandBag'),
-    Model(ima: 'assets/p3.png', title: 'Jewellery'),
-    Model(ima: 'assets/p4.png', title: 'Eyewear'),
-    Model(ima: 'assets/p5.png', title: 'Shoes'),
+    Model(ima: 'assets/type/p0.png', title: 'Skincare'),
+    Model(ima: 'assets/type/p1.png', title: 'Watches'),
+    Model(ima: 'assets/type/p2.png', title: 'HandBag'),
+    Model(ima: 'assets/type/p3.png', title: 'Jewellery'),
+    Model(ima: 'assets/type/p4.png', title: 'Eyewear'),
+    Model(ima: 'assets/type/p5.png', title: 'Shoes'),
   ];
 }
 List<String> addresslist=['Office','Home','Other'];
@@ -45,12 +45,12 @@ List<Model> cateList = [
   Model(ima: 'assets/sunglasses.png', title: ''),
 ];
 List<Model> brands = [
-  Model(ima: 'assets/b1.png', title: ''),
-  Model(ima: 'assets/b2.png', title: ''),
-  Model(ima: 'assets/b3.png', title: ''),
-  Model(ima: 'assets/b4.png', title: ''),
-  Model(ima: 'assets/b5.png', title: ''),
-  Model(ima: 'assets/b6.png', title: ''),
+  Model(ima: 'assets/brand/b1.png', title: ''),
+  Model(ima: 'assets/brand/b2.png', title: ''),
+  Model(ima: 'assets/brand/b3.png', title: ''),
+  Model(ima: 'assets/brand/b4.png', title: ''),
+  Model(ima: 'assets/brand/b5.png', title: ''),
+  Model(ima: 'assets/brand/b6.png', title: ''),
 ];
 List<int> sizepa = [7, 8, 9, 10];
 

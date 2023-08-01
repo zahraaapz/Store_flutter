@@ -309,7 +309,7 @@ class Extractmainscreen extends StatelessWidget {
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: Image.asset('assets/makeup.png').image)),
+                          image: Image.asset('assets/banner/makeup.png').image)),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0, right: 20, top: 8),
@@ -320,7 +320,7 @@ class Extractmainscreen extends StatelessWidget {
                       decoration: BoxDecoration(
                           image: DecorationImage(
                               fit: BoxFit.fill,
-                              image: Image.asset('assets/skincare.png').image)),
+                              image: Image.asset('assets/banner/skincare.png').image)),
                     ),
                     Container(
                       width: size.width / 2.2,
@@ -329,7 +329,7 @@ class Extractmainscreen extends StatelessWidget {
                           image: DecorationImage(
                               fit: BoxFit.fill,
                               image:
-                                  Image.asset('assets/facepacks.png').image)),
+                                  Image.asset('assets/banner/facepacks.png').image)),
                     )
                   ]),
                 ),
@@ -707,7 +707,7 @@ SizedBox  suggList(size,fav) {//suggestion List
                                 children: [
 
                                   
-                                  Text( homeScreenController.suggestlist[index].brand!,
+                                  Text( homeScreenController.suggestlist[index].name!,
                                       style:
                                           const TextStyle(fontWeight: FontWeight.bold)),
                                   InkWell(
@@ -740,8 +740,8 @@ SizedBox  suggList(size,fav) {//suggestion List
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(top: 3.0, bottom: 3),
-                              child: Text( homeScreenController.suggestlist[index].name!,
+                              padding: const EdgeInsets.only(top: 1.0, bottom: 3),
+                              child: Text( homeScreenController.suggestlist[index].brand!,
                                   style: const TextStyle(
                                     color: Rang.greylight,
                                   )),
@@ -903,8 +903,8 @@ class Bannner extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         child: Row(
           children: [
-            Image.asset('assets/spring.png'),
-            Image.asset('assets/banner.png'),
+            Image.asset('assets/banner/spring.png'),
+            Image.asset('assets/banner/banner.png'),
           ],
         ));
   }

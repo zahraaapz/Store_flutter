@@ -1,8 +1,12 @@
 import 'package:appstore/color/color.dart';
+import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/view/firstScreen/mainScreen.dart';
 
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../model/Model.dart';
 
 
 
@@ -14,20 +18,33 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   TextEditingController searchController = TextEditingController();
-  List<String> items = List.generate(20, ((index)=>'item $index'));
-  List<String> filteredItems = [];
 
+  List<Kala> filteredItems =[];
+HomeScreenController homeScreenController=Get.put(HomeScreenController());
   @override
   void initState() {
     super.initState();
-    filteredItems.addAll(items);
+    
+    filteredItems.addAll(homeScreenController.suggestlist);
   }
 
   void filterItems(String query) {
-    List<String> temp = [];
-    temp.addAll(items);
+    List<Kala> temp = [];
+  
+      
+    
+    temp.addAll(homeScreenController.searchKala);
+   
+    
     if (query.isNotEmpty) {
-      temp.retainWhere((item) => item.toLowerCase().contains(query.toLowerCase()));
+      temp.retainWhere((item) {
+        
+        
+     return   item.name!.toLowerCase().contains(query.toLowerCase()) ||
+       item.brand!.toLowerCase().contains(query.toLowerCase());
+        
+        });
+     //temp.retainWhere((item) => item.brand!.toLowerCase().contains(query.toLowerCase()));
     }
     setState(() {
       filteredItems.clear();
@@ -40,53 +57,56 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.white,elevation: 0,
-        title: Row(
-                  children: [
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Home(),
-                              ));
-                        },
-                        child: const Icon(Icons.arrow_back_ios,color: Colors.black,)),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    Container(
-                      decoration: const BoxDecoration(
-                        color: Rang.toosi,
-                      ),
-                      width: 300,
-                      height: 50,
-                      child: TextField(
-                        controller: searchController,
-                        onChanged: filterItems,
-                        decoration: InputDecoration(
-                            hintText: 'Search',
-                            hintStyle: const TextStyle(color: Rang.grey),
-                            suffixIcon: const Icon(
-                              Icons.search,
-                              color: Colors.black,
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            )),
-                      ),
-                    )
-                  ],
-                ),
-      ),
+        actions: [GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Home(),
+                  ));
+            },
+            child:const Icon(Icons.arrow_back_ios,color: Colors.black,)),
+            const SizedBox(width:20,),      
+        Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Container(
+            decoration: const BoxDecoration(
+              color: Rang.toosi, borderRadius: BorderRadius.all(Radius.circular(10))
+            ),
+            width: 350,
+            height: 50,
+            child: TextField(
+              controller: searchController,
+              onChanged: filterItems,
+              decoration: InputDecoration(
+                  hintText: 'Search',
+                  hintStyle: const TextStyle(color: Rang.grey),
+                  suffixIcon: const Icon(
+                    Icons.search,
+                    color: Colors.black,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  )),
+            ),
+          ),
+        ),
+      ]),
       body: ListView.builder(
         itemCount: filteredItems.length,
         itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            title: Text(filteredItems[index]),
+          return Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+           crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+          
+              Text( 'name:  '+filteredItems[index].name!),
+            
+              Text( 'brand:  ' +filteredItems[index].brand!,)
+            ],),
           );
+          
         },
       ),
     );

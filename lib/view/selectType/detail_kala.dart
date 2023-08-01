@@ -35,11 +35,12 @@ class _DetailKalaState extends State<DetailKala> {
   List<Kala> kalalist;
   int select;
   int index;
+  RxBool isFavorite = false.obs;
   HomeScreenController homeScreenController = Get.put(HomeScreenController());
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    RxBool isFavorite = false.obs;
+    
     return SafeArea(
       child: Scaffold(
           body: SingleChildScrollView(

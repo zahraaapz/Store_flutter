@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'model/Model.dart';
+import 'model/component.dart';
+import 'model/string.dart';
+import 'view/firstScreen/mainScreen.dart';
 
 class Bag extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
@@ -28,199 +31,217 @@ class _BagState extends State<Bag> {
           body: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             physics: const BouncingScrollPhysics(),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child:  myBagList.isEmpty ?  Text('data'):Column(
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Row(children: [
-                      Icon(
-                        Icons.close,
-                        color: Rang.blue,
-                        size: 30,
-                      ),
-                      SizedBox(width: 20),
-                      Text(
-                        'My Bag',
-                        style: TextStyle(
-                            color: Rang.blue,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 23),
-                      )
-                    ]),
-                  ),
+            child: Column(
+              children: [
+                iconANDtitle('My Bag',Icons.close),
+                myBagList.isEmpty ?  Column(children: [
+
+                 const SizedBox(
+            height: 90,
+          ),
+          Image.asset('assets/wish.png'),
+           Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: titleEmtypage(MyString.bagEmptytile),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: contentEmptyPages(MyString.bagEmptyContent),
+          ),
+          const SizedBox(
+            height: 100,
+          ),
+          SizedBox(
+            height: 50,
+            width: 250,
+            child: ElevatedButton(
+            onPressed: (() {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: ((context) => Home())));
+            }),
+            style: buttonModel(
+                ),
+            child: const Text(
+              'continue shopping',
+              style: TextStyle(color: Colors.white),
+            ),
+            ),
+          )
+            ],):Column(children:[
            SizedBox(
-                    height:Get.height/2.5,
-                                   child: ListView.builder(
-                                    physics: const BouncingScrollPhysics(),
-                        itemCount: myBagList.length,
-                        scrollDirection: Axis.vertical,
-                        itemBuilder: ((context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              height: 200,
-                              decoration: BoxDecoration(
-                                  boxShadow: [BoxShadow(blurRadius:4)],
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: Column(children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      height: 150,
-                                      width: 150,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          image: DecorationImage(
-                                              image:
-                                                  AssetImage(myBagList[index].ima!),
-                                              fit: BoxFit.fill)),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(myBagList[index].brand!,
-                                              style: TextStyle(fontSize: 15)),
-                                          const SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text(myBagList[index].name!,
-                                              style: TextStyle(fontSize: 15)),
-                                          const SizedBox(
-                                            height: 10,
-                                          ),
-                                          Container(
-                                            color: Rang.toosi,
-                                            height: 40,
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Row(
-                                                children: [
-                                                  Obx(()=> Text('Qnty: ${i[index]}')),
-                                                  InkWell(
-                                                      onTap: () {
-                                                        
-                                                            i[index] =i[index] +1;
-   
+                  height:Get.height/2.5,
+                                 child: ListView.builder(
+                                  physics: const BouncingScrollPhysics(),
+                      itemCount: myBagList.length,
+                      scrollDirection: Axis.vertical,
+                      itemBuilder: ((context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            height: 200,
+                            decoration: BoxDecoration(
+                                boxShadow: [BoxShadow(blurRadius:4)],
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Column(children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    height: 150,
+                                    width: 150,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(15),
+                                        image: DecorationImage(
+                                            image:
+                                                AssetImage(myBagList[index].ima!),
+                                            fit: BoxFit.fill)),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 8.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(myBagList[index].brand!,
+                                            style: TextStyle(fontSize: 15)),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(myBagList[index].name!,
+                                            style: TextStyle(fontSize: 15)),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Container(
+                                          color: Rang.toosi,
+                                          height: 40,
+                                          child: Padding(
+                                            padding:
+                                                const EdgeInsets.all(8.0),
+                                            child: Row(
+                                              children: [
+                                                Obx(()=> Text('Qnty: ${i[index]}')),
+                                                InkWell(
+                                                    onTap: () {
                                                       
-                                              
+                                                          i[index] =i[index] +1;
+   
+                                                    
+                                            
  
    },
-                                                      child: const Icon(Icons.add))
-                                                ],
-                                              ),
+                                                    child: const Icon(Icons.add))
+                                              ],
                                             ),
                                           ),
-                                          const SizedBox(
-                                            height: 10,
-                                          ),
-                                          Obx(()=> Text((int.parse(myBagList[index].price!)*i[index]).toString())),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 12,
-                                ),
-                                const Divider(
-                                  height: 1,
-                                  thickness: 1,
-                                  endIndent: 3,
-                                  indent: 3,
-                                  color: Rang.blue,
-                                ),
-                                Row(
-                                  children: [
-                                    const SizedBox(
-                                      width: 60,
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Obx(()=> Text((int.parse(myBagList[index].price!)*i[index]).toString())),
+                                      ],
                                     ),
-                                    Text('Move to Wishlist',
+                                  )
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 12,
+                              ),
+                              const Divider(
+                                height: 1,
+                                thickness: 1,
+                                endIndent: 3,
+                                indent: 3,
+                                color: Rang.blue,
+                              ),
+                              Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 60,
+                                  ),
+                                  Text('Move to Wishlist',
+                                      style: TextStyle(
+                                          color: Rang.blue, fontSize: 16)),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                    child: VerticalDivider(
+                                      color: Rang.blue,
+                                      thickness: 1,
+                                      indent: 3,
+                                      endIndent: 1,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                //      myBagList.remove(myBagList[index]);
+                                    },
+                                    child: const Text('Remove',
                                         style: TextStyle(
                                             color: Rang.blue, fontSize: 16)),
-                                    SizedBox(
-                                      width: 8,
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                      child: VerticalDivider(
-                                        color: Rang.blue,
-                                        thickness: 1,
-                                        indent: 3,
-                                        endIndent: 1,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 8,
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                  //      myBagList.remove(myBagList[index]);
-                                      },
-                                      child: const Text('Remove',
-                                          style: TextStyle(
-                                              color: Rang.blue, fontSize: 16)),
-                                    ),
-                                  ],
-                                )
-                              ]),
-                            ),
-                          );
-                        })),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                        height: 50,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(15)),
-                        child: TextField(
-                          decoration: InputDecoration(
-                              hintText: 'Apply Copon Code',
-                              suffixIcon: const Padding(
-                                padding: EdgeInsets.only(top: 12.0),
-                                child: Text(
-                                  'Check',
-                                  style: TextStyle(
-                                      color: Rang.blue,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide(color: Rang.blue)),
-                              hintStyle: TextStyle(color: Rang.greylight),
-                              border: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.circular(15))),
-                        )),
-                  ),
-                  ClipPath(
-                    clipper: cut(x: 35, y: 20),
-                    child: Container(
+                                  ),
+                                ],
+                              )
+                            ]),
+                          ),
+                        );
+                      })),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                      height: 50,
                       width: double.infinity,
-                      height: 380,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(15)),
-                      child: columnPrices(i),
-                    ),
-                  )
-                ],
-              ),
+                      child: TextField(
+                        decoration: InputDecoration(
+                            hintText: 'Apply Copon Code',
+                            suffixIcon: const Padding(
+                              padding: EdgeInsets.only(top: 12.0),
+                              child: Text(
+                                'Check',
+                                style: TextStyle(
+                                    color: Rang.blue,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                                borderSide: BorderSide(color: Rang.blue)),
+                            hintStyle: TextStyle(color: Rang.greylight),
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.circular(15))),
+                      )),
+                ),
+                ClipPath(
+                  clipper: cut(x: 35, y: 20),
+                  child: Container(
+                    width: double.infinity,
+                    height: 380,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15)),
+                    child: columnPrices(i),
+                  ),
+                )
+            ])],
             ),
           )),
     );
   }
+
+
+
+
 
   Column columnPrices(i) {
    
