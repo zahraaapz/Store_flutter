@@ -1,6 +1,5 @@
 
-import 'package:appstore/view/profile/profile.dart';
-import 'package:appstore/view/search/search.dart';
+
 
 
 
@@ -21,6 +20,6 @@ class AppStore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: Profile());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: Searchresult());
   }
 }
