@@ -19,7 +19,7 @@ ButtonStyle buttonModel() {
 
     Text titleEmtypage(String title) {
     return Text(
-            'Whoops!',
+            title,
             style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
           );
   }

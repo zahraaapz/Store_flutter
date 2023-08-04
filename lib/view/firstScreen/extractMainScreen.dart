@@ -6,6 +6,7 @@ import 'package:appstore/view/search/search.dart';
 
 
 import 'package:appstore/view/selectType/select_kala.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'package:get/get.dart';
 
@@ -232,6 +233,7 @@ class Extractmainscreen extends StatelessWidget {
                   ),
                 ),
                 //////suggest List
+                
                 suggList(size,fav),
                 Container(
                   ///collection container
@@ -411,12 +413,13 @@ SizedBox typeList(Size size) {//seslect clothes or...
      );
   }
 
-SizedBox  suggList(size,fav) {//suggestion List
-  
-      return SizedBox(
+SizedBox suggList(size,fav) {//suggestion List
+ 
+   return  SizedBox(
         height: size.height / 4.2,
         width: double.infinity,
-        child:  Obx(()=>ListView.builder(
+        child:  Obx(()=> homeScreenController.waiting.value==false?
+        ListView.builder(
                   physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   itemCount: homeScreenController.suggestlist.length,
@@ -683,7 +686,10 @@ SizedBox  suggList(size,fav) {//suggestion List
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                          
                             Container(
+                                height: size.height / 9,
+                              width: size.width / 3.5,
                               ////container suggestlist
                               decoration: BoxDecoration(
                                   color: Colors.black,
@@ -693,8 +699,7 @@ SizedBox  suggList(size,fav) {//suggestion List
                                       image: Image.asset(
                                         homeScreenController.suggestlist[index].ima!,
                                       ).image)),
-                              height: size.height / 9,
-                              width: size.width / 3.5,
+                            
                             ),
                             const SizedBox(
                               height: 6,
@@ -752,7 +757,7 @@ SizedBox  suggList(size,fav) {//suggestion List
                         ),
                       ),
                     
-                  );}),
+                  );}):const SpinKitThreeBounce(color: Rang.blue,size: 30,),
               ),
            
         

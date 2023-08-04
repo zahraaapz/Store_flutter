@@ -12,7 +12,7 @@ class HomeScreenController extends GetxController {
   RxList<Kala> watche = RxList();
   RxList<Kala> skincare = RxList();
   RxList<Kala> searchKala = RxList();
-
+RxBool waiting=false.obs;
   @override
   void onInit() {
     super.onInit();
@@ -28,6 +28,8 @@ class HomeScreenController extends GetxController {
 
 
   getHomeItem() async {
+    waiting.value=true;
+
     var response = await DioService().getList(ApiAddress().suggest);
 if (suggestlist.isEmpty) {
    response.data.forEach((element) {
@@ -36,7 +38,7 @@ if (suggestlist.isEmpty) {
 
   
 }
-   
+     waiting.value=false;
   }
 
   getHandBagItem() async {
