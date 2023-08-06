@@ -274,6 +274,8 @@ class _BagState extends State<Bag> {
       }
       orderDetail[3].price = (sum * 0.2 + 20).toString();
 
+
+
       sum = 0.0;
       for (int i = 0; i < myBagList.length; i++) {
         sum = (double.parse(myBagList[i].price!) * qnty![i]) + sum;
@@ -281,7 +283,7 @@ class _BagState extends State<Bag> {
       }
       orderDetail[0].price = (sum).toString();
 
-      totalPrice=double.parse(orderDetail[3].price!);
+      totalPrice=double.parse(orderDetail[0].price!)-double.parse(orderDetail[3].price!);
     });
 
     return Column(

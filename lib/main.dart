@@ -1,9 +1,5 @@
 
-
-
-
-
-import 'package:appstore/view/search/searchResult.dart';
+import 'package:appstore/view/splash/splash-screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -21,6 +17,6 @@ class AppStore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: Searchresult());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: splash());
   }
 }

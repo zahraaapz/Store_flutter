@@ -14,6 +14,8 @@ import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../notif.dart';
+
 class Extractmainscreen extends StatelessWidget {
 
 
@@ -169,16 +171,15 @@ class Extractmainscreen extends StatelessWidget {
                                 color: Rang.blue),
                             InkWell(
                                 onTap: (() {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => Search(),
-                                      ));
+                                 Get.to(Search());
                                 }),
                                 child:
                                     const Icon(Icons.search, color: Rang.blue)),
-                            const Icon(Icons.notifications_none,
-                                color: Rang.blue)
+                            GestureDetector(
+                              onTap: () => Navigator.push(context, MaterialPageRoute(builder:(context) => Notif(),)),
+                              child: const Icon(Icons.notifications_none,
+                                  color: Rang.blue),
+                            )
                           ]),
                     )
                   ],
