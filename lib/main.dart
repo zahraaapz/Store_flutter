@@ -2,6 +2,7 @@
 import 'package:appstore/view/splash/splash-screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -17,6 +18,6 @@ class AppStore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: splash());
+    return GetMaterialApp(debugShowCheckedModeBanner: false, home: splash());
   }
 }

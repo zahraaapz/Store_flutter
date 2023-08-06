@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../model/Model.dart';
+import 'searchResult.dart';
 
 
 
@@ -43,71 +44,85 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
      return   item.name!.toLowerCase().contains(query.toLowerCase()) ||
        item.brand!.toLowerCase().contains(query.toLowerCase());
         
+
         });
-     //temp.retainWhere((item) => item.brand!.toLowerCase().contains(query.toLowerCase()));
-    }
+    if (temp.any((item) => item.name!.toLowerCase().contains(query.toLowerCase()) ||
+       item.brand!.toLowerCase().contains(query.toLowerCase()))==false){
+
+       Future.delayed(Duration(seconds:5)).then((value) => Get.to(SearchResult()));
+
+       }
+        
+    } 
+
     setState(() {
       filteredItems.clear();
       filteredItems.addAll(temp);
     });
-  }
+  } 
+  
+
+
 
   @override
 
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.white,elevation: 0,
-        actions: [GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Home(),
-                  ));
-            },
-            child:const Icon(Icons.arrow_back_ios,color: Colors.black,)),
-            const SizedBox(width:20,),      
-        Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: Container(
-            decoration: const BoxDecoration(
-              color: Rang.toosi, borderRadius: BorderRadius.all(Radius.circular(10))
-            ),
-            width: 350,
-            height: 50,
-            child: TextField(
-              controller: searchController,
-              onChanged: filterItems,
-              decoration: InputDecoration(
-                  hintText: 'Search',
-                  hintStyle: const TextStyle(color: Rang.grey),
-                  suffixIcon: const Icon(
-                    Icons.search,
-                    color: Colors.black,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  )),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(backgroundColor: Colors.white,elevation: 0,
+          actions: [GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Home(),
+                    ));
+              },
+              child:const Icon(Icons.arrow_back_ios,color: Colors.black,)),
+              const SizedBox(width:20,),      
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Rang.toosi, borderRadius: BorderRadius.all(Radius.circular(10))
+              ),
+              width: 350,
+              height: 50,
+              child: TextField(
+             
+                controller: searchController,
+                onChanged: filterItems,
+                decoration: InputDecoration(
+                    hintText: 'Search',
+                    hintStyle: const TextStyle(color: Rang.grey),
+                    suffixIcon: const Icon(
+                      Icons.search,
+                      color: Colors.black,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    )),
+              ),
             ),
           ),
-        ),
-      ]),
-      body: ListView.builder(
-        itemCount: filteredItems.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(
-           crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-          
-              Text( 'name:  '+filteredItems[index].name!),
+        ]),
+        body: ListView.builder(
+          itemCount: filteredItems.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+             crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
             
-              Text( 'brand:  ' +filteredItems[index].brand!,)
-            ],),
-          );
-          
-        },
+                Text( 'name:  '+filteredItems[index].name!),
+              
+                Text( 'brand:  ' +filteredItems[index].brand!,)
+              ],),
+            );
+            
+          },
+        ),
       ),
     );
 
