@@ -29,7 +29,7 @@ ButtonStyle buttonModel() {
                 padding: EdgeInsets.all(8.0),
                 child: Row(children: [
                   Icon(
-                    Icons.close,
+                    icon,
                     color: Rang.blue,
                     size: 30,
                   ),

@@ -1,15 +1,25 @@
 import 'package:appstore/color/color.dart';
 import 'package:appstore/model/Model.dart';
+import 'package:appstore/payment.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
-class address extends StatefulWidget{
-  @override
-  State<address> createState() => _addressState();
-}
+import 'model/component.dart';
 
-class _addressState extends State<address> {
-  int select=0;
+class Address extends StatelessWidget{
+
+  RxInt select=0.obs;
+  TextEditingController fullname=TextEditingController();
+  TextEditingController number=TextEditingController();
+  TextEditingController preNum=TextEditingController();
+  TextEditingController pinCode=TextEditingController();
+  TextEditingController street=TextEditingController();
+  TextEditingController city=TextEditingController();
+final box=GetStorage();
+
+
   @override
 
   Widget build(BuildContext context) {
@@ -27,15 +37,7 @@ return SafeArea(
         
           children: [
         
-          Row(children: [
-        
-            Icon(Icons.arrow_back_ios,color: Rang.blue,size: 20,),
-        
-        
-         SizedBox(width: 9,)
-            ,Text('Add New Address',style:TextStyle(color: Rang.blue,fontSize: 20,fontWeight: FontWeight.bold) ,)
-        
-          ],),
+         iconANDtitle('My Address', Icons.arrow_back_ios),
           SizedBox(height: 9,),
         
           Text('Contact Information',style:TextStyle(fontSize: 16)),
@@ -53,7 +55,7 @@ return SafeArea(
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color:Rang.toosi ),
         
               child: TextField(
-        
+        controller: fullname,
                 decoration: InputDecoration(
           hintText: 'Full name',
         helperStyle: TextStyle(color: Rang.grey),
@@ -78,12 +80,13 @@ return SafeArea(
         
               height: 50,
         
-              width: 50,
+              width: 70,
         
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color:Rang.toosi ),
         
               child: TextField(
-        keyboardType: TextInputType.number,
+                controller: preNum,
+        keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
           hintText: '49',
         helperStyle: TextStyle(color: Rang.grey),
@@ -102,12 +105,13 @@ return SafeArea(
         
               height: 50,
         
-              width: 340,
+              width: 310,
         
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color:Rang.toosi ),
         
               child: TextField(
-        
+                controller: number,
+        keyboardType:TextInputType.phone,
                 decoration: InputDecoration(
         hintText: 'Contact number',
         helperStyle: TextStyle(color: Rang.grey),
@@ -140,7 +144,8 @@ return SafeArea(
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color:Rang.toosi ),
         
               child: TextField(
-        
+                keyboardType: TextInputType.number,
+        controller:pinCode,
                 decoration: InputDecoration(
         hintText: 'Pin code',
         helperStyle: TextStyle(color: Rang.grey),
@@ -162,7 +167,7 @@ return SafeArea(
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color:Rang.toosi ),
         
               child: TextField(
-        
+        controller: street,
                 decoration: InputDecoration(
         hintText: 'Street Address',
         helperStyle: TextStyle(color: Rang.grey),
@@ -183,7 +188,7 @@ return SafeArea(
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color:Rang.toosi ),
         
               child: TextField(
-        
+        controller: city,
                 decoration: InputDecoration(
         hintText: 'City',
         helperStyle: TextStyle(color: Rang.grey),
@@ -206,33 +211,62 @@ return SafeArea(
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
                   onTap: () {
-                    setState(() {
-                      select=index;
-                    });
+                   
+                      select.value=index;
+                  
                   },
-                  child: Container(
-                        height: 30,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          color: select==index?Rang.blue:Rang.toosi,
-                          borderRadius: BorderRadius.circular(15)
-                        ),
-                    child: Center(child: Text(addresslist[index],style: TextStyle(color: select==index?Colors.white:Rang.grey),)),  ),
+                  child: Obx(()=>
+                    Container(
+                          height: 30,
+                          width: 50,
+                          decoration: BoxDecoration(
+                            color: select==index?Rang.blue:Rang.toosi,
+                            borderRadius: BorderRadius.circular(15)
+                          ),
+                      child: Center(child: Text(addresslist[index],style: TextStyle(color: select.value==index?Colors.white:Rang.grey),)),  ),
+                  ),
                 ),
               );
                      },
                 
               ),
             ),
-            SizedBox(height: 20,)
-,            Container(
+            const SizedBox(height: 20,)
+,            SizedBox(
               width: double.infinity,
               height: 50,
-              child: ElevatedButton(onPressed: () {  },
+              child: ElevatedButton(onPressed: () {  
+box.write('fulName', fullname.text);
+box.write('pin', pinCode.text);
+box.write('number', number.text);
+box.write('preNum', preNum.text);
+box.write('Street', street.text);
+box.write('city', city.text);
+
+print(box.read('city'));
+
+if(street.text.isNotEmpty && city.text.isNotEmpty) {
+  Navigator.push(context, MaterialPageRoute(builder: (context)=>Payments(street,city)));
+}else{
+
+  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(  backgroundColor:Color.fromARGB(255, 27, 75, 102) ,
+          content: SizedBox(
+            height: 60,
+            child: Center(
+              child: Text('Enter information'
+                ,
+                style: TextStyle(color: Colors.white,fontSize: 18),
+               
+              ),
+            ),
+          )));
+}
+  
+              },
               style: ButtonStyle(
          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
                 backgroundColor: MaterialStateProperty.all(Rang.blue)),
-              child:Text('Save Address') ,),
+              child:const Text('Save Address') ,),
             )
         
         ]),
