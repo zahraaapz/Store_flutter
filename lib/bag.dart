@@ -1,4 +1,7 @@
+import 'package:appstore/address.dart';
 import 'package:appstore/color/color.dart';
+import 'package:appstore/notif.dart';
+import 'package:appstore/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -329,7 +332,10 @@ class _BagState extends State<Bag> {
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15))),
                       backgroundColor: MaterialStateProperty.all(Rang.blue)),
-                  onPressed: (() {}),
+                  onPressed: (() {
+                    Address().box.read('street')== null ?
+                    Get.offAll(Address()):Get.to(Payments());
+                  }),
                   child: Text('Place Order')),
             ],
           )

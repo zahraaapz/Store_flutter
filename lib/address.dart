@@ -17,12 +17,11 @@ class Address extends StatelessWidget{
   TextEditingController pinCode=TextEditingController();
   TextEditingController street=TextEditingController();
   TextEditingController city=TextEditingController();
-final box=GetStorage();
+  final box=GetStorage();
 
 
   @override
-
-  Widget build(BuildContext context) {
+ Widget build(BuildContext context) {
 return SafeArea(
   child:   Scaffold(
   
@@ -240,13 +239,13 @@ box.write('fulName', fullname.text);
 box.write('pin', pinCode.text);
 box.write('number', number.text);
 box.write('preNum', preNum.text);
-box.write('Street', street.text);
+box.write('street', street.text);
 box.write('city', city.text);
 
 print(box.read('city'));
 
 if(street.text.isNotEmpty && city.text.isNotEmpty) {
-  Navigator.push(context, MaterialPageRoute(builder: (context)=>Payments(street,city)));
+  Navigator.push(context, MaterialPageRoute(builder: (context)=>Payments()));
 }else{
 
   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(  backgroundColor:Color.fromARGB(255, 27, 75, 102) ,

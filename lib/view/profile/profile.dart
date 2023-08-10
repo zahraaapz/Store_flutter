@@ -1,17 +1,17 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:appstore/address.dart';
 import 'package:appstore/color/color.dart';
 import 'package:appstore/controller/pick_file.dart';
 import 'package:appstore/view/search/search.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 class Profile extends StatelessWidget {
    Profile({super.key});
+   
 PickFileController pickFileController=Get.put(PickFileController());
   @override
   Widget build(BuildContext context) {
@@ -105,11 +105,11 @@ PickFileController pickFileController=Get.put(PickFileController());
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
+          const Padding(
+            padding: EdgeInsets.all(10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children: [
                 Text(
                   'Personal Informantion',
                   style: TextStyle(fontWeight: FontWeight.bold),
@@ -120,17 +120,20 @@ PickFileController pickFileController=Get.put(PickFileController());
           ),
           Padding(
             padding: const EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('My Address Book',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                Icon(Icons.arrow_forward_ios_outlined)
-              ],
+            child: GestureDetector(
+              onTap: () => Get.offAll(Address()),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('My Address Book',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  Icon(Icons.arrow_forward_ios_outlined)
+                ],
+              ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
+          const Padding(
+            padding: EdgeInsets.all(10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -140,8 +143,8 @@ PickFileController pickFileController=Get.put(PickFileController());
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
+          const Padding(
+            padding: EdgeInsets.all(10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
