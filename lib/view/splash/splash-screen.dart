@@ -23,15 +23,15 @@ class _splashState extends State<splash> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return SafeArea(
+    return const SafeArea(
       child: Scaffold(
           backgroundColor: Colors.white,
           body: Align(
             alignment: Alignment.center,
-            child: Container(
+            child: SizedBox(
               height: 100,
               child: Column(
-                children: const [
+                children: [
                   Text(
                     'Welcome...  ',
                     style: TextStyle(
@@ -42,7 +42,7 @@ class _splashState extends State<splash> {
                   SizedBox(
                     height: 40,
                   ),
-                  SpinKitThreeBounce(
+                  SpinKitCircle(
                     color: Rang.blue,
                     size: 30,
                   ),

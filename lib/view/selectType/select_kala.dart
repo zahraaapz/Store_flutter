@@ -6,6 +6,7 @@ import 'package:appstore/view/firstScreen/mainScreen.dart';
 import 'package:appstore/view/selectType/detail_kala.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'package:get/get.dart';
 
@@ -34,19 +35,18 @@ class _Select_kalaState extends State<Select_kala> {
 @override
 initState(){
 super.initState();
-lenght=select==0?8:select==1?5:select==2?10:select==3?3:select==4?7:7;
+lenght=select==0?homeScreenController.skincare.length:select==1?homeScreenController.watche.length:select==2?homeScreenController.bag.length:select==3?homeScreenController.jewellery.length:select==4?homeScreenController.eyewear.length:homeScreenController.shoes.length;
 fav=RxList.generate(lenght,(index)=>false.obs);
 
 }
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.sizeOf(context);
-
-  
     return SafeArea(
         child: Scaffold(
       body: Stack(children: [
         Obx(()=>
+        homeScreenController.waiting.value==false?
          Column(children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -290,7 +290,7 @@ fav=RxList.generate(lenght,(index)=>false.obs);
                                             }
                                        
                                         debugPrint(wishList.length.toString());},
-                                        child: Obx(()=>
+                                        child: Obx(() =>
                                           Icon(
                                             fav[index].value == false
                                                
@@ -342,7 +342,9 @@ fav=RxList.generate(lenght,(index)=>false.obs);
               //  SpinKitThreeBounce(
               //       color: Rang.blue,
               //     ),
-          ]),
+          ]):const SpinKitCircle(
+                color: Rang.blue,
+              ),
         ),
         Positioned(
           bottom: 0,
@@ -395,6 +397,17 @@ fav=RxList.generate(lenght,(index)=>false.obs);
                                     onChanged: (value) {
                                       setState(() {
                                         sel = value.toString();
+                                              select == 0
+                                          ? homeScreenController.skincare.sort(((b,a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
+                                          : select == 1
+                                              ? homeScreenController.watche.sort(((b,a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
+                                              : select == 2
+                                                  ? homeScreenController.bag.sort(((b,a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
+                                                  : select == 3
+                                                      ? homeScreenController.jewellery.sort(((b,a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
+                                                      : select == 4
+                                                          ? homeScreenController.eyewear.sort(((b,a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
+                                                          : homeScreenController.shoes.sort(((b,a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())));
                                       });
                                     },
                                   ),
@@ -405,16 +418,28 @@ fav=RxList.generate(lenght,(index)=>false.obs);
                                     height: 1.5,
                                   ),
                                   RadioListTile(
-                                    activeColor: Rang.blue,
+                                  
+                                activeColor: Rang.blue,
                                     title: const Text('Price - Low to Hight'),
                                     groupValue: sel,
                                     value: '1',
                                     onChanged: (value) {
                                       setState(() {
                                         sel = value.toString();
-                                      });
-                                    },
-                                  ),
+                                           select == 0
+                                          ? homeScreenController.skincare.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
+                                          : select == 1
+                                              ? homeScreenController.watche.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
+                                              : select == 2
+                                                  ? homeScreenController.bag.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
+                                                  : select == 3
+                                                      ? homeScreenController.jewellery.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
+                                                      : select == 4
+                                                          ? homeScreenController.eyewear.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
+                                                          : homeScreenController.shoes.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())));
+                                     });
+                                        
+                      }),
                                   const Divider(
                                     color: Rang.grey,
                                     indent: 40,

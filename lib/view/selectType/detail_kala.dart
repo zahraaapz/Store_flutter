@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:appstore/controller/homeScreenController.dart';
-import 'package:appstore/review/review.dart';
+
 
 import 'package:appstore/model/Model.dart';
 
@@ -12,6 +12,8 @@ import 'package:appstore/view/selectType/select_kala.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../review/review.dart';
 
 class DetailKala extends StatefulWidget {
   int index;

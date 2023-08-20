@@ -21,20 +21,32 @@ import '../../controller/pick_file.dart';
 import '../../notif.dart';
 import '../profile/profile.dart';
 
-class Extractmainscreen extends StatelessWidget {
+class Extractmainscreen extends StatefulWidget {
 
 
-final HomeScreenController homeScreenController=Get.put(HomeScreenController());
-  final GlobalKey<ScaffoldState> _key = GlobalKey();
-  RxInt  select=0.obs;
- 
- 
+
   Extractmainscreen({super.key});
 
+  @override
+  State<Extractmainscreen> createState() => _ExtractmainscreenState();
+}
 
+class _ExtractmainscreenState extends State<Extractmainscreen> {
+final HomeScreenController homeScreenController=Get.put(HomeScreenController());
 
-RxList<RxBool> fav = RxList.generate(3,(index) => false.obs);
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
+
+  RxInt  select=0.obs;
+
+late RxList<RxBool> fav ;
+
 var box=GetStorage();
+
+@override
+void initState() {
+   fav = RxList.generate(homeScreenController.suggestlist.length,(index) => false.obs);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -799,7 +811,7 @@ SizedBox suggList(size,fav) {//suggestion List
                         ),
                       ),
                     
-                  );}):const SpinKitThreeBounce(color: Rang.blue,size: 30,),
+                  );}):const SpinKitCircle(color: Rang.blue,size: 30,),
               ),
            
         

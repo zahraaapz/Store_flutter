@@ -64,12 +64,11 @@ class _ReviewState extends State<Review> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return FutureBuilder(
-      builder: (context, snapshot) {
-        return snapshot.hasData
-            ? Scaffold(
+        return   Scaffold(
                 backgroundColor: Colors.white,
-                body: SingleChildScrollView(
+                body:
+                comment.isNotEmpty?
+                 SingleChildScrollView(
                   scrollDirection: Axis.vertical,
                   child: Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -95,7 +94,7 @@ class _ReviewState extends State<Review> {
                                                         select: select,
                                                         Kalalist: listkala))));
                                       }),
-                                      icon: Icon(
+                                      icon: const Icon(
                                         Icons.arrow_back_ios,
                                         color: Rang.blue,
                                       )),
@@ -136,20 +135,12 @@ class _ReviewState extends State<Review> {
                           ))),
                         ],
                       )),
-                ),
+                ):SpinKitCircle(
+                color: Rang.blue,
+              ),
               )
-            : Scaffold(
-                backgroundColor: Colors.white,
-                body: const Center(
-                  child: SpinKitThreeBounce(
-                    color: Rang.blue,
-                    size: 30,
-                  ),
-                ),
-              );
-      },
-      future: getcomment(),
-    );
+        
+    ;
   }
 }
 
