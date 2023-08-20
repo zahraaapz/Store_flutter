@@ -18,11 +18,13 @@ import '../review/review.dart';
 class DetailKala extends StatefulWidget {
   int index;
   int select;
+  // ignore: non_constant_identifier_names
   List<Kala> Kalalist;
   DetailKala(
       {super.key,
       required this.index,
       required this.select,
+      // ignore: non_constant_identifier_names
       required this.Kalalist});
 
   @override
@@ -43,6 +45,7 @@ class _DetailKalaState extends State<DetailKala> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     
+   final int randomValue=Random().nextInt(500000);
     return SafeArea(
       child: Scaffold(
           body: SingleChildScrollView(
@@ -249,10 +252,10 @@ class _DetailKalaState extends State<DetailKala> {
                           children: [
                             const Text('Use code',
                                 style: TextStyle(color: Rang.grey)),
-                            Text(
-                              Random().nextInt(500000).toString(),
+                        Text(
+                          randomValue.toString(),
                               style:
-                                  const TextStyle(fontWeight: FontWeight.bold),
+                                TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),

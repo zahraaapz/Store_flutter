@@ -1,4 +1,5 @@
 import 'package:appstore/color/color.dart';
+import 'package:appstore/view/firstScreen/mainScreen.dart';
 import 'package:appstore/view/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -63,13 +64,13 @@ return SafeArea(
               ),
         
             ),
-            SizedBox(height: 15,),
+            const SizedBox(height: 15,),
         
           Container(
         
               height: 50,
         
-              width: 310,
+              width: double.infinity,
         
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color:Rang.toosi ),
         
@@ -90,7 +91,7 @@ return SafeArea(
             ),
 
 
-      
+        const SizedBox(height: 15,),
                Container(
         
               height: 50,
@@ -100,7 +101,7 @@ return SafeArea(
               decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color:Rang.toosi ),
         
               child: TextField(
-                keyboardType: TextInputType.number,
+                
         controller:email,
                 decoration: InputDecoration(
         hintText: 'Email Address',
@@ -127,7 +128,7 @@ box.write('number', number.text);
 
 
 if(fullname.text.isNotEmpty && email.text.isNotEmpty && number.text.isNotEmpty) {
-  Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile()));
+  Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
 }else{
 
   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(  backgroundColor:Color.fromARGB(255, 27, 75, 102) ,

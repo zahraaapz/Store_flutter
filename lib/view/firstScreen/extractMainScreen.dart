@@ -19,7 +19,7 @@ import 'package:get_storage/get_storage.dart';
 
 import '../../controller/pick_file.dart';
 import '../../notif.dart';
-import '../profile/profile.dart';
+
 
 class Extractmainscreen extends StatefulWidget {
 
@@ -44,8 +44,10 @@ var box=GetStorage();
 
 @override
 void initState() {
-   fav = RxList.generate(homeScreenController.suggestlist.length,(index) => false.obs);
+   fav = RxList.generate(3,(index) => false.obs);
     super.initState();
+
+
   }
   @override
   Widget build(BuildContext context) {
@@ -468,12 +470,13 @@ SizedBox typeList(Size size) {//seslect clothes or...
      );
   }
 
-SizedBox suggList(size,fav) {//suggestion List
+SizedBox suggList(size,RxList fav) {//suggestion List
  
    return  SizedBox(
         height: size.height / 4.2,
         width: double.infinity,
-        child:  Obx(()=> homeScreenController.waiting.value==false?
+        child:  Obx(()  => 
+        homeScreenController.suggestlist.isNotEmpty?
         ListView.builder(
                   physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
@@ -709,8 +712,9 @@ SizedBox suggList(size,fav) {//suggestion List
                                                             MaterialStateProperty.all(
                                                                 Rang.blue)),
                                                     onPressed: () {
-                                                      if(!myBagList.contains(homeScreenController.suggestlist[index]))
-                                                      myBagList.add(homeScreenController.suggestlist[index]);
+                                                      if(!myBagList.contains(homeScreenController.suggestlist[index])) {
+                                                        myBagList.add(homeScreenController.suggestlist[index]);
+                                                      }
                                                     },
                                                     child: const SizedBox(
                                                       width: 270,
@@ -773,8 +777,6 @@ SizedBox suggList(size,fav) {//suggestion List
                                   InkWell(
                                     onTap:() {
 
-                                    
-                                     
                                       fav[index].value =! fav[index].value;
 
                                       if(fav[index].value==true && !wishList.contains(homeScreenController.suggestlist[index])){
@@ -784,7 +786,7 @@ SizedBox suggList(size,fav) {//suggestion List
 
                                           wishList.remove(homeScreenController.suggestlist[index]);
                                       }
-                             debugPrint(wishList.length.toString()) ;  
+                             debugPrint(wishList.length.toString());  
                                  },
                                     child: Obx(()=>
                                      Icon(
