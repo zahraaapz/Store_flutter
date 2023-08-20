@@ -1,7 +1,6 @@
 import 'package:appstore/color/color.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/payment.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -37,11 +36,11 @@ return SafeArea(
           children: [
         
          iconANDtitle('My Address', Icons.arrow_back_ios),
-          SizedBox(height: 9,),
+          const SizedBox(height: 9,),
         
-          Text('Contact Information',style:TextStyle(fontSize: 16)),
+          const Text('Contact Information',style:TextStyle(fontSize: 16)),
         
-          Divider(
+          const Divider(
         
             thickness: 1,color: Rang.grey,endIndent: 5,indent:5 ,
         

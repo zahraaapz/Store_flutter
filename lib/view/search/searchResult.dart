@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../model/component.dart';
 import '../../model/string.dart';
@@ -28,7 +29,7 @@ class SearchResult extends StatelessWidget {
                 children: [
                  
                   GestureDetector(
-                    onTap: () {},
+                    onTap: ()=>Get.back(),
                     child: const Icon(
                       Icons.arrow_back_ios_new,
                       color: Rang.blue,size: 30,

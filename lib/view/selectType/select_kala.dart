@@ -25,17 +25,23 @@ class Select_kala extends StatefulWidget {
 class _Select_kalaState extends State<Select_kala> {
   String? sel;
   int select;
+ late int lenght;
   final HomeScreenController homeScreenController;
-
+ late RxList<RxBool>fav;
 
   _Select_kalaState({required this.select, required this.homeScreenController});
 
+@override
+initState(){
+super.initState();
+lenght=select==0?8:select==1?5:select==2?10:select==3?3:select==4?7:7;
+fav=RxList.generate(lenght,(index)=>false.obs);
 
+}
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.sizeOf(context);
-    int lenght=select==0?homeScreenController.skincare.length:select==1?homeScreenController.watche.length:select==2?homeScreenController.bag.length:select==3?homeScreenController.jewellery.length:select==4?homeScreenController.eyewear.length:homeScreenController.shoes.length;
-RxList<RxBool>fav=RxList.generate(lenght,(index)=>false.obs);
+
   
     return SafeArea(
         child: Scaffold(

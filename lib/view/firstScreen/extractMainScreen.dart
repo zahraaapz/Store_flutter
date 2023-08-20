@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/view/firstScreen/expandable.dart';
 import 'package:appstore/model/Model.dart';
@@ -13,13 +15,16 @@ import 'package:get/get.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 
+import '../../controller/pick_file.dart';
 import '../../notif.dart';
+import '../profile/profile.dart';
 
 class Extractmainscreen extends StatelessWidget {
 
 
- HomeScreenController homeScreenController=Get.put(HomeScreenController());
+final HomeScreenController homeScreenController=Get.put(HomeScreenController());
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   RxInt  select=0.obs;
  
@@ -28,11 +33,10 @@ class Extractmainscreen extends StatelessWidget {
 
 
 
-
-
+RxList<RxBool> fav = RxList.generate(3,(index) => false.obs);
+var box=GetStorage();
   @override
   Widget build(BuildContext context) {
-      RxList<RxBool> fav = RxList.generate(3,(index) => false.obs);
     var size = MediaQuery.of(context).size;
     homeScreenController.getHomeItem();
  
@@ -40,92 +44,7 @@ class Extractmainscreen extends StatelessWidget {
       child: Scaffold(
           key: _key,
           backgroundColor: Colors.white,
-          drawer: Drawer(
-            backgroundColor: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 300,
-                      height: 150,
-                      decoration: BoxDecoration(
-                          color: Rang.toosi,
-                          borderRadius: BorderRadius.circular(15)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: CircleAvatar(
-                              radius: 50,
-                              backgroundImage: AssetImage(
-                                'assets/avatar.png',
-                              ),
-                            ),
-                          ),
-                          Text('zahra pirooz'),
-                          SizedBox(
-                            width: 10,
-                          )
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Text('Top Categories',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold)),
-                    SizedBox(
-                      height: 220,
-                      child: ListView.builder(
-                          physics: const ClampingScrollPhysics(),
-                          itemCount: Model.modelList.length,
-                          itemBuilder: ((context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
-                              child: GestureDetector(
-                                child: Text(Model.modelList[index].title,
-                                    style: const TextStyle(
-                                        color: Rang.blue, fontSize: 15)),
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: ((context) => Select_kala(
-                                            select: index,homeScreenController: homeScreenController,
-                                          ))));
-                                },
-                              ),
-                            );
-                          })),
-                    ),
-                    const Text('Contact us',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold)),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    GestureDetector(
-                      child: const Text('Help & Support',
-                          style: TextStyle(color: Rang.blue)),
-                      onTap: () {},
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    GestureDetector(
-                      child: const Text('Wishlist',
-                          style: TextStyle(color: Rang.blue)),
-                      // onTap: () {
-                      //   Navigator.of(context).push(MaterialPageRoute(
-                      //       builder: ((context) =>
-                      //           Wish(fav, suggestList, select))));
-                      // },
-                    ),
-                  ]),
-            ),
-          ),
+          drawer: drawer(),
           body: Stack(children: [
             SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
@@ -346,6 +265,128 @@ class Extractmainscreen extends StatelessWidget {
             ),
           ])),
     );
+  }
+
+  Drawer drawer() {
+    return Drawer(
+          backgroundColor: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 300,
+                    height: 150,
+                    decoration: BoxDecoration(
+                        color: Rang.toosi,
+                        borderRadius: BorderRadius.circular(15)),
+                    child:  Obx(()=>
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                   pickFileController.file.value.name=='not'?
+                      Container(
+                                    height: 100,
+                                   width: 100,
+                                    decoration: BoxDecoration(
+                                   
+                                      shape: BoxShape.circle,
+                                     image: DecorationImage(image: AssetImage('assets/avatar.png',),fit:BoxFit.cover )
+                                    ),
+                                    )
+                   
+                             
+                   
+                   : Container(
+                                    height: 100,
+                                   width: 100,
+                                    decoration: BoxDecoration(
+                                   
+                                      shape: BoxShape.circle,
+                                     image: DecorationImage(image:Image.file(File(box.read('ima'))).image ,fit:BoxFit.cover )
+                                    ),
+                   ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Padding(
+                        padding: EdgeInsets.all(3.0),
+                        child: Text('Zahra Pirooz'),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(3.0),
+                        child: Text('6690400 996'),
+                      ),
+                      Text(
+                        'zahrapirooo@jmnm.cpm',
+                        style: TextStyle(color: Rang.greylight),
+                      ),
+                    ],
+                  ),
+                  const Icon(
+                    Icons.arrow_forward_ios_outlined,
+                    color: Rang.greylight,
+                  )
+                ],
+              ),
+            ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const Text('Top Categories',
+                      style: TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold)),
+                  SizedBox(
+                    height: 220,
+                    child: ListView.builder(
+                        physics: const ClampingScrollPhysics(),
+                        itemCount: Model.modelList.length,
+                        itemBuilder: ((context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+                            child: GestureDetector(
+                              child: Text(Model.modelList[index].title,
+                                  style: const TextStyle(
+                                      color: Rang.blue, fontSize: 15)),
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: ((context) => Select_kala(
+                                          select: index,homeScreenController: homeScreenController,
+                                        ))));
+                              },
+                            ),
+                          );
+                        })),
+                  ),
+                  const Text('Contact us',
+                      style: TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold)),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  GestureDetector(
+                    child: const Text('Help & Support',
+                        style: TextStyle(color: Rang.blue)),
+                    onTap: () {},
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  GestureDetector(
+                    child: const Text('Wishlist',
+                        style: TextStyle(color: Rang.blue)),
+                    // onTap: () {
+                    //   Navigator.of(context).push(MaterialPageRoute(
+                    //       builder: ((context) =>
+                    //           Wish(fav, suggestList, select))));
+                    // },
+                  ),
+                ]),
+          ),
+        );
   }
 
 SizedBox typeList(Size size) {//seslect clothes or...

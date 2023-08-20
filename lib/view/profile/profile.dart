@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'dart:ui';
 
+import 'package:get_storage/get_storage.dart';
 import 'package:appstore/address.dart';
 import 'package:appstore/color/color.dart';
 import 'package:appstore/controller/pick_file.dart';
@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 
 class Profile extends StatelessWidget {
    Profile({super.key});
-   
+   var box=GetStorage();
 PickFileController pickFileController=Get.put(PickFileController());
   @override
   Widget build(BuildContext context) {
@@ -20,11 +20,11 @@ PickFileController pickFileController=Get.put(PickFileController());
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Column(children: [
-          Padding(
-            padding: const EdgeInsets.all(9.0),
+          const Padding(
+            padding: EdgeInsets.all(9.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: const [
+              children: [
                 Text('Profile',
                     style: TextStyle(
                         color: Rang.blue,
@@ -48,14 +48,15 @@ PickFileController pickFileController=Get.put(PickFileController());
                   children: [
                      Stack(
                        children:[ GestureDetector(
-                        onTap: () {
+                        onTap: () async{
                          getFile(); 
+                    
                         },
                          child:pickFileController.file.value.name=='not'?
                             Container(
                                           height: 100,
                                          width: 100,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                          
                                             shape: BoxShape.circle,
                                            image: DecorationImage(image: AssetImage('assets/avatar.png',),fit:BoxFit.cover )
@@ -68,12 +69,14 @@ PickFileController pickFileController=Get.put(PickFileController());
                                           height: 100,
                                          width: 100,
                                           decoration: BoxDecoration(
-                                         
-                                            shape: BoxShape.circle,
-                                           image: DecorationImage(image:Image.file(File(pickFileController.file.value.path!)).image ,fit:BoxFit.cover )
+                                     shape: BoxShape.circle,
+                                           image: DecorationImage(
+
+                                            image:Image.file(
+                                             File(pickFileController.file.value.path!)).image ,fit:BoxFit.cover,)
                                           ),
                        )),
-                       Positioned(
+                       const Positioned(
                         top: 60,
                         left: 5,
                         child: Text('upload your pic',style: TextStyle(fontSize: 13),)),

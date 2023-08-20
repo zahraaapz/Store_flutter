@@ -31,15 +31,11 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
 
   void filterItems(String query) {
     List<Kala> temp = [];
-  
-      
-    
+   
     temp.addAll(homeScreenController.searchKala);
    
-    
     if (query.isNotEmpty) {
       temp.retainWhere((item) {
-        
         
      return   item.name!.toLowerCase().contains(query.toLowerCase()) ||
        item.brand!.toLowerCase().contains(query.toLowerCase());
@@ -47,9 +43,9 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
 
         });
     if (temp.any((item) => item.name!.toLowerCase().contains(query.toLowerCase()) ||
-       item.brand!.toLowerCase().contains(query.toLowerCase()))==false){
+       item.brand!.toLowerCase().contains(query.toLowerCase()))==false) {
 
-       Future.delayed(Duration(seconds:5)).then((value) => Get.to(SearchResult()));
+       Future.delayed(const Duration(seconds:5)).then((value) => Get.to(SearchResult()));
 
        }
         
@@ -59,6 +55,22 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
       filteredItems.clear();
       filteredItems.addAll(temp);
     });
+  }  
+void resultSeach(String query) {
+    List<Kala> temp = [];
+   
+    temp.addAll(homeScreenController.searchKala);
+   
+    if (query.isNotEmpty) {
+    if (temp.any((item) => item.name!.toLowerCase().contains(query.toLowerCase()) ||
+       item.brand!.toLowerCase().contains(query.toLowerCase()))==false) {
+
+        Get.to(SearchResult());
+
+       }
+        
+    } 
+
   } 
   
 
@@ -89,10 +101,10 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
               width: 350,
               height: 50,
               child: TextField(
-             
+           onSubmitted: resultSeach,
                 controller: searchController,
                 onChanged: filterItems,
-                decoration: InputDecoration(
+                decoration:InputDecoration(
                     hintText: 'Search',
                     hintStyle: const TextStyle(color: Rang.grey),
                     suffixIcon: const Icon(
@@ -111,14 +123,30 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
           itemBuilder: (BuildContext context, int index) {
             return Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Column(
-             crossAxisAlignment: CrossAxisAlignment.start,
+              child: Row(
                 children: [
+
+                  Container(
+                    width: 70,
+                    height: 70,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(9)),
+                      image: DecorationImage(
+                        
+                        image:Image.asset(filteredItems[index].ima!).image,fit: BoxFit.cover)
+                    ),
+                  ),
+                  SizedBox(width: 10,),
+                  Column(
+             crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
             
-                Text( 'name:  '+filteredItems[index].name!),
-              
-                Text( 'brand:  ' +filteredItems[index].brand!,)
-              ],),
+                    Text( 'name:  '+filteredItems[index].name!),
+                  SizedBox(height: 25,),
+                    Text( 'brand:  ' +filteredItems[index].brand!,)
+                  ],),
+                ],
+              ),
             );
             
           },

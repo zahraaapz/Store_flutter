@@ -42,7 +42,7 @@ class Payments extends StatelessWidget {
                     Row(
                       children: [
                         Text(Address().box.read('street') ,style: TextStyle(color: Colors.black),),
-                        SizedBox(width: 10,)
+                        const SizedBox(width: 10,)
           ,                      Text(Address().box.read('city'),style: TextStyle(color: Colors.black),),
           
                       ],
@@ -75,14 +75,20 @@ class Payments extends StatelessWidget {
                 width:double.infinity,
                height:50 ,
                 color: Rang.toosi,
-                child:Text('Product Detail')
+                child: const Column(mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Product Detail'),
+                  ],
+                )
               ),SizedBox(height:10),
                Container(
                 width:double.infinity,
                 height: 150,
                 color: Rang.toosi,
-                child: Column(
-                  children: [
+                child: Column(crossAxisAlignment:CrossAxisAlignment.start,
+  children: [
+
+                    Text('Payment'),
           SizedBox(height:15),
                     Row(
                       children: [
