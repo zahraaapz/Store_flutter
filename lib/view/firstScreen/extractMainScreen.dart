@@ -322,17 +322,18 @@ void initState() {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children:  [
                       Padding(
                         padding: EdgeInsets.all(3.0),
-                        child: Text('Zahra Pirooz'),
+                        child: Text(box.read('fullName') ?? '--'),
                       ),
                       Padding(
                         padding: EdgeInsets.all(3.0),
-                        child: Text('6690400 996'),
+                        child: Text(box.read('number')??'--'
+                           ),
                       ),
                       Text(
-                        'zahrapirooo@jmnm.cpm',
+                       box.read('email')??'--',
                         style: TextStyle(color: Rang.greylight),
                       ),
                     ],
@@ -746,7 +747,7 @@ SizedBox suggList(size,fav) {//suggestion List
                               width: size.width / 3.5,
                               ////container suggestlist
                               decoration: BoxDecoration(
-                                  color: Colors.black,
+                                  
                                   borderRadius: BorderRadius.circular(13),
                                   image: DecorationImage(
                                       fit: BoxFit.fill,

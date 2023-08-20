@@ -12,15 +12,12 @@ import 'model/component.dart';
 
 class Payments extends StatelessWidget {
 
-
-
- 
   Payments();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor:Rang.toosi,
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(
@@ -35,7 +32,7 @@ class Payments extends StatelessWidget {
               Container(
                 width: double.infinity,
                 height: 100,
-                color: Rang.toosi,
+                color: Colors.white,
                 child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
           
@@ -74,21 +71,25 @@ class Payments extends StatelessWidget {
               Container(
                 width:double.infinity,
                height:50 ,
-                color: Rang.toosi,
+                color: Colors.white,
                 child: const Column(mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Product Detail'),
+                    Text('Product Details'),
                   ],
                 )
               ),SizedBox(height:10),
                Container(
                 width:double.infinity,
                 height: 150,
-                color: Rang.toosi,
+                color: Colors.white,
                 child: Column(crossAxisAlignment:CrossAxisAlignment.start,
   children: [
 
-                    Text('Payment'),
+          Text('Select Payment Method'),
+          SizedBox(height:15),  
+           Text('Debit Card/Credit Card'),
+          SizedBox(height:15), 
+            Text('UPI'),
           SizedBox(height:15),
                     Row(
                       children: [
@@ -122,7 +123,7 @@ class Payments extends StatelessWidget {
                  SizedBox(
                     width: double.infinity,
                 height: 50,
-                   child: ElevatedButton(onPressed: (){Get.to(Home());}, style: ButtonStyle(
+                   child: ElevatedButton(onPressed: (){Get.offAll(Home());}, style: ButtonStyle(
                           shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
                     backgroundColor: MaterialStateProperty.all(Rang.blue)),
                                child:const Text('Pay now')),

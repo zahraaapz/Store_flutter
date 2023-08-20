@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:get_storage/get_storage.dart';
+import 'package:appstore/view/profile/personal_info.dart';
 import 'package:appstore/address.dart';
 import 'package:appstore/color/color.dart';
 import 'package:appstore/controller/pick_file.dart';
@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 
 class Profile extends StatelessWidget {
    Profile({super.key});
-   var box=GetStorage();
+
 PickFileController pickFileController=Get.put(PickFileController());
   @override
   Widget build(BuildContext context) {
@@ -84,17 +84,17 @@ PickFileController pickFileController=Get.put(PickFileController());
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children:  [
                         Padding(
                           padding: EdgeInsets.all(3.0),
-                          child: Text('Zahra Pirooz'),
+                          child: Text(Personal().box.read('fullName') ?? '--'),
                         ),
                         Padding(
                           padding: EdgeInsets.all(3.0),
-                          child: Text('6690400 996'),
+                          child: Text(Personal().box.read('number')??'--'),
                         ),
                         Text(
-                          'zahrapirooo@jmnm.cpm',
+                         Personal().box.read('email')??'--',
                           style: TextStyle(color: Rang.greylight),
                         ),
                       ],
@@ -108,17 +108,20 @@ PickFileController pickFileController=Get.put(PickFileController());
               ),
             ),
           ),
-          const Padding(
+           Padding(
             padding: EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Personal Informantion',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Icon(Icons.arrow_forward_ios_outlined)
-              ],
+            child: GestureDetector(
+              onTap: () => Get.to(Personal()),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Personal Informantion',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Icon(Icons.arrow_forward_ios_outlined)
+                ],
+              ),
             ),
           ),
           Padding(
