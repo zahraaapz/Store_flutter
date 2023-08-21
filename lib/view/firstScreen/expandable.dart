@@ -1,10 +1,13 @@
 import 'dart:ffi';
 
 import 'package:appstore/color/color.dart';
+import 'package:appstore/model/component.dart';
 import 'package:expandable/expandable.dart';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../../model/Model.dart';
 
 class Expandablee extends StatelessWidget {
   const Expandablee({super.key});
@@ -33,9 +36,9 @@ collapse(context) {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+               Text(
                 'More about CORA’L',
-                style: TextStyle(color: Rang.blue),
+                style: textStyle.displaySmall,
               ),
               Builder(builder: (context) {
                 var controller =
@@ -80,9 +83,9 @@ Expandd(context) {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
+                     Text(
                       'CORA’L',
-                      style: TextStyle(color: Rang.blue),
+                      style: textStyle.bodySmall,
                     ),
                     Builder(builder: (context) {
                       var controller =
@@ -113,68 +116,33 @@ Expandd(context) {
                       padding: EdgeInsets.only(
                           left: MediaQuery.of(context).size.height / 60,
                           top: MediaQuery.of(context).size.height / 35),
-                      child: const Text('Shop by Category',
-                          style: TextStyle(color: Colors.white)),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.height / 60,
-                          top: MediaQuery.of(context).size.height / 100),
-                      child: const Text('Skincare',
-                          style: TextStyle(color: Rang.greylight)),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.height / 60,
-                          top: MediaQuery.of(context).size.height / 100),
-                      child: Text('Personal Care',
-                          style: TextStyle(color: Rang.greylight)),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.height / 60,
-                          top: MediaQuery.of(context).size.height / 100),
-                      child: Text('Handbags',
-                          style: TextStyle(color: Rang.greylight)),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.height / 60,
-                          top: MediaQuery.of(context).size.height / 100),
-                      child: Text('Apparels',
-                          style: TextStyle(color: Rang.greylight)),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.height / 60,
-                          top: MediaQuery.of(context).size.height / 100),
-                      child: Text('Watches',
-                          style: TextStyle(color: Rang.greylight)),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.height / 60,
-                          top: MediaQuery.of(context).size.height / 100),
-                      child: Text('Eye Wear',
-                          style: TextStyle(color: Rang.greylight)),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.height / 60,
-                          top: MediaQuery.of(context).size.height / 100),
-                      child: Text('Jewellery',
-                          style: TextStyle(color: Rang.greylight)),
+                      child:  Text('Shop by Category',
+                          style: textStyle.headlineLarge),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height / 80,
-                    ),
+                      height: 180,
+                      child: ListView.builder(
+                        itemCount: expandableCat.length,
+                      itemBuilder: (BuildContext context, int index) {
+
+                        return   Padding(
+                        padding: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.height / 60,
+                            top: MediaQuery.of(context).size.height / 100),
+                        child:  Text(expandableCat[index],
+                                 style: textStyle.bodySmall,  )                      );
+                        },
+                    ),),
+                 
+                   
+                  
                     Padding(
                       padding: EdgeInsets.only(
                           left: MediaQuery.of(context).size.height / 60),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
-                          Text('Policy', style: TextStyle(color: Colors.white)),
+                        children:  [
+                          Text('Policy', style: textStyle.headlineLarge),
                         ],
                       ),
                     ),
@@ -191,24 +159,24 @@ Expandd(context) {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
+                              children:  [
                                 Text('Return |',
-                                    style: TextStyle(color: Rang.greylight)),
+                                    style: textStyle.bodySmall),
                                 Text('Term of use |',
-                                    style: TextStyle(color: Rang.greylight)),
+                                     style: textStyle.bodySmall),
                                 Text('Sitemap |',
-                                    style: TextStyle(color: Rang.greylight)),
+                                   style: textStyle.bodySmall),
                                 Text('Security |',
-                                    style: TextStyle(color: Rang.greylight)),
+                                    style: textStyle.bodySmall),
                                 Text('Privacy |',
-                                    style: TextStyle(color: Rang.greylight)),
+                                   style: textStyle.bodySmall),
                               ],
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
-                              children: const [
+                              children:  [
                                 Text('EPR Compliance |',
-                                    style: TextStyle(color: Rang.greylight)),
+                                  style: textStyle.bodySmall),
                               ],
                             ),
                           ],
@@ -223,8 +191,8 @@ Expandd(context) {
                           left: MediaQuery.of(context).size.width / 25),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
-                          Text('About', style: TextStyle(color: Colors.white)),
+                        children:  [
+                          Text('About', style: textStyle.headlineLarge),
                         ],
                       ),
                     ),
@@ -233,15 +201,15 @@ Expandd(context) {
                           left: MediaQuery.of(context).size.width / 25,
                           top: MediaQuery.of(context).size.height / 100),
                       child: Row(
-                        children: const [
+                        children: [
                           Text('Contact Us |',
-                              style: TextStyle(color: Rang.greylight)),
+                              style: textStyle.bodySmall),
                           Text('About Us |',
-                              style: TextStyle(color: Rang.greylight)),
+                              style: textStyle.bodySmall),
                           Text('Careers |',
-                              style: TextStyle(color: Rang.greylight)),
+                              style: textStyle.bodySmall),
                           Text('Press',
-                              style: TextStyle(color: Rang.greylight)),
+                              style: textStyle.bodySmall),
                         ],
                       ),
                     ),
@@ -250,7 +218,7 @@ Expandd(context) {
                           MediaQuery.of(context).size.width / 50),
                       child: Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.facebook,
                             color: Rang.tintBlue,
                             size: 50,
@@ -260,13 +228,13 @@ Expandd(context) {
                               right: MediaQuery.of(context).size.width / 120,
                               left: MediaQuery.of(context).size.width / 120,
                             ),
-                            child: FaIcon(
+                            child: const FaIcon(
                               FontAwesomeIcons.instagram,
                               color: Rang.tintBlue,
                               size: 45,
                             ),
                           ),
-                          FaIcon(
+                          const FaIcon(
                             FontAwesomeIcons.twitter,
                             color: Rang.tintBlue,
                             size: 45,
@@ -276,7 +244,7 @@ Expandd(context) {
                               right: MediaQuery.of(context).size.width / 120,
                               left: MediaQuery.of(context).size.width / 120,
                             ),
-                            child: FaIcon(
+                            child: const FaIcon(
                               FontAwesomeIcons.youtube,
                               color: Rang.tintBlue,
                               size: 45,
@@ -289,15 +257,15 @@ Expandd(context) {
                       padding: EdgeInsets.only(
                           left: MediaQuery.of(context).size.width / 50,
                           top: MediaQuery.of(context).size.height / 120),
-                      child: Row(
-                        children: const [
-                          Icon(
+                      child:  Row(
+                        children: [
+                          const Icon(
                             Icons.place_outlined,
                             color: Colors.white,
                           ),
                           Text(
                             'United State',
-                            style: TextStyle(color: Colors.white),
+                            style: textStyle.headlineLarge
                           )
                         ],
                       ),
@@ -308,14 +276,14 @@ Expandd(context) {
                           top: MediaQuery.of(context).size.height / 100),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
-                          Text('© 2021 | Cora Leviene All Rights Reserved',
-                              style: TextStyle(color: Colors.white)),
+                        children:  [
+                          Text('2021 | Cora Leviene All Rights Reserved',
+                             style: textStyle.headlineLarge),
                         ],
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height / 120,
+                      height: MediaQuery.of(context).size.height / 140,
                     )
                   ],
                 )),

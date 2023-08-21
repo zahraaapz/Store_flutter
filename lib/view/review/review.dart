@@ -1,5 +1,6 @@
 import 'package:appstore/color/color.dart';
 import 'package:appstore/model/Model.dart';
+import 'package:appstore/model/component.dart';
 
 import 'package:appstore/view/selectType/detail_kala.dart';
 
@@ -99,7 +100,9 @@ class _ReviewState extends State<Review> {
                                         color: Rang.blue,
                                       )),
                                   Text(
-                                      "${(comment[0].score + comment[1].score + comment[2].score + comment[3].score + comment[4].score) / 5}"),
+                                      "${(comment[0].score + comment[1].score + comment[2].score + comment[3].score + comment[4].score) / 5}"
+                                      
+                                      ,style: textStyle.bodyMedium,),
                                   const Icon(
                                     CupertinoIcons.star_fill,
                                     color: Rang.orange,
@@ -109,11 +112,9 @@ class _ReviewState extends State<Review> {
                                 const SizedBox(
                                   width: 12,
                                 ),
-                                const Text(
-                                  'Avrage Rating',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
+                                 Text(
+                                  'Avrage Rating'
+                                 ,style: textStyle.bodyMedium,
                                 )
                               ],
                             ),
@@ -161,8 +162,7 @@ collapseComment(context, List<Comment> comment) {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(comment[1].score.toString(),
-                        style: const TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold)),
+                        style: textStyle.bodyMedium,),
                     const Icon(
                       CupertinoIcons.star_fill,
                       color: Rang.orange,
@@ -178,21 +178,21 @@ collapseComment(context, List<Comment> comment) {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(comment[1].name),
-                  Text(comment[1].date),
+                  Text(comment[1].name,style: textStyle.bodyMedium,),
+                  Text(comment[1].date,style: textStyle.bodyMedium,),
                 ],
               ),
             ),
           ],
         ),
-        Text(comment[1].review),
+        Text(comment[1].review,style: textStyle.bodyMedium,),
         Builder(
           builder: (context) {
             var controller = ExpandableController.of(context, required: true)!;
             return InkWell(
-              child: const Text(
+              child:  Text(
                 'more',
-                style: TextStyle(color: Rang.grey),
+                style: textStyle.headlineMedium,
               ),
               onTap: () {
                 controller.toggle();
@@ -235,9 +235,7 @@ expandedComment(context, List<Comment> comment) {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(comment[index].score.toString(),
-                                      style: const TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold)),
+                                     style: textStyle.bodyMedium,),
                                   const Icon(
                                     CupertinoIcons.star_fill,
                                     color: Rang.orange,
@@ -253,14 +251,14 @@ expandedComment(context, List<Comment> comment) {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(comment[index].name),
-                                Text(comment[index].date),
+                                Text(comment[index].name,style: textStyle.bodyMedium,),
+                                Text(comment[index].date,style: textStyle.bodyMedium,),
                               ],
                             ),
                           ),
                         ],
                       ),
-                      Text(comment[index].review),
+                      Text(comment[index].review,style: textStyle.bodyMedium,),
                     ],
                   ),
                 ),
@@ -272,9 +270,9 @@ expandedComment(context, List<Comment> comment) {
 
         return InkWell(
             onTap: () => controller.toggle(),
-            child: const Text(
+            child:  Text(
               'less',
-              style: TextStyle(color: Rang.grey),
+              style: textStyle.bodyMedium,
             ));
       })
     ],
@@ -302,7 +300,7 @@ write() {
                 SizedBox(
                   width: 8,
                 ),
-                Text('Write a Review'),
+                Text('Write a Review',style: textStyle.headlineLarge,),
               ],
             )),
       );
@@ -315,7 +313,7 @@ descripe() {
     Builder(builder: (context) {
       var controller = ExpandableController.of(context, required: true)!;
       return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text('Review Description'),
+        Text('Review Description',style: textStyle.bodyMedium,),
         SizedBox(
           height: 12,
         ),
@@ -355,7 +353,7 @@ descripe() {
                   SizedBox(
                     width: 8,
                   ),
-                  Text('Save'),
+                  Text('Save',style: textStyle.headlineLarge,),
                 ],
               )),
         )
@@ -366,5 +364,5 @@ descripe() {
 
 _snackbar(context) {
   ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(backgroundColor: Rang.blue, content: Text('Saved :)')));
+      SnackBar(backgroundColor: Rang.blue, content: Text('Saved :)',style: textStyle.headlineLarge)));
 }

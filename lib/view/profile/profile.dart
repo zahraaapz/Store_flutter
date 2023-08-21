@@ -9,6 +9,8 @@ import 'package:appstore/view/search/search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../model/component.dart';
+
 class Profile extends StatelessWidget {
    Profile({super.key});
 
@@ -20,16 +22,13 @@ PickFileController pickFileController=Get.put(PickFileController());
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Column(children: [
-          const Padding(
-            padding: EdgeInsets.all(9.0),
+           Padding(
+            padding: const EdgeInsets.all(9.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text('Profile',
-                    style: TextStyle(
-                        color: Rang.blue,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold)),
+                    style: textStyle.displaySmall),
               ],
             ),
           ),
@@ -59,7 +58,7 @@ PickFileController pickFileController=Get.put(PickFileController());
                                           decoration: const BoxDecoration(
                                          
                                             shape: BoxShape.circle,
-                                           image: DecorationImage(image: AssetImage('assets/avatar.png',),fit:BoxFit.cover )
+                                           image: DecorationImage(image: AssetImage('assets/image/avatar.png',),fit:BoxFit.cover )
                                           ),
                                           )
                          
@@ -86,17 +85,16 @@ PickFileController pickFileController=Get.put(PickFileController());
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children:  [
                         Padding(
-                          padding: EdgeInsets.all(3.0),
-                          child: Text(Personal().box.read('fullName') ?? '--'),
+                          padding: const EdgeInsets.all(3.0),
+                          child: Text(Personal().box.read('fullName') ?? '--',style: textStyle.headlineMedium,),
                         ),
                         Padding(
-                          padding: EdgeInsets.all(3.0),
-                          child: Text(Personal().box.read('number')??'--'),
+                          padding: const EdgeInsets.all(3.0),
+                          child: Text(Personal().box.read('number')??'--',style: textStyle.headlineMedium,),
                         ),
                         Text(
                          Personal().box.read('email')??'--',
-                          style: TextStyle(color: Rang.greylight),
-                        ),
+style: textStyle.headlineMedium,                        ),
                       ],
                     ),
                     const Icon(
@@ -109,17 +107,17 @@ PickFileController pickFileController=Get.put(PickFileController());
             ),
           ),
            Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: GestureDetector(
               onTap: () => Get.to(Personal()),
-              child: const Row(
+              child:  Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'Personal Informantion',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: textStyle.headlineMedium,
                   ),
-                  Icon(Icons.arrow_forward_ios_outlined)
+                  const Icon(Icons.arrow_forward_ios_outlined)
                 ],
               ),
             ),
@@ -128,50 +126,50 @@ PickFileController pickFileController=Get.put(PickFileController());
             padding: const EdgeInsets.all(10.0),
             child: GestureDetector(
               onTap: () => Get.offAll(Address()),
-              child: const Row(
+              child:  Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text('My Address Book',
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  Icon(Icons.arrow_forward_ios_outlined)
+                      style: textStyle.headlineMedium,),
+                  const Icon(Icons.arrow_forward_ios_outlined)
                 ],
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('My Saved Cards',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                Icon(Icons.arrow_forward_ios_outlined)
-              ],
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('My Order', style: TextStyle(fontWeight: FontWeight.bold)),
-                Icon(Icons.arrow_forward_ios_outlined)
-              ],
-            ),
-          ),
-          Padding(
+           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                Text('My Saved Cards',
+                    style: textStyle.headlineMedium,),
+                const Icon(Icons.arrow_forward_ios_outlined)
+              ],
+            ),
+          ),
+           Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('My Order', style: textStyle.headlineMedium,),
+                const Icon(Icons.arrow_forward_ios_outlined)
+              ],
+            ),
+          ),
+          Padding(
+            padding:  const EdgeInsets.all(10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
                 Text('Refer and Earn',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                    style:textStyle.headlineMedium,),
                 InkWell(
                     onTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: ((context) => Search())));
                     },
-                    child: Icon(Icons.arrow_forward_ios_outlined))
+                    child: const Icon(Icons.arrow_forward_ios_outlined))
               ],
             ),
           ),
@@ -179,17 +177,9 @@ PickFileController pickFileController=Get.put(PickFileController());
             padding: const EdgeInsets.all(8.0),
             child: SizedBox(
               height: 50,
-              width: 300,
+              width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {},
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Icon(Icons.logout, color: Rang.blue),
-                  Text(
-                    'Log out',
-                    style: TextStyle(color: Rang.blue),
-                  )
-                ]),
                 style: ButtonStyle(
                     backgroundColor:
                         MaterialStateProperty.resolveWith(((states) {
@@ -202,7 +192,15 @@ PickFileController pickFileController=Get.put(PickFileController());
                           borderRadius: BorderRadius.circular(20)),
                     ),
                     side: MaterialStateProperty.all(
-                        BorderSide(color: Rang.blue, width: 2))),
+                        const BorderSide(color: Rang.blue, width: 2))),
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  const Icon(Icons.logout, color: Rang.blue),
+                  Text(
+                    'Log out',
+                    style: textStyle.displaySmall
+                  )
+                ]),
               ),
             ),
           )

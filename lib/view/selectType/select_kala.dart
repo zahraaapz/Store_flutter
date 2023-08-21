@@ -10,6 +10,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'package:get/get.dart';
 
+import '../../model/component.dart';
+
 
 class Select_kala extends StatefulWidget {
   int select;
@@ -82,10 +84,7 @@ fav=RxList.generate(lenght,(index)=>false.obs);
                                     : select == 4
                                         ? 'Eyewear'
                                         : 'Shoes',
-                    style: const TextStyle(
-                        color: Rang.blue,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 23),
+                    style: textStyle.headlineSmall,
                   )
                 ],
               ),
@@ -98,7 +97,9 @@ fav=RxList.generate(lenght,(index)=>false.obs);
                   const SizedBox(
                     width: 30,
                   ),
-                  Text(select == 0
+                  Text(
+                    style: textStyle.bodyMedium,
+                    select == 0
                       ? '${homeScreenController.skincare.length} products'
                       : select == 1
                           ? '${homeScreenController.watche.length} products'
@@ -208,7 +209,9 @@ fav=RxList.generate(lenght,(index)=>false.obs);
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(select == 0
+                                      Text(
+                                        style: textStyle.bodyMedium,
+                                        select == 0
                                           ? homeScreenController.skincare[index].name!
                                           : select == 1
                                               ? homeScreenController.watche[index].name!
@@ -306,7 +309,9 @@ fav=RxList.generate(lenght,(index)=>false.obs);
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(select == 0
+                                      Text(
+                                        style: textStyle.bodyMedium,
+                                        select == 0
                                           ? homeScreenController.skincare[index].brand!
                                           : select == 1
                                               ? homeScreenController.watche[index].brand!
@@ -320,7 +325,9 @@ fav=RxList.generate(lenght,(index)=>false.obs);
                                                               .brand!
                                                           : homeScreenController.shoes[index]
                                                               .brand!),
-                                      Text(select == 0
+                                      Text(
+                                        style: textStyle.bodyMedium,
+                                        select == 0
                                           ? '${homeScreenController.skincare[index].price}\$'
                                           : select == 1
                                               ? '${homeScreenController.watche[index].price}\$'
@@ -379,6 +386,7 @@ fav=RxList.generate(lenght,(index)=>false.obs);
                                     child: Text(
                                       'Sort by',
                                       style: TextStyle(
+                                        fontFamily: 'Auliare',
                                           color: Rang.greylight,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -391,7 +399,7 @@ fav=RxList.generate(lenght,(index)=>false.obs);
                                   ),
                                   RadioListTile(
                                     activeColor: Rang.blue,
-                                    title: const Text('Price - Hight to Low'),
+                                    title:  Text('Price - Hight to Low',style: textStyle.bodyMedium),
                                     groupValue: sel,
                                     value: '0',
                                     onChanged: (value) {
@@ -420,7 +428,7 @@ fav=RxList.generate(lenght,(index)=>false.obs);
                                   RadioListTile(
                                   
                                 activeColor: Rang.blue,
-                                    title: const Text('Price - Low to Hight'),
+                                    title:  Text('Price - Low to Hight',style: textStyle.bodyMedium),
                                     groupValue: sel,
                                     value: '1',
                                     onChanged: (value) {
@@ -448,7 +456,7 @@ fav=RxList.generate(lenght,(index)=>false.obs);
                                   ),
                                   RadioListTile(
                                     activeColor: Rang.blue,
-                                    title: const Text('Lasted product'),
+                                    title: Text('Lasted product',style: textStyle.bodyMedium),
                                     groupValue: sel,
                                     value: '2',
                                     onChanged: (value) {

@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'color/color.dart';
+import 'model/component.dart';
+import 'view/profile/personal_info.dart';
 
 class Notif extends StatelessWidget {
   @override
@@ -27,12 +28,8 @@ class Notif extends StatelessWidget {
                   const SizedBox(
                     width: 20,
                   ),
-                  const Text(
-                    'Notification',
-                    style: TextStyle(
-                        color: Rang.blue,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
+                   Text(
+                    'Notification',style: textStyle.displaySmall,
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 2,
@@ -46,32 +43,32 @@ class Notif extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              Image.asset('assets/notf.png'),
+              Image.asset('assets/image/notf.png'),
               SizedBox(
                 height: 20,
               ),
-              const Row(
+               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 36,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Upto 50% OFF⚡⚡'),
-                      SizedBox(
+                      Text('Upto 50% OFF⚡⚡',style: textStyle.bodyMedium),
+                      const SizedBox(
                         height: 20,
                       ),
-                      Text('This winter gift your loved ones.'),
+                       Text('This winter gift your loved ones.',style: textStyle.bodyMedium),
                     ],
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Container(
+              SizedBox(
                 width: 350,
                 height: 60,
                 child: ElevatedButton(
@@ -81,7 +78,7 @@ class Notif extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20)),
                         ),
                         side: MaterialStateProperty.all(
-                            BorderSide(color: Rang.blue, width: 1.5)),
+                            const BorderSide(color: Rang.blue, width: 1.5)),
                         backgroundColor:
                             MaterialStateProperty.resolveWith((states) {
                           if (states.contains(MaterialState.pressed)) {
@@ -92,10 +89,10 @@ class Notif extends StatelessWidget {
                     onPressed: () {},
                     child: Text(
                       'Shop now',
-                      style: TextStyle(color: Rang.blue),
+                     style: textStyle.displaySmall,
                     )),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
@@ -106,13 +103,13 @@ class Notif extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image.asset('assets/icon.png'),
-                      Text('Share your feedback'),
+                      Image.asset('assets/image/icon.png'),
+                      Text('Share your feedback',style: textStyle.bodyMedium),
                       SizedBox(
                         height: 20,
                       ),
-                      Text(
-                        '''Hey, Tina. Thanks for using CORAL. You know what? You can help us improve with just one click''',
+                      Text(style: textStyle.bodyMedium,
+                        '''Hey, ${Personal().box.read('fullName')}. Thanks for using CORAL. You know what? You can help us improve with just one click''',
                         textScaleFactor: 1.1,
                       )
                     ],

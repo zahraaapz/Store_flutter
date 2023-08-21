@@ -38,7 +38,7 @@ return SafeArea(
          iconANDtitle('My Address', Icons.arrow_back_ios),
           const SizedBox(height: 9,),
         
-          const Text('Contact Information',style:TextStyle(fontSize: 16)),
+           Text('Contact Information',style: textStyle.bodyMedium),
         
           const Divider(
         
@@ -125,7 +125,7 @@ return SafeArea(
         
           ],),
           SizedBox(height: 120,),
-                  Text('Delivery Address',style:TextStyle(fontSize: 16)),
+                  Text('Delivery Address',style: textStyle.bodyMedium),
         
           Divider(
         
@@ -221,7 +221,7 @@ return SafeArea(
                             color: select==index?Rang.blue:Rang.toosi,
                             borderRadius: BorderRadius.circular(15)
                           ),
-                      child: Center(child: Text(addresslist[index],style: TextStyle(color: select.value==index?Colors.white:Rang.grey),)),  ),
+                      child: Center(child: Text(addresslist[index],style: TextStyle(color: select.value==index?Colors.white:Rang.grey,fontFamily: 'Auliare'),)),  ),
                   ),
                 ),
               );
@@ -253,7 +253,7 @@ if(street.text.isNotEmpty && city.text.isNotEmpty) {
             child: Center(
               child: Text('Enter information'
                 ,
-                style: TextStyle(color: Colors.white,fontSize: 18),
+                style: TextStyle(color: Colors.white,fontSize: 18,fontFamily: 'Auliare'),
                
               ),
             ),
@@ -264,7 +264,7 @@ if(street.text.isNotEmpty && city.text.isNotEmpty) {
               style: ButtonStyle(
          shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
                 backgroundColor: MaterialStateProperty.all(Rang.blue)),
-              child:const Text('Save Address') ,),
+              child: Text('Save Address',style: textStyle.headlineLarge) ,),
             )
         
         ]),

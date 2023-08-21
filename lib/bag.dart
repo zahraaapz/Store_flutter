@@ -36,7 +36,7 @@ class _BagState extends State<Bag> {
                         const SizedBox(
                           height: 90,
                         ),
-                        Image.asset('assets/emptyBag.png'),
+                        Image.asset('assets/image/emptyBag.png'),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: titleEmtypage(MyString.bagEmptytile),
@@ -59,9 +59,9 @@ class _BagState extends State<Bag> {
                                       builder: ((context) => Home())));
                             }),
                             style: buttonModel(),
-                            child: const Text(
-                              'continue shopping',
-                              style: TextStyle(color: Colors.white),
+                            child:  Text(
+                              'continue shopping'
+                             ,style: textStyle.headlineLarge,
                             ),
                           ),
                         )
@@ -105,15 +105,13 @@ class _BagState extends State<Bag> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text(myBagList[index].brand!,
-                                                  style: TextStyle(
-                                                      fontSize: 15)),
+                                              Text(myBagList[index].brand!
+                                                  ,style: textStyle.bodyMedium),
                                               const SizedBox(
                                                 height: 10,
                                               ),
-                                              Text(myBagList[index].name!,
-                                                  style: TextStyle(
-                                                      fontSize: 15)),
+                                              Text(myBagList[index].name!
+                                                 ,style: textStyle.bodyMedium),
                                               const SizedBox(
                                                 height: 10,
                                               ),
@@ -137,7 +135,7 @@ class _BagState extends State<Bag> {
                                                             8.0),
                                                     child: Row(
                                                       children: [
-                                                        Text(
+                                                        Text(style: textStyle.bodyMedium,
                                                             'Qnty: ${qnty![index]}'),
                                                         const Icon(
                                                             Icons.add)
@@ -149,7 +147,7 @@ class _BagState extends State<Bag> {
                                               const SizedBox(
                                                 height: 10,
                                               ),
-                                              Text(
+                                              Text(style: textStyle.bodyMedium,
                                                   '${int.parse(myBagList[index].price!) * qnty![index]}\$'),
                                             ],
                                           ),
@@ -166,16 +164,14 @@ class _BagState extends State<Bag> {
                                       indent: 3,
                                       color: Rang.blue,
                                     ),
-                                    SizedBox(height: 5,),
+                                    const SizedBox(height: 5,),
                                     Row(crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                         const SizedBox(
                                           width: 60,
                                         ),
-                                        const Text('Move to Wishlist',
-                                            style: TextStyle(
-                                                color: Rang.blue,
-                                                fontSize: 16)),
+                                         Text('Move to Wishlist',
+                                            style: textStyle.displaySmall),
                                         const SizedBox(
                                           width: 8,
                                         ),
@@ -198,12 +194,10 @@ class _BagState extends State<Bag> {
                                             });
                                                  
                                           },
-                                          child: const Text('Remove',
-                                              style: TextStyle(
-                                                  color: Rang.blue,
-                                                  fontSize: 16)),
+                                          child: Text('Remove'
+                                            ,style: textStyle.displaySmall,
                                         ),
-                                      ],
+                                    )],
                                     )
                                   ]),
                                 ),
@@ -216,27 +210,25 @@ class _BagState extends State<Bag> {
                             height: 50,
                             width: double.infinity,
                             decoration: BoxDecoration(
-                                boxShadow: [BoxShadow(blurRadius: 1)],
+                                boxShadow: const [ BoxShadow(blurRadius: 1)],
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(15)),
                             child: TextField(
                               decoration: InputDecoration(
                                 
                                   hintText: 'Apply Copon Code',
-                                  suffixIcon: const Padding(
-                                    padding: EdgeInsets.only(top: 12.0),
+                                  suffixIcon:  Padding(
+                                    padding: const EdgeInsets.only(top: 12.0),
                                     child: Text(
                                       'Check',
-                                      style: TextStyle(
-                                          color: Rang.blue,
-                                          fontWeight: FontWeight.bold),
+                                      style: textStyle.displaySmall,
                                     ),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(15),
                                       borderSide:
-                                          BorderSide(color: Rang.blue)),
-                                  hintStyle: TextStyle(color: Rang.greylight),
+                                          const BorderSide(color: Rang.blue)),
+                                  hintStyle: const TextStyle(color: Rang.greylight),
                                   border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
                                       borderRadius:
@@ -294,8 +286,8 @@ class _BagState extends State<Bag> {
      
         children: [
           const SizedBox(height: 15,),
-          const Text('Order detail',
-              style: TextStyle(color: Rang.blue, fontSize: 16)),
+           Text('Order detail',
+              style: textStyle.displaySmall),
           SizedBox( height: 140,
         
             child: ListView.builder(
@@ -309,10 +301,12 @@ class _BagState extends State<Bag> {
                     children: [
                       Text(orderDetail[ix].title!,
                           style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Auliare',
                               fontSize: 16, color: Rang.greylight)),
                       Text(
                            orderDetail[ix].price!,
-                          style: const TextStyle(fontSize: 16)),
+                         style: textStyle.bodyMedium),
                     ],
                   ),
                 )),
@@ -323,8 +317,8 @@ class _BagState extends State<Bag> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Total Bag Amount', style: TextStyle(fontSize: 16)),
-                  Text(totalPrice.toString(), style: TextStyle(fontSize: 13)),
+                  Text('Total Bag Amount',style: textStyle.bodyMedium),
+                  Text(totalPrice.toString(),style: textStyle.bodyMedium),
                 ],
               ),
               ElevatedButton(
@@ -336,7 +330,7 @@ class _BagState extends State<Bag> {
                     Address().box.read('street')== null ?
                     Get.offAll(Address()):Get.to(Payments());
                   }),
-                  child: Text('Place Order')),
+                  child: Text('Place Order',style: textStyle.headlineLarge)),
             ],
           )
         ]);

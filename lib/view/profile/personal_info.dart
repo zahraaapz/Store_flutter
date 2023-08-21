@@ -131,13 +131,13 @@ if(fullname.text.isNotEmpty && email.text.isNotEmpty && number.text.isNotEmpty) 
   Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
 }else{
 
-  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(  backgroundColor:Color.fromARGB(255, 27, 75, 102) ,
+  ScaffoldMessenger.of(context).showSnackBar( SnackBar(  backgroundColor:const Color.fromARGB(255, 27, 75, 102) ,
           content: SizedBox(
             height: 60,
             child: Center(
               child: Text('Enter information'
                 ,
-                style: TextStyle(color: Colors.white,fontSize: 18),
+                style: textStyle.headlineLarge,
                
               ),
             ),

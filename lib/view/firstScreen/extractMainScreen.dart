@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:appstore/controller/homeScreenController.dart';
+import 'package:appstore/model/component.dart';
 import 'package:appstore/view/firstScreen/expandable.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/color/color.dart';
@@ -44,15 +45,15 @@ var box=GetStorage();
 
 @override
 void initState() {
+   homeScreenController.getHomeItem();
    fav = RxList.generate(3,(index) => false.obs);
     super.initState();
-
 
   }
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    homeScreenController.getHomeItem();
+   
  
     return SafeArea(
       child: Scaffold(
@@ -83,11 +84,8 @@ void initState() {
                               size: 32,
                             ),
                           ),
-                          const Text(' Home',
-                              style: TextStyle(
-                                  color: Rang.blue,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold)),
+                         Text(' Home',
+                              style: textStyle.displaySmall),
                         ],
                       ),
                     ),
@@ -124,20 +122,20 @@ void initState() {
                 const SizedBox(
                   height: 8,
                 ),
-                const Padding(
+                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text('Top Categories',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
+                          style: textStyle.headlineMedium),
                     ],
                   ),
                 ),
                 ////type list
                 typeList(size),
 
-                const Padding(
+                 Padding(
                   padding: EdgeInsets.only(left: 10, right: 10),
                   child: SizedBox(
                     height: 30,
@@ -145,16 +143,16 @@ void initState() {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('New Arrivals',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
+                            style: textStyle.headlineMedium),
                         SizedBox(
                             child: InkWell(
                           child: Row(
                             children: [
                               Text(
                                 'View all',
-                                style: TextStyle(color: Rang.blue),
+                                style: textStyle.bodyMedium,
                               ),
-                              Icon(
+                              const Icon(
                                 Icons.arrow_forward_ios_rounded,
                                 color: Rang.blue,
                                 size: 15,
@@ -173,17 +171,17 @@ void initState() {
                   ///collection container
                   color: Rang.blue,
                   width: double.infinity,
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
+                  child:  Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
                         Padding(
-                          padding: EdgeInsets.all(6.0),
+                          padding: const EdgeInsets.all(6.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text('Handpicked Collections',
-                                  style: TextStyle(color: Colors.white)),
+                                  style: textStyle.headlineLarge),
                             ],
                           ),
                         ),
@@ -192,23 +190,23 @@ void initState() {
                     ),
                   ),
                 ),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         'Shop by Brands',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: textStyle.headlineMedium,
                       ),
                       SizedBox(
                         child: Row(
                           children: [
                             Text(
                               'View all',
-                              style: TextStyle(color: Rang.blue),
+                              style: textStyle.bodyMedium,
                             ),
-                            Icon(
+                            const Icon(
                               Icons.arrow_forward_ios_rounded,
                               color: Rang.blue,
                               size: 15,
@@ -228,15 +226,13 @@ void initState() {
                   ),
                 ),
                 Shortcut(size: size),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.only(left: 16.0, bottom: 8, top: 8),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text('Makeup & Skincare',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold))
+                            style: textStyle.headlineMedium)
                       ]),
                 ),
                 Container(
@@ -245,7 +241,7 @@ void initState() {
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: Image.asset('assets/banner/makeup.png').image)),
+                          image: Image.asset('assets/image/banner/makeup.png').image)),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0, right: 20, top: 8),
@@ -256,7 +252,7 @@ void initState() {
                       decoration: BoxDecoration(
                           image: DecorationImage(
                               fit: BoxFit.fill,
-                              image: Image.asset('assets/banner/skincare.png').image)),
+                              image: Image.asset('assets/image/banner/skincare.png').image)),
                     ),
                     Container(
                       width: size.width / 2.2,
@@ -265,7 +261,7 @@ void initState() {
                           image: DecorationImage(
                               fit: BoxFit.fill,
                               image:
-                                  Image.asset('assets/banner/facepacks.png').image)),
+                                  Image.asset('assets/image/banner/facepacks.png').image)),
                     )
                   ]),
                 ),
@@ -306,7 +302,7 @@ void initState() {
                                     decoration: BoxDecoration(
                                    
                                       shape: BoxShape.circle,
-                                     image: DecorationImage(image: AssetImage('assets/avatar.png',),fit:BoxFit.cover )
+                                     image: DecorationImage(image: AssetImage('assets/image/avatar.png',),fit:BoxFit.cover )
                                     ),
                                     )
                    
@@ -327,16 +323,16 @@ void initState() {
                     children:  [
                       Padding(
                         padding: EdgeInsets.all(3.0),
-                        child: Text(box.read('fullName') ?? '--'),
+                        child: Text(box.read('fullName') ?? '--',style: textStyle.bodyMedium,),
                       ),
                       Padding(
                         padding: EdgeInsets.all(3.0),
-                        child: Text(box.read('number')??'--'
+                        child: Text(box.read('number')??'--',style: textStyle.bodyMedium,
                            ),
                       ),
                       Text(
                        box.read('email')??'--',
-                        style: TextStyle(color: Rang.greylight),
+                        style: textStyle.bodyMedium,
                       ),
                     ],
                   ),
@@ -351,9 +347,8 @@ void initState() {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Text('Top Categories',
-                      style: TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold)),
+                   Text('Top Categories',
+                      style: textStyle.bodyMedium),
                   SizedBox(
                     height: 220,
                     child: ListView.builder(
@@ -364,8 +359,7 @@ void initState() {
                             padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
                             child: GestureDetector(
                               child: Text(Model.modelList[index].title,
-                                  style: const TextStyle(
-                                      color: Rang.blue, fontSize: 15)),
+                                  style:textStyle.bodyLarge),
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: ((context) => Select_kala(
@@ -376,23 +370,22 @@ void initState() {
                           );
                         })),
                   ),
-                  const Text('Contact us',
-                      style: TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.bold)),
+                  Text('Contact us',
+                      style: textStyle.bodyLarge),
                   const SizedBox(
                     height: 12,
                   ),
                   GestureDetector(
-                    child: const Text('Help & Support',
-                        style: TextStyle(color: Rang.blue)),
+                    child:  Text('Help & Support',
+                        style: textStyle.bodyMedium),
                     onTap: () {},
                   ),
                   const SizedBox(
                     height: 12,
                   ),
                   GestureDetector(
-                    child: const Text('Wishlist',
-                        style: TextStyle(color: Rang.blue)),
+                    child:  Text('Wishlist',
+                        style: textStyle.bodyLarge),
                     // onTap: () {
                     //   Navigator.of(context).push(MaterialPageRoute(
                     //       builder: ((context) =>
@@ -453,8 +446,7 @@ SizedBox typeList(Size size) {//seslect clothes or...
                              padding: const EdgeInsets.all(3.0),
                              child: Text(
                                Model.modelList[index].title,
-                               style: const TextStyle(
-                                   fontSize: 14, fontWeight: FontWeight.bold),
+                               style: textStyle.bodyMedium,
                              ),
                            )
                          ],
@@ -527,26 +519,20 @@ SizedBox suggList(size,RxList fav) {//suggestion List
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text( homeScreenController.suggestlist[index].brand!,
-                                                        style: const TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold)),
+                                                        style: textStyle.bodyMedium),
                                                     const SizedBox(
                                                       height: 12,
                                                     ),
                                                     Text(
                                                       homeScreenController.suggestlist[index].name!,
-                                                      style: const TextStyle(
-                                                        color: Rang.toosi,
-                                                      ),
+                                                      style:textStyle.bodyMedium,
                                                     ),
                                                     const SizedBox(
                                                       height: 12,
                                                     ),
                                                     Text(
                                                         '${homeScreenController.suggestlist[index].price}\$',
-                                                        style: const TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold)),
+                                                        style: textStyle.bodyMedium),
                                                   ],
                                                 )
                                               ],
@@ -563,12 +549,12 @@ SizedBox suggList(size,RxList fav) {//suggestion List
                                                       color: Rang.toosi,
                                                       borderRadius:
                                                           BorderRadius.circular(10)),
-                                                  child: const Row(
+                                                  child:  Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.spaceAround,
                                                     children: [
-                                                      Text('4.5'),
-                                                      Icon(
+                                                      Text('4.5',style: textStyle.bodyMedium,),
+                                                      const Icon(
                                                         CupertinoIcons.star_fill,
                                                         color: Rang.orange,
                                                         size: 17,
@@ -579,23 +565,20 @@ SizedBox suggList(size,RxList fav) {//suggestion List
                                                 const SizedBox(
                                                   width: 10,
                                                 ),
-                                                const Column(
+                                                 Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
                                                       'Average Rating',
-                                                      style: TextStyle(
-                                                          fontWeight: FontWeight.bold),
+                                                      style:textStyle.bodyMedium,
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       height: 8,
                                                     ),
                                                     Text(
                                                       '43 Ratings & 23 Reviews',
-                                                      style: TextStyle(
-                                                        color: Rang.greylight,
-                                                      ),
+                                                      style: textStyle.bodyMedium,
                                                     ),
                                                   ],
                                                 )
@@ -606,21 +589,18 @@ SizedBox suggList(size,RxList fav) {//suggestion List
                                          homeScreenController.suggestlist[index].filter == 'shoes'
                                               ? Column(
                                                   children: [
-                                                    const Padding(
+                                                     Padding(
                                                       padding:
-                                                          EdgeInsets.all(8.0),
+                                                          const EdgeInsets.all(8.0),
                                                       child: Row(
                                                         children: [
                                                           Text(
                                                             'Select Size',
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight.bold),
+                                                            style: textStyle.bodyMedium,
                                                           ),
                                                           Text(
                                                             ' (Uk Size)',
-                                                            style: TextStyle(
-                                                                color: Rang.grey),
+                                                            style:textStyle.bodyMedium ,
                                                           ),
                                                         ],
                                                       ),
@@ -675,7 +655,7 @@ SizedBox suggList(size,RxList fav) {//suggestion List
                                                                       child: Center(
                                                                         child: Text(sizepa[
                                                                                 index]
-                                                                            .toString()),
+                                                                            .toString(),style:textStyle.bodyMedium),
                                                                       ),
                                                                    
                                                                                                                              
@@ -716,16 +696,16 @@ SizedBox suggList(size,RxList fav) {//suggestion List
                                                         myBagList.add(homeScreenController.suggestlist[index]);
                                                       }
                                                     },
-                                                    child: const SizedBox(
+                                                    child:  SizedBox(
                                                       width: 270,
                                                       height: 50,
                                                       child: Row(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment.center,
                                                         children: [
-                                                          Icon(Icons
+                                                          const Icon(Icons
                                                               .shopping_bag_outlined),
-                                                          Text('Add to Bags')
+                                                          Text('Add to Bags',style: textStyle.headlineLarge,)
                                                         ],
                                                       ),
                                                     )),
@@ -772,8 +752,8 @@ SizedBox suggList(size,RxList fav) {//suggestion List
 
                                   
                                   Text( homeScreenController.suggestlist[index].name!,
-                                      style:
-                                          const TextStyle(fontWeight: FontWeight.bold)),
+                                      style:textStyle.bodyMedium
+                                         ),
                                   InkWell(
                                     onTap:() {
 
@@ -804,12 +784,10 @@ SizedBox suggList(size,RxList fav) {//suggestion List
                             Padding(
                               padding: const EdgeInsets.only(top: 1.0, bottom: 3),
                               child: Text( homeScreenController.suggestlist[index].brand!,
-                                  style: const TextStyle(
-                                    color: Rang.greylight,
-                                  )),
+                                  style:textStyle.bodyMedium),
                             ),
                             Text("${ homeScreenController.suggestlist[index].price}\$",
-                                style: const TextStyle(fontWeight: FontWeight.bold)),
+                                style:textStyle.bodyMedium),
                           ],
                         ),
                       ),
@@ -855,16 +833,16 @@ class Shortcut extends StatelessWidget {
                   image: const DecorationImage(
                       fit: BoxFit.fill,
                       image: AssetImage(
-                        'assets/PWA-CTA.png',
+                        'assets/image/PWA-CTA.png',
                       )),
                   borderRadius: BorderRadius.circular(10)),
             ),
             const SizedBox(width: 8),
-            const SizedBox(
+             SizedBox(
               width: 200,
               child: Text(
                 '''Discover your favrouite products faster with CORA’L web app.''',
-                style: TextStyle(color: Colors.white),
+               style:textStyle.headlineLarge
               ),
             )
           ],
@@ -882,9 +860,9 @@ class Shortcut extends StatelessWidget {
         left: 150,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-            Text('Add shortcut ', style: TextStyle(color: Colors.white)),
-            Icon(Icons.arrow_forward, color: Colors.white)
+          children: [
+            Text('Add shortcut ', style:textStyle.headlineLarge ),
+            const Icon(Icons.arrow_forward, color: Colors.white)
           ],
         ),
       )
@@ -965,8 +943,8 @@ class Bannner extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         child: Row(
           children: [
-            Image.asset('assets/banner/spring.png'),
-            Image.asset('assets/banner/banner.png'),
+            Image.asset('assets/image/banner/spring.png'),
+            Image.asset('assets/image/banner/banner.png'),
           ],
         ));
   }

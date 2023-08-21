@@ -42,7 +42,7 @@ class _WishState extends State<Wish> {
           const SizedBox(
             height: 90,
           ),
-          Image.asset('assets/wish.png'),
+          Image.asset('assets/image/wish.png'),
            Padding(
             padding: const EdgeInsets.all(8.0),
             child: titleEmtypage(MyString.wishEmptytitle),
@@ -63,9 +63,9 @@ class _WishState extends State<Wish> {
                     MaterialPageRoute(builder: ((context) => Home())));
               }),
               style: buttonModel(),
-              child: const Text(
-                'start shopping',
-                style: TextStyle(color: Colors.white),
+              child:  Text(
+                'start shopping'
+                ,style: textStyle.headlineLarge,
               ),
             ),
           )
@@ -107,7 +107,7 @@ class _WishState extends State<Wish> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(wishList[index].brand!),
+                        Text(wishList[index].brand!,style: textStyle.bodyMedium),
                         GestureDetector(
                           onTap: (() {
                            
@@ -134,8 +134,8 @@ class _WishState extends State<Wish> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(wishList[index].name!),
-                        Text("${wishList[index].price}\$"),
+                        Text(wishList[index].name!,style: textStyle.bodyMedium),
+                        Text("${wishList[index].price}\$",style: textStyle.bodyMedium),
                       ],
                     ),
                   ],

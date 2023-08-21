@@ -13,6 +13,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../model/component.dart';
 import '../review/review.dart';
 
 class DetailKala extends StatefulWidget {
@@ -127,7 +128,7 @@ class _DetailKalaState extends State<DetailKala> {
                                     : select == 4
                                         ? kalalist[index].name!
                                         : kalalist[index].name!,
-                    textScaleFactor: 1.9,
+                    textScaleFactor: 1.9,style: textStyle.headlineMedium,
                   ),
                   Text(
                     select == 0
@@ -142,7 +143,7 @@ class _DetailKalaState extends State<DetailKala> {
                                         ? kalalist[index].brand!
                                         : kalalist[index].brand!,
                     textScaleFactor: 1.1,
-                    style: const TextStyle(color: Rang.greylight),
+                    style: textStyle.bodyMedium,
                     strutStyle: const StrutStyle(height: 2),
                   ),
                   Row(
@@ -160,7 +161,7 @@ class _DetailKalaState extends State<DetailKala> {
                                             ? '${kalalist[index].price}\$'
                                             : '${kalalist[index].price}\$',
                         textScaleFactor: 1.6,
-                        strutStyle: const StrutStyle(height: 2),
+                        strutStyle: const StrutStyle(height: 2),style: textStyle.bodyMedium,
                       ),
                       const SizedBox(
                         width: 20,
@@ -168,7 +169,7 @@ class _DetailKalaState extends State<DetailKala> {
                       const Text(
                         '20%OFF',
                         textScaleFactor: 1.1,
-                        style: TextStyle(color: Colors.red),
+                        style: TextStyle(color: Colors.red,fontFamily:'Auliare',fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -186,12 +187,12 @@ class _DetailKalaState extends State<DetailKala> {
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
-                                children: const [
-                                  Text('43.5'),
-                                  SizedBox(
+                                children: [
+                                  Text('43.5',style: textStyle.bodyMedium,),
+                                  const SizedBox(
                                     width: 3,
                                   ),
-                                  Icon(
+                                  const Icon(
                                     CupertinoIcons.star_fill,
                                     color: Rang.orange,
                                     size: 17,
@@ -203,15 +204,16 @@ class _DetailKalaState extends State<DetailKala> {
                       const SizedBox(
                         width: 100,
                       ),
-                      Column(
+               const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               'Avrange Rating',
-                              style: TextStyle(color: Rang.greylight),
+                             
+                              style: TextStyle(color: Rang.greylight,fontFamily: 'Auliare',fontWeight: FontWeight.bold),
                             ),
                             Text('43Rating and 23 Reviews',
-                                style: TextStyle(color: Rang.greylight))
+                                style: TextStyle(color: Rang.greylight,fontFamily: 'Auliare',fontWeight: FontWeight.bold))
                           ])
                     ],
                   )
@@ -229,13 +231,13 @@ class _DetailKalaState extends State<DetailKala> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
+                     Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: SizedBox(
                         width: 200,
                         child: Text(
                           'Get upto 30% of on order value above \$100',
-                          style: TextStyle(fontSize: 17),
+                         style: textStyle.bodyMedium,
                         ),
                       ),
                     ),
@@ -251,11 +253,11 @@ class _DetailKalaState extends State<DetailKala> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const Text('Use code',
-                                style: TextStyle(color: Rang.grey)),
+                                style: TextStyle(color: Rang.grey,fontFamily: 'Auliare',fontWeight: FontWeight.bold)),
                         Text(
                           randomValue.toString(),
-                              style:
-                                TextStyle(fontWeight: FontWeight.bold),
+                              style:textStyle.bodyMedium
+                               
                             ),
                           ],
                         ),
@@ -321,14 +323,14 @@ class _DetailKalaState extends State<DetailKala> {
                          
                           }
                         }),
-                        child: const Row(
+                        child:  Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.shopping_bag_outlined,
                               color: Colors.white,
                             ),
-                            Text('Add to Bags')
+                            Text('Add to Bags',style: textStyle.headlineLarge,)
                           ],
                         )),
                   )
@@ -341,9 +343,9 @@ class _DetailKalaState extends State<DetailKala> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('43 Rating and 23 Reviews',
-                      style:
-                          TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+                  Text('43 Rating and 23 Reviews',
+                      style:textStyle.bodyMedium
+                          ),
                   InkWell(
                     onTap: (() {
                       Navigator.of(context).push(MaterialPageRoute(
@@ -361,13 +363,13 @@ class _DetailKalaState extends State<DetailKala> {
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(18.0),
+             Padding(
+              padding: const EdgeInsets.all(18.0),
               child: Row(
                 children: [
                   Text('You might like also',
-                      style:
-                          TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+                      style:textStyle.bodyMedium
+                          ),
                 ],
               ),
             ),
@@ -402,7 +404,7 @@ class _DetailKalaState extends State<DetailKala> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(kalalist[index].brand!),
+                                      Text(kalalist[index].brand!,style: textStyle.bodyMedium,),
                                       const Icon(
                                         Icons.favorite_border,
                                         size: 20,
@@ -410,12 +412,11 @@ class _DetailKalaState extends State<DetailKala> {
                                     ],
                                   ),
                                   Text(
-                                    kalalist[index].name!,
-                                    style: TextStyle(color: Rang.greylight),
-                                  ),
+                                    kalalist[index].name!
+,style: textStyle.bodyMedium                                  ),
                                   Text(
                                     '${kalalist[index].price}\$',
-                                    strutStyle: StrutStyle(height: 2),
+                                    strutStyle: StrutStyle(height: 2),style: textStyle.bodyMedium
                                   ),
                                 ],
                               ),

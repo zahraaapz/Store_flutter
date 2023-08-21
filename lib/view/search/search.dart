@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../model/Model.dart';
+import '../../model/component.dart';
 import 'searchResult.dart';
 
 
@@ -122,7 +123,7 @@ void resultSeach(String query) {
           itemCount: filteredItems.length,
           itemBuilder: (BuildContext context, int index) {
             return Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding:  const EdgeInsets.all(10.0),
               child: Row(
                 children: [
 
@@ -130,20 +131,20 @@ void resultSeach(String query) {
                     width: 70,
                     height: 70,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(9)),
+                      borderRadius: const BorderRadius.all(Radius.circular(9)),
                       image: DecorationImage(
                         
                         image:Image.asset(filteredItems[index].ima!).image,fit: BoxFit.cover)
                     ),
                   ),
-                  SizedBox(width: 10,),
+                  const SizedBox(width: 10,),
                   Column(
              crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
             
-                    Text( 'name:  '+filteredItems[index].name!),
-                  SizedBox(height: 25,),
-                    Text( 'brand:  ' +filteredItems[index].brand!,)
+                    Text( 'name:  ${filteredItems[index].name!}',style: textStyle.bodyMedium,),
+                  const SizedBox(height: 25,),
+                    Text( 'brand:  ${filteredItems[index].brand!}',style: textStyle.bodyMedium,)
                   ],),
                 ],
               ),

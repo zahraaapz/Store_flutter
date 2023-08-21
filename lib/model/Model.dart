@@ -5,12 +5,12 @@ class Model {
   String title;
   Model({required this.ima, required this.title});
   static List<Model> modelList = [
-    Model(ima: 'assets/type/p0.png', title: 'Skincare'),
-    Model(ima: 'assets/type/p1.png', title: 'Watches'),
-    Model(ima: 'assets/type/p2.png', title: 'HandBag'),
-    Model(ima: 'assets/type/p3.png', title: 'Jewellery'),
-    Model(ima: 'assets/type/p4.png', title: 'Eyewear'),
-    Model(ima: 'assets/type/p5.png', title: 'Shoes'),
+    Model(ima: 'assets/image/type/p0.png', title: 'Skincare'),
+    Model(ima: 'assets/image/type/p1.png', title: 'Watches'),
+    Model(ima: 'assets/image/type/p2.png', title: 'HandBag'),
+    Model(ima: 'assets/image/type/p3.png', title: 'Jewellery'),
+    Model(ima: 'assets/image/type/p4.png', title: 'Eyewear'),
+    Model(ima: 'assets/image/type/p5.png', title: 'Shoes'),
   ];
 }
 List<String> addresslist=['Office','Home','Other'];
@@ -39,18 +39,18 @@ class Kala {
 }
 
 List<Model> cateList = [
-  Model(ima: 'assets/personal care.png', title: ''),
-  Model(ima: 'assets/wrist watches.png', title: ''),
-  Model(ima: 'assets/handbags.png', title: ''),
-  Model(ima: 'assets/sunglasses.png', title: ''),
+  Model(ima: 'assets/image/personal care.png', title: ''),
+  Model(ima: 'assets/image/wrist watches.png', title: ''),
+  Model(ima: 'assets/image/handbags.png', title: ''),
+  Model(ima: 'assets/image/sunglasses.png', title: ''),
 ];
 List<Model> brands = [
-  Model(ima: 'assets/brand/b1.png', title: ''),
-  Model(ima: 'assets/brand/b2.png', title: ''),
-  Model(ima: 'assets/brand/b3.png', title: ''),
-  Model(ima: 'assets/brand/b4.png', title: ''),
-  Model(ima: 'assets/brand/b5.png', title: ''),
-  Model(ima: 'assets/brand/b6.png', title: ''),
+  Model(ima: 'assets/image/brand/b1.png', title: ''),
+  Model(ima: 'assets/image/brand/b2.png', title: ''),
+  Model(ima: 'assets/image/brand/b3.png', title: ''),
+  Model(ima: 'assets/image/brand/b4.png', title: ''),
+  Model(ima: 'assets/image/brand/b5.png', title: ''),
+  Model(ima: 'assets/image/brand/b6.png', title: ''),
 ];
 List<int> sizepa = [7, 8, 9, 10];
 
@@ -89,3 +89,4 @@ class Comment {
       required this.review});
 }
 
+List expandableCat=['Personal Care','Skincare','Handbags','Apparels','Watches','Eye Wear','Jewellery'];

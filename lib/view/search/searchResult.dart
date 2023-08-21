@@ -17,7 +17,7 @@ class SearchResult extends StatelessWidget {
  
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -38,12 +38,9 @@ class SearchResult extends StatelessWidget {
                   const SizedBox(
                     width: 20,
                   ),
-                  const Text(
-                    'Search results',
-                    style: TextStyle(
-                        color: Rang.blue,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
+                   Text(
+                    'Search results'
+                  ,style: textStyle.displaySmall,
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 2.2,
@@ -58,7 +55,7 @@ class SearchResult extends StatelessWidget {
             const SizedBox(
               height: 90,
             ),
-            Image.asset('assets/search.png'),
+            Image.asset('assets/image/search.png'),
              Padding(
               padding: const EdgeInsets.all(8.0),
               child: titleEmtypage(MyString.searchEmptytitle),
@@ -79,9 +76,9 @@ class SearchResult extends StatelessWidget {
                       MaterialPageRoute(builder: ((context) => Home())));
                 }),
                 style: buttonModel(),
-                child: const Text(
+                child:  Text(
                   'Back to home',
-                  style: TextStyle(color: Colors.white),
+                 style: textStyle.headlineLarge,
                 )
               ),
             )

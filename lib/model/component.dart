@@ -13,14 +13,15 @@ ButtonStyle buttonModel() {
     return Text(
            title,
             textAlign: TextAlign.center,
-            strutStyle: StrutStyle(height: 2),
+            style: textStyle.bodyMedium,
+            strutStyle: const StrutStyle(height: 2),
           );
   }
 
     Text titleEmtypage(String title) {
     return Text(
             title,
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            style: textStyle.headlineMedium,
           );
   }
 
@@ -33,14 +34,63 @@ ButtonStyle buttonModel() {
                     color: Rang.blue,
                     size: 30,
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Text(
                     title,
-                    style: TextStyle(
-                        color: Rang.blue,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 23),
+                    style:textStyle.displaySmall,
                   )
                 ]),
               );
   }
+
+ TextTheme textStyle=const TextTheme(
+  displaySmall: TextStyle(
+     fontFamily: 'Auliare',
+       fontSize: 17,
+       color: Rang.blue, 
+       fontWeight: FontWeight.bold
+
+  ),
+    headlineSmall: TextStyle(
+       fontFamily: 'Auliare',
+       fontSize: 20,
+       color: Rang.blue, 
+       fontWeight: FontWeight.bold
+       
+ ),
+headlineMedium: TextStyle(
+       fontFamily: 'Auliare',
+       fontSize: 17,
+       color: Colors.black, 
+fontWeight: FontWeight.bold
+),
+headlineLarge:  TextStyle(
+       fontFamily: 'Auliare',
+       fontSize: 14,
+       color: Colors.white, 
+fontWeight: FontWeight.bold
+
+),
+bodyMedium:  TextStyle(
+       fontFamily: 'Auliare',
+       fontSize: 14,
+       color: Colors.black, 
+fontWeight: FontWeight.bold
+
+),  
+bodyLarge:  TextStyle(
+       fontFamily: 'Auliare',
+       fontSize: 14,
+       color: Rang.blue, 
+
+),
+bodySmall:  TextStyle(
+       fontFamily: 'Auliare',
+       fontSize: 14,
+       color: Rang.greylight, 
+fontWeight: FontWeight.bold
+
+),
+
+
+ ); 

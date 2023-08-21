@@ -1,4 +1,5 @@
 import 'package:appstore/color/color.dart';
+import 'package:appstore/model/component.dart';
 import 'package:appstore/view/firstScreen/mainScreen.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -23,7 +24,7 @@ class _splashState extends State<splash> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return const SafeArea(
+    return  SafeArea(
       child: Scaffold(
           backgroundColor: Colors.white,
           body: Align(
@@ -34,15 +35,12 @@ class _splashState extends State<splash> {
                 children: [
                   Text(
                     'Welcome...  ',
-                    style: TextStyle(
-                        color: Rang.blue,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                    style: textStyle.headlineSmall,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 40,
                   ),
-                  SpinKitCircle(
+                  const SpinKitCircle(
                     color: Rang.blue,
                     size: 30,
                   ),
