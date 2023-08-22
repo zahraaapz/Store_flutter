@@ -12,39 +12,42 @@ import 'package:appstore/view/selectType/select_kala.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../../model/component.dart';
 import '../review/review.dart';
 
 class DetailKala extends StatefulWidget {
   int index;
-  int select;
-  // ignore: non_constant_identifier_names
-  List<Kala> Kalalist;
+ bool? isFavorite;
+   int select;
+List<Kala> Kalalist;
   DetailKala(
-      {super.key,
-      required this.index,
-      required this.select,
-      // ignore: non_constant_identifier_names
-      required this.Kalalist});
+       this.index,
+       this.select,
+       this.Kalalist ,
+       {this.isFavorite}
+       );
 
   @override
   State<DetailKala> createState() =>
       // ignore: no_logic_in_create_state
-      _DetailKalaState(select: select, index: index, kalalist: Kalalist);
+      _DetailKalaState(select,  index,  Kalalist);
 }
 
 class _DetailKalaState extends State<DetailKala> {
   _DetailKalaState(
-      {required this.select, required this.index, required this.kalalist});
+       this.select, this.index,  this.kalalist,{this.isFavorite});
   List<Kala> kalalist;
   int select;
+  var box=GetStorage();
   int index;
-  RxBool isFavorite = false.obs;
-  HomeScreenController homeScreenController = Get.put(HomeScreenController());
+bool ?isFavorite;
+   HomeScreenController homeScreenController = Get.put(HomeScreenController());
+
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    
     
    final int randomValue=Random().nextInt(500000);
     return SafeArea(
@@ -253,10 +256,13 @@ class _DetailKalaState extends State<DetailKala> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const Text('Use code',
-                                style: TextStyle(color: Rang.grey,fontFamily: 'Auliare',fontWeight: FontWeight.bold)),
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Rang.grey,fontFamily: 'Auliare',fontWeight: FontWeight.bold)
+                                  ),
                         Text(
                           randomValue.toString(),
-                              style:textStyle.bodyMedium
+                            style:textStyle.bodyMedium
                                
                             ),
                           ],
@@ -274,19 +280,23 @@ class _DetailKalaState extends State<DetailKala> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      isFavorite.value = !isFavorite.value;
 
-                      if (isFavorite.value == false &&
+                      setState(() {
+                        
+                   
+                      isFavorite = !isFavorite!;
+
+                      if (isFavorite == false &&
                           wishList.contains(kalalist[index])) {
                         wishList.remove(kalalist[index]);
                       }
-                      if (isFavorite.value == true &&
+                      if (isFavorite == true &&
                           !wishList.contains(kalalist[index])) {
                         wishList.add(kalalist[index]);
                       }
 
                       debugPrint(wishList.length.toString());
-                    },
+});  },
                     child: Container(
                       width: 60,
                       height: 60,
@@ -294,13 +304,12 @@ class _DetailKalaState extends State<DetailKala> {
                         borderRadius: BorderRadius.circular(30),
                         color: Rang.toosi,
                       ),
-                      child: Obx(
-                        () => Icon(
-                          isFavorite.value == false
+                      child: Icon(
+                          isFavorite == false
                               ? Icons.favorite_border
                               : Icons.favorite,
                           color: Rang.blue,
-                        ),
+                       
                       ),
                     ),
                   ),
@@ -416,7 +425,7 @@ class _DetailKalaState extends State<DetailKala> {
 ,style: textStyle.bodyMedium                                  ),
                                   Text(
                                     '${kalalist[index].price}\$',
-                                    strutStyle: StrutStyle(height: 2),style: textStyle.bodyMedium
+                                    strutStyle: const StrutStyle(height: 2),style: textStyle.bodyMedium
                                   ),
                                 ],
                               ),

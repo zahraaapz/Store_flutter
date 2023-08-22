@@ -19,27 +19,29 @@ class Payments extends StatelessWidget {
       child: Scaffold(
         backgroundColor:Rang.toosi,
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.only(left:8.0,right: 8),
           child: SingleChildScrollView(
             child: Column(crossAxisAlignment: CrossAxisAlignment.start,
               children: [
               
-              iconANDtitle('Payment', Icons.arrow_back_ios),
+              Container(
+                color: Colors.white,
+                child: iconANDtitle('Payment', Icons.arrow_back_ios)),
           
-              SizedBox(height: 10,),
+              const  SizedBox(height: 10,),
               Text('Delivering to',style: textStyle.bodyMedium),
-          
+          const  SizedBox(height: 10,),
               Container(
                 width: double.infinity,
                 height: 80,
-                color: Rang.toosi,
+                color: Colors.white,
                 child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
           
                     Row(
                       children: [
                         Text(Address().box.read('street') ,style: textStyle.bodyMedium,),
-                        const SizedBox(width: 10,)
+                        const  SizedBox(width: 10,)
           ,                      Text(Address().box.read('city'),style: textStyle.bodyMedium,),
           
                       ],
@@ -67,7 +69,7 @@ class Payments extends StatelessWidget {
                 ),
           
               ),
-              const SizedBox(height:10),
+              const  SizedBox(height:10),
               Container(
                 width:double.infinity,
                height:50 ,
@@ -77,41 +79,41 @@ class Payments extends StatelessWidget {
                     Text('Product Details',style: textStyle.bodyMedium),
                   ],
                 )
-              ),const SizedBox(height:10),
+              ),const  SizedBox(height:10),
                Container(
                 width:double.infinity,
-                height:210,
+                height:230,
                 color: Colors.white,
                 child: Column(crossAxisAlignment:CrossAxisAlignment.start,
   children: [
-
+const  SizedBox(height: 10,),
           Text('Select Payment Method',style: textStyle.bodyMedium),
-          SizedBox(height:15),  
+          const  SizedBox(height:15),  
            Text('Debit Card/Credit Card',style: textStyle.bodyMedium),
-          SizedBox(height:15), 
+          const  SizedBox(height:15), 
             Text('UPI',style: textStyle.bodyMedium),
-          SizedBox(height:15),
+          const  SizedBox(height:15),
                     Row(
                       children: [
-                      SizedBox(width:9), 
+                      const  SizedBox(width:9), 
                      SvgPicture.asset('assets/image/google.svg',width: 30,height: 30,),
-                     SizedBox(width:10),
+                     const  SizedBox(width:10),
                         Text('Google pay' ,style: textStyle.bodyMedium,)
                       ], ),
-          SizedBox(height:10),
+          const SizedBox(height:10),
                       Row(
                       children: [  
                         SvgPicture.asset('assets/image/Paytm.svg',width: 35,height: 35,),
-                     SizedBox(width:4),
+                     const SizedBox(width:4),
           
                         Text('paytm' ,style: textStyle.bodyMedium,)
                       ],) 
-                      ,SizedBox(height:10),
+                      ,const SizedBox(height:10),
                       Row(
                       children: [  
-                       SizedBox(width:12),  
+                       const SizedBox(width:12),  
                      SvgPicture.asset('assets/image/phonepe.svg',width: 30,height: 30,),
-                     SizedBox(width:12),
+                     const SizedBox(width:12),
           
                         Text('Phonepe' ,style: textStyle.bodyMedium,)
                       ],)
@@ -120,7 +122,7 @@ class Payments extends StatelessWidget {
                   ],
                 )
               ),
-                 SizedBox(
+                  SizedBox(
                     width: double.infinity,
                 height: 50,
                    child: ElevatedButton(onPressed: (){Get.offAll(Home());}, style: ButtonStyle(

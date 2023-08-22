@@ -39,22 +39,29 @@ final HomeScreenController homeScreenController=Get.put(HomeScreenController());
 
   RxInt  select=0.obs;
 
-late RxList<RxBool> fav ;
+late List<bool> fav ;
 
 var box=GetStorage();
 
 @override
 void initState() {
    homeScreenController.getHomeItem();
-   fav = RxList.generate(3,(index) => false.obs);
+   homeScreenController.getEyewearItem();
+   homeScreenController.getHandBagItem();
+   homeScreenController.getShoesItem();
+   homeScreenController.getSkincareItem();
+   homeScreenController.getWatcheItem();
+   homeScreenController.getjewellery();
+   fav = List.generate(3,(index) => box.read('fav$index')??false);
     super.initState();
 
   }
+
+ 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
    
- 
     return SafeArea(
       child: Scaffold(
           key: _key,
@@ -299,7 +306,7 @@ void initState() {
                       Container(
                                     height: 100,
                                    width: 100,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                    
                                       shape: BoxShape.circle,
                                      image: DecorationImage(image: AssetImage('assets/image/avatar.png',),fit:BoxFit.cover )
@@ -371,7 +378,7 @@ void initState() {
                         })),
                   ),
                   Text('Contact us',
-                      style: textStyle.bodyLarge),
+                      style: textStyle.bodyMedium),
                   const SizedBox(
                     height: 12,
                   ),
@@ -385,7 +392,7 @@ void initState() {
                   ),
                   GestureDetector(
                     child:  Text('Wishlist',
-                        style: textStyle.bodyLarge),
+                        style: textStyle.bodyMedium),
                     // onTap: () {
                     //   Navigator.of(context).push(MaterialPageRoute(
                     //       builder: ((context) =>
@@ -462,7 +469,7 @@ SizedBox typeList(Size size) {//seslect clothes or...
      );
   }
 
-SizedBox suggList(size,RxList fav) {//suggestion List
+SizedBox suggList(size,List fav) {//suggestion List
  
    return  SizedBox(
         height: size.height / 4.2,
@@ -756,26 +763,31 @@ SizedBox suggList(size,RxList fav) {//suggestion List
                                          ),
                                   InkWell(
                                     onTap:() {
+                                      setState(() {
+                                         fav[index] =! fav[index];
+                                     
+                                     box.write('fav$index', fav[index]);
 
-                                      fav[index].value =! fav[index].value;
-
-                                      if(fav[index].value==true && !wishList.contains(homeScreenController.suggestlist[index])){
+                                      if(fav[index]==true && !wishList.contains(homeScreenController.suggestlist[index])){
 
                                         wishList.add(homeScreenController.suggestlist[index]);
-                                      }if(fav[index].value==false && wishList.contains(homeScreenController.suggestlist[index])){
+                                      }if(fav[index]==false && wishList.contains(homeScreenController.suggestlist[index])){
 
                                           wishList.remove(homeScreenController.suggestlist[index]);
                                       }
-                             debugPrint(wishList.length.toString());  
+                             debugPrint(wishList.length.toString()); 
+                                      });
+                                    
+                                     
                                  },
-                                    child: Obx(()=>
+                                    child: 
                                      Icon(
-                                        fav[index].value ==false
+                                       fav[index]==false
                                             ? Icons.favorite_border
-                                            : Icons.favorite,
+                                            :  Icons.favorite,
                                         size: 20,
                                         color: Colors.black,
-                                      ),
+                                      
                                     ),
                                   )
                                 ],
@@ -838,11 +850,12 @@ class Shortcut extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10)),
             ),
             const SizedBox(width: 8),
-             SizedBox(
+             const SizedBox(
               width: 200,
               child: Text(
+                
                 '''Discover your favrouite products faster with CORA’L web app.''',
-               style:textStyle.headlineLarge
+               style:TextStyle(fontFamily: 'Auliare',fontSize: 14,color: Colors.white)
               ),
             )
           ],

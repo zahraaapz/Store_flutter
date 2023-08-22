@@ -80,7 +80,7 @@ class _BagState extends State<Bag> {
                                 child: Container(
                                   height: 200,
                                   decoration: BoxDecoration(
-                                      boxShadow: [BoxShadow(blurRadius: 1.6)],
+                                      boxShadow: const [BoxShadow(blurRadius: 1.6)],
                                       color: Colors.white,
                                       borderRadius:
                                           BorderRadius.circular(15)),
@@ -138,7 +138,24 @@ class _BagState extends State<Bag> {
                                                         Text(style: textStyle.bodyMedium,
                                                             'Qnty: ${qnty![index]}'),
                                                         const Icon(
-                                                            Icons.add)
+                                                            Icons.add) ,
+                                                           
+                                                         GestureDetector(
+                                                          onTap: () {
+                                                            setState(() {
+                                                                qnty![index] =
+                                                                  qnty![index] -
+                                                                      1;
+                                                              indexOfqnty =
+                                                                  index; 
+
+                                                              qnty![index]==0?
+                                                              myBagList.remove(myBagList[index]):null;   
+                                                            });
+                                                          },
+                                                           child: const Icon(
+                                                              Icons.remove),
+                                                         ),
                                                       ],
                                                     ),
                                                   ),
@@ -218,7 +235,7 @@ class _BagState extends State<Bag> {
                                 
                                   hintText: 'Apply Copon Code',
                                   suffixIcon:  Padding(
-                                    padding: const EdgeInsets.only(top: 12.0),
+                                    padding: const EdgeInsets.only(top: 12.0,left: 6),
                                     child: Text(
                                       'Check',
                                       style: textStyle.displaySmall,
@@ -267,7 +284,7 @@ class _BagState extends State<Bag> {
         sum = (double.parse(myBagList[i].price!) * qnty![i]) + sum;
       
       }
-      orderDetail[3].price = (sum * 0.2 + 20).toString();
+      orderDetail[3].price = (sum * 0.2 + 20).toStringAsFixed(2).toString();
 
 
 
@@ -276,7 +293,7 @@ class _BagState extends State<Bag> {
         sum = (double.parse(myBagList[i].price!) * qnty![i]) + sum;
        
       }
-      orderDetail[0].price = (sum).toString();
+      orderDetail[0].price = sum.toStringAsFixed(2).toString();
 
       totalPrice=double.parse(orderDetail[0].price!)-double.parse(orderDetail[3].price!);
     });

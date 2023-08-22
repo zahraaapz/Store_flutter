@@ -9,6 +9,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../../model/component.dart';
 
@@ -30,15 +31,15 @@ class _Select_kalaState extends State<Select_kala> {
   int select;
  late int lenght;
   final HomeScreenController homeScreenController;
- late RxList<RxBool>fav;
-
+ late List<bool>fav;
+var box=GetStorage();
   _Select_kalaState({required this.select, required this.homeScreenController});
 
 @override
 initState(){
 super.initState();
 lenght=select==0?homeScreenController.skincare.length:select==1?homeScreenController.watche.length:select==2?homeScreenController.bag.length:select==3?homeScreenController.jewellery.length:select==4?homeScreenController.eyewear.length:homeScreenController.shoes.length;
-fav=RxList.generate(lenght,(index)=>false.obs);
+fav=List.generate(lenght,(index)=>  box.read('fav$index')??false);
 
 }
   @override
@@ -148,9 +149,9 @@ fav=RxList.generate(lenght,(index)=>false.obs);
                                           context,
                                           MaterialPageRoute(
                                               builder: ((context) => DetailKala(
-                                                    index: index,
-                                                    select: select,
-                                                    Kalalist: select == 0
+                                                    index,
+                                                    select,
+                                                    select == 0
                                                         ? homeScreenController
                                                             .skincare
                                                         : select == 1
@@ -168,6 +169,7 @@ fav=RxList.generate(lenght,(index)=>false.obs);
                                                                             .eyewear
                                                                         : homeScreenController
                                                                             .shoes,
+                                                                        isFavorite: fav[index],    
                                                   ))));
                                     },
                                     child: Container(
@@ -227,10 +229,11 @@ fav=RxList.generate(lenght,(index)=>false.obs);
                                                               .name!),
                                       GestureDetector(
                                         onTap: () {
-                                      
-                                       
-                                            fav[index].value = !fav[index].value;
-                                            if (fav[index].value == true &&
+                                      setState(() {
+                                        
+                                            fav[index] = !fav[index];
+                                            box.write('fav$index', fav[index]);
+                                            if (fav[index] == true &&
                                                 !wishList.contains(select == 0
                                                     ? homeScreenController.skincare[index]
                                                     : select == 1
@@ -275,7 +278,7 @@ fav=RxList.generate(lenght,(index)=>false.obs);
                                                                         index]
                                                                     : homeScreenController.shoes[
                                                                         index]) &&
-                                                fav[index].value == false) {
+                                                fav[index] == false) {
                                               wishList.remove(select == 0
                                                     ? homeScreenController.skincare[index]
                                                     : select == 1
@@ -290,17 +293,23 @@ fav=RxList.generate(lenght,(index)=>false.obs);
                                                                         index]
                                                                     : homeScreenController.shoes[
                                                                         index]);
+                                                                        
+                                                                        }
                                             }
                                        
-                                        debugPrint(wishList.length.toString());},
-                                        child: Obx(() =>
+                                        
+                                      ); }
+                                        
+                                        
+                                      ,
+                                        child: 
                                           Icon(
-                                            fav[index].value == false
+                                            fav[index] == false
                                                
                                                 ? Icons.favorite_border: Icons.favorite,
                                             size: 19,
                                             color: Colors.black,
-                                          ),
+                                         
                                         ),
                                       ),
                                     ],

@@ -109,7 +109,7 @@ class Notif extends StatelessWidget {
                         height: 20,
                       ),
                       Text(style: textStyle.bodyMedium,
-                        '''Hey, ${Personal().box.read('fullName')}. Thanks for using CORAL. You know what? You can help us improve with just one click''',
+                        '''Hey, ${Personal().box.read('fullName')??'--'}. Thanks for using CORAL. You know what? You can help us improve with just one click''',
                         textScaleFactor: 1.1,
                       )
                     ],

@@ -21,7 +21,7 @@ ButtonStyle buttonModel() {
     Text titleEmtypage(String title) {
     return Text(
             title,
-            style: textStyle.headlineMedium,
+            style: textStyle.headlineSmall,
           );
   }
 
@@ -82,6 +82,7 @@ bodyLarge:  TextStyle(
        fontFamily: 'Auliare',
        fontSize: 14,
        color: Rang.blue, 
+fontWeight: FontWeight.bold
 
 ),
 bodySmall:  TextStyle(

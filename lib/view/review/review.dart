@@ -91,9 +91,9 @@ class _ReviewState extends State<Review> {
                                             MaterialPageRoute(
                                                 builder: ((context) =>
                                                     DetailKala(
-                                                        index: index,
-                                                        select: select,
-                                                        Kalalist: listkala))));
+                                                        index,
+                                                        select,
+                                                        listkala))));
                                       }),
                                       icon: const Icon(
                                         Icons.arrow_back_ios,
