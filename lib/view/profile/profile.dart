@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:io';
 
 import 'package:appstore/view/profile/personal_info.dart';
@@ -17,7 +19,7 @@ class Profile extends StatelessWidget {
 PickFileController pickFileController=Get.put(PickFileController());
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+ 
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,

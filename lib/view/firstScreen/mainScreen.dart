@@ -1,4 +1,5 @@
-import 'package:appstore/address.dart';
+// ignore_for_file: must_be_immutable
+
 import 'package:appstore/bag.dart';
 import 'package:appstore/view/firstScreen/extractMainScreen.dart';
 import 'package:appstore/model/Model.dart';
@@ -12,13 +13,16 @@ import 'package:appstore/view/wish/wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+
 class Home extends StatelessWidget {
  
 
   RxInt selectpg = 0.obs;
+
+  Home({super.key});
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.sizeOf(context);
+   
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,

@@ -1,6 +1,5 @@
 // ignore_for_file: no_logic_in_create_state
 
-import 'package:appstore/color/color.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +27,7 @@ class _WishState extends State<Wish> {
   @override
   Widget build(BuildContext context) {
      RxList<RxBool> fav = RxList.generate(wishList.length,((index) => true.obs));
-    var size = MediaQuery.of(context).size;
+   
     return SafeArea(
         child: Scaffold(
             body: Column(children: [

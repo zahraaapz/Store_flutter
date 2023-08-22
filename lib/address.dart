@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:appstore/color/color.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/payment.dart';
@@ -17,6 +19,8 @@ class Address extends StatelessWidget{
   TextEditingController street=TextEditingController();
   TextEditingController city=TextEditingController();
   final box=GetStorage();
+
+  Address({super.key});
 
 
   @override

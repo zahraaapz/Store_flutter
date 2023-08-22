@@ -1,10 +1,12 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/color/color.dart';
 import 'package:d_chart/d_chart.dart';
 import 'package:flutter/material.dart';
 
-class chart extends StatelessWidget {
-  chart({super.key, required this.comment});
+class Chart extends StatelessWidget {
+  Chart({super.key, required this.comment});
   List<Comment> comment = [];
 
   @override

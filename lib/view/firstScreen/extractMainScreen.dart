@@ -39,8 +39,7 @@ final HomeScreenController homeScreenController=Get.put(HomeScreenController());
 
   RxInt  select=0.obs;
 
-late List<bool> fav ;
-
+  late List<bool>fav;
 var box=GetStorage();
 
 @override
@@ -369,8 +368,8 @@ void initState() {
                                   style:textStyle.bodyLarge),
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
-                                    builder: ((context) => Select_kala(
-                                          select: index,homeScreenController: homeScreenController,
+                                    builder: ((context) => Selectkala(
+                                           index, homeScreenController,
                                         ))));
                               },
                             ),
@@ -431,8 +430,8 @@ SizedBox typeList(Size size) {//seslect clothes or...
                                  
                                    Navigator.of(context).push(MaterialPageRoute(
                                        builder: (context) => 
-                                          Select_kala(
-                                               select: index,homeScreenController: homeScreenController,
+                                          Selectkala(
+                                                index, homeScreenController,
                                              ),
                                        ));
                                  },
@@ -469,7 +468,7 @@ SizedBox typeList(Size size) {//seslect clothes or...
      );
   }
 
-SizedBox suggList(size,List fav) {//suggestion List
+SizedBox suggList(size,fav) {//suggestion List
  
    return  SizedBox(
         height: size.height / 4.2,
@@ -761,7 +760,7 @@ SizedBox suggList(size,List fav) {//suggestion List
                                   Text( homeScreenController.suggestlist[index].name!,
                                       style:textStyle.bodyMedium
                                          ),
-                                  InkWell(
+                           InkWell(
                                     onTap:() {
                                       setState(() {
                                          fav[index] =! fav[index];

@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:math';
 
 import 'package:appstore/controller/homeScreenController.dart';
@@ -21,23 +23,23 @@ class DetailKala extends StatefulWidget {
   int index;
  bool? isFavorite;
    int select;
-List<Kala> Kalalist;
+List<Kala> kalaList;
   DetailKala(
        this.index,
        this.select,
-       this.Kalalist ,
+       this.kalaList ,
        {this.isFavorite}
        );
 
   @override
   State<DetailKala> createState() =>
       // ignore: no_logic_in_create_state
-      _DetailKalaState(select,  index,  Kalalist);
+      _DetailKalaState(select,  index,  kalaList,isFavorite:isFavorite);
 }
 
 class _DetailKalaState extends State<DetailKala> {
   _DetailKalaState(
-       this.select, this.index,  this.kalalist,{this.isFavorite});
+       this.select, this.index,  this.kalalist, {this.isFavorite});
   List<Kala> kalalist;
   int select;
   var box=GetStorage();
@@ -67,9 +69,10 @@ bool ?isFavorite;
                     ),
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: ((context) => Select_kala(
-                                select: select,
-                                homeScreenController: homeScreenController,
+                          builder: ((context) => Selectkala(
+
+                               select,
+                                homeScreenController,
                               ))));
                     },
                   ),
@@ -282,10 +285,9 @@ bool ?isFavorite;
                     onTap: () {
 
                       setState(() {
-                        
-                   
+                      
                       isFavorite = !isFavorite!;
-
+                      box.write('fav$index', isFavorite);
                       if (isFavorite == false &&
                           wishList.contains(kalalist[index])) {
                         wishList.remove(kalalist[index]);

@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:appstore/color/color.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/model/component.dart';
@@ -64,7 +66,6 @@ class _ReviewState extends State<Review> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
         return   Scaffold(
                 backgroundColor: Colors.white,
                 body:
@@ -119,7 +120,7 @@ class _ReviewState extends State<Review> {
                               ],
                             ),
                           ),
-                          chart(
+                          Chart(
                             comment: comment,
                           ),
                           ExpandableNotifier(

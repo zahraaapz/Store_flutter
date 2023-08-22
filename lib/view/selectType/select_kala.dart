@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:appstore/color/color.dart';
 import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/model/Model.dart';
@@ -14,26 +16,28 @@ import 'package:get_storage/get_storage.dart';
 import '../../model/component.dart';
 
 
-class Select_kala extends StatefulWidget {
+class Selectkala extends StatefulWidget {
+
   int select;
   final HomeScreenController homeScreenController;
-  Select_kala(
-      {super.key, required this.select, required this.homeScreenController});
+  Selectkala(
+       this.select,  this.homeScreenController,);
 
   @override
   // ignore: no_logic_in_create_state
-  State<Select_kala> createState() => _Select_kalaState(
-      select: select, homeScreenController: homeScreenController);
+  State<Selectkala> createState() => _SelectkalaState(
+      select,homeScreenController);
 }
 
-class _Select_kalaState extends State<Select_kala> {
+class _SelectkalaState extends State<Selectkala> {
   String? sel;
+
   int select;
  late int lenght;
   final HomeScreenController homeScreenController;
  late List<bool>fav;
 var box=GetStorage();
-  _Select_kalaState({required this.select, required this.homeScreenController});
+  _SelectkalaState( this.select, this.homeScreenController,);
 
 @override
 initState(){
@@ -41,10 +45,11 @@ super.initState();
 lenght=select==0?homeScreenController.skincare.length:select==1?homeScreenController.watche.length:select==2?homeScreenController.bag.length:select==3?homeScreenController.jewellery.length:select==4?homeScreenController.eyewear.length:homeScreenController.shoes.length;
 fav=List.generate(lenght,(index)=>  box.read('fav$index')??false);
 
+
 }
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.sizeOf(context);
+  
     return SafeArea(
         child: Scaffold(
       body: Stack(children: [

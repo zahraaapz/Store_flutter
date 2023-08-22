@@ -1,4 +1,4 @@
-import 'dart:ui';
+
 
 import 'package:appstore/color/color.dart';
 import 'package:appstore/view/firstScreen/mainScreen.dart';
@@ -13,7 +13,7 @@ import '../../model/component.dart';
 import '../../model/string.dart';
 
 class SearchResult extends StatelessWidget {
-  SearchResult({super.key, });
+  const SearchResult({super.key, });
  
   @override
   Widget build(BuildContext context) {

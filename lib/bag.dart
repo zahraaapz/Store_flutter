@@ -1,6 +1,6 @@
 import 'package:appstore/address.dart';
 import 'package:appstore/color/color.dart';
-import 'package:appstore/notif.dart';
+
 import 'package:appstore/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

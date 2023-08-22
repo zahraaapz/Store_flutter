@@ -1,6 +1,7 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:appstore/color/color.dart';
 import 'package:appstore/view/firstScreen/mainScreen.dart';
-import 'package:appstore/view/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -14,6 +15,8 @@ var box=GetStorage();
   TextEditingController fullname=TextEditingController();
   TextEditingController number=TextEditingController();
 TextEditingController email=TextEditingController();
+
+  Personal({super.key});
 
 
 
