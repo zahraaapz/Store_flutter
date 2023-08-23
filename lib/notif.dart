@@ -40,11 +40,11 @@ class Notif extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Image.asset('assets/image/notf.png'),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
                Row(
@@ -53,50 +53,60 @@ class Notif extends StatelessWidget {
                   const SizedBox(
                     width: 36,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Upto 50% OFF⚡⚡',style: textStyle.bodyMedium),
-                      const SizedBox(
-                        height: 20,
+                  Card(
+                    elevation: 1,
+                    shadowColor: Colors.black,
+                    child: Container(
+                      width: 350,
+                      height: 200,
+                      color: Colors.amber,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Upto 50% OFF⚡⚡',style: textStyle.bodyMedium),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                           Text('This winter gift your loved ones.',style: textStyle.bodyMedium),
+                                    const SizedBox(
+                                    height: 20,
+                                  ),
+                                  SizedBox(
+                                    width: 350,
+                                    height: 60,
+                                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                          ),
+                          side: MaterialStateProperty.all(
+                              const BorderSide(color: Rang.blue, width: 1.5)),
+                          backgroundColor:
+                              MaterialStateProperty.resolveWith((states) {
+                            if (states.contains(MaterialState.pressed)) {
+                              return Rang.blue;
+                            }
+                            return Colors.white;
+                          })),
+                      onPressed: () {},
+                      child: Text(
+                        'Shop now',
+                       style: textStyle.displaySmall,
+                      )),
+                                  ),  ],
                       ),
-                       Text('This winter gift your loved ones.',style: textStyle.bodyMedium),
-                    ],
+                    ),
                   ),
                 ],
               ),
+
               const SizedBox(
                 height: 20,
               ),
-              SizedBox(
-                width: 350,
-                height: 60,
-                child: ElevatedButton(
-                    style: ButtonStyle(
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                        ),
-                        side: MaterialStateProperty.all(
-                            const BorderSide(color: Rang.blue, width: 1.5)),
-                        backgroundColor:
-                            MaterialStateProperty.resolveWith((states) {
-                          if (states.contains(MaterialState.pressed)) {
-                            return Rang.blue;
-                          }
-                          return Colors.white;
-                        })),
-                    onPressed: () {},
-                    child: Text(
-                      'Shop now',
-                     style: textStyle.displaySmall,
-                    )),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                height: 150,
+              Card(
+                shadowColor: Colors.black,
+                elevation: 1,
                 color: Rang.toosi,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20.0),

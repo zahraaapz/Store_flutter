@@ -322,26 +322,11 @@ void initState() {
                                       shape: BoxShape.circle,
                                      image: DecorationImage(image:Image.file(File(box.read('ima'))).image ,fit:BoxFit.cover )
                                     ),
-                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children:  [
-                      Padding(
-                        padding: EdgeInsets.all(3.0),
-                        child: Text(box.read('fullName') ?? '--',style: textStyle.bodyMedium,),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(3.0),
-                        child: Text(box.read('number')??'--',style: textStyle.bodyMedium,
-                           ),
-                      ),
-                      Text(
-                       box.read('email')??'--',
-                        style: textStyle.bodyMedium,
-                      ),
-                    ],
-                  ),
+                   ),Column(
+                    children:[
+                  Text(box.read('fullName') ?? '--',style: textStyle.labelSmall,),
+                  Text(box.read('number')??'--',style: textStyle.labelSmall,),
+                  Text(box.read('email')??'--',style: textStyle.labelSmall,),]),
                   const Icon(
                     Icons.arrow_forward_ios_outlined,
                     color: Rang.greylight,
@@ -375,6 +360,12 @@ void initState() {
                             ),
                           );
                         })),
+                  ),
+
+                  Container(
+                    width: double.infinity,
+                    height: 30,
+                    color:Rang.toosi
                   ),
                   Text('Contact us',
                       style: textStyle.bodyMedium),

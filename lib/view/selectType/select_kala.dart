@@ -15,113 +15,123 @@ import 'package:get_storage/get_storage.dart';
 
 import '../../model/component.dart';
 
-
 class Selectkala extends StatefulWidget {
-
   int select;
   final HomeScreenController homeScreenController;
   Selectkala(
-       this.select,  this.homeScreenController,);
+    this.select,
+    this.homeScreenController,
+  );
 
   @override
   // ignore: no_logic_in_create_state
-  State<Selectkala> createState() => _SelectkalaState(
-      select,homeScreenController);
+  State<Selectkala> createState() =>
+      _SelectkalaState(select, homeScreenController);
 }
 
 class _SelectkalaState extends State<Selectkala> {
   String? sel;
-
+  bool checkBox = false;
   int select;
- late int lenght;
+  late int lenght;
   final HomeScreenController homeScreenController;
- late List<bool>fav;
-var box=GetStorage();
-  _SelectkalaState( this.select, this.homeScreenController,);
+  late List<bool> fav;
+  var box = GetStorage();
+  _SelectkalaState(
+    this.select,
+    this.homeScreenController,
+  );
 
-@override
-initState(){
-super.initState();
-lenght=select==0?homeScreenController.skincare.length:select==1?homeScreenController.watche.length:select==2?homeScreenController.bag.length:select==3?homeScreenController.jewellery.length:select==4?homeScreenController.eyewear.length:homeScreenController.shoes.length;
-fav=List.generate(lenght,(index)=>  box.read('fav$index')??false);
+  @override
+  initState() {
+    super.initState();
+    lenght = select == 0
+        ? homeScreenController.skincare.length
+        : select == 1
+            ? homeScreenController.watche.length
+            : select == 2
+                ? homeScreenController.bag.length
+                : select == 3
+                    ? homeScreenController.jewellery.length
+                    : select == 4
+                        ? homeScreenController.eyewear.length
+                        : homeScreenController.shoes.length;
+    fav = List.generate(lenght, (index) => box.read('fav$index') ?? false);
+  }
 
-
-}
   @override
   Widget build(BuildContext context) {
-  
     return SafeArea(
         child: Scaffold(
       body: Stack(children: [
-        Obx(()=>
-        homeScreenController.waiting.value==false?
-         Column(children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                    
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: ((context) => Home())));
-                   
-                    },
-                    child: const Icon(
-                      Icons.arrow_back_ios_new,
-                      color: Rang.blue,
+        Obx(
+          () => homeScreenController.waiting.value == false
+              ? Column(children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: ((context) => Home())));
+                          },
+                          child: const Icon(
+                            Icons.arrow_back_ios_new,
+                            color: Rang.blue,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 25,
+                        ),
+                        Text(
+                          select == 0
+                              ? 'Skincare'
+                              : select == 1
+                                  ? 'Watches'
+                                  : select == 2
+                                      ? 'Handbags'
+                                      : select == 3
+                                          ? 'jewellery'
+                                          : select == 4
+                                              ? 'Eyewear'
+                                              : 'Shoes',
+                          style: textStyle.headlineSmall,
+                        )
+                      ],
                     ),
                   ),
-                  const SizedBox(
-                    width: 25,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          width: 30,
+                        ),
+                        Text(
+                            style: textStyle.bodyMedium,
+                            select == 0
+                                ? '${homeScreenController.skincare.length} products'
+                                : select == 1
+                                    ? '${homeScreenController.watche.length} products'
+                                    : select == 2
+                                        ? '${homeScreenController.bag.length} products'
+                                        : select == 3
+                                            ? '${homeScreenController.jewellery.length} products'
+                                            : select == 4
+                                                ? '${homeScreenController.eyewear.length} products'
+                                                : '${homeScreenController.shoes.length} products'),
+                      ],
+                    ),
                   ),
-                  Text(
-                    select == 0
-                        ? 'Skincare'
-                        : select == 1
-                            ? 'Watches'
-                            : select == 2
-                                ? 'Handbags'
-                                : select == 3
-                                    ? 'jewellery'
-                                    : select == 4
-                                        ? 'Eyewear'
-                                        : 'Shoes',
-                    style: textStyle.headlineSmall,
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    width: 30,
-                  ),
-                  Text(
-                    style: textStyle.bodyMedium,
-                    select == 0
-                      ? '${homeScreenController.skincare.length} products'
-                      : select == 1
-                          ? '${homeScreenController.watche.length} products'
-                          : select == 2
-                              ? '${homeScreenController.bag.length} products'
-                              : select == 3
-                                  ? '${homeScreenController.jewellery.length} products'
-                                  : select == 4
-                                      ? '${homeScreenController.eyewear.length} products'
-                                      : '${homeScreenController.shoes.length} products'),
-                ],
-              ),
-            ),
-             SizedBox(
+                  SizedBox(
                     height: 670,
-                     child: Obx(()=> GridView.builder(
+                    child: Obx(
+                      () => GridView.builder(
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
                           itemCount: select == 0
@@ -174,7 +184,7 @@ fav=List.generate(lenght,(index)=>  box.read('fav$index')??false);
                                                                             .eyewear
                                                                         : homeScreenController
                                                                             .shoes,
-                                                                        isFavorite: fav[index],    
+                                                    isFavorite: fav[index],
                                                   ))));
                                     },
                                     child: Container(
@@ -217,104 +227,125 @@ fav=List.generate(lenght,(index)=>  box.read('fav$index')??false);
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        style: textStyle.bodyMedium,
-                                        select == 0
-                                          ? homeScreenController.skincare[index].name!
-                                          : select == 1
-                                              ? homeScreenController.watche[index].name!
-                                              : select == 2
-                                                  ? homeScreenController.bag[index].name!
-                                                  : select == 3
-                                                      ? homeScreenController.jewellery[index]
-                                                          .name!
-                                                      : select == 4
-                                                          ? homeScreenController.eyewear[index]
+                                          style: textStyle.bodyMedium,
+                                          select == 0
+                                              ? homeScreenController
+                                                  .skincare[index].name!
+                                              : select == 1
+                                                  ? homeScreenController
+                                                      .watche[index].name!
+                                                  : select == 2
+                                                      ? homeScreenController
+                                                          .bag[index].name!
+                                                      : select == 3
+                                                          ? homeScreenController
+                                                              .jewellery[index]
                                                               .name!
-                                                          : homeScreenController.shoes[index]
-                                                              .name!),
+                                                          : select == 4
+                                                              ? homeScreenController
+                                                                  .eyewear[
+                                                                      index]
+                                                                  .name!
+                                                              : homeScreenController
+                                                                  .shoes[index]
+                                                                  .name!),
                                       GestureDetector(
                                         onTap: () {
-                                      setState(() {
-                                        
+                                          setState(() {
                                             fav[index] = !fav[index];
                                             box.write('fav$index', fav[index]);
                                             if (fav[index] == true &&
                                                 !wishList.contains(select == 0
-                                                    ? homeScreenController.skincare[index]
+                                                    ? homeScreenController
+                                                        .skincare[index]
                                                     : select == 1
-                                                        ? homeScreenController.watche[index]
+                                                        ? homeScreenController
+                                                            .watche[index]
                                                         : select == 2
-                                                            ? homeScreenController.bag[index]
+                                                            ? homeScreenController
+                                                                .bag[index]
                                                             : select == 3
-                                                                ? homeScreenController.jewellery[
+                                                                ? homeScreenController
+                                                                        .jewellery[
                                                                     index]
                                                                 : select == 4
-                                                                    ? homeScreenController.eyewear[
+                                                                    ? homeScreenController
+                                                                            .eyewear[
                                                                         index]
-                                                                    : homeScreenController.shoes[
+                                                                    : homeScreenController
+                                                                            .shoes[
                                                                         index])) {
-                                              wishList.add(
-                                                select == 0
-                                                    ? homeScreenController.skincare[index]
-                                                    : select == 1
-                                                        ? homeScreenController.watche[index]
-                                                        : select == 2
-                                                            ? homeScreenController.bag[index]
-                                                            : select == 3
-                                                                ? homeScreenController.jewellery[
-                                                                    index]
-                                                                : select == 4
-                                                                    ? homeScreenController.eyewear[
-                                                                        index]
-                                                                    : homeScreenController.shoes[
-                                                                        index]);
+                                              wishList.add(select == 0
+                                                  ? homeScreenController
+                                                      .skincare[index]
+                                                  : select == 1
+                                                      ? homeScreenController
+                                                          .watche[index]
+                                                      : select == 2
+                                                          ? homeScreenController
+                                                              .bag[index]
+                                                          : select == 3
+                                                              ? homeScreenController
+                                                                      .jewellery[
+                                                                  index]
+                                                              : select == 4
+                                                                  ? homeScreenController
+                                                                          .eyewear[
+                                                                      index]
+                                                                  : homeScreenController
+                                                                          .shoes[
+                                                                      index]);
                                             }
                                             if (wishList.contains(select == 0
-                                                    ? homeScreenController.skincare[index]
+                                                    ? homeScreenController
+                                                        .skincare[index]
                                                     : select == 1
-                                                        ? homeScreenController.watche[index]
+                                                        ? homeScreenController
+                                                            .watche[index]
                                                         : select == 2
-                                                            ? homeScreenController.bag[index]
+                                                            ? homeScreenController
+                                                                .bag[index]
                                                             : select == 3
-                                                                ? homeScreenController.jewellery[
+                                                                ? homeScreenController
+                                                                        .jewellery[
                                                                     index]
                                                                 : select == 4
-                                                                    ? homeScreenController.eyewear[
+                                                                    ? homeScreenController
+                                                                            .eyewear[
                                                                         index]
-                                                                    : homeScreenController.shoes[
+                                                                    : homeScreenController
+                                                                            .shoes[
                                                                         index]) &&
                                                 fav[index] == false) {
                                               wishList.remove(select == 0
-                                                    ? homeScreenController.skincare[index]
-                                                    : select == 1
-                                                        ? homeScreenController.watche[index]
-                                                        : select == 2
-                                                            ? homeScreenController.bag[index]
-                                                            : select == 3
-                                                                ? homeScreenController.jewellery[
-                                                                    index]
-                                                                : select == 4
-                                                                    ? homeScreenController.eyewear[
-                                                                        index]
-                                                                    : homeScreenController.shoes[
-                                                                        index]);
-                                                                        
-                                                                        }
+                                                  ? homeScreenController
+                                                      .skincare[index]
+                                                  : select == 1
+                                                      ? homeScreenController
+                                                          .watche[index]
+                                                      : select == 2
+                                                          ? homeScreenController
+                                                              .bag[index]
+                                                          : select == 3
+                                                              ? homeScreenController
+                                                                      .jewellery[
+                                                                  index]
+                                                              : select == 4
+                                                                  ? homeScreenController
+                                                                          .eyewear[
+                                                                      index]
+                                                                  : homeScreenController
+                                                                          .shoes[
+                                                                      index]);
                                             }
-                                       
-                                        
-                                      ); }
-                                        
-                                        
-                                      ,
-                                        child: 
-                                          Icon(
-                                            fav[index] == false
-                                               
-                                                ? Icons.favorite_border: Icons.favorite,
-                                            size: 19,
-                                            color: Colors.black,
-                                         
+                                          });
+                                        },
+                                        child: Icon(
+                                          fav[index] == false
+                                              ? Icons.favorite_border
+                                              : Icons.favorite,
+                                          size: 19,
+                                          color: Colors.black,
                                         ),
                                       ),
                                     ],
@@ -324,34 +355,41 @@ fav=List.generate(lenght,(index)=>  box.read('fav$index')??false);
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        style: textStyle.bodyMedium,
-                                        select == 0
-                                          ? homeScreenController.skincare[index].brand!
-                                          : select == 1
-                                              ? homeScreenController.watche[index].brand!
-                                              : select == 2
-                                                  ? homeScreenController.bag[index].brand!
-                                                  : select == 3
-                                                      ? homeScreenController.jewellery[index]
-                                                          .brand!
-                                                      : select == 4
-                                                          ? homeScreenController.eyewear[index]
+                                          style: textStyle.bodyMedium,
+                                          select == 0
+                                              ? homeScreenController
+                                                  .skincare[index].brand!
+                                              : select == 1
+                                                  ? homeScreenController
+                                                      .watche[index].brand!
+                                                  : select == 2
+                                                      ? homeScreenController
+                                                          .bag[index].brand!
+                                                      : select == 3
+                                                          ? homeScreenController
+                                                              .jewellery[index]
                                                               .brand!
-                                                          : homeScreenController.shoes[index]
-                                                              .brand!),
+                                                          : select == 4
+                                                              ? homeScreenController
+                                                                  .eyewear[
+                                                                      index]
+                                                                  .brand!
+                                                              : homeScreenController
+                                                                  .shoes[index]
+                                                                  .brand!),
                                       Text(
-                                        style: textStyle.bodyMedium,
-                                        select == 0
-                                          ? '${homeScreenController.skincare[index].price}\$'
-                                          : select == 1
-                                              ? '${homeScreenController.watche[index].price}\$'
-                                              : select == 2
-                                                  ? '${homeScreenController.bag[index].price}\$'
-                                                  : select == 3
-                                                      ? '${homeScreenController.jewellery[index].price}\$'
-                                                      : select == 4
-                                                          ? '${homeScreenController.eyewear[index].price}\$'
-                                                          : '${homeScreenController.shoes[index].price}\$'),
+                                          style: textStyle.bodyMedium,
+                                          select == 0
+                                              ? '${homeScreenController.skincare[index].price}\$'
+                                              : select == 1
+                                                  ? '${homeScreenController.watche[index].price}\$'
+                                                  : select == 2
+                                                      ? '${homeScreenController.bag[index].price}\$'
+                                                      : select == 3
+                                                          ? '${homeScreenController.jewellery[index].price}\$'
+                                                          : select == 4
+                                                              ? '${homeScreenController.eyewear[index].price}\$'
+                                                              : '${homeScreenController.shoes[index].price}\$'),
                                     ],
                                   ),
                                 ],
@@ -360,12 +398,13 @@ fav=List.generate(lenght,(index)=>  box.read('fav$index')??false);
                           })),
                     ),
                   ),
-              //  SpinKitThreeBounce(
-              //       color: Rang.blue,
-              //     ),
-          ]):const SpinKitCircle(
-                color: Rang.blue,
-              ),
+                  //  SpinKitThreeBounce(
+                  //       color: Rang.blue,
+                  //     ),
+                ])
+              : const SpinKitCircle(
+                  color: Rang.blue,
+                ),
         ),
         Positioned(
           bottom: 0,
@@ -374,7 +413,35 @@ fav=List.generate(lenght,(index)=>  box.read('fav$index')??false);
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const Icon(Icons.filter),
+              InkWell(
+                  onTap: () {
+                    showModalBottomSheet(
+                        backgroundColor: Colors.transparent,
+                        context: context,
+                        builder: ((context) {
+                          return StatefulBuilder(
+                              builder: (context, setState) => Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: Colors.white,
+                                    ),
+                                    height: Get.height / 3,
+                                    child: Column(
+                                      children: [
+                                        Checkbox(
+                                            value: checkBox,
+                                            onChanged: (value) {
+                                              setState(() {
+                                                checkBox = value!;
+                                                print(val.toString());
+                                              });
+                                            }),
+                                      ],
+                                    ),
+                                  ));
+                        }));
+                  },
+                  child: const Icon(Icons.filter)),
               InkWell(
                 onTap: (() {
                   showModalBottomSheet(
@@ -400,7 +467,7 @@ fav=List.generate(lenght,(index)=>  box.read('fav$index')??false);
                                     child: Text(
                                       'Sort by',
                                       style: TextStyle(
-                                        fontFamily: 'Auliare',
+                                          fontFamily: 'Auliare',
                                           color: Rang.greylight,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -413,23 +480,33 @@ fav=List.generate(lenght,(index)=>  box.read('fav$index')??false);
                                   ),
                                   RadioListTile(
                                     activeColor: Rang.blue,
-                                    title:  Text('Price - Hight to Low',style: textStyle.bodyMedium),
+                                    title: Text('Price - Hight to Low',
+                                        style: textStyle.bodyMedium),
                                     groupValue: sel,
                                     value: '0',
                                     onChanged: (value) {
                                       setState(() {
                                         sel = value.toString();
-                                              select == 0
-                                          ? homeScreenController.skincare.sort(((b,a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
-                                          : select == 1
-                                              ? homeScreenController.watche.sort(((b,a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
-                                              : select == 2
-                                                  ? homeScreenController.bag.sort(((b,a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
-                                                  : select == 3
-                                                      ? homeScreenController.jewellery.sort(((b,a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
-                                                      : select == 4
-                                                          ? homeScreenController.eyewear.sort(((b,a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
-                                                          : homeScreenController.shoes.sort(((b,a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())));
+                                        select == 0
+                                            ? homeScreenController.skincare.sort(
+                                                ((b, a) => double.parse(a.price!)
+                                                    .toString()
+                                                    .compareTo(double.parse(b.price!)
+                                                        .toString())))
+                                            : select == 1
+                                                ? homeScreenController.watche.sort(
+                                                    ((b, a) => double.parse(a.price!)
+                                                        .toString()
+                                                        .compareTo(double.parse(b.price!)
+                                                            .toString())))
+                                                : select == 2
+                                                    ? homeScreenController.bag
+                                                        .sort(((b, a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
+                                                    : select == 3
+                                                        ? homeScreenController.jewellery.sort(((b, a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
+                                                        : select == 4
+                                                            ? homeScreenController.eyewear.sort(((b, a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
+                                                            : homeScreenController.shoes.sort(((b, a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())));
                                       });
                                     },
                                   ),
@@ -440,28 +517,36 @@ fav=List.generate(lenght,(index)=>  box.read('fav$index')??false);
                                     height: 1.5,
                                   ),
                                   RadioListTile(
-                                  
-                                activeColor: Rang.blue,
-                                    title:  Text('Price - Low to Hight',style: textStyle.bodyMedium),
-                                    groupValue: sel,
-                                    value: '1',
-                                    onChanged: (value) {
-                                      setState(() {
-                                        sel = value.toString();
-                                           select == 0
-                                          ? homeScreenController.skincare.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
-                                          : select == 1
-                                              ? homeScreenController.watche.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
-                                              : select == 2
-                                                  ? homeScreenController.bag.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
-                                                  : select == 3
-                                                      ? homeScreenController.jewellery.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
-                                                      : select == 4
-                                                          ? homeScreenController.eyewear.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
-                                                          : homeScreenController.shoes.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())));
-                                     });
-                                        
-                      }),
+                                      activeColor: Rang.blue,
+                                      title: Text('Price - Low to Hight',
+                                          style: textStyle.bodyMedium),
+                                      groupValue: sel,
+                                      value: '1',
+                                      onChanged: (value) {
+                                        setState(() {
+                                          sel = value.toString();
+                                          select == 0
+                                              ? homeScreenController.skincare.sort(
+                                                  ((a, b) => double.parse(a.price!)
+                                                      .toString()
+                                                      .compareTo(double.parse(b.price!)
+                                                          .toString())))
+                                              : select == 1
+                                                  ? homeScreenController.watche.sort(
+                                                      ((a, b) => double.parse(a.price!)
+                                                          .toString()
+                                                          .compareTo(double.parse(b.price!)
+                                                              .toString())))
+                                                  : select == 2
+                                                      ? homeScreenController.bag
+                                                          .sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
+                                                      : select == 3
+                                                          ? homeScreenController.jewellery.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
+                                                          : select == 4
+                                                              ? homeScreenController.eyewear.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
+                                                              : homeScreenController.shoes.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())));
+                                        });
+                                      }),
                                   const Divider(
                                     color: Rang.grey,
                                     indent: 40,
@@ -470,7 +555,8 @@ fav=List.generate(lenght,(index)=>  box.read('fav$index')??false);
                                   ),
                                   RadioListTile(
                                     activeColor: Rang.blue,
-                                    title: Text('Lasted product',style: textStyle.bodyMedium),
+                                    title: Text('Lasted product',
+                                        style: textStyle.bodyMedium),
                                     groupValue: sel,
                                     value: '2',
                                     onChanged: (value) {

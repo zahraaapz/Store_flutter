@@ -44,6 +44,12 @@ ButtonStyle buttonModel() {
   }
 
  TextTheme textStyle=const TextTheme(
+  labelSmall: TextStyle(
+       fontFamily: 'Auliare',
+       fontSize: 12,
+       color: Colors.black, 
+fontWeight: FontWeight.bold
+) ,
   displaySmall: TextStyle(
      fontFamily: 'Auliare',
        fontSize: 17,
@@ -76,8 +82,10 @@ bodyMedium:  TextStyle(
        fontSize: 14,
        color: Colors.black, 
 fontWeight: FontWeight.bold
+,
 
-),  
+), 
+
 bodyLarge:  TextStyle(
        fontFamily: 'Auliare',
        fontSize: 14,

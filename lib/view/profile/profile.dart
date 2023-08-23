@@ -6,7 +6,6 @@ import 'package:appstore/view/profile/personal_info.dart';
 import 'package:appstore/address.dart';
 import 'package:appstore/color/color.dart';
 import 'package:appstore/controller/pick_file.dart';
-import 'package:appstore/view/search/search.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -86,14 +85,8 @@ PickFileController pickFileController=Get.put(PickFileController());
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children:  [
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Text(Personal().box.read('fullName') ?? '--',style: textStyle.headlineMedium,),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Text(Personal().box.read('number')??'--',style: textStyle.headlineMedium,),
-                        ),
+                        Text(Personal().box.read('fullName') ?? '--',style: textStyle.headlineMedium,),
+                        Text(Personal().box.read('number')??'--',style: textStyle.headlineMedium,),
                         Text(
                          Personal().box.read('email')??'--',
 style: textStyle.headlineMedium,                        ),
@@ -112,15 +105,17 @@ style: textStyle.headlineMedium,                        ),
             padding: const EdgeInsets.all(10.0),
             child: GestureDetector(
               onTap: () => Get.to(Personal()),
-              child:  Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Personal Informantion',
-                    style: textStyle.headlineMedium,
-                  ),
-                  const Icon(Icons.arrow_forward_ios_outlined)
-                ],
+              child:  SizedBox(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Personal Informantion',
+                      style: textStyle.headlineMedium,
+                    ),
+                    const Icon(Icons.arrow_forward_ios_outlined)
+                  ],
+                ),
               ),
             ),
           ),
@@ -128,13 +123,15 @@ style: textStyle.headlineMedium,                        ),
             padding: const EdgeInsets.all(10.0),
             child: GestureDetector(
               onTap: () => Get.offAll(Address()),
-              child:  Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('My Address Book',
-                      style: textStyle.headlineMedium,),
-                  const Icon(Icons.arrow_forward_ios_outlined)
-                ],
+              child:  SizedBox(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('My Address Book',
+                        style: textStyle.headlineMedium,),
+                    const Icon(Icons.arrow_forward_ios_outlined)
+                  ],
+                ),
               ),
             ),
           ),
@@ -166,12 +163,7 @@ style: textStyle.headlineMedium,                        ),
               children: [
                 Text('Refer and Earn',
                     style:textStyle.headlineMedium,),
-                InkWell(
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: ((context) => Search())));
-                    },
-                    child: const Icon(Icons.arrow_forward_ios_outlined))
+                const Icon(Icons.arrow_forward_ios_outlined)
               ],
             ),
           ),
