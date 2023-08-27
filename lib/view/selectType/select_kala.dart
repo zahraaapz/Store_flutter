@@ -14,13 +14,16 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../model/component.dart';
+import '../../model/listDetail.dart';
 
 class Selectkala extends StatefulWidget {
   int select;
+   RxList<Kala> ?filterList=RxList();
   final HomeScreenController homeScreenController;
   Selectkala(
     this.select,
     this.homeScreenController,
+    {this.filterList}
   );
 
   @override
@@ -30,33 +33,94 @@ class Selectkala extends StatefulWidget {
 }
 
 class _SelectkalaState extends State<Selectkala> {
-  String? sel;
-  bool checkBox = false;
-  int select;
+  String? selectRadioTile;
+  RxList<Kala> filterList=RxList();
+  List <bool> checkBoxPriceBrand = [false,false];
+  List  selectedBrand=[];
+  List <bool>? checkBoxBrands;
+  int selectPage;
+  late int indx;
   late int lenght;
   final HomeScreenController homeScreenController;
   late List<bool> fav;
   var box = GetStorage();
+  List? brands;
+ List<double>? prices;
+ RangeValues ?val;
+ 
+
+
+
   _SelectkalaState(
-    this.select,
+    this.selectPage,
     this.homeScreenController,
   );
 
+ 
+
   @override
   initState() {
+ 
+
     super.initState();
-    lenght = select == 0
-        ? homeScreenController.skincare.length
-        : select == 1
-            ? homeScreenController.watche.length
-            : select == 2
-                ? homeScreenController.bag.length
-                : select == 3
-                    ? homeScreenController.jewellery.length
-                    : select == 4
-                        ? homeScreenController.eyewear.length
-                        : homeScreenController.shoes.length;
+    lenght = ListDetail().LenghtLists(selectPage);
     fav = List.generate(lenght, (index) => box.read('fav$index') ?? false);
+    checkBoxBrands = List.generate(lenght, (index) =>  false);
+    brands = List.generate(lenght, (index) => ListDetail().brandItem(selectPage, index));
+
+   prices= List.generate(lenght, (index) => double.parse(homeScreenController.bag[index].price.toString())  );
+   prices!.sort();
+     val=RangeValues(prices!.first, prices!.last,);
+  }
+  Future<void>showMyDialog()async{
+return  showDialog<void>(
+                                  context: context,
+                                  builder: (context) => 
+                                  StatefulBuilder(
+                                    builder: (context, setState) => 
+                                    
+                                   Dialog(
+                                    
+                                      child:SizedBox(
+                                        height: 450,
+                                        child: Column(children: [
+                                    
+                                              SizedBox(
+                                                height: 400,
+                                                child: ListView.builder(
+                                                scrollDirection: Axis.vertical,
+                                                itemCount: brands?.length ,
+                                                shrinkWrap: true,
+                                                  itemBuilder: (BuildContext context, int index) =>
+                                                   CheckboxListTile(
+                                                     title: Text( 
+                                                    brands?[index]),
+                                                        fillColor: MaterialStateProperty.all(Rang.blue),
+                                                    onChanged: (bool? value) { 
+                                                      setState(() {
+                                                        checkBoxBrands![index]=value!;
+                                                        indx=index;
+                                                     
+                                                           if(checkBoxBrands![indx]==true){
+                                                           selectedBrand.add(brands![indx]);
+
+                                                  ListDetail().filterBrand(selectPage,filterList,selectedBrand) ;                                             
+                                                       
+                                                   }else{
+                                                   filterList.removeWhere((e)=>selectedBrand.contains(e.brand));
+                                                   selectedBrand.remove(brands![indx]);
+                                                    
+                                                   }  
+                                                      },);      },
+                                                     value: checkBoxBrands![index],
+                                                
+                                                  ),
+                                                ),
+                                              )   ]),
+                                      ),
+                                  ),
+                                ));
+
   }
 
   @override
@@ -88,15 +152,15 @@ class _SelectkalaState extends State<Selectkala> {
                           width: 25,
                         ),
                         Text(
-                          select == 0
+                          selectPage == 0
                               ? 'Skincare'
-                              : select == 1
+                              : selectPage == 1
                                   ? 'Watches'
-                                  : select == 2
+                                  : selectPage == 2
                                       ? 'Handbags'
-                                      : select == 3
+                                      : selectPage == 3
                                           ? 'jewellery'
-                                          : select == 4
+                                          : selectPage == 4
                                               ? 'Eyewear'
                                               : 'Shoes',
                           style: textStyle.headlineSmall,
@@ -114,290 +178,32 @@ class _SelectkalaState extends State<Selectkala> {
                         ),
                         Text(
                             style: textStyle.bodyMedium,
-                            select == 0
-                                ? '${homeScreenController.skincare.length} products'
-                                : select == 1
-                                    ? '${homeScreenController.watche.length} products'
-                                    : select == 2
-                                        ? '${homeScreenController.bag.length} products'
-                                        : select == 3
-                                            ? '${homeScreenController.jewellery.length} products'
-                                            : select == 4
-                                                ? '${homeScreenController.eyewear.length} products'
-                                                : '${homeScreenController.shoes.length} products'),
+                       filterList.isEmpty?     selectPage == 0
+                                ? '${ListDetail.skincareLenght} products'
+                                : selectPage == 1
+                                    ? '${ListDetail.WatchesLenght} products'
+                                    : selectPage == 2
+                                        ? '${ListDetail.handBagLenght} products'
+                                        : selectPage == 3
+                                            ? '${ListDetail.jewelleryLenght} products'
+                                            : selectPage == 4
+                                                ? '${ListDetail.eyewearLenght} products'
+                                                : '${ListDetail.shoesLenght} products':'${filterList.length} products'),
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: 670,
-                    child: Obx(
-                      () => GridView.builder(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: select == 0
-                              ? homeScreenController.skincare.length
-                              : select == 1
-                                  ? homeScreenController.watche.length
-                                  : select == 2
-                                      ? homeScreenController.bag.length
-                                      : select == 3
-                                          ? homeScreenController
-                                              .jewellery.length
-                                          : select == 4
-                                              ? homeScreenController
-                                                  .eyewear.length
-                                              : homeScreenController
-                                                  .shoes.length,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                          ),
-                          itemBuilder: ((context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(right: 8, left: 8),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: ((context) => DetailKala(
-                                                    index,
-                                                    select,
-                                                    select == 0
-                                                        ? homeScreenController
-                                                            .skincare
-                                                        : select == 1
-                                                            ? homeScreenController
-                                                                .watche
-                                                            : select == 2
-                                                                ? homeScreenController
-                                                                    .bag
-                                                                : select == 3
-                                                                    ? homeScreenController
-                                                                        .jewellery
-                                                                    : select ==
-                                                                            4
-                                                                        ? homeScreenController
-                                                                            .eyewear
-                                                                        : homeScreenController
-                                                                            .shoes,
-                                                    isFavorite: fav[index],
-                                                  ))));
-                                    },
-                                    child: Container(
-                                      height: 160,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          image: DecorationImage(
-                                              fit: BoxFit.fill,
-                                              image: Image.asset(select == 0
-                                                      ? homeScreenController
-                                                          .skincare[index].ima!
-                                                      : select == 1
-                                                          ? homeScreenController
-                                                              .watche[index]
-                                                              .ima!
-                                                          : select == 2
-                                                              ? homeScreenController
-                                                                  .bag[index]
-                                                                  .ima!
-                                                              : select == 3
-                                                                  ? homeScreenController
-                                                                      .jewellery[
-                                                                          index]
-                                                                      .ima!
-                                                                  : select == 4
-                                                                      ? homeScreenController
-                                                                          .eyewear[
-                                                                              index]
-                                                                          .ima!
-                                                                      : homeScreenController
-                                                                          .shoes[
-                                                                              index]
-                                                                          .ima!)
-                                                  .image)),
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                          style: textStyle.bodyMedium,
-                                          select == 0
-                                              ? homeScreenController
-                                                  .skincare[index].name!
-                                              : select == 1
-                                                  ? homeScreenController
-                                                      .watche[index].name!
-                                                  : select == 2
-                                                      ? homeScreenController
-                                                          .bag[index].name!
-                                                      : select == 3
-                                                          ? homeScreenController
-                                                              .jewellery[index]
-                                                              .name!
-                                                          : select == 4
-                                                              ? homeScreenController
-                                                                  .eyewear[
-                                                                      index]
-                                                                  .name!
-                                                              : homeScreenController
-                                                                  .shoes[index]
-                                                                  .name!),
-                                      GestureDetector(
-                                        onTap: () {
-                                          setState(() {
-                                            fav[index] = !fav[index];
-                                            box.write('fav$index', fav[index]);
-                                            if (fav[index] == true &&
-                                                !wishList.contains(select == 0
-                                                    ? homeScreenController
-                                                        .skincare[index]
-                                                    : select == 1
-                                                        ? homeScreenController
-                                                            .watche[index]
-                                                        : select == 2
-                                                            ? homeScreenController
-                                                                .bag[index]
-                                                            : select == 3
-                                                                ? homeScreenController
-                                                                        .jewellery[
-                                                                    index]
-                                                                : select == 4
-                                                                    ? homeScreenController
-                                                                            .eyewear[
-                                                                        index]
-                                                                    : homeScreenController
-                                                                            .shoes[
-                                                                        index])) {
-                                              wishList.add(select == 0
-                                                  ? homeScreenController
-                                                      .skincare[index]
-                                                  : select == 1
-                                                      ? homeScreenController
-                                                          .watche[index]
-                                                      : select == 2
-                                                          ? homeScreenController
-                                                              .bag[index]
-                                                          : select == 3
-                                                              ? homeScreenController
-                                                                      .jewellery[
-                                                                  index]
-                                                              : select == 4
-                                                                  ? homeScreenController
-                                                                          .eyewear[
-                                                                      index]
-                                                                  : homeScreenController
-                                                                          .shoes[
-                                                                      index]);
-                                            }
-                                            if (wishList.contains(select == 0
-                                                    ? homeScreenController
-                                                        .skincare[index]
-                                                    : select == 1
-                                                        ? homeScreenController
-                                                            .watche[index]
-                                                        : select == 2
-                                                            ? homeScreenController
-                                                                .bag[index]
-                                                            : select == 3
-                                                                ? homeScreenController
-                                                                        .jewellery[
-                                                                    index]
-                                                                : select == 4
-                                                                    ? homeScreenController
-                                                                            .eyewear[
-                                                                        index]
-                                                                    : homeScreenController
-                                                                            .shoes[
-                                                                        index]) &&
-                                                fav[index] == false) {
-                                              wishList.remove(select == 0
-                                                  ? homeScreenController
-                                                      .skincare[index]
-                                                  : select == 1
-                                                      ? homeScreenController
-                                                          .watche[index]
-                                                      : select == 2
-                                                          ? homeScreenController
-                                                              .bag[index]
-                                                          : select == 3
-                                                              ? homeScreenController
-                                                                      .jewellery[
-                                                                  index]
-                                                              : select == 4
-                                                                  ? homeScreenController
-                                                                          .eyewear[
-                                                                      index]
-                                                                  : homeScreenController
-                                                                          .shoes[
-                                                                      index]);
-                                            }
-                                          });
-                                        },
-                                        child: Icon(
-                                          fav[index] == false
-                                              ? Icons.favorite_border
-                                              : Icons.favorite,
-                                          size: 19,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                          style: textStyle.bodyMedium,
-                                          select == 0
-                                              ? homeScreenController
-                                                  .skincare[index].brand!
-                                              : select == 1
-                                                  ? homeScreenController
-                                                      .watche[index].brand!
-                                                  : select == 2
-                                                      ? homeScreenController
-                                                          .bag[index].brand!
-                                                      : select == 3
-                                                          ? homeScreenController
-                                                              .jewellery[index]
-                                                              .brand!
-                                                          : select == 4
-                                                              ? homeScreenController
-                                                                  .eyewear[
-                                                                      index]
-                                                                  .brand!
-                                                              : homeScreenController
-                                                                  .shoes[index]
-                                                                  .brand!),
-                                      Text(
-                                          style: textStyle.bodyMedium,
-                                          select == 0
-                                              ? '${homeScreenController.skincare[index].price}\$'
-                                              : select == 1
-                                                  ? '${homeScreenController.watche[index].price}\$'
-                                                  : select == 2
-                                                      ? '${homeScreenController.bag[index].price}\$'
-                                                      : select == 3
-                                                          ? '${homeScreenController.jewellery[index].price}\$'
-                                                          : select == 4
-                                                              ? '${homeScreenController.eyewear[index].price}\$'
-                                                              : '${homeScreenController.shoes[index].price}\$'),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            );
-                          })),
-                    ),
-                  ),
+                  mainList(filterList.isEmpty?  selectPage == 0
+                                              ? ListDetail.skincareName
+                                              : selectPage == 1
+                                                  ? ListDetail.WatchesName
+                                                  : selectPage == 2
+                                                      ? ListDetail.handBagName
+                                                      : selectPage == 3
+                                                          ? ListDetail.jewellerName
+                                                              
+                                                          : selectPage == 4
+                                                              ?ListDetail.eyewearName
+                                                              : ListDetail.shoesName:filterList),
                   //  SpinKitThreeBounce(
                   //       color: Rang.blue,
                   //     ),
@@ -421,22 +227,41 @@ class _SelectkalaState extends State<Selectkala> {
                         builder: ((context) {
                           return StatefulBuilder(
                               builder: (context, setState) => Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
+                                    decoration: const BoxDecoration(
+                                      borderRadius: BorderRadius.only(topLeft: Radius.circular(30),topRight: Radius.circular(30)),
                                       color: Colors.white,
                                     ),
-                                    height: Get.height / 3,
+                                    height: Get.height / 4,
                                     child: Column(
                                       children: [
-                                        Checkbox(
-                                            value: checkBox,
+                                        CheckboxListTile(
+                                          title: Text('Brand'),
+                                          fillColor: MaterialStateProperty.all(Rang.blue),
+                                            value: checkBoxPriceBrand[0],
                                             onChanged: (value) {
                                               setState(() {
-                                                checkBox = value!;
-                                                print(val.toString());
+                                                checkBoxPriceBrand[0] = value!;
+                                              
                                               });
-                                            }),
-                                      ],
+                              
+                                checkBoxPriceBrand[0]==true?
+                              showMyDialog()
+                                :null; 
+                                       
+                                          }),  
+                                            
+                                          CheckboxListTile(
+                                          title: Text('Price'),
+                                          fillColor: MaterialStateProperty.all(Rang.blue),
+                                            value: checkBoxPriceBrand[1],
+                                            onChanged: (value) {
+                                              setState(() {
+                                                checkBoxPriceBrand[1] = value!;
+                                               
+                                              });
+                                             checkBoxPriceBrand[1]==true?
+                                             bottomSheetLimitedPrice(context):null;   }),
+                                  ],
                                     ),
                                   ));
                         }));
@@ -482,31 +307,12 @@ class _SelectkalaState extends State<Selectkala> {
                                     activeColor: Rang.blue,
                                     title: Text('Price - Hight to Low',
                                         style: textStyle.bodyMedium),
-                                    groupValue: sel,
+                                    groupValue: selectRadioTile,
                                     value: '0',
                                     onChanged: (value) {
                                       setState(() {
-                                        sel = value.toString();
-                                        select == 0
-                                            ? homeScreenController.skincare.sort(
-                                                ((b, a) => double.parse(a.price!)
-                                                    .toString()
-                                                    .compareTo(double.parse(b.price!)
-                                                        .toString())))
-                                            : select == 1
-                                                ? homeScreenController.watche.sort(
-                                                    ((b, a) => double.parse(a.price!)
-                                                        .toString()
-                                                        .compareTo(double.parse(b.price!)
-                                                            .toString())))
-                                                : select == 2
-                                                    ? homeScreenController.bag
-                                                        .sort(((b, a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
-                                                    : select == 3
-                                                        ? homeScreenController.jewellery.sort(((b, a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
-                                                        : select == 4
-                                                            ? homeScreenController.eyewear.sort(((b, a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
-                                                            : homeScreenController.shoes.sort(((b, a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())));
+                                        selectRadioTile = value.toString();
+                                     ListDetail().sortListHightoLow(selectPage);
                                       });
                                     },
                                   ),
@@ -520,31 +326,12 @@ class _SelectkalaState extends State<Selectkala> {
                                       activeColor: Rang.blue,
                                       title: Text('Price - Low to Hight',
                                           style: textStyle.bodyMedium),
-                                      groupValue: sel,
+                                      groupValue: selectRadioTile,
                                       value: '1',
                                       onChanged: (value) {
                                         setState(() {
-                                          sel = value.toString();
-                                          select == 0
-                                              ? homeScreenController.skincare.sort(
-                                                  ((a, b) => double.parse(a.price!)
-                                                      .toString()
-                                                      .compareTo(double.parse(b.price!)
-                                                          .toString())))
-                                              : select == 1
-                                                  ? homeScreenController.watche.sort(
-                                                      ((a, b) => double.parse(a.price!)
-                                                          .toString()
-                                                          .compareTo(double.parse(b.price!)
-                                                              .toString())))
-                                                  : select == 2
-                                                      ? homeScreenController.bag
-                                                          .sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
-                                                      : select == 3
-                                                          ? homeScreenController.jewellery.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
-                                                          : select == 4
-                                                              ? homeScreenController.eyewear.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
-                                                              : homeScreenController.shoes.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())));
+                                          selectRadioTile = value.toString();
+                                       ListDetail().sortLisLowtoHigh(selectPage);
                                         });
                                       }),
                                   const Divider(
@@ -557,11 +344,11 @@ class _SelectkalaState extends State<Selectkala> {
                                     activeColor: Rang.blue,
                                     title: Text('Lasted product',
                                         style: textStyle.bodyMedium),
-                                    groupValue: sel,
+                                    groupValue: selectRadioTile,
                                     value: '2',
                                     onChanged: (value) {
                                       setState(() {
-                                        sel = value.toString();
+                                        selectRadioTile = value.toString();
                                       });
                                     },
                                   ),
@@ -578,4 +365,162 @@ class _SelectkalaState extends State<Selectkala> {
       ]),
     ));
   }
+
+  Future<dynamic> bottomSheetLimitedPrice(BuildContext context) {
+    return showModalBottomSheet(
+                                       context:context,
+                                       builder:(context) => 
+                                      StatefulBuilder(builder:(context, setState) =>
+                                      Container(
+                                        height: Get.height/4,
+                                           decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.only(topLeft: Radius.circular(30),
+                                    topRight: Radius.circular(30)),
+                                    color: Colors.white,
+                                    
+                                  ),child:Column(mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                              
+                               SliderTheme(
+                                data:SliderTheme.of(context).copyWith(
+                                  activeTrackColor: Rang.blue,
+                                  inactiveTrackColor:Rang.greylight,
+                                  
+                                  thumbColor: Rang.blue,
+                                 
+
+                                ) ,
+                                child:RangeSlider(
+                                    labels: RangeLabels(val!.start.toString(),val!.end.toString()),
+                                    min: prices!.first,
+                                    max:prices!.last,
+                                    divisions: 15,
+                                     onChanged: (value) {
+                                       setState(() {
+                                     val =value;
+                                     
+                                     homeScreenController
+                                     .bag.where((element) =>double.tryParse(element.price.toString())!>=val!.start && 
+                                     double.tryParse(element.price.toString())!<=val!.end).toList();
+                                      
+
+                                       },);
+                                     }, values: val!,
+                                  ),
+                               ) ,   ElevatedButton(
+                                onPressed: (){
+                                  setState(() {
+                            
+                             
+                                      
+                                        });
+                                            
+
+                                }, style: ButtonStyle(
+                        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
+                  backgroundColor: MaterialStateProperty.all(Rang.blue)),
+                             child: Text('Apply',style: textStyle.headlineLarge)
+                               )      ],
+                                  )
+
+
+                                     )));
+  }
+
+  SizedBox mainList(RxList<Kala> list) {
+    return SizedBox(
+                  height: 670,
+                  child: GridView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount:list.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                        ),
+                        itemBuilder: ((context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 8, left: 8),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: ((context) => DetailKala(
+                                                  index,
+                                                  selectPage,
+                                                list,
+                                                  isFavorite: fav[index],
+                                                ))));
+                                  },
+                                  child: Container(
+                                    height: 160,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(20),
+                                        image: DecorationImage(
+                                            fit: BoxFit.fill,
+                                            image: Image.asset(list[index].ima!
+                                                )
+                                                .image)),
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                        style: textStyle.bodyMedium,
+                                        list[index].name!
+                                          ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          fav[index] = !fav[index];
+                                          box.write('fav$index', fav[index]);
+                                          if (fav[index] == true &&
+                                              !wishList.contains(list[index])) {
+                                            wishList.add(list[index]);
+                                          }
+                                          if (wishList.contains(list[index]) &&
+                                              fav[index] == false) {
+                                            wishList.remove(list[index]);
+                                          }
+                                        });
+                                      },
+                                      child: Icon(
+                                        fav[index] == false
+                                            ? Icons.favorite_border
+                                            : Icons.favorite,
+                                        size: 19,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                        style: textStyle.bodyMedium,
+                                       list[index].brand!
+                                           ),
+                                    Text(
+                                        style: textStyle.bodyMedium,
+                                        '${list[index].price}\$'
+                                           ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          );
+                        })),
+                  
+                );
+  }
+  
 }

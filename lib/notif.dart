@@ -53,49 +53,45 @@ class Notif extends StatelessWidget {
                   const SizedBox(
                     width: 36,
                   ),
-                  Card(
-                    elevation: 1,
-                    shadowColor: Colors.black,
-                    child: Container(
-                      width: 350,
-                      height: 200,
-                      color: Colors.amber,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Upto 50% OFF⚡⚡',style: textStyle.bodyMedium),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                           Text('This winter gift your loved ones.',style: textStyle.bodyMedium),
-                                    const SizedBox(
-                                    height: 20,
-                                  ),
-                                  SizedBox(
-                                    width: 350,
-                                    height: 60,
-                                    child: ElevatedButton(
-                      style: ButtonStyle(
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                          ),
-                          side: MaterialStateProperty.all(
-                              const BorderSide(color: Rang.blue, width: 1.5)),
-                          backgroundColor:
-                              MaterialStateProperty.resolveWith((states) {
-                            if (states.contains(MaterialState.pressed)) {
-                              return Rang.blue;
-                            }
-                            return Colors.white;
-                          })),
-                      onPressed: () {},
-                      child: Text(
-                        'Shop now',
-                       style: textStyle.displaySmall,
-                      )),
-                                  ),  ],
-                      ),
+                  SizedBox(
+                    width: 320,
+                    height: 200,
+                   
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Upto 50% OFF⚡⚡',style: textStyle.bodyMedium),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                         Text('This winter gift your loved ones.',style: textStyle.bodyMedium),
+                                  const SizedBox(
+                                  height: 20,
+                                ),
+                                SizedBox(
+                                  width: 350,
+                                  height: 60,
+                                  child: ElevatedButton(
+                    style: ButtonStyle(
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                        ),
+                        side: MaterialStateProperty.all(
+                            const BorderSide(color: Rang.blue, width: 1.5)),
+                        backgroundColor:
+                            MaterialStateProperty.resolveWith((states) {
+                          if (states.contains(MaterialState.pressed)) {
+                            return Rang.blue;
+                          }
+                          return Colors.white;
+                        })),
+                    onPressed: () {},
+                    child: Text(
+                      'Shop now',
+                     style: textStyle.displaySmall,
+                    )),
+                                ),  ],
                     ),
                   ),
                 ],
@@ -113,6 +109,9 @@ class Notif extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                        SizedBox(
+                        height: 10,
+                      ),
                       Image.asset('assets/image/icon.png'),
                       Text('Share your feedback',style: textStyle.bodyMedium),
                       SizedBox(
@@ -122,7 +121,7 @@ class Notif extends StatelessWidget {
                         '''Hey, ${Personal().box.read('fullName')??'--'}. Thanks for using CORAL. You know what? You can help us improve with just one click''',
                         textScaleFactor: 1.1,
                       )
-                    ],
+                  ,SizedBox(height: 10,)  ],
                   ),
                 ),
               )

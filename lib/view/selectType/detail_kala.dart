@@ -9,7 +9,6 @@ import 'package:appstore/model/Model.dart';
 
 import 'package:appstore/color/color.dart';
 
-import 'package:appstore/view/selectType/select_kala.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -68,12 +67,7 @@ bool ?isFavorite;
                       color: Rang.blue,
                     ),
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: ((context) => Selectkala(
-
-                               select,
-                                homeScreenController,
-                              ))));
+                      Get.back();
                     },
                   ),
                 ],

@@ -303,8 +303,8 @@ void initState() {
                 children: [
                    pickFileController.file.value.name=='not'?
                       Container(
-                                    height: 100,
-                                   width: 100,
+                                    height: 80,
+                                   width: 80,
                                     decoration: const BoxDecoration(
                                    
                                       shape: BoxShape.circle,
@@ -315,14 +315,14 @@ void initState() {
                              
                    
                    : Container(
-                                    height: 100,
-                                   width: 100,
+                                    height: 80,
+                                   width: 80,
                                     decoration: BoxDecoration(
                                    
                                       shape: BoxShape.circle,
                                      image: DecorationImage(image:Image.file(File(box.read('ima'))).image ,fit:BoxFit.cover )
                                     ),
-                   ),Column(
+                   ),Column(mainAxisAlignment: MainAxisAlignment.center,
                     children:[
                   Text(box.read('fullName') ?? '--',style: textStyle.labelSmall,),
                   Text(box.read('number')??'--',style: textStyle.labelSmall,),
