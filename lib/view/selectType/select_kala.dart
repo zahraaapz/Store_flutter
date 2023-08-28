@@ -14,17 +14,13 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../model/component.dart';
-import '../../model/listDetail.dart';
+
 
 class Selectkala extends StatefulWidget {
   int select;
-   RxList<Kala> ?filterList=RxList();
+  RxList<Kala>? filterList = RxList();
   final HomeScreenController homeScreenController;
-  Selectkala(
-    this.select,
-    this.homeScreenController,
-    {this.filterList}
-  );
+  Selectkala(this.select, this.homeScreenController, {this.filterList});
 
   @override
   // ignore: no_logic_in_create_state
@@ -33,11 +29,13 @@ class Selectkala extends StatefulWidget {
 }
 
 class _SelectkalaState extends State<Selectkala> {
+  RxInt level=0.obs;
   String? selectRadioTile;
-  RxList<Kala> filterList=RxList();
-  List <bool> checkBoxPriceBrand = [false,false];
-  List  selectedBrand=[];
-  List <bool>? checkBoxBrands;
+  RxList<Kala> filterListBrand = RxList();
+  List<bool> checkBoxPriceBrand = [false, false];
+  List selectedBrand = [];
+  RxList<Kala> filterPrice = RxList();
+  List<bool>? checkBoxBrands;
   int selectPage;
   late int indx;
   late int lenght;
@@ -45,82 +43,85 @@ class _SelectkalaState extends State<Selectkala> {
   late List<bool> fav;
   var box = GetStorage();
   List? brands;
- List<double>? prices;
- RangeValues ?val;
- 
-
-
+  List<double>? prices;
+  RangeValues? val;
 
   _SelectkalaState(
     this.selectPage,
     this.homeScreenController,
   );
 
- 
-
   @override
   initState() {
- 
-
     super.initState();
-    lenght = ListDetail().LenghtLists(selectPage);
+    lenght = lenghtLists(selectPage,homeScreenController);
     fav = List.generate(lenght, (index) => box.read('fav$index') ?? false);
-    checkBoxBrands = List.generate(lenght, (index) =>  false);
-    brands = List.generate(lenght, (index) => ListDetail().brandItem(selectPage, index));
+    checkBoxBrands = List.generate(lenght, (index) => false);
+    brands = List.generate(
+        lenght, (index) => brandItem(selectPage, index,homeScreenController));
 
-   prices= List.generate(lenght, (index) => double.parse(homeScreenController.bag[index].price.toString())  );
-   prices!.sort();
-     val=RangeValues(prices!.first, prices!.last,);
+    prices = List.generate(
+        lenght,
+        (index) =>
+            double.parse(homeScreenController.bag[index].price.toString()));
+    prices!.sort();
+    val = RangeValues(
+      prices!.first,
+      prices!.last,
+    );
   }
-  Future<void>showMyDialog()async{
-return  showDialog<void>(
-                                  context: context,
-                                  builder: (context) => 
-                                  StatefulBuilder(
-                                    builder: (context, setState) => 
-                                    
-                                   Dialog(
-                                    
-                                      child:SizedBox(
-                                        height: 450,
-                                        child: Column(children: [
-                                    
-                                              SizedBox(
-                                                height: 400,
-                                                child: ListView.builder(
-                                                scrollDirection: Axis.vertical,
-                                                itemCount: brands?.length ,
-                                                shrinkWrap: true,
-                                                  itemBuilder: (BuildContext context, int index) =>
-                                                   CheckboxListTile(
-                                                     title: Text( 
-                                                    brands?[index]),
-                                                        fillColor: MaterialStateProperty.all(Rang.blue),
-                                                    onChanged: (bool? value) { 
-                                                      setState(() {
-                                                        checkBoxBrands![index]=value!;
-                                                        indx=index;
-                                                     
-                                                           if(checkBoxBrands![indx]==true){
-                                                           selectedBrand.add(brands![indx]);
 
-                                                  ListDetail().filterBrand(selectPage,filterList,selectedBrand) ;                                             
-                                                       
-                                                   }else{
-                                                   filterList.removeWhere((e)=>selectedBrand.contains(e.brand));
-                                                   selectedBrand.remove(brands![indx]);
-                                                    
-                                                   }  
-                                                      },);      },
-                                                     value: checkBoxBrands![index],
-                                                
-                                                  ),
-                                                ),
-                                              )   ]),
-                                      ),
-                                  ),
-                                ));
+  Future<void> showMyDialog() async {
+    return showDialog<void>(
+        context: context,
+        builder: (context) => StatefulBuilder(
+              builder: (context, setState) => Dialog(
+                child: SizedBox(
+                  height: 450,
+                  child: Column(children: [
+                    SizedBox(
+                      height: 400,
+                      child: ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        itemCount: brands?.length,
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) =>
+                            CheckboxListTile(
+                          title: Text(brands?[index]),
+                          fillColor: MaterialStateProperty.all(Rang.blue),
+                          onChanged: (bool? value) {
+                            setState(
+                              () {
+                                checkBoxBrands![index] = value!;
+                                indx = index;
 
+                                if (checkBoxBrands![index] == true ) {
+                                  selectedBrand.add(brands![index]);
+
+                                 filterBrand(
+                                      selectPage, filterListBrand, selectedBrand,homeScreenController);
+                                level.value=1;
+                                 print(filterListBrand.length.toString());
+                                } else {
+                                 
+                                  filterListBrand.removeWhere(
+                                      (e) => selectedBrand.contains(e.brand));
+                                  selectedBrand.remove(brands![index]);
+                                  print(filterListBrand.length.toString());
+                                 level.value=0;
+                                }
+                              
+                              },
+                            );
+                          },
+                          value: checkBoxBrands![index],
+                        ),
+                      ),
+                    )
+                  ]),
+                ),
+              ),
+            ));
   }
 
   @override
@@ -168,45 +169,27 @@ return  showDialog<void>(
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          width: 30,
-                        ),
-                        Text(
-                            style: textStyle.bodyMedium,
-                       filterList.isEmpty?     selectPage == 0
-                                ? '${ListDetail.skincareLenght} products'
-                                : selectPage == 1
-                                    ? '${ListDetail.WatchesLenght} products'
-                                    : selectPage == 2
-                                        ? '${ListDetail.handBagLenght} products'
-                                        : selectPage == 3
-                                            ? '${ListDetail.jewelleryLenght} products'
-                                            : selectPage == 4
-                                                ? '${ListDetail.eyewearLenght} products'
-                                                : '${ListDetail.shoesLenght} products':'${filterList.length} products'),
-                      ],
-                    ),
-                  ),
-                  mainList(filterList.isEmpty?  selectPage == 0
-                                              ? ListDetail.skincareName
-                                              : selectPage == 1
-                                                  ? ListDetail.WatchesName
-                                                  : selectPage == 2
-                                                      ? ListDetail.handBagName
-                                                      : selectPage == 3
-                                                          ? ListDetail.jewellerName
-                                                              
-                                                          : selectPage == 4
-                                                              ?ListDetail.eyewearName
-                                                              : ListDetail.shoesName:filterList),
-                  //  SpinKitThreeBounce(
-                  //       color: Rang.blue,
-                  //     ),
+               
+                  mainList( 
+            level.value==2?
+             filterPrice:
+             level.value==1?
+             filterListBrand:
+              selectPage==0?
+              homeScreenController.skincare:
+              selectPage==1?
+              homeScreenController.watche:
+              selectPage==2?
+              homeScreenController.bag:
+              selectPage==3?
+              homeScreenController.jewellery:
+               selectPage==4?
+              homeScreenController.eyewear:
+              homeScreenController.shoes
+                  
+                      
+                      ),
+                
                 ])
               : const SpinKitCircle(
                   color: Rang.blue,
@@ -228,40 +211,45 @@ return  showDialog<void>(
                           return StatefulBuilder(
                               builder: (context, setState) => Container(
                                     decoration: const BoxDecoration(
-                                      borderRadius: BorderRadius.only(topLeft: Radius.circular(30),topRight: Radius.circular(30)),
+                                      borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(30),
+                                          topRight: Radius.circular(30)),
                                       color: Colors.white,
                                     ),
                                     height: Get.height / 4,
                                     child: Column(
                                       children: [
                                         CheckboxListTile(
-                                          title: Text('Brand'),
-                                          fillColor: MaterialStateProperty.all(Rang.blue),
+                                            title: Text('Brand'),
+                                            fillColor:
+                                                MaterialStateProperty.all(
+                                                    Rang.blue),
                                             value: checkBoxPriceBrand[0],
                                             onChanged: (value) {
                                               setState(() {
                                                 checkBoxPriceBrand[0] = value!;
-                                              
                                               });
-                              
-                                checkBoxPriceBrand[0]==true?
-                              showMyDialog()
-                                :null; 
-                                       
-                                          }),  
-                                            
-                                          CheckboxListTile(
-                                          title: Text('Price'),
-                                          fillColor: MaterialStateProperty.all(Rang.blue),
+
+                                              checkBoxPriceBrand[0] == true
+                                                  ? showMyDialog()
+                                                  : null;
+                                            }),
+                                        CheckboxListTile(
+                                            title: Text('Price'),
+                                            fillColor:
+                                                MaterialStateProperty.all(
+                                                    Rang.blue),
                                             value: checkBoxPriceBrand[1],
                                             onChanged: (value) {
                                               setState(() {
                                                 checkBoxPriceBrand[1] = value!;
-                                               
                                               });
-                                             checkBoxPriceBrand[1]==true?
-                                             bottomSheetLimitedPrice(context):null;   }),
-                                  ],
+                                              checkBoxPriceBrand[1] == true
+                                                  ? bottomSheetLimitedPrice(
+                                                      context)
+                                                  : null;
+                                            }),
+                                      ],
                                     ),
                                   ));
                         }));
@@ -312,7 +300,7 @@ return  showDialog<void>(
                                     onChanged: (value) {
                                       setState(() {
                                         selectRadioTile = value.toString();
-                                     ListDetail().sortListHightoLow(selectPage);
+                                       sortListHightoLow(selectPage,homeScreenController);
                                       });
                                     },
                                   ),
@@ -331,7 +319,7 @@ return  showDialog<void>(
                                       onChanged: (value) {
                                         setState(() {
                                           selectRadioTile = value.toString();
-                                       ListDetail().sortLisLowtoHigh(selectPage);
+                                         sortLisLowtoHigh(selectPage,homeScreenController);
                                         });
                                       }),
                                   const Divider(
@@ -368,159 +356,284 @@ return  showDialog<void>(
 
   Future<dynamic> bottomSheetLimitedPrice(BuildContext context) {
     return showModalBottomSheet(
-                                       context:context,
-                                       builder:(context) => 
-                                      StatefulBuilder(builder:(context, setState) =>
-                                      Container(
-                                        height: Get.height/4,
-                                           decoration: const BoxDecoration(
-                                    borderRadius: BorderRadius.only(topLeft: Radius.circular(30),
-                                    topRight: Radius.circular(30)),
-                                    color: Colors.white,
-                                    
-                                  ),child:Column(mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                              
-                               SliderTheme(
-                                data:SliderTheme.of(context).copyWith(
-                                  activeTrackColor: Rang.blue,
-                                  inactiveTrackColor:Rang.greylight,
-                                  
-                                  thumbColor: Rang.blue,
-                                 
+        context: context,
+        builder: (context) => StatefulBuilder(
+            builder: (context, setState) => Container(
+                height: Get.height / 4,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30)),
+                  color: Colors.white,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SliderTheme(
+                      data: SliderTheme.of(context).copyWith(
+                        activeTrackColor: Rang.blue,
+                        inactiveTrackColor: Rang.greylight,
+                        thumbColor: Rang.blue,
+                      ),
+                      child: RangeSlider(
+                        labels: RangeLabels(
+                            val!.start.toString(), val!.end.toString()),
+                        min: prices!.first,
+                        max: prices!.last,
+                        divisions: 15,
+                        onChanged: (value) {
+                          setState(
+                            () {
+                              val = value;
 
-                                ) ,
-                                child:RangeSlider(
-                                    labels: RangeLabels(val!.start.toString(),val!.end.toString()),
-                                    min: prices!.first,
-                                    max:prices!.last,
-                                    divisions: 15,
-                                     onChanged: (value) {
-                                       setState(() {
-                                     val =value;
-                                     
-                                     homeScreenController
-                                     .bag.where((element) =>double.tryParse(element.price.toString())!>=val!.start && 
-                                     double.tryParse(element.price.toString())!<=val!.end).toList();
-                                      
-
-                                       },);
-                                     }, values: val!,
-                                  ),
-                               ) ,   ElevatedButton(
-                                onPressed: (){
-                                  setState(() {
-                            
-                             
-                                      
-                                        });
-                                            
-
-                                }, style: ButtonStyle(
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
-                  backgroundColor: MaterialStateProperty.all(Rang.blue)),
-                             child: Text('Apply',style: textStyle.headlineLarge)
-                               )      ],
-                                  )
-
-
-                                     )));
-  }
-
-  SizedBox mainList(RxList<Kala> list) {
-    return SizedBox(
-                  height: 670,
-                  child: GridView.builder(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemCount:list.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                        ),
-                        itemBuilder: ((context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.only(right: 8, left: 8),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: ((context) => DetailKala(
-                                                  index,
-                                                  selectPage,
-                                                list,
-                                                  isFavorite: fav[index],
-                                                ))));
-                                  },
-                                  child: Container(
-                                    height: 160,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(20),
-                                        image: DecorationImage(
-                                            fit: BoxFit.fill,
-                                            image: Image.asset(list[index].ima!
-                                                )
-                                                .image)),
-                                  ),
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                        style: textStyle.bodyMedium,
-                                        list[index].name!
-                                          ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          fav[index] = !fav[index];
-                                          box.write('fav$index', fav[index]);
-                                          if (fav[index] == true &&
-                                              !wishList.contains(list[index])) {
-                                            wishList.add(list[index]);
-                                          }
-                                          if (wishList.contains(list[index]) &&
-                                              fav[index] == false) {
-                                            wishList.remove(list[index]);
-                                          }
-                                        });
-                                      },
-                                      child: Icon(
-                                        fav[index] == false
-                                            ? Icons.favorite_border
-                                            : Icons.favorite,
-                                        size: 19,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                        style: textStyle.bodyMedium,
-                                       list[index].brand!
-                                           ),
-                                    Text(
-                                        style: textStyle.bodyMedium,
-                                        '${list[index].price}\$'
-                                           ),
-                                  ],
-                                ),
-                              ],
-                            ),
+                              filterPrice.assignAll(homeScreenController.bag
+                                  .where((element) =>
+                                      double.tryParse(
+                                              element.price.toString())! >=
+                                          val!.start &&
+                                      double.tryParse(
+                                              element.price.toString())! <=
+                                          val!.end));
+                                
+                            level.value=2;
+                            print(filterPrice.length);
+                            print(level);
+                            },
                           );
-                        })),
-                  
-                );
+                        },
+                        values: val!,
+                      ),
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          setState(() {});
+                        },
+                        style: ButtonStyle(
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15))),
+                            backgroundColor:
+                                MaterialStateProperty.all(Rang.blue)),
+                        child: Text('Apply', style: textStyle.headlineLarge))
+                  ],
+                ))));
   }
-  
+
+Column mainList(RxList<Kala> list) {
+    return Column(
+      children: [
+         const SizedBox(height: 5,),
+           Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        width: 30,
+                      ),
+                      Text(
+                          style: textStyle.bodyMedium,
+                       '${list.length} products'),
+                    ],
+                  ),
+       const SizedBox(height: 10,),
+        SizedBox(
+          height: 670,
+          child: GridView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: list.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+              ),
+              itemBuilder: ((context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(right: 8, left: 8),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => DetailKala(
+                                        index,
+                                        selectPage,
+                                        list,
+                                        isFavorite: fav[index],
+                                      ))));
+                        },
+                        child: Container(
+                          height: 160,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              image: DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: Image.asset(list[index].ima!).image)),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(style: textStyle.bodyMedium, list[index].name!),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                fav[index] = !fav[index];
+                                box.write('fav$index', fav[index]);
+                                if (fav[index] == true &&
+                                    !wishList.contains(list[index])) {
+                                  wishList.add(list[index]);
+                                }
+                                if (wishList.contains(list[index]) &&
+                                    fav[index] == false) {
+                                  wishList.remove(list[index]);
+                                }
+                              });
+                            },
+                            child: Icon(
+                              fav[index] == false
+                                  ? Icons.favorite_border
+                                  : Icons.favorite,
+                              size: 19,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(style: textStyle.bodyMedium, list[index].brand!),
+                          Text(
+                              style: textStyle.bodyMedium,
+                              '${list[index].price}\$'),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              })),
+        ),
+      ],
+    );
+  }
 }
+
+
+
+
+int lenghtLists(int selectPage,HomeScreenController homeScreenController){
+   return selectPage == 0
+        ?homeScreenController.skincare.length
+        : selectPage == 1
+            ?homeScreenController.watche.length 
+            : selectPage == 2
+                ? homeScreenController.bag.length
+                : selectPage == 3
+                    ? homeScreenController.jewellery.length
+                    : selectPage == 4
+                        ? homeScreenController.eyewear.length
+                        : homeScreenController.shoes.length;
+}
+
+filterBrand(int selectPage,List<Kala>filterList,List selectedBrand,HomeScreenController homeScreenController){
+
+selectPage==0?    
+ filterList.assignAll(                                            
+        homeScreenController.skincare.where((p0) =>selectedBrand.contains(p0.brand)).toList() ):
+    selectPage==1?
+ filterList.assignAll(                                            
+   homeScreenController.watche.where((p0) =>selectedBrand.contains(p0.brand)).toList()
+    ):     selectPage==2?
+ filterList.assignAll(                                            
+   homeScreenController.bag.where((p0) =>selectedBrand.contains(p0.brand)).toList()
+    ):     selectPage==3?
+ filterList.assignAll(                                            
+   homeScreenController.jewellery.where((p0) =>selectedBrand.contains(p0.brand)).toList()
+    ):      selectPage==4?
+ filterList.assignAll(                                            
+   homeScreenController.eyewear.where((p0) =>selectedBrand.contains(p0.brand)).toList()
+    ):    
+ filterList.assignAll(                                            
+   homeScreenController.shoes.where((p0) =>selectedBrand.contains(p0.brand)).toList()
+    );  
+
+
+
+
+}
+
+
+String brandItem(int selectPage,int index,HomeScreenController homeScreenController){
+   return selectPage == 0
+                                              ? homeScreenController
+                                                  .skincare[index].brand!
+                                              : selectPage == 1
+                                                  ? homeScreenController
+                                                      .watche[index].brand!
+                                                  : selectPage == 2
+                                                      ? homeScreenController
+                                                          .bag[index].brand!
+                                                      : selectPage == 3
+                                                          ? homeScreenController
+                                                              .jewellery[index]
+                                                              .brand!
+                                                          : selectPage == 4
+                                                              ? homeScreenController
+                                                                  .eyewear[
+                                                                      index]
+                                                                  .brand!
+                                                              : homeScreenController
+                                                                  .shoes[index]
+                                                                  .brand!;
+}
+ 
+sortLisLowtoHigh(int selectPage,HomeScreenController homeScreenController){
+     selectPage == 0
+                                              ? homeScreenController.skincare.sort(
+                                                  ((a, b) => double.parse(a.price!)
+                                                      .toString()
+                                                      .compareTo(double.parse(b.price!)
+                                                          .toString())))
+                                              : selectPage == 1
+                                                  ? homeScreenController.watche.sort(
+                                                      ((a, b) => double.parse(a.price!)
+                                                          .toString()
+                                                          .compareTo(double.parse(b.price!)
+                                                              .toString())))
+                                                  : selectPage == 2
+                                                      ? homeScreenController.bag
+                                                          .sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
+                                                      : selectPage == 3
+                                                          ? homeScreenController.jewellery.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
+                                                          : selectPage == 4
+                                                              ? homeScreenController.eyewear.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
+                                                              : homeScreenController.shoes.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())));
+} 
+
+sortListHightoLow(int selectPage,HomeScreenController homeScreenController){
+
+ selectPage == 0
+                                            ? homeScreenController.skincare.sort(
+                                                ((b, a) => double.parse(a.price!)
+                                                    .toString()
+                                                    .compareTo(double.parse(b.price!)
+                                                        .toString())))
+                                            : selectPage == 1
+                                                ? homeScreenController.watche.sort(
+                                                    ((b, a) => double.parse(a.price!)
+                                                        .toString()
+                                                        .compareTo(double.parse(b.price!)
+                                                            .toString())))
+                                                : selectPage == 2
+                                                    ? homeScreenController.bag
+                                                        .sort(((b, a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
+                                                    : selectPage == 3
+                                                        ? homeScreenController.jewellery.sort(((b, a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
+                                                        : selectPage == 4
+                                                            ? homeScreenController.eyewear.sort(((b, a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
+                                                            : homeScreenController.shoes.sort(((b, a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())));
+
+
+
+} 
