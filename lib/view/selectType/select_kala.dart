@@ -80,14 +80,14 @@ class _SelectkalaState extends State<Selectkala> {
                   height: 450,
                   child: Column(children: [
                     SizedBox(
-                      height: 400,
+                      height: 450,
                       child: ListView.builder(
                         scrollDirection: Axis.vertical,
                         itemCount: brands?.length,
                         shrinkWrap: true,
                         itemBuilder: (BuildContext context, int index) =>
                             CheckboxListTile(
-                          title: Text(brands?[index]),
+                          title: Text(brands?[index],style: textStyle.headlineMedium,),
                           fillColor: MaterialStateProperty.all(Rang.blue),
                           onChanged: (bool? value) {
                             setState(
@@ -101,14 +101,15 @@ class _SelectkalaState extends State<Selectkala> {
                                  filterBrand(
                                       selectPage, filterListBrand, selectedBrand,homeScreenController);
                                 level.value=1;
-                                 print(filterListBrand.length.toString());
+                               
                                 } else {
                                  
                                   filterListBrand.removeWhere(
-                                      (e) => selectedBrand.contains(e.brand));
+                                      (e) => brands![index]==e.brand);
                                   selectedBrand.remove(brands![index]);
                                   print(filterListBrand.length.toString());
-                                 level.value=0;
+                                 filterListBrand.isEmpty?
+                                 level.value=0:level.value=1;
                                 }
                               
                               },
@@ -144,9 +145,13 @@ class _SelectkalaState extends State<Selectkala> {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: ((context) => Home())));
                           },
-                          child: const Icon(
-                            Icons.arrow_back_ios_new,
-                            color: Rang.blue,
+                          child: const SizedBox(
+                           
+                            height: 50,
+                            child:  Icon(
+                              Icons.arrow_back_ios_new,
+                              color: Rang.blue,
+                            ),
                           ),
                         ),
                         const SizedBox(
@@ -216,11 +221,30 @@ class _SelectkalaState extends State<Selectkala> {
                                           topRight: Radius.circular(30)),
                                       color: Colors.white,
                                     ),
-                                    height: Get.height / 4,
-                                    child: Column(
+                                    height: Get.height / 5,
+                                    child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
+
+                                       
+                                           const Padding(
+                                             padding:  EdgeInsets.all(15.0),
+                                             child:  Text(
+                                                                                 'Filter by',
+                                                                                 style: TextStyle(
+                                                                                     fontFamily: 'Auliare',
+                                                                                     color: Rang.greylight,
+                                                                                     fontWeight: FontWeight.bold),
+                                                                               ),
+                                           ),
+                                  
+                                  const Divider(
+                                    color: Rang.grey,
+                                    indent: 20,
+                                    endIndent: 30,
+                                    height: 1.5,
+                                  ),
                                         CheckboxListTile(
-                                            title: Text('Brand'),
+                                            title: Text('Brand',style: textStyle.headlineMedium,),
                                             fillColor:
                                                 MaterialStateProperty.all(
                                                     Rang.blue),
@@ -235,7 +259,7 @@ class _SelectkalaState extends State<Selectkala> {
                                                   : null;
                                             }),
                                         CheckboxListTile(
-                                            title: Text('Price'),
+                                            title: Text('Price',style: textStyle.headlineMedium,),
                                             fillColor:
                                                 MaterialStateProperty.all(
                                                     Rang.blue),
@@ -276,7 +300,7 @@ class _SelectkalaState extends State<Selectkala> {
                                 children: [
                                   const Padding(
                                     padding: EdgeInsets.only(
-                                        left: 25, bottom: 8, top: 8),
+                                        left: 25, bottom: 8, top: 15),
                                     child: Text(
                                       'Sort by',
                                       style: TextStyle(

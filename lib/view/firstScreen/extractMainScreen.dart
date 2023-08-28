@@ -362,11 +362,7 @@ void initState() {
                         })),
                   ),
 
-                  Container(
-                    width: double.infinity,
-                    height: 30,
-                    color:Rang.toosi
-                  ),
+                
                   Text('Contact us',
                       style: textStyle.bodyMedium),
                   const SizedBox(
