@@ -1,10 +1,13 @@
 import 'package:appstore/color/color.dart';
 import 'package:appstore/model/component.dart';
-import 'package:appstore/view/firstScreen/mainScreen.dart';
 
+import 'package:appstore/view/firstScreen/mainScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
+
+import '../../controller/homeScreenController.dart';
 
 class splash extends StatefulWidget {
   @override
@@ -12,14 +15,21 @@ class splash extends StatefulWidget {
 }
 
 class _splashState extends State<splash> {
+   var homeScreenController  =Get.put(HomeScreenController());
+
+
+
+
   @override
-  void initState() {
+void initState() {
     Future.delayed(const Duration(seconds: 2)).then((value) {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => Home()));
     });
-    super.initState();
+
+ super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +43,9 @@ class _splashState extends State<splash> {
               child: Column(
                 children: [
                   Text(
-                    'Welcome...  ',
-                    style: textStyle.headlineSmall,
+                    'Welcome...  '
+
+                    ,style: textStyle.headlineSmall,
                   ),
                   const SizedBox(
                     height: 40,

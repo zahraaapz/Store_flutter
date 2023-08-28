@@ -16,6 +16,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../model/component.dart';
+
 import '../review/review.dart';
 
 class DetailKala extends StatefulWidget {
@@ -38,20 +39,16 @@ List<Kala> kalaList;
 
 class _DetailKalaState extends State<DetailKala> {
   _DetailKalaState(
-       this.select, this.index,  this.kalalist, {this.isFavorite});
+ this.select, this.index,  this.kalalist, {this.isFavorite});
   List<Kala> kalalist;
   int select;
   var box=GetStorage();
   int index;
 bool ?isFavorite;
-   HomeScreenController homeScreenController = Get.put(HomeScreenController());
-
+final int randomValue=Random().nextInt(500000);
   @override
   Widget build(BuildContext context) {
-    
-    
-   final int randomValue=Random().nextInt(500000);
-    return SafeArea(
+   return SafeArea(
       child: Scaffold(
           body: SingleChildScrollView(
         child: Column(
@@ -82,17 +79,7 @@ bool ?isFavorite;
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             fit: BoxFit.fill,
-                            image: Image.asset(select == 0
-                                    ? kalalist[index].ima!
-                                    : select == 3
-                                        ? kalalist[index].ima!
-                                        : select == 1
-                                            ? kalalist[index].ima!
-                                            : select == 2
-                                                ? kalalist[index].ima!
-                                                : select == 4
-                                                    ? kalalist[index].ima!
-                                                    : kalalist[index].ima!)
+                            image: Image.asset(kalalist[index].ima!)
                                 .image),
                         borderRadius: BorderRadius.circular(30)),
                   ),
@@ -117,31 +104,11 @@ bool ?isFavorite;
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    select == 0
-                        ? kalalist[index].name!
-                        : select == 3
-                            ? kalalist[index].name!
-                            : select == 1
-                                ? kalalist[index].name!
-                                : select == 2
-                                    ? kalalist[index].name!
-                                    : select == 4
-                                        ? kalalist[index].name!
-                                        : kalalist[index].name!,
+                   kalalist[index].name!,
                     textScaleFactor: 1.9,style: textStyle.headlineMedium,
                   ),
                   Text(
-                    select == 0
-                        ? kalalist[index].brand!
-                        : select == 3
-                            ? kalalist[index].brand!
-                            : select == 1
-                                ? kalalist[index].brand!
-                                : select == 2
-                                    ? kalalist[index].brand!
-                                    : select == 4
-                                        ? kalalist[index].brand!
-                                        : kalalist[index].brand!,
+                kalalist[index].brand!,
                     textScaleFactor: 1.1,
                     style: textStyle.bodyMedium,
                     strutStyle: const StrutStyle(height: 2),
@@ -149,17 +116,7 @@ bool ?isFavorite;
                   Row(
                     children: [
                       Text(
-                        select == 0
-                            ? '${kalalist[index].price}\$'
-                            : select == 3
-                                ? '${kalalist[index].price}\$'
-                                : select == 1
-                                    ? '${kalalist[index].price}\$'
-                                    : select == 2
-                                        ? '${kalalist[index].price}\$'
-                                        : select == 4
-                                            ? '${kalalist[index].price}\$'
-                                            : '${kalalist[index].price}\$',
+                       '${kalalist[index].price}\$',
                         textScaleFactor: 1.6,
                         strutStyle: const StrutStyle(height: 2),style: textStyle.bodyMedium,
                       ),
@@ -387,6 +344,7 @@ bool ?isFavorite;
                     scrollDirection: Axis.horizontal,
                     itemCount: 2,
                     itemBuilder: ((context, index) {
+                      HomeScreenController homeScreenController=Get.put(HomeScreenController());
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: SizedBox(
@@ -398,7 +356,22 @@ bool ?isFavorite;
                                   borderRadius: BorderRadius.circular(20),
                                   image: DecorationImage(
                                       fit: BoxFit.fill,
-                                      image: AssetImage(kalalist[index].ima!))),
+                                      image: AssetImage(
+                                        select==0?
+                                        
+                                        homeScreenController.skincare[index].ima!: select==1?
+                                        
+                                        homeScreenController.watche[index].ima!: select==2?
+                                        
+                                        homeScreenController.bag[index].ima!: select==3?
+                                        
+                                        homeScreenController.jewellery[index].ima!: select==4?
+                                        
+                                        homeScreenController.eyewear[index].ima!:
+                                        homeScreenController.shoes[index].ima!
+                                        
+                                        
+                                        ))),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -409,18 +382,45 @@ bool ?isFavorite;
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(kalalist[index].brand!,style: textStyle.bodyMedium,),
+                                      Text(  select==0?
+                                        
+                                        homeScreenController.skincare[index].brand!: select==1?
+                                        
+                                        homeScreenController.watche[index].brand!: select==2?
+                                        
+                                        homeScreenController.bag[index].brand!: select==3?
+                                        
+                                        homeScreenController.jewellery[index].brand!: select==4?
+                                        
+                                        homeScreenController.eyewear[index].brand!:
+                                        homeScreenController.shoes[index].brand!,style: textStyle.bodyMedium,),
                                       const Icon(
                                         Icons.favorite_border,
                                         size: 20,
                                       ),
                                     ],
                                   ),
-                                  Text(
-                                    kalalist[index].name!
+                                  Text( select==0?
+                                        
+                                        homeScreenController.skincare[index].name!: select==1?
+                                        
+                                        homeScreenController.watche[index].name!: select==2?
+                                        
+                                        homeScreenController.bag[index].name!: select==3?
+                                        
+                                        homeScreenController.jewellery[index].name!: select==4?
+                                        
+                                        homeScreenController.eyewear[index].name!:
+                                        homeScreenController.shoes[index].name!
+                                   
 ,style: textStyle.bodyMedium                                  ),
-                                  Text(
-                                    '${kalalist[index].price}\$',
+                                  Text(select==0?
+                                    '${homeScreenController.skincare[index].price!}\$':select==1?
+                                    '${homeScreenController.watche[index].price!}\$':select==2?
+                                    '${homeScreenController.bag[index].price!}\$':select==3?
+                                    '${homeScreenController.jewellery[index].price!}\$':select==4?
+                                    '${homeScreenController.eyewear[index].price!}\$':
+                                    '${homeScreenController.shoes[index].price!}\$',
                                     strutStyle: const StrutStyle(height: 2),style: textStyle.bodyMedium
                                   ),
                                 ],
