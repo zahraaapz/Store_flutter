@@ -43,12 +43,7 @@ HomeScreenController homeScreenController=Get.put(HomeScreenController());
         
 
         });
-    if (temp.any((item) => item.name!.toLowerCase().contains(query.toLowerCase()) ||
-       item.brand!.toLowerCase().contains(query.toLowerCase()))==false) {
-
-       Future.delayed(const Duration(seconds:5)).then((value) => Get.to(SearchResult()));
-
-       }
+  
         
     } 
 
@@ -66,7 +61,7 @@ void resultSeach(String query) {
     if (temp.any((item) => item.name!.toLowerCase().contains(query.toLowerCase()) ||
        item.brand!.toLowerCase().contains(query.toLowerCase()))==false) {
 
-        Get.to(SearchResult());
+        Get.to(const SearchResult());
 
        }
         

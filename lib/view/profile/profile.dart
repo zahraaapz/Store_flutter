@@ -101,29 +101,32 @@ style: textStyle.headlineMedium,                        ),
               ),
             ),
           ),
-           Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: GestureDetector(
-              onTap: () => Get.to(Personal()),
-              child:  SizedBox(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Personal Informantion',
-                      style: textStyle.headlineMedium,
-                    ),
-                    const Icon(Icons.arrow_forward_ios_outlined)
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: GestureDetector(
-              onTap: () => Get.offAll(Address()),
-              child:  SizedBox(
+           GestureDetector(
+             onTap: () => Get.to(Personal()),
+             child:  Padding(
+               padding: const EdgeInsets.only(left:8.0,right:8),
+               child: SizedBox(
+                
+                 height: 50,
+                 child: Row(
+                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                   children: [
+                     Text(
+                       'Personal Informantion',
+                       style: textStyle.headlineMedium,
+                     ),
+                     const Icon(Icons.arrow_forward_ios_outlined)
+                   ],
+                 ),
+               ),
+             ),
+           ),
+          GestureDetector(
+            onTap: () => Get.offAll(Address()),
+            child:  Padding(
+              padding: const EdgeInsets.only(left:8.0,right:8),
+              child: SizedBox(
+                height:50,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

@@ -37,7 +37,6 @@ class _SelectkalaState extends State<Selectkala> {
   RxList<Kala> filterPrice = RxList();
   List<bool>? checkBoxBrands;
   int selectPage;
-  late int indx;
   late int lenght;
   final HomeScreenController homeScreenController;
   late List<bool> fav;
@@ -93,7 +92,7 @@ class _SelectkalaState extends State<Selectkala> {
                             setState(
                               () {
                                 checkBoxBrands![index] = value!;
-                                indx = index;
+                                
 
                                 if (checkBoxBrands![index] == true ) {
                                   selectedBrand.add(brands![index]);
@@ -378,7 +377,7 @@ class _SelectkalaState extends State<Selectkala> {
     ));
   }
 
-  Future<dynamic> bottomSheetLimitedPrice(BuildContext context) {
+Future<dynamic> bottomSheetLimitedPrice(BuildContext context) {
     return showModalBottomSheet(
         context: context,
         builder: (context) => StatefulBuilder(
@@ -410,7 +409,9 @@ class _SelectkalaState extends State<Selectkala> {
                             () {
                               val = value;
 
-                              filterPrice.assignAll(homeScreenController.bag
+                              switch(selectPage){
+                               case 0:
+                                 filterPrice.assignAll(homeScreenController.skincare
                                   .where((element) =>
                                       double.tryParse(
                                               element.price.toString())! >=
@@ -418,10 +419,58 @@ class _SelectkalaState extends State<Selectkala> {
                                       double.tryParse(
                                               element.price.toString())! <=
                                           val!.end));
-                                
+                                 break;         
+                               case 1:
+                                 filterPrice.assignAll(homeScreenController.watche
+                                  .where((element) =>
+                                      double.tryParse(
+                                              element.price.toString())! >=
+                                          val!.start &&
+                                      double.tryParse(
+                                              element.price.toString())! <=
+                                          val!.end)) ;
+                                          break;
+                                case 2:
+                                  filterPrice.assignAll(homeScreenController.skincare
+                                  .where((element) =>
+                                      double.tryParse(
+                                              element.price.toString())! >=
+                                          val!.start &&
+                                      double.tryParse(
+                                              element.price.toString())! <=
+                                          val!.end));break;
+                                   case 3:
+                                     filterPrice.assignAll(homeScreenController.jewellery
+                                  .where((element) =>
+                                      double.tryParse(
+                                              element.price.toString())! >=
+                                          val!.start &&
+                                      double.tryParse(
+                                              element.price.toString())! <=
+                                          val!.end)) ;break;
+                                     case 4:
+                                       filterPrice.assignAll(homeScreenController.eyewear
+                                  .where((element) =>
+                                      double.tryParse(
+                                              element.price.toString())! >=
+                                          val!.start &&
+                                      double.tryParse(
+                                              element.price.toString())! <=
+                                          val!.end));break;
+                                         case 5:
+                                           filterPrice.assignAll(homeScreenController.shoes
+                                  .where((element) =>
+                                      double.tryParse(
+                                              element.price.toString())! >=
+                                          val!.start &&
+                                      double.tryParse(
+                                              element.price.toString())! <=
+                                          val!.end));break;                                
+
+                              }
+                      
                             level.value=2;
-                            print(filterPrice.length);
-                            print(level);
+                         
                             },
                           );
                         },
