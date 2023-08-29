@@ -1,14 +1,14 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
-import 'package:appstore/address.dart';
+import 'package:appstore/view/address/address.dart';
 import 'package:appstore/view/firstScreen/mainScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import 'color/color.dart';
-import 'model/component.dart';
+import '../../color/color.dart';
+import '../../model/component.dart';
 
 class Payments extends StatelessWidget {
 
@@ -121,7 +121,7 @@ const  SizedBox(height: 10,),
                   
                   ],
                 )
-              ),
+              ),SizedBox(height: 80,),
                   SizedBox(
                     width: double.infinity,
                 height: 50,

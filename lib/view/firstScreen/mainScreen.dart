@@ -1,6 +1,6 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:appstore/bag.dart';
+import 'package:appstore/view/buy/bag.dart';
 import 'package:appstore/view/firstScreen/extractMainScreen.dart';
 import 'package:appstore/model/Model.dart';
 

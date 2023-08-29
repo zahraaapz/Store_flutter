@@ -2,12 +2,12 @@
 
 import 'package:appstore/color/color.dart';
 import 'package:appstore/model/Model.dart';
-import 'package:appstore/payment.dart';
+import 'package:appstore/view/payment/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import 'model/component.dart';
+import '../../model/component.dart';
 
 class Address extends StatelessWidget{
 
@@ -60,10 +60,10 @@ return SafeArea(
         controller: fullname,
                 decoration: InputDecoration(
           hintText: 'Full name',
-        helperStyle: TextStyle(color: Rang.grey),
+        helperStyle: const TextStyle(color: Rang.grey),
                   border: OutlineInputBorder(borderSide:BorderSide.none,borderRadius: BorderRadius.circular(15)),
         
-                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Rang.toosi),borderRadius: BorderRadius.circular(15))
+                  focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Rang.toosi),borderRadius: BorderRadius.circular(15))
         
                 ),
         
@@ -91,10 +91,10 @@ return SafeArea(
         keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
           hintText: '49',
-        helperStyle: TextStyle(color: Rang.grey),
+        helperStyle: const TextStyle(color: Rang.grey),
                   border: OutlineInputBorder(borderSide: BorderSide.none,borderRadius: BorderRadius.circular(15)),
         
-                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Rang.toosi),borderRadius: BorderRadius.circular(15))
+                  focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Rang.toosi),borderRadius: BorderRadius.circular(15))
         
                 ),
         
@@ -116,10 +116,10 @@ return SafeArea(
         keyboardType:TextInputType.phone,
                 decoration: InputDecoration(
         hintText: 'Contact number',
-        helperStyle: TextStyle(color: Rang.grey),
+        helperStyle: const TextStyle(color: Rang.grey),
                   border: OutlineInputBorder(borderSide: BorderSide.none,borderRadius: BorderRadius.circular(15)),
         
-                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Rang.toosi),borderRadius: BorderRadius.circular(15))
+                  focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Rang.toosi),borderRadius: BorderRadius.circular(15))
         
                 ),
         
@@ -131,7 +131,7 @@ return SafeArea(
           SizedBox(height: 120,),
                   Text('Delivery Address',style: textStyle.bodyMedium),
         
-          Divider(
+          const Divider(
         
             thickness: 1,color: Rang.grey,endIndent: 5,indent:5 ,
         
@@ -150,10 +150,10 @@ return SafeArea(
         controller:pinCode,
                 decoration: InputDecoration(
         hintText: 'Pin code',
-        helperStyle: TextStyle(color: Rang.grey),
+        helperStyle: const TextStyle(color: Rang.grey),
                   border: OutlineInputBorder(borderSide: BorderSide.none,borderRadius: BorderRadius.circular(15)),
         
-                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Rang.toosi),borderRadius: BorderRadius.circular(15))
+                  focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Rang.toosi),borderRadius: BorderRadius.circular(15))
         
                 ),
         
@@ -172,10 +172,10 @@ return SafeArea(
         controller: street,
                 decoration: InputDecoration(
         hintText: 'Street Address',
-        helperStyle: TextStyle(color: Rang.grey),
+        helperStyle: const TextStyle(color: Rang.grey),
                   border: OutlineInputBorder(borderSide: BorderSide.none,borderRadius: BorderRadius.circular(15)),
         
-                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Rang.toosi),borderRadius: BorderRadius.circular(15))
+                  focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Rang.toosi),borderRadius: BorderRadius.circular(15))
         
                 ),
         
@@ -193,10 +193,10 @@ return SafeArea(
         controller: city,
                 decoration: InputDecoration(
         hintText: 'City',
-        helperStyle: TextStyle(color: Rang.grey),
+        helperStyle: const TextStyle(color: Rang.grey),
                   border: OutlineInputBorder(borderSide: BorderSide.none,borderRadius: BorderRadius.circular(15)),
         
-                  focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Rang.toosi),borderRadius: BorderRadius.circular(15))
+                  focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Rang.toosi),borderRadius: BorderRadius.circular(15))
         
                 ),
         
@@ -222,7 +222,7 @@ return SafeArea(
                           height: 30,
                           width: 50,
                           decoration: BoxDecoration(
-                            color: select==index?Rang.blue:Rang.toosi,
+                            color: select.value==index?Rang.blue:Rang.toosi,
                             borderRadius: BorderRadius.circular(15)
                           ),
                       child: Center(child: Text(addresslist[index],style: TextStyle(color: select.value==index?Colors.white:Rang.grey,fontFamily: 'Auliare'),)),  ),
@@ -233,7 +233,7 @@ return SafeArea(
                 
               ),
             ),
-            const SizedBox(height: 20,)
+            const SizedBox(height: 40,)
 ,            SizedBox(
               width: double.infinity,
               height: 50,
@@ -245,9 +245,10 @@ box.write('preNum', preNum.text);
 box.write('street', street.text);
 box.write('city', city.text);
 
-print(box.read('city'));
 
-if(street.text.isNotEmpty && city.text.isNotEmpty) {
+
+if(street.text.isNotEmpty && city.text.isNotEmpty &&fullname.text.isNotEmpty&&
+ preNum.text.isNotEmpty&& number.text.isNotEmpty&&pinCode.text.isNotEmpty ) {
   Navigator.push(context, MaterialPageRoute(builder: (context)=>Payments()));
 }else{
 

@@ -42,7 +42,7 @@ class _ReviewState extends State<Review> {
     var value = await http.get(Uri.parse(url));
 
     List json = convert.jsonDecode(value.body);
-    if (2.isFinite) {
+    if (comment.isEmpty) {
       ///:(
       for (int i = 0; i < json.length; i++) {
         setState(() {
@@ -129,6 +129,7 @@ class _ReviewState extends State<Review> {
                             collapsed: collapseComment(context, comment),
                             expanded: expandedComment(context, comment),
                           ))),
+                         
                           ExpandableNotifier(
                               child: ScrollOnExpand(
                                   child: Expandable(
@@ -187,13 +188,14 @@ collapseComment(context, List<Comment> comment) {
           ],
         ),
         Text(comment[1].review,style: textStyle.bodyMedium,),
+        SizedBox(height: 5,),
         Builder(
           builder: (context) {
             var controller = ExpandableController.of(context, required: true)!;
             return InkWell(
               child:  Text(
                 'more',
-                style: textStyle.headlineMedium,
+                style: textStyle.bodySmall,
               ),
               onTap: () {
                 controller.toggle();
@@ -273,7 +275,7 @@ expandedComment(context, List<Comment> comment) {
             onTap: () => controller.toggle(),
             child:  Text(
               'less',
-              style: textStyle.bodyMedium,
+              style: textStyle.bodySmall,
             ));
       })
     ],
@@ -282,14 +284,16 @@ expandedComment(context, List<Comment> comment) {
 
 write() {
   return Column(children: [
+     SizedBox(height: 300,),
     Builder(builder: (context) {
       var controller = ExpandableController.of(context, required: true)!;
-
+      
       return Container(
         width: double.infinity,
         height: 50,
         child: ElevatedButton(
             style: ButtonStyle(
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
                 backgroundColor: MaterialStateProperty.all(Rang.blue)),
             onPressed: () {
               controller.toggle();
@@ -310,57 +314,57 @@ write() {
 }
 
 descripe() {
-  return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-    Builder(builder: (context) {
-      var controller = ExpandableController.of(context, required: true)!;
-      return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text('Review Description',style: textStyle.bodyMedium,),
-        SizedBox(
-          height: 12,
+  return Builder(builder: (context) {
+    var controller = ExpandableController.of(context, required: true)!;
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Text('Review Description',style: textStyle.bodyMedium,),
+      SizedBox(
+        height: 12,
+      ),
+      Container(
+        width: double.infinity,
+        height: 200,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15), color: Rang.toosi),
+        child: TextField(
+          keyboardType: TextInputType.multiline,
+          maxLines: 3,
+          decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Rang.toosi)),
+              hintText: 'Enter Description',
+              border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.circular(15))),
         ),
-        Container(
-          width: double.infinity,
-          height: 100,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15), color: Rang.toosi),
-          child: TextField(
-            keyboardType: TextInputType.multiline,
-            maxLines: 3,
-            decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Rang.toosi)),
-                hintText: 'Enter Description',
-                border: OutlineInputBorder(
-                    borderSide: BorderSide.none,
-                    borderRadius: BorderRadius.circular(15))),
-          ),
-        ),
-        Container(
-          width: double.infinity,
-          height: 50,
-          child: ElevatedButton(
-              style: ButtonStyle(
-                shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15))),
-                backgroundColor: MaterialStateProperty.all(Rang.blue),
-              ),
-              onPressed: () {
-                controller.toggle();
-                _snackbar(context);
-              },
-              child: Row(
-                children: [
-                  Icon(Icons.add),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  Text('Save',style: textStyle.headlineLarge,),
-                ],
-              )),
-        )
-      ]);
-    })
-  ]);
+      ),
+     SizedBox(height: 100,)
+      ,
+      SizedBox(
+        width: double.infinity,
+        height: 50,
+        child: ElevatedButton(
+            style: ButtonStyle(
+              shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15))),
+              backgroundColor: MaterialStateProperty.all(Rang.blue),
+            ),
+            onPressed: () {
+              controller.toggle();
+              _snackbar(context);
+            },
+            child: Row(
+              children: [
+                Icon(Icons.add),
+                SizedBox(
+                  width: 8,
+                ),
+                Text('Save',style: textStyle.headlineLarge,),
+              ],
+            )),
+      )
+    ]);
+  });
 }
 
 _snackbar(context) {

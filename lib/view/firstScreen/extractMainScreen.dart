@@ -19,7 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../controller/pick_file.dart';
-import '../../notif.dart';
+import '../notifition/notif.dart';
 
 
 class Extractmainscreen extends StatefulWidget {

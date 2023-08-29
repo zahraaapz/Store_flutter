@@ -3,7 +3,7 @@
 import 'dart:io';
 
 import 'package:appstore/view/profile/personal_info.dart';
-import 'package:appstore/address.dart';
+import 'package:appstore/view/address/address.dart';
 import 'package:appstore/color/color.dart';
 import 'package:appstore/controller/pick_file.dart';
 
@@ -171,7 +171,7 @@ style: textStyle.headlineMedium,                        ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(left: 8,top: 30,right: 8),
             child: SizedBox(
               height: 50,
               width: double.infinity,

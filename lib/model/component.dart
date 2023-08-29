@@ -6,7 +6,7 @@ ButtonStyle buttonModel() {
     return ButtonStyle(
                 backgroundColor: const MaterialStatePropertyAll(Rang.blue),
                 shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12))));
+                    borderRadius: BorderRadius.circular(15))));
   }
 
     Text contentEmptyPages(String title) {

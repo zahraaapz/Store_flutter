@@ -62,7 +62,7 @@ class _SelectkalaState extends State<Selectkala> {
     prices = List.generate(
         lenght,
         (index) =>
-            double.parse(homeScreenController.bag[index].price.toString()));
+            double.parse(priceLists(selectPage,homeScreenController,index).toString()));
     prices!.sort();
     val = RangeValues(
       prices!.first,
@@ -277,7 +277,7 @@ class _SelectkalaState extends State<Selectkala> {
                                   ));
                         }));
                   },
-                  child: const Icon(Icons.filter)),
+                  child: const Icon(Icons.filter_alt_outlined)),
               InkWell(
                 onTap: (() {
                   showModalBottomSheet(
@@ -477,17 +477,7 @@ Future<dynamic> bottomSheetLimitedPrice(BuildContext context) {
                         values: val!,
                       ),
                     ),
-                    ElevatedButton(
-                        onPressed: () {
-                          setState(() {});
-                        },
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15))),
-                            backgroundColor:
-                                MaterialStateProperty.all(Rang.blue)),
-                        child: Text('Apply', style: textStyle.headlineLarge))
+                  
                   ],
                 ))));
   }
@@ -607,6 +597,19 @@ int lenghtLists(int selectPage,HomeScreenController homeScreenController){
                     : selectPage == 4
                         ? homeScreenController.eyewear.length
                         : homeScreenController.shoes.length;
+}
+String  priceLists(int selectPage,HomeScreenController homeScreenController,int index){
+ return  selectPage == 0
+        ?homeScreenController.skincare[index].price!
+        : selectPage == 1 
+            ?homeScreenController.watche[index].price!
+            : selectPage == 2
+                ? homeScreenController.bag[index].price!
+                : selectPage == 3
+                    ? homeScreenController.jewellery[index].price!
+                    : selectPage == 4
+                        ? homeScreenController.eyewear[index].price!
+                        : homeScreenController.shoes[index].price!;
 }
 
 filterBrand(int selectPage,List<Kala>filterList,List selectedBrand,HomeScreenController homeScreenController){

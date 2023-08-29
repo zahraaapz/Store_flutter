@@ -1,14 +1,14 @@
-import 'package:appstore/address.dart';
+import 'package:appstore/view/address/address.dart';
 import 'package:appstore/color/color.dart';
 
-import 'package:appstore/payment.dart';
+import 'package:appstore/view/payment/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'model/Model.dart';
-import 'model/component.dart';
-import 'model/string.dart';
-import 'view/firstScreen/mainScreen.dart';
+import '../../model/Model.dart';
+import '../../model/component.dart';
+import '../../model/string.dart';
+import '../firstScreen/mainScreen.dart';
 
 class Bag extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
