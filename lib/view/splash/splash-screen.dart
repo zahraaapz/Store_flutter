@@ -43,7 +43,7 @@ void initState() {
               child: Column(
                 children: [
                   Text(
-                    'Welcome...  '
+                    'Wellcome...  '
 
                     ,style: textStyle.headlineSmall,
                   ),

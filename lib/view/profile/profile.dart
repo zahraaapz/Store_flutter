@@ -85,11 +85,11 @@ PickFileController pickFileController=Get.put(PickFileController());
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children:  [
-                        Text(Personal().box.read('fullName') ?? '--',style: textStyle.headlineMedium,),
-                        Text(Personal().box.read('number')??'--',style: textStyle.headlineMedium,),
+                        Text(Personal().box.read('fullName') ?? '--',style: textStyle.bodySmall,),
+                        Text(Personal().box.read('number')??'--',style: textStyle.bodySmall,),
                         Text(
                          Personal().box.read('email')??'--',
-style: textStyle.headlineMedium,                        ),
+style: textStyle.bodySmall,                        ),
                       ],
                     ),
                     const Icon(

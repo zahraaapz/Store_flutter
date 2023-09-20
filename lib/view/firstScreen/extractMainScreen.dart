@@ -609,52 +609,53 @@ SizedBox suggList(size,fav) {//suggestion List
                                                               ((context, index) {
                                                           return
                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets.all(
-                                                                        2.0),
-                                                                child: 
-                                                                  InkWell(
-                                                                    onTap: () {
-                                                                     
-                                                                        select.value = index;
-                                                                     
-                                                                    },
-                                                                    child:
-                                                                      AnimatedContainer(
-                                                                      height: 80,
-                                                                      width: 50,
-                                                                      decoration: BoxDecoration(
-                                                                          border: Border.all(
-                                                                              color: Rang
-                                                                                  .blue),
-                                                                          color: select ==
-                                                                                  index
-                                                                              ? const Color
-                                                                                      .fromARGB(
-                                                                                  82,
-                                                                                  61,
-                                                                                  123,
-                                                                                  159)
-                                                                              : Colors
-                                                                                  .white,
-                                                                          borderRadius:
-                                                                              BorderRadius
-                                                                                  .circular(
-                                                                                      45)),
-                                                                      duration:
-                                                                          const Duration(
-                                                                              milliseconds:
-                                                                                  200),
-                                                                      child: Center(
-                                                                        child: Text(sizepa[
-                                                                                index]
-                                                                            .toString(),style:textStyle.bodyMedium),
-                                                                      ),
+                                                               padding: const EdgeInsets.all(2.0),
+                                                               child: GestureDetector(
+                                                             
+                                                                onTap: () {
+                                                                  select.value=index;
+                                                                },
+                                                             
+                                                             
+                                                             
+                                                                 child: Obx(
+                                                                   ()=> AnimatedContainer(
+                                                                   height: 80,
+                                                                     width:50,                                                      
+                                                                   decoration: BoxDecoration(
                                                                    
-                                                                                                                             
-                                                                                                                            ),
-                                                                ),
-                                                            );
+                                                                       border: Border.all(
+                                                                           color: Rang
+                                                                               .blue),
+                                                                       color: select.value ==
+                                                                               index
+                                                                           ? const Color
+                                                                                   .fromARGB(
+                                                                               82,
+                                                                               61,
+                                                                               123,
+                                                                               159)
+                                                                           : Colors
+                                                                               .white,
+                                                                       borderRadius:
+                                                                           BorderRadius
+                                                                               .circular(
+                                                                                   45)),
+                                                                   duration:
+                                                                       const Duration(
+                                                                           milliseconds:
+                                                                               200),
+                                                                   child: Center(
+                                                                     child: Text(sizepa[
+                                                                             index]
+                                                                         .toString(),style:textStyle.bodyMedium),
+                                                                   ),
+                                                                    
+                                                                                                                          
+                                                                                                                         ),
+                                                                 ),
+                                                               ),
+                                                             );
                                                           })),
                                                     ),
                                                   ],

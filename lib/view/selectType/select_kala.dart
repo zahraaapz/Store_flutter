@@ -431,7 +431,7 @@ Future<dynamic> bottomSheetLimitedPrice(BuildContext context) {
                                           val!.end)) ;
                                           break;
                                 case 2:
-                                  filterPrice.assignAll(homeScreenController.skincare
+                                  filterPrice.assignAll(homeScreenController.bag
                                   .where((element) =>
                                       double.tryParse(
                                               element.price.toString())! >=
