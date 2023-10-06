@@ -1,5 +1,5 @@
-import 'package:appstore/color/color.dart';
-import 'package:appstore/model/component.dart';
+import 'package:appstore/constant/color/color.dart';
+import 'package:appstore/constant/widget/component.dart';
 
 import 'package:appstore/view/firstScreen/mainScreen.dart';
 import 'package:flutter/cupertino.dart';

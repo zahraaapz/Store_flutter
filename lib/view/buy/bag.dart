@@ -1,13 +1,13 @@
 import 'package:appstore/view/address/address.dart';
-import 'package:appstore/color/color.dart';
+import 'package:appstore/constant/color/color.dart';
 
 import 'package:appstore/view/payment/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../model/Model.dart';
-import '../../model/component.dart';
-import '../../model/string.dart';
+import '../../constant/widget/component.dart';
+import '../../constant/strings/string.dart';
 import '../firstScreen/mainScreen.dart';
 
 class Bag extends StatefulWidget {
@@ -48,23 +48,10 @@ class _BagState extends State<Bag> {
                         const SizedBox(
                           height: 100,
                         ),
-                        SizedBox(
-                          height: 50,
-                          width: 250,
-                          child: ElevatedButton(
-                            onPressed: (() {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: ((context) => Home())));
-                            }),
-                            style: buttonModel(),
-                            child:  Text(
-                              'continue shopping'
-                             ,style: textStyle.headlineLarge,
-                            ),
-                          ),
-                        )
+                     ButtonWidget(
+                      onPressed: ()=>_onPressed(),
+                      title: 'continue shopping',
+                     )
                       ],
                     )
                   : Column(children: [
@@ -352,6 +339,12 @@ class _BagState extends State<Bag> {
           )
         ]);
   }
+     _onPressed() {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: ((context) => Home())));
+                            }
 }
 
 class cut extends CustomClipper<Path> {

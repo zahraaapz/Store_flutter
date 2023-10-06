@@ -2,9 +2,8 @@ import 'package:appstore/view/firstScreen/mainScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../color/color.dart';
-import '../../model/component.dart';
+import '../../constant/color/color.dart';
+import '../../constant/widget/component.dart';
 import '../profile/personal_info.dart';
 
 class Notif extends StatelessWidget {
@@ -70,29 +69,9 @@ class Notif extends StatelessWidget {
                                   const SizedBox(
                                   height: 20,
                                 ),
-                                SizedBox(
-                                  width: 350,
-                                  height: 60,
-                                  child: ElevatedButton(
-                    style: ButtonStyle(
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                        ),
-                        side: MaterialStateProperty.all(
-                            const BorderSide(color: Rang.blue, width: 1.5)),
-                        backgroundColor:
-                            MaterialStateProperty.resolveWith((states) {
-                          if (states.contains(MaterialState.pressed)) {
-                            return Rang.blue;
-                          }
-                          return Colors.white;
-                        })),
-                    onPressed: () {Get.to(Home());},
-                    child: Text(
-                      'Shop now',
-                     style: textStyle.displaySmall,
-                    )),
+                                ButtonWidgetRevesed(
+                                  title:  'Shop now',
+                                  onPressed: _onPressed,
                                 ),  ],
                     ),
                   ),
@@ -133,4 +112,5 @@ class Notif extends StatelessWidget {
       ),
     );
   }
-}
+   _onPressed () {Get.to(Home());}}
+

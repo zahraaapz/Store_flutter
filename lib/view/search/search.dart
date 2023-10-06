@@ -1,4 +1,4 @@
-import 'package:appstore/color/color.dart';
+import 'package:appstore/constant/color/color.dart';
 import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/view/firstScreen/mainScreen.dart';
 
@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../model/Model.dart';
-import '../../model/component.dart';
+import '../../constant/widget/component.dart';
 import 'searchResult.dart';
 
 

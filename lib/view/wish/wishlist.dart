@@ -5,9 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../model/component.dart';
-import '../../model/string.dart';
-import '../firstScreen/mainScreen.dart';
+import '../../constant/widget/component.dart';
+import '../../constant/strings/string.dart';
 
 class Wish extends StatefulWidget {
 
@@ -53,30 +52,13 @@ class _WishState extends State<Wish> {
           const SizedBox(
             height: 100,
           ),
-          SizedBox(
+          const SizedBox(
             height: 50,
             width: 250,
-            child: ElevatedButton(
-              onPressed: (() {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: ((context) => Home())));
-              }),
-              style: buttonModel(),
-              child:  Text(
-                'start shopping'
-                ,style: textStyle.headlineLarge,
+            child: ButtonWidget(
+              title:'start shopping'
               ),
-            ),
           )
-
-
-
-
-
-
-
-
-
 
       ],)
       :SizedBox(

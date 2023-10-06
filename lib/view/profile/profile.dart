@@ -4,13 +4,13 @@ import 'dart:io';
 
 import 'package:appstore/view/profile/personal_info.dart';
 import 'package:appstore/view/address/address.dart';
-import 'package:appstore/color/color.dart';
+import 'package:appstore/constant/color/color.dart';
 import 'package:appstore/controller/pick_file.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../model/component.dart';
+import '../../constant/widget/component.dart';
 
 class Profile extends StatelessWidget {
    Profile({super.key});
@@ -172,33 +172,9 @@ style: textStyle.bodySmall,                        ),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 8,top: 30,right: 8),
-            child: SizedBox(
-              height: 50,
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.resolveWith(((states) {
-                      return states.contains(MaterialState.pressed)
-                          ? Rang.blue
-                          : Colors.white;
-                    })),
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                    ),
-                    side: MaterialStateProperty.all(
-                        const BorderSide(color: Rang.blue, width: 2))),
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  const Icon(Icons.logout, color: Rang.blue),
-                  Text(
-                    'Log out',
-                    style: textStyle.displaySmall
-                  )
-                ]),
-              ),
+            child: ButtonWidgetRevesed(
+              title:  'Log Out',
+              iconData: Icons.exit_to_app,
             ),
           )
         ]),

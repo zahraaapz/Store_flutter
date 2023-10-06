@@ -1,7 +1,7 @@
 
 
-import 'package:appstore/color/color.dart';
-import 'package:appstore/model/component.dart';
+import 'package:appstore/constant/color/color.dart';
+import 'package:appstore/constant/widget/component.dart';
 import 'package:expandable/expandable.dart';
 
 import 'package:flutter/material.dart';

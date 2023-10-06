@@ -6,7 +6,7 @@ import 'package:appstore/model/Model.dart';
 
 
 
-import 'package:appstore/color/color.dart';
+import 'package:appstore/constant/color/color.dart';
 import 'package:appstore/view/profile/profile.dart';
 import 'package:appstore/view/wish/wishlist.dart';
 

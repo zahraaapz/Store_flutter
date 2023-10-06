@@ -1,6 +1,6 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:appstore/color/color.dart';
+import 'package:appstore/constant/color/color.dart';
 import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/view/firstScreen/mainScreen.dart';
@@ -13,8 +13,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../../model/component.dart';
-
+import '../../constant/widget/component.dart';
 
 class Selectkala extends StatefulWidget {
   int select;
@@ -29,7 +28,7 @@ class Selectkala extends StatefulWidget {
 }
 
 class _SelectkalaState extends State<Selectkala> {
-  RxInt level=0.obs;
+  RxInt level = 0.obs;
   String? selectRadioTile;
   RxList<Kala> filterListBrand = RxList();
   List<bool> checkBoxPriceBrand = [false, false];
@@ -53,16 +52,16 @@ class _SelectkalaState extends State<Selectkala> {
   @override
   initState() {
     super.initState();
-    lenght = lenghtLists(selectPage,homeScreenController);
+    lenght = lenghtLists(selectPage, homeScreenController);
     fav = List.generate(lenght, (index) => box.read('fav$index') ?? false);
     checkBoxBrands = List.generate(lenght, (index) => false);
     brands = List.generate(
-        lenght, (index) => brandItem(selectPage, index,homeScreenController));
+        lenght, (index) => brandItem(selectPage, index, homeScreenController));
 
     prices = List.generate(
         lenght,
-        (index) =>
-            double.parse(priceLists(selectPage,homeScreenController,index).toString()));
+        (index) => double.parse(
+            priceLists(selectPage, homeScreenController, index).toString()));
     prices!.sort();
     val = RangeValues(
       prices!.first,
@@ -86,31 +85,31 @@ class _SelectkalaState extends State<Selectkala> {
                         shrinkWrap: true,
                         itemBuilder: (BuildContext context, int index) =>
                             CheckboxListTile(
-                          title: Text(brands?[index],style: textStyle.headlineMedium,),
+                          title: Text(
+                            brands?[index],
+                            style: textStyle.headlineMedium,
+                          ),
                           fillColor: MaterialStateProperty.all(Rang.blue),
                           onChanged: (bool? value) {
                             setState(
                               () {
                                 checkBoxBrands![index] = value!;
-                                
 
-                                if (checkBoxBrands![index] == true ) {
+                                if (checkBoxBrands![index] == true) {
                                   selectedBrand.add(brands![index]);
 
-                                 filterBrand(
-                                      selectPage, filterListBrand, selectedBrand,homeScreenController);
-                                level.value=1;
-                               
+                                  filterBrand(selectPage, filterListBrand,
+                                      selectedBrand, homeScreenController);
+                                  level.value = 1;
                                 } else {
-                                 
                                   filterListBrand.removeWhere(
-                                      (e) => brands![index]==e.brand);
+                                      (e) => brands![index] == e.brand);
                                   selectedBrand.remove(brands![index]);
                                   print(filterListBrand.length.toString());
-                                 filterListBrand.isEmpty?
-                                 level.value=0:level.value=1;
+                                  filterListBrand.isEmpty
+                                      ? level.value = 0
+                                      : level.value = 1;
                                 }
-                              
                               },
                             );
                           },
@@ -145,9 +144,8 @@ class _SelectkalaState extends State<Selectkala> {
                                 builder: ((context) => Home())));
                           },
                           child: const SizedBox(
-                           
                             height: 50,
-                            child:  Icon(
+                            child: Icon(
                               Icons.arrow_back_ios_new,
                               color: Rang.blue,
                             ),
@@ -173,27 +171,21 @@ class _SelectkalaState extends State<Selectkala> {
                       ],
                     ),
                   ),
-               
-                  mainList( 
-            level.value==2?
-             filterPrice:
-             level.value==1?
-             filterListBrand:
-              selectPage==0?
-              homeScreenController.skincare:
-              selectPage==1?
-              homeScreenController.watche:
-              selectPage==2?
-              homeScreenController.bag:
-              selectPage==3?
-              homeScreenController.jewellery:
-               selectPage==4?
-              homeScreenController.eyewear:
-              homeScreenController.shoes
-                  
-                      
-                      ),
-                
+                  mainList(level.value == 2
+                      ? filterPrice
+                      : level.value == 1
+                          ? filterListBrand
+                          : selectPage == 0
+                              ? homeScreenController.skincare
+                              : selectPage == 1
+                                  ? homeScreenController.watche
+                                  : selectPage == 2
+                                      ? homeScreenController.bag
+                                      : selectPage == 3
+                                          ? homeScreenController.jewellery
+                                          : selectPage == 4
+                                              ? homeScreenController.eyewear
+                                              : homeScreenController.shoes),
                 ])
               : const SpinKitCircle(
                   color: Rang.blue,
@@ -221,29 +213,31 @@ class _SelectkalaState extends State<Selectkala> {
                                       color: Colors.white,
                                     ),
                                     height: Get.height / 5,
-                                    child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-
-                                       
-                                           const Padding(
-                                             padding:  EdgeInsets.all(15.0),
-                                             child:  Text(
-                                                                                 'Filter by',
-                                                                                 style: TextStyle(
-                                                                                     fontFamily: 'Auliare',
-                                                                                     color: Rang.greylight,
-                                                                                     fontWeight: FontWeight.bold),
-                                                                               ),
-                                           ),
-                                  
-                                  const Divider(
-                                    color: Rang.grey,
-                                    indent: 20,
-                                    endIndent: 30,
-                                    height: 1.5,
-                                  ),
+                                        const Padding(
+                                          padding: EdgeInsets.all(15.0),
+                                          child: Text(
+                                            'Filter by',
+                                            style: TextStyle(
+                                                fontFamily: 'Auliare',
+                                                color: Rang.greylight,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        const Divider(
+                                          color: Rang.grey,
+                                          indent: 20,
+                                          endIndent: 30,
+                                          height: 1.5,
+                                        ),
                                         CheckboxListTile(
-                                            title: Text('Brand',style: textStyle.headlineMedium,),
+                                            title: Text(
+                                              'Brand',
+                                              style: textStyle.headlineMedium,
+                                            ),
                                             fillColor:
                                                 MaterialStateProperty.all(
                                                     Rang.blue),
@@ -258,7 +252,10 @@ class _SelectkalaState extends State<Selectkala> {
                                                   : null;
                                             }),
                                         CheckboxListTile(
-                                            title: Text('Price',style: textStyle.headlineMedium,),
+                                            title: Text(
+                                              'Price',
+                                              style: textStyle.headlineMedium,
+                                            ),
                                             fillColor:
                                                 MaterialStateProperty.all(
                                                     Rang.blue),
@@ -323,7 +320,8 @@ class _SelectkalaState extends State<Selectkala> {
                                     onChanged: (value) {
                                       setState(() {
                                         selectRadioTile = value.toString();
-                                       sortListHightoLow(selectPage,homeScreenController);
+                                        sortListHightoLow(
+                                            selectPage, homeScreenController);
                                       });
                                     },
                                   ),
@@ -342,7 +340,8 @@ class _SelectkalaState extends State<Selectkala> {
                                       onChanged: (value) {
                                         setState(() {
                                           selectRadioTile = value.toString();
-                                         sortLisLowtoHigh(selectPage,homeScreenController);
+                                          sortLisLowtoHigh(
+                                              selectPage, homeScreenController);
                                         });
                                       }),
                                   const Divider(
@@ -377,7 +376,7 @@ class _SelectkalaState extends State<Selectkala> {
     ));
   }
 
-Future<dynamic> bottomSheetLimitedPrice(BuildContext context) {
+  Future<dynamic> bottomSheetLimitedPrice(BuildContext context) {
     return showModalBottomSheet(
         context: context,
         builder: (context) => StatefulBuilder(
@@ -409,95 +408,103 @@ Future<dynamic> bottomSheetLimitedPrice(BuildContext context) {
                             () {
                               val = value;
 
-                              switch(selectPage){
-                               case 0:
-                                 filterPrice.assignAll(homeScreenController.skincare
-                                  .where((element) =>
-                                      double.tryParse(
-                                              element.price.toString())! >=
-                                          val!.start &&
-                                      double.tryParse(
-                                              element.price.toString())! <=
-                                          val!.end));
-                                 break;         
-                               case 1:
-                                 filterPrice.assignAll(homeScreenController.watche
-                                  .where((element) =>
-                                      double.tryParse(
-                                              element.price.toString())! >=
-                                          val!.start &&
-                                      double.tryParse(
-                                              element.price.toString())! <=
-                                          val!.end)) ;
-                                          break;
+                              switch (selectPage) {
+                                case 0:
+                                  filterPrice.assignAll(homeScreenController
+                                      .skincare
+                                      .where((element) =>
+                                          double.tryParse(
+                                                  element.price.toString())! >=
+                                              val!.start &&
+                                          double.tryParse(
+                                                  element.price.toString())! <=
+                                              val!.end));
+                                  break;
+                                case 1:
+                                  filterPrice.assignAll(homeScreenController
+                                      .watche
+                                      .where((element) =>
+                                          double.tryParse(
+                                                  element.price.toString())! >=
+                                              val!.start &&
+                                          double.tryParse(
+                                                  element.price.toString())! <=
+                                              val!.end));
+                                  break;
                                 case 2:
                                   filterPrice.assignAll(homeScreenController.bag
-                                  .where((element) =>
-                                      double.tryParse(
-                                              element.price.toString())! >=
-                                          val!.start &&
-                                      double.tryParse(
-                                              element.price.toString())! <=
-                                          val!.end));break;
-                                   case 3:
-                                     filterPrice.assignAll(homeScreenController.jewellery
-                                  .where((element) =>
-                                      double.tryParse(
-                                              element.price.toString())! >=
-                                          val!.start &&
-                                      double.tryParse(
-                                              element.price.toString())! <=
-                                          val!.end)) ;break;
-                                     case 4:
-                                       filterPrice.assignAll(homeScreenController.eyewear
-                                  .where((element) =>
-                                      double.tryParse(
-                                              element.price.toString())! >=
-                                          val!.start &&
-                                      double.tryParse(
-                                              element.price.toString())! <=
-                                          val!.end));break;
-                                         case 5:
-                                           filterPrice.assignAll(homeScreenController.shoes
-                                  .where((element) =>
-                                      double.tryParse(
-                                              element.price.toString())! >=
-                                          val!.start &&
-                                      double.tryParse(
-                                              element.price.toString())! <=
-                                          val!.end));break;                                
-
+                                      .where((element) =>
+                                          double.tryParse(
+                                                  element.price.toString())! >=
+                                              val!.start &&
+                                          double.tryParse(
+                                                  element.price.toString())! <=
+                                              val!.end));
+                                  break;
+                                case 3:
+                                  filterPrice.assignAll(homeScreenController
+                                      .jewellery
+                                      .where((element) =>
+                                          double.tryParse(
+                                                  element.price.toString())! >=
+                                              val!.start &&
+                                          double.tryParse(
+                                                  element.price.toString())! <=
+                                              val!.end));
+                                  break;
+                                case 4:
+                                  filterPrice.assignAll(homeScreenController
+                                      .eyewear
+                                      .where((element) =>
+                                          double.tryParse(
+                                                  element.price.toString())! >=
+                                              val!.start &&
+                                          double.tryParse(
+                                                  element.price.toString())! <=
+                                              val!.end));
+                                  break;
+                                case 5:
+                                  filterPrice.assignAll(homeScreenController
+                                      .shoes
+                                      .where((element) =>
+                                          double.tryParse(
+                                                  element.price.toString())! >=
+                                              val!.start &&
+                                          double.tryParse(
+                                                  element.price.toString())! <=
+                                              val!.end));
+                                  break;
                               }
-                      
-                            level.value=2;
-                         
+
+                              level.value = 2;
                             },
                           );
                         },
                         values: val!,
                       ),
                     ),
-                  
                   ],
                 ))));
   }
 
-Column mainList(RxList<Kala> list) {
+  Column mainList(RxList<Kala> list) {
     return Column(
       children: [
-         const SizedBox(height: 5,),
-           Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        width: 30,
-                      ),
-                      Text(
-                          style: textStyle.bodyMedium,
-                       '${list.length} products'),
-                    ],
-                  ),
-       const SizedBox(height: 10,),
+        const SizedBox(
+          height: 5,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(
+              width: 30,
+            ),
+            Text(style: textStyle.bodyMedium, '${list.length} products'),
+          ],
+        ),
+        const SizedBox(
+          height: 10,
+        ),
         SizedBox(
           height: 670,
           child: GridView.builder(
@@ -582,134 +589,121 @@ Column mainList(RxList<Kala> list) {
   }
 }
 
-
-
-
-int lenghtLists(int selectPage,HomeScreenController homeScreenController){
-   return selectPage == 0
-        ?homeScreenController.skincare.length
-        : selectPage == 1
-            ?homeScreenController.watche.length 
-            : selectPage == 2
-                ? homeScreenController.bag.length
-                : selectPage == 3
-                    ? homeScreenController.jewellery.length
-                    : selectPage == 4
-                        ? homeScreenController.eyewear.length
-                        : homeScreenController.shoes.length;
-}
-String  priceLists(int selectPage,HomeScreenController homeScreenController,int index){
- return  selectPage == 0
-        ?homeScreenController.skincare[index].price!
-        : selectPage == 1 
-            ?homeScreenController.watche[index].price!
-            : selectPage == 2
-                ? homeScreenController.bag[index].price!
-                : selectPage == 3
-                    ? homeScreenController.jewellery[index].price!
-                    : selectPage == 4
-                        ? homeScreenController.eyewear[index].price!
-                        : homeScreenController.shoes[index].price!;
+int lenghtLists(int selectPage, HomeScreenController homeScreenController) {
+  return selectPage == 0
+      ? homeScreenController.skincare.length
+      : selectPage == 1
+          ? homeScreenController.watche.length
+          : selectPage == 2
+              ? homeScreenController.bag.length
+              : selectPage == 3
+                  ? homeScreenController.jewellery.length
+                  : selectPage == 4
+                      ? homeScreenController.eyewear.length
+                      : homeScreenController.shoes.length;
 }
 
-filterBrand(int selectPage,List<Kala>filterList,List selectedBrand,HomeScreenController homeScreenController){
-
-selectPage==0?    
- filterList.assignAll(                                            
-        homeScreenController.skincare.where((p0) =>selectedBrand.contains(p0.brand)).toList() ):
-    selectPage==1?
- filterList.assignAll(                                            
-   homeScreenController.watche.where((p0) =>selectedBrand.contains(p0.brand)).toList()
-    ):     selectPage==2?
- filterList.assignAll(                                            
-   homeScreenController.bag.where((p0) =>selectedBrand.contains(p0.brand)).toList()
-    ):     selectPage==3?
- filterList.assignAll(                                            
-   homeScreenController.jewellery.where((p0) =>selectedBrand.contains(p0.brand)).toList()
-    ):      selectPage==4?
- filterList.assignAll(                                            
-   homeScreenController.eyewear.where((p0) =>selectedBrand.contains(p0.brand)).toList()
-    ):    
- filterList.assignAll(                                            
-   homeScreenController.shoes.where((p0) =>selectedBrand.contains(p0.brand)).toList()
-    );  
-
-
-
-
+String priceLists(
+    int selectPage, HomeScreenController homeScreenController, int index) {
+  return selectPage == 0
+      ? homeScreenController.skincare[index].price!
+      : selectPage == 1
+          ? homeScreenController.watche[index].price!
+          : selectPage == 2
+              ? homeScreenController.bag[index].price!
+              : selectPage == 3
+                  ? homeScreenController.jewellery[index].price!
+                  : selectPage == 4
+                      ? homeScreenController.eyewear[index].price!
+                      : homeScreenController.shoes[index].price!;
 }
 
-
-String brandItem(int selectPage,int index,HomeScreenController homeScreenController){
-   return selectPage == 0
-                                              ? homeScreenController
-                                                  .skincare[index].brand!
-                                              : selectPage == 1
-                                                  ? homeScreenController
-                                                      .watche[index].brand!
-                                                  : selectPage == 2
-                                                      ? homeScreenController
-                                                          .bag[index].brand!
-                                                      : selectPage == 3
-                                                          ? homeScreenController
-                                                              .jewellery[index]
-                                                              .brand!
-                                                          : selectPage == 4
-                                                              ? homeScreenController
-                                                                  .eyewear[
-                                                                      index]
-                                                                  .brand!
-                                                              : homeScreenController
-                                                                  .shoes[index]
-                                                                  .brand!;
+filterBrand(int selectPage, List<Kala> filterList, List selectedBrand,
+    HomeScreenController homeScreenController) {
+  selectPage == 0
+      ? filterList.assignAll(homeScreenController.skincare
+          .where((p0) => selectedBrand.contains(p0.brand))
+          .toList())
+      : selectPage == 1
+          ? filterList.assignAll(homeScreenController.watche
+              .where((p0) => selectedBrand.contains(p0.brand))
+              .toList())
+          : selectPage == 2
+              ? filterList.assignAll(homeScreenController.bag
+                  .where((p0) => selectedBrand.contains(p0.brand))
+                  .toList())
+              : selectPage == 3
+                  ? filterList.assignAll(homeScreenController.jewellery
+                      .where((p0) => selectedBrand.contains(p0.brand))
+                      .toList())
+                  : selectPage == 4
+                      ? filterList.assignAll(homeScreenController.eyewear
+                          .where((p0) => selectedBrand.contains(p0.brand))
+                          .toList())
+                      : filterList.assignAll(homeScreenController.shoes
+                          .where((p0) => selectedBrand.contains(p0.brand))
+                          .toList());
 }
- 
-sortLisLowtoHigh(int selectPage,HomeScreenController homeScreenController){
-     selectPage == 0
-                                              ? homeScreenController.skincare.sort(
-                                                  ((a, b) => double.parse(a.price!)
-                                                      .toString()
-                                                      .compareTo(double.parse(b.price!)
-                                                          .toString())))
-                                              : selectPage == 1
-                                                  ? homeScreenController.watche.sort(
-                                                      ((a, b) => double.parse(a.price!)
-                                                          .toString()
-                                                          .compareTo(double.parse(b.price!)
-                                                              .toString())))
-                                                  : selectPage == 2
-                                                      ? homeScreenController.bag
-                                                          .sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
-                                                      : selectPage == 3
-                                                          ? homeScreenController.jewellery.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
-                                                          : selectPage == 4
-                                                              ? homeScreenController.eyewear.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
-                                                              : homeScreenController.shoes.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())));
-} 
 
-sortListHightoLow(int selectPage,HomeScreenController homeScreenController){
+String brandItem(
+    int selectPage, int index, HomeScreenController homeScreenController) {
+  return selectPage == 0
+      ? homeScreenController.skincare[index].brand!
+      : selectPage == 1
+          ? homeScreenController.watche[index].brand!
+          : selectPage == 2
+              ? homeScreenController.bag[index].brand!
+              : selectPage == 3
+                  ? homeScreenController.jewellery[index].brand!
+                  : selectPage == 4
+                      ? homeScreenController.eyewear[index].brand!
+                      : homeScreenController.shoes[index].brand!;
+}
 
- selectPage == 0
-                                            ? homeScreenController.skincare.sort(
-                                                ((b, a) => double.parse(a.price!)
-                                                    .toString()
-                                                    .compareTo(double.parse(b.price!)
-                                                        .toString())))
-                                            : selectPage == 1
-                                                ? homeScreenController.watche.sort(
-                                                    ((b, a) => double.parse(a.price!)
-                                                        .toString()
-                                                        .compareTo(double.parse(b.price!)
-                                                            .toString())))
-                                                : selectPage == 2
-                                                    ? homeScreenController.bag
-                                                        .sort(((b, a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
-                                                    : selectPage == 3
-                                                        ? homeScreenController.jewellery.sort(((b, a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
-                                                        : selectPage == 4
-                                                            ? homeScreenController.eyewear.sort(((b, a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
-                                                            : homeScreenController.shoes.sort(((b, a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())));
+sortLisLowtoHigh(int selectPage, HomeScreenController homeScreenController) {
+  selectPage == 0
+      ? homeScreenController.skincare.sort(((a, b) => double.parse(a.price!)
+          .toString()
+          .compareTo(double.parse(b.price!).toString())))
+      : selectPage == 1
+          ? homeScreenController.watche.sort(((a, b) => double.parse(a.price!)
+              .toString()
+              .compareTo(double.parse(b.price!).toString())))
+          : selectPage == 2
+              ? homeScreenController.bag.sort(((a, b) => double.parse(a.price!)
+                  .toString()
+                  .compareTo(double.parse(b.price!).toString())))
+              : selectPage == 3
+                  ? homeScreenController.jewellery.sort(((a, b) =>
+                      double.parse(a.price!)
+                          .toString()
+                          .compareTo(double.parse(b.price!).toString())))
+                  : selectPage == 4
+                      ? homeScreenController.eyewear.sort(
+                          ((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
+                      : homeScreenController.shoes.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())));
+}
 
-
-
-} 
+sortListHightoLow(int selectPage, HomeScreenController homeScreenController) {
+  selectPage == 0
+      ? homeScreenController.skincare.sort(((b, a) => double.parse(a.price!)
+          .toString()
+          .compareTo(double.parse(b.price!).toString())))
+      : selectPage == 1
+          ? homeScreenController.watche.sort(((b, a) => double.parse(a.price!)
+              .toString()
+              .compareTo(double.parse(b.price!).toString())))
+          : selectPage == 2
+              ? homeScreenController.bag.sort(((b, a) => double.parse(a.price!)
+                  .toString()
+                  .compareTo(double.parse(b.price!).toString())))
+              : selectPage == 3
+                  ? homeScreenController.jewellery.sort(((b, a) =>
+                      double.parse(a.price!)
+                          .toString()
+                          .compareTo(double.parse(b.price!).toString())))
+                  : selectPage == 4
+                      ? homeScreenController.eyewear.sort(
+                          ((b, a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
+                      : homeScreenController.shoes.sort(((b, a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())));
+}

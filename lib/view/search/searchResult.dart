@@ -1,6 +1,6 @@
 
 
-import 'package:appstore/color/color.dart';
+import 'package:appstore/constant/color/color.dart';
 import 'package:appstore/view/firstScreen/mainScreen.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -9,8 +9,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../model/component.dart';
-import '../../model/string.dart';
+import '../../constant/widget/component.dart';
+import '../../constant/strings/string.dart';
 
 class SearchResult extends StatelessWidget {
   const SearchResult({super.key, });
@@ -67,26 +67,18 @@ class SearchResult extends StatelessWidget {
             const SizedBox(
               height: 100,
             ),
-            SizedBox(
-              height: 50,
-              width: 250,
-              child: ElevatedButton(
-                onPressed: (() {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: ((context) => Home())));
-                }),
-                style: buttonModel(),
-                child:  Text(
-                  'Back to home',
-                 style: textStyle.headlineLarge,
-                )
-              ),
-            )
+        ButtonWidget(
+          onPressed:()=>_onPressed(context),
+          title:  'Back to home',
+        )
           ]),
         ),
       ),
     );
   }
-
+  _onPressed(context) {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: ((context) => Home())));
+                }
 
 }

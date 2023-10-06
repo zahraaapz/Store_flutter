@@ -1,54 +1,39 @@
 // ignore_for_file: must_be_immutable
-
 import 'dart:math';
-
 import 'package:appstore/controller/homeScreenController.dart';
-
-
 import 'package:appstore/model/Model.dart';
-
-import 'package:appstore/color/color.dart';
-
-
+import 'package:appstore/constant/color/color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-
-import '../../model/component.dart';
-
+import '../../constant/widget/component.dart';
 import '../review/review.dart';
 
 class DetailKala extends StatefulWidget {
   int index;
- bool? isFavorite;
-   int select;
-List<Kala> kalaList;
-  DetailKala(
-       this.index,
-       this.select,
-       this.kalaList ,
-       {this.isFavorite}
-       );
+  bool? isFavorite;
+  int select;
+  List<Kala> kalaList;
+  DetailKala(this.index, this.select, this.kalaList, {this.isFavorite});
 
   @override
   State<DetailKala> createState() =>
       // ignore: no_logic_in_create_state
-      _DetailKalaState(select,  index,  kalaList,isFavorite:isFavorite);
+      _DetailKalaState(select, index, kalaList, isFavorite: isFavorite);
 }
 
 class _DetailKalaState extends State<DetailKala> {
-  _DetailKalaState(
- this.select, this.index,  this.kalalist, {this.isFavorite});
+  _DetailKalaState(this.select, this.index, this.kalalist, {this.isFavorite});
   List<Kala> kalalist;
   int select;
-  var box=GetStorage();
+  var box = GetStorage();
   int index;
-bool ?isFavorite;
-final int randomValue=Random().nextInt(500000);
+  bool? isFavorite;
+  final int randomValue = Random().nextInt(500000);
   @override
   Widget build(BuildContext context) {
-   return SafeArea(
+    return SafeArea(
       child: Scaffold(
           body: SingleChildScrollView(
         child: Column(
@@ -79,8 +64,7 @@ final int randomValue=Random().nextInt(500000);
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             fit: BoxFit.fill,
-                            image: Image.asset(kalalist[index].ima!)
-                                .image),
+                            image: Image.asset(kalalist[index].ima!).image),
                         borderRadius: BorderRadius.circular(30)),
                   ),
                   Positioned(
@@ -104,11 +88,12 @@ final int randomValue=Random().nextInt(500000);
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                   kalalist[index].name!,
-                    textScaleFactor: 1.9,style: textStyle.headlineMedium,
+                    kalalist[index].name!,
+                    textScaleFactor: 1.9,
+                    style: textStyle.headlineMedium,
                   ),
                   Text(
-                kalalist[index].brand!,
+                    kalalist[index].brand!,
                     textScaleFactor: 1.1,
                     style: textStyle.bodyMedium,
                     strutStyle: const StrutStyle(height: 2),
@@ -116,9 +101,10 @@ final int randomValue=Random().nextInt(500000);
                   Row(
                     children: [
                       Text(
-                       '${kalalist[index].price}\$',
+                        '${kalalist[index].price}\$',
                         textScaleFactor: 1.6,
-                        strutStyle: const StrutStyle(height: 2),style: textStyle.bodyMedium,
+                        strutStyle: const StrutStyle(height: 2),
+                        style: textStyle.bodyMedium,
                       ),
                       const SizedBox(
                         width: 20,
@@ -126,7 +112,10 @@ final int randomValue=Random().nextInt(500000);
                       const Text(
                         '20%OFF',
                         textScaleFactor: 1.1,
-                        style: TextStyle(color: Colors.red,fontFamily:'Auliare',fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            color: Colors.red,
+                            fontFamily: 'Auliare',
+                            fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -145,7 +134,10 @@ final int randomValue=Random().nextInt(500000);
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text('43.5',style: textStyle.bodyMedium,),
+                                  Text(
+                                    '43.5',
+                                    style: textStyle.bodyMedium,
+                                  ),
                                   const SizedBox(
                                     width: 3,
                                   ),
@@ -161,16 +153,21 @@ final int randomValue=Random().nextInt(500000);
                       const SizedBox(
                         width: 100,
                       ),
-               const Column(
+                      const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               'Avrange Rating',
-                             
-                              style: TextStyle(color: Rang.greylight,fontFamily: 'Auliare',fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  color: Rang.greylight,
+                                  fontFamily: 'Auliare',
+                                  fontWeight: FontWeight.bold),
                             ),
                             Text('43Rating and 23 Reviews',
-                                style: TextStyle(color: Rang.greylight,fontFamily: 'Auliare',fontWeight: FontWeight.bold))
+                                style: TextStyle(
+                                    color: Rang.greylight,
+                                    fontFamily: 'Auliare',
+                                    fontWeight: FontWeight.bold))
                           ])
                     ],
                   )
@@ -188,13 +185,13 @@ final int randomValue=Random().nextInt(500000);
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                     Padding(
+                    Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: SizedBox(
                         width: 200,
                         child: Text(
                           'Get upto 30% of on order value above \$100',
-                         style: textStyle.bodyMedium,
+                          style: textStyle.bodyMedium,
                         ),
                       ),
                     ),
@@ -211,14 +208,12 @@ final int randomValue=Random().nextInt(500000);
                           children: [
                             const Text('Use code',
                                 style: TextStyle(
-                                  fontSize: 12,
-                                  color: Rang.grey,fontFamily: 'Auliare',fontWeight: FontWeight.bold)
-                                  ),
-                        Text(
-                          randomValue.toString(),
-                            style:textStyle.bodyMedium
-                               
-                            ),
+                                    fontSize: 12,
+                                    color: Rang.grey,
+                                    fontFamily: 'Auliare',
+                                    fontWeight: FontWeight.bold)),
+                            Text(randomValue.toString(),
+                                style: textStyle.bodyMedium),
                           ],
                         ),
                       ),
@@ -234,22 +229,21 @@ final int randomValue=Random().nextInt(500000);
                 children: [
                   GestureDetector(
                     onTap: () {
-
                       setState(() {
-                      
-                      isFavorite = !isFavorite!;
-                      box.write('fav$index', isFavorite);
-                      if (isFavorite == false &&
-                          wishList.contains(kalalist[index])) {
-                        wishList.remove(kalalist[index]);
-                      }
-                      if (isFavorite == true &&
-                          !wishList.contains(kalalist[index])) {
-                        wishList.add(kalalist[index]);
-                      }
+                        isFavorite = !isFavorite!;
+                        box.write('fav$index', isFavorite);
+                        if (isFavorite == false &&
+                            wishList.contains(kalalist[index])) {
+                          wishList.remove(kalalist[index]);
+                        }
+                        if (isFavorite == true &&
+                            !wishList.contains(kalalist[index])) {
+                          wishList.add(kalalist[index]);
+                        }
 
-                      debugPrint(wishList.length.toString());
-});  },
+                        debugPrint(wishList.length.toString());
+                      });
+                    },
                     child: Container(
                       width: 60,
                       height: 60,
@@ -258,43 +252,17 @@ final int randomValue=Random().nextInt(500000);
                         color: Rang.toosi,
                       ),
                       child: Icon(
-                          isFavorite == false
-                              ? Icons.favorite_border
-                              : Icons.favorite,
-                          color: Rang.blue,
-                       
+                        isFavorite == false
+                            ? Icons.favorite_border
+                            : Icons.favorite,
+                        color: Rang.blue,
                       ),
                     ),
                   ),
-                  SizedBox(
-                    width: 150,
-                    height: 60,
-                    child: ElevatedButton(
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Rang.blue),
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15)))),
-                        onPressed: (() {
-                          if (!myBagList.contains(kalalist[index])) {
-                            setState(() {
-                                    myBagList.add(kalalist[index]);
-                            debugPrint(myBagList.length.toString());
-                            });
-                         
-                          }
-                        }),
-                        child:  Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              Icons.shopping_bag_outlined,
-                              color: Colors.white,
-                            ),
-                            Text('Add to Bags',style: textStyle.headlineLarge,)
-                          ],
-                        )),
+                  ButtonWidget(
+                    iconData: Icons.shopping_bag_outlined,
+                    title: 'Add to Bags',
+                    onPressed: ()=>_onPressed(),
                   )
                 ],
               ),
@@ -305,9 +273,7 @@ final int randomValue=Random().nextInt(500000);
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('43 Rating and 23 Reviews',
-                      style:textStyle.bodyMedium
-                          ),
+                  Text('43 Rating and 23 Reviews', style: textStyle.bodyMedium),
                   InkWell(
                     onTap: (() {
                       Navigator.of(context).push(MaterialPageRoute(
@@ -325,13 +291,11 @@ final int randomValue=Random().nextInt(500000);
                 ],
               ),
             ),
-             Padding(
+            Padding(
               padding: const EdgeInsets.all(18.0),
               child: Row(
                 children: [
-                  Text('You might like also',
-                      style:textStyle.bodyMedium
-                          ),
+                  Text('You might like also', style: textStyle.bodyMedium),
                 ],
               ),
             ),
@@ -344,7 +308,8 @@ final int randomValue=Random().nextInt(500000);
                     scrollDirection: Axis.horizontal,
                     itemCount: 2,
                     itemBuilder: ((context, index) {
-                      HomeScreenController homeScreenController=Get.put(HomeScreenController());
+                      HomeScreenController homeScreenController =
+                          Get.put(HomeScreenController());
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: SizedBox(
@@ -356,22 +321,25 @@ final int randomValue=Random().nextInt(500000);
                                   borderRadius: BorderRadius.circular(20),
                                   image: DecorationImage(
                                       fit: BoxFit.fill,
-                                      image: AssetImage(
-                                        select==0?
-                                        
-                                        homeScreenController.skincare[index].ima!: select==1?
-                                        
-                                        homeScreenController.watche[index].ima!: select==2?
-                                        
-                                        homeScreenController.bag[index].ima!: select==3?
-                                        
-                                        homeScreenController.jewellery[index].ima!: select==4?
-                                        
-                                        homeScreenController.eyewear[index].ima!:
-                                        homeScreenController.shoes[index].ima!
-                                        
-                                        
-                                        ))),
+                                      image: AssetImage(select == 0
+                                          ? homeScreenController
+                                              .skincare[index].ima!
+                                          : select == 1
+                                              ? homeScreenController
+                                                  .watche[index].ima!
+                                              : select == 2
+                                                  ? homeScreenController
+                                                      .bag[index].ima!
+                                                  : select == 3
+                                                      ? homeScreenController
+                                                          .jewellery[index].ima!
+                                                      : select == 4
+                                                          ? homeScreenController
+                                                              .eyewear[index]
+                                                              .ima!
+                                                          : homeScreenController
+                                                              .shoes[index]
+                                                              .ima!))),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -382,47 +350,71 @@ final int randomValue=Random().nextInt(500000);
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(  select==0?
-                                        
-                                        homeScreenController.skincare[index].brand!: select==1?
-                                        
-                                        homeScreenController.watche[index].brand!: select==2?
-                                        
-                                        homeScreenController.bag[index].brand!: select==3?
-                                        
-                                        homeScreenController.jewellery[index].brand!: select==4?
-                                        
-                                        homeScreenController.eyewear[index].brand!:
-                                        homeScreenController.shoes[index].brand!,style: textStyle.bodyMedium,),
+                                      Text(
+                                        select == 0
+                                            ? homeScreenController
+                                                .skincare[index].brand!
+                                            : select == 1
+                                                ? homeScreenController
+                                                    .watche[index].brand!
+                                                : select == 2
+                                                    ? homeScreenController
+                                                        .bag[index].brand!
+                                                    : select == 3
+                                                        ? homeScreenController
+                                                            .jewellery[index]
+                                                            .brand!
+                                                        : select == 4
+                                                            ? homeScreenController
+                                                                .eyewear[index]
+                                                                .brand!
+                                                            : homeScreenController
+                                                                .shoes[index]
+                                                                .brand!,
+                                        style: textStyle.bodyMedium,
+                                      ),
                                       const Icon(
                                         Icons.favorite_border,
                                         size: 20,
                                       ),
                                     ],
                                   ),
-                                  Text( select==0?
-                                        
-                                        homeScreenController.skincare[index].name!: select==1?
-                                        
-                                        homeScreenController.watche[index].name!: select==2?
-                                        
-                                        homeScreenController.bag[index].name!: select==3?
-                                        
-                                        homeScreenController.jewellery[index].name!: select==4?
-                                        
-                                        homeScreenController.eyewear[index].name!:
-                                        homeScreenController.shoes[index].name!
-                                   
-,style: textStyle.bodyMedium                                  ),
-                                  Text(select==0?
-                                    '${homeScreenController.skincare[index].price!}\$':select==1?
-                                    '${homeScreenController.watche[index].price!}\$':select==2?
-                                    '${homeScreenController.bag[index].price!}\$':select==3?
-                                    '${homeScreenController.jewellery[index].price!}\$':select==4?
-                                    '${homeScreenController.eyewear[index].price!}\$':
-                                    '${homeScreenController.shoes[index].price!}\$',
-                                    strutStyle: const StrutStyle(height: 2),style: textStyle.bodyMedium
-                                  ),
+                                  Text(
+                                      select == 0
+                                          ? homeScreenController
+                                              .skincare[index].name!
+                                          : select == 1
+                                              ? homeScreenController
+                                                  .watche[index].name!
+                                              : select == 2
+                                                  ? homeScreenController
+                                                      .bag[index].name!
+                                                  : select == 3
+                                                      ? homeScreenController
+                                                          .jewellery[index]
+                                                          .name!
+                                                      : select == 4
+                                                          ? homeScreenController
+                                                              .eyewear[index]
+                                                              .name!
+                                                          : homeScreenController
+                                                              .shoes[index]
+                                                              .name!,
+                                      style: textStyle.bodyMedium),
+                                  Text(
+                                      select == 0
+                                          ? '${homeScreenController.skincare[index].price!}\$'
+                                          : select == 1
+                                              ? '${homeScreenController.watche[index].price!}\$'
+                                              : select == 2
+                                                  ? '${homeScreenController.bag[index].price!}\$'
+                                                  : select == 3
+                                                      ? '${homeScreenController.jewellery[index].price!}\$'
+                                                      : select == 4
+                                                          ? '${homeScreenController.eyewear[index].price!}\$'
+                                                          : '${homeScreenController.shoes[index].price!}\$',
+                                      strutStyle: const StrutStyle(height: 2),
+                                      style: textStyle.bodyMedium),
                                 ],
                               ),
                             ),
@@ -436,5 +428,14 @@ final int randomValue=Random().nextInt(500000);
         ),
       )),
     );
+  }
+
+  _onPressed() {
+    if (!myBagList.contains(kalalist[index])) {
+      setState(() {
+        myBagList.add(kalalist[index]);
+        debugPrint(myBagList.length.toString());
+      });
+    }
   }
 }
