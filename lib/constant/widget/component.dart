@@ -179,7 +179,8 @@ final String? title;
                  
                     child: Row(mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(iconData,color: Rang.blue,),
+
+                       iconData!=null? Icon(iconData,color: Rang.blue,):SizedBox.shrink(),
                         Text(
                          title!,
                          style: textStyle.displaySmall,

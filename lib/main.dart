@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+
 void main() async{
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       systemNavigationBarColor: Colors.white,
@@ -21,6 +22,6 @@ class AppStore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(debugShowCheckedModeBanner: false, home: splash());
+    return GetMaterialApp(debugShowCheckedModeBanner: false, home: Splash());
   }
 }

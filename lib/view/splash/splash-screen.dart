@@ -9,12 +9,12 @@ import 'package:get/get.dart';
 
 import '../../controller/homeScreenController.dart';
 
-class splash extends StatefulWidget {
+class Splash extends StatefulWidget {
   @override
-  State<splash> createState() => _splashState();
+  State<Splash> createState() => _SplashState();
 }
 
-class _splashState extends State<splash> {
+class _SplashState extends State<Splash> {
    var homeScreenController  =Get.put(HomeScreenController());
 
 

@@ -311,6 +311,7 @@ write() {
       return SizedBox(
         width: double.infinity,
         child: ButtonWidget(
+          iconData: Icons.add,
           title: 'Write a Review',
           onPressed: () => controller.toggle(),
         ),

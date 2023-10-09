@@ -8,7 +8,7 @@ import 'package:appstore/constant/color/color.dart';
 import 'package:appstore/view/search/search.dart';
 
 import 'package:appstore/view/selectType/select_kala.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 
 import 'package:get/get.dart';
 
@@ -16,6 +16,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../../shimmer.dart';
 import '../../controller/pick_file.dart';
 import '../notifition/notif.dart';
 
@@ -784,10 +785,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                     ),
                   );
                 })
-            : const SpinKitCircle(
-                color: Rang.blue,
-                size: 30,
-              ),
+            : ShimmerSuggestList(size: size,)
       ),
     );
   }

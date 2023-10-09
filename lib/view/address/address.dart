@@ -220,6 +220,7 @@ class Address extends StatelessWidget {
                 height: 40,
               ),
               ButtonWidget(
+                iconData: Icons.location_on,
                 title: 'Save Address',
                 onPressed: () => _onPressed,
               )

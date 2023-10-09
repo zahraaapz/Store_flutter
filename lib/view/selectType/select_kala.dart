@@ -7,12 +7,10 @@ import 'package:appstore/view/firstScreen/mainScreen.dart';
 
 import 'package:appstore/view/selectType/detail_kala.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../../shimmer.dart';
 import '../../constant/widget/component.dart';
 
 class Selectkala extends StatefulWidget {
@@ -129,8 +127,7 @@ class _SelectkalaState extends State<Selectkala> {
         child: Scaffold(
       body: Stack(children: [
         Obx(
-          () => homeScreenController.waiting.value == false
-              ? Column(children: [
+          () =>  Column(children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
@@ -171,6 +168,7 @@ class _SelectkalaState extends State<Selectkala> {
                       ],
                     ),
                   ),
+                  homeScreenController.waiting.value == false?
                   mainList(level.value == 2
                       ? filterPrice
                       : level.value == 1
@@ -185,17 +183,17 @@ class _SelectkalaState extends State<Selectkala> {
                                           ? homeScreenController.jewellery
                                           : selectPage == 4
                                               ? homeScreenController.eyewear
-                                              : homeScreenController.shoes),
+                                              : homeScreenController.shoes):
+                                              const ShimmerList(),
                 ])
-              : const SpinKitCircle(
-                  color: Rang.blue,
-                ),
+               ,
         ),
         Positioned(
-          bottom: 0,
+          bottom: 10,
           right: 0,
           left: 0,
           child: Row(
+         
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               InkWell(
@@ -506,7 +504,7 @@ class _SelectkalaState extends State<Selectkala> {
           height: 10,
         ),
         SizedBox(
-          height: 670,
+          height: 650,
           child: GridView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
