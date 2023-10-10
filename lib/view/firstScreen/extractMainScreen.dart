@@ -1,21 +1,15 @@
 import 'dart:io';
-
 import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/constant/widget/component.dart';
 import 'package:appstore/view/firstScreen/expandable.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/constant/color/color.dart';
 import 'package:appstore/view/search/search.dart';
-
 import 'package:appstore/view/selectType/select_kala.dart';
-
-
 import 'package:get/get.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
-
 import '../../shimmer.dart';
 import '../../controller/pick_file.dart';
 import '../notifition/notif.dart';
@@ -30,11 +24,8 @@ class Extractmainscreen extends StatefulWidget {
 class _ExtractmainscreenState extends State<Extractmainscreen> {
   final HomeScreenController homeScreenController =
       Get.put(HomeScreenController());
-
   final GlobalKey<ScaffoldState> _key = GlobalKey();
-
   RxInt select = 0.obs;
-
   late List<bool> fav;
   var box = GetStorage();
 
@@ -53,71 +44,20 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-
+    var size = MediaQuery.sizeOf(context);
     return SafeArea(
       child: Scaffold(
           key: _key,
           backgroundColor: Colors.white,
-          drawer: drawer(),
+          drawer: drawer(size),
           body: Stack(children: [
             SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.vertical,
-              child: Column(children: [
+              child: Column(
+                children: [
                 ////App Bar
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 90,
-                      height: 40,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              _key.currentState?.openDrawer();
-                            },
-                            child: const Icon(
-                              Icons.menu,
-                              color: Rang.blue,
-                              size: 32,
-                            ),
-                          ),
-                          Text(' Home', style: textStyle.displaySmall),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 121,
-                    ),
-                    SizedBox(
-                      width: 200,
-                      height: 40,
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            const Icon(Icons.add_to_photos_rounded,
-                                color: Rang.blue),
-                            InkWell(
-                                onTap: (() {
-                                  Get.to(Search());
-                                }),
-                                child:
-                                    const Icon(Icons.search, color: Rang.blue)),
-                            GestureDetector(
-                              onTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Notif(),
-                                  )),
-                              child: const Icon(Icons.notifications_none,
-                                  color: Rang.blue),
-                            )
-                          ]),
-                    )
-                  ],
-                ),
+                appBar(size, context),
 
                 ///Bannner
                 const Bannner(),
@@ -186,7 +126,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                             ],
                           ),
                         ),
-                        CollectionList(),
+                        CollectionList(size: size,),
                       ],
                     ),
                   ),
@@ -218,17 +158,17 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                     ],
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
+                 Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      Brand(),
+                      Brand(size: size,),
                     ],
                   ),
                 ),
                 Shortcut(size: size),
                 Padding(
-                  padding: EdgeInsets.only(left: 16.0, bottom: 8, top: 8),
+                  padding: const EdgeInsets.only(left: 16.0, bottom: 8, top: 8),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -270,7 +210,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                     )
                   ]),
                 ),
-                const Expandablee(),
+                Expandablee(),
 
                 ///expandble box
                 const SizedBox(
@@ -282,43 +222,96 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
     );
   }
 
-  Drawer drawer() {
+  Row appBar(Size size, BuildContext context) {
+    return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width:size.width/4.6,
+                    height: size.height/20,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            _key.currentState?.openDrawer();
+                          },
+                          child: const Icon(
+                            Icons.menu,
+                            color: Rang.blue,
+                            size: 32,
+                          ),
+                        ),
+                        Text(' Home', style: textStyle.displaySmall),
+                      ],
+                    ),
+                  ),
+                 
+                  SizedBox(
+                    width: size.width/2.4,
+                    height:size.height/20,
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          const Icon(Icons.add_to_photos_rounded,
+                              color: Rang.blue),
+                          InkWell(
+                              onTap: (() {
+                                Get.to(Search());
+                              }),
+                              child:
+                                  const Icon(Icons.search, color: Rang.blue)),
+                          GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Notif(),
+                                )),
+                            child: const Icon(Icons.notifications_none,
+                                color: Rang.blue),
+                          )
+                        ]),
+                  )
+                ],
+              );
+  }
+
+Drawer drawer(size) {
     return Drawer(
       backgroundColor: Colors.white,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Container(
-            width: 300,
-            height: 150,
+            padding: const EdgeInsets.all(15),
+            width:size.width/1.1,
+            height: size.height/6,
             decoration: BoxDecoration(
                 color: Rang.toosi, borderRadius: BorderRadius.circular(15)),
             child: Obx(
               () => Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                
+                
                 children: [
-                  pickFileController.file.value.name == 'not'
-                      ? Container(
-                          height: 80,
-                          width: 80,
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                  image: AssetImage(
-                                    'assets/image/avatar.png',
-                                  ),
-                                  fit: BoxFit.cover)),
-                        )
-                      : Container(
-                          height: 80,
-                          width: 80,
-                          decoration: BoxDecoration(
+                  Container(
+                          width:size.width/4.5,
+                           height: size.height/10,
+                          decoration:  BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
                                   image:
-                                      Image.file(File(box.read('ima'))).image,
+                                    pickFileController.file.value.name == 'not'?
+                                   const AssetImage(
+                                     
+                                    'assets/image/avatar.png'
+                                    ,
+                                  ):
+                                  Image.file(File(box.read('ima'))).image,
                                   fit: BoxFit.cover)),
-                        ),
+                        )
+                     ,
+                 const SizedBox(width: 50,),
+                 
+                 
                   Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -335,10 +328,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                           style: textStyle.labelSmall,
                         ),
                       ]),
-                  const Icon(
-                    Icons.arrow_forward_ios_outlined,
-                    color: Rang.greylight,
-                  )
+              
                 ],
               ),
             ),
@@ -348,7 +338,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
           ),
           Text('Top Categories', style: textStyle.bodyMedium),
           SizedBox(
-            height: 220,
+            height: size.height/4,
             child: ListView.builder(
                 physics: const ClampingScrollPhysics(),
                 itemCount: Model.modelList.length,
@@ -423,8 +413,8 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                       },
                       child: Container(
                         //list container
-                        width: 60,
-                        height: 65,
+                        width: size.width/6,
+                        height: size.height/11,
                         decoration: BoxDecoration(
                             image: DecorationImage(
                           fit: BoxFit.fill,
@@ -447,7 +437,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
     );
   }
 
-  SizedBox suggList(size, fav) {
+SizedBox suggList(size, fav) {
     //suggestion List
 
     return SizedBox(
@@ -485,8 +475,8 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                                           child: Row(
                                             children: [
                                               Container(
-                                                width: 120,
-                                                height: 115,
+                                                width: size.width/3,
+                                                height: size.height/8,
                                                 decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(
@@ -539,8 +529,8 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                                           child: Row(
                                             children: [
                                               Container(
-                                                width: 60,
-                                                height: 40,
+                                                width: size.width/8,
+                                                height: size.height/22,
                                                 decoration: BoxDecoration(
                                                     color: Rang.toosi,
                                                     borderRadius:
@@ -724,12 +714,11 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                                           .suggestlist[index].ima!,
                                     ).image)),
                           ),
-                          const SizedBox(
-                            height: 6,
-                          ),
+                        
                           SizedBox(
-                            height: 30,
-                            width: 120,
+                          
+                              width: size.width/3.5,
+                             height: size.height/19,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -771,12 +760,10 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 1.0, bottom: 3),
-                            child: Text(
-                                homeScreenController.suggestlist[index].brand!,
-                                style: textStyle.bodyMedium),
-                          ),
+                          Text(
+                              homeScreenController.suggestlist[index].brand!,
+                              style: textStyle.bodyMedium),
+                              const SizedBox(height: 6,),
                           Text(
                               "${homeScreenController.suggestlist[index].price}\$",
                               style: textStyle.bodyMedium),
@@ -797,7 +784,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
   }
 }
 
-class Shortcut extends StatelessWidget {
+class Shortcut extends StatelessWidget{
   const Shortcut({
     Key? key,
     required this.size,
@@ -823,8 +810,8 @@ class Shortcut extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              width: 120,
-              height: 100,
+              width: size.width/3.5,
+                  height: size.height/7,
               decoration: BoxDecoration(
                   image: const DecorationImage(
                       fit: BoxFit.fill,
@@ -834,10 +821,11 @@ class Shortcut extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10)),
             ),
             const SizedBox(width: 8),
-            const SizedBox(
-              width: 200,
-              child: Text(
+             SizedBox(
+              width:size.width/2.2 ,
+              child: const Text(
                   '''Discover your favrouite products faster with CORA’L web app.''',
+                  strutStyle: StrutStyle(height: 1.7),
                   style: TextStyle(
                       fontFamily: 'Auliare',
                       fontSize: 14,
@@ -871,8 +859,11 @@ class Shortcut extends StatelessWidget {
 class Brand extends StatelessWidget {
   const Brand({
     Key? key,
-  }) : super(key: key);
+    this.size
+   
+    }) : super(key: key);
 
+final size;
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -888,8 +879,8 @@ class Brand extends StatelessWidget {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(image: AssetImage(brands[index].ima))),
-              width: 80,
-              height: 80,
+              width: size.width/6,
+              height: size.height/20,
             ),
           );
         }));
@@ -899,8 +890,9 @@ class Brand extends StatelessWidget {
 class CollectionList extends StatelessWidget {
   const CollectionList({
     Key? key,
+    this.size
   }) : super(key: key);
-
+final size;
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -915,8 +907,8 @@ class CollectionList extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.all(7.0),
             child: Container(
-              width: 120,
-              height: 200,
+          width: size.width/3,
+                  height: size.height/7,
               decoration: BoxDecoration(
                 color: Colors.blueGrey,
                 borderRadius: BorderRadius.circular(10),

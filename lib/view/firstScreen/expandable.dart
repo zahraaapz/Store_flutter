@@ -3,36 +3,35 @@
 import 'package:appstore/constant/color/color.dart';
 import 'package:appstore/constant/widget/component.dart';
 import 'package:expandable/expandable.dart';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '../../model/Model.dart';
 
 class Expandablee extends StatelessWidget {
-  const Expandablee({super.key});
+   Expandablee({super.key});
 
   @override
   Widget build(BuildContext context) {
+      final size= MediaQuery.sizeOf(context);
     return ExpandableNotifier(
         child: ScrollOnExpand(
       child: Expandable(
-        collapsed: collapse(context),
-        expanded: Expandd(context),
+        collapsed: collapse(context,size),
+        expanded: expandd(context,size),
       ),
     ));
   }
 }
 
-collapse(context) {
+collapse(context,size) {
   return Column(
     children: [
       Padding(
-        padding: EdgeInsets.all(MediaQuery.of(context).size.width / 25),
+        padding: EdgeInsets.all(size.width / 25),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           color: Colors.white,
-          height: MediaQuery.of(context).size.height / 15,
+          height: size.height / 15,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -61,12 +60,12 @@ collapse(context) {
   );
 }
 
-Expandd(context) {
+expandd(context,size) {
   return SizedBox(
 
       ////main sizedbox
       width: double.infinity,
-      height: MediaQuery.of(context).size.height / 1.35,
+      height: size.height / 1.35,
       child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,33 +74,12 @@ Expandd(context) {
               duration: const Duration(milliseconds: 200),
               //header container
 
-              height: MediaQuery.of(context).size.height / 15,
+              height: size.height / 15,
               color: Colors.white,
               width: double.infinity,
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                     Text(
-                      'CORA’L',
-                      style: textStyle.bodySmall,
-                    ),
-                    Builder(builder: (context) {
-                      var controller =
-                          ExpandableController.of(context, required: true)!;
-                      return InkWell(
-                        onTap: () {
-                          controller.toggle();
-                        },
-                        child: const Icon(
-                          Icons.keyboard_arrow_up_outlined,
-                          color: Rang.blue,
-                        ),
-                      );
-                    })
-                  ],
-                ),
+                child: titleExpanded(),
               ),
             ),
             Container(
@@ -114,21 +92,22 @@ Expandd(context) {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.height / 60,
-                          top: MediaQuery.of(context).size.height / 35),
+                          left: size.height / 60,
+                          top: size.height / 35),
                       child:  Text('Shop by Category',
                           style: textStyle.headlineLarge),
                     ),
                     SizedBox(
-                      height: 180,
+                      height:size.height /4.5 ,
                       child: ListView.builder(
+                        physics: const ClampingScrollPhysics(),
                         itemCount: expandableCat.length,
                       itemBuilder: (BuildContext context, int index) {
 
                         return   Padding(
                         padding: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.height / 60,
-                            top: MediaQuery.of(context).size.height / 100),
+                            left: size.height / 60,
+                            top: size.height / 100),
                         child:  Text(expandableCat[index],
                                  style: textStyle.bodySmall,  )                      );
                         },
@@ -138,7 +117,7 @@ Expandd(context) {
                   
                     Padding(
                       padding: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.height / 60),
+                          left: size.height / 60),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children:  [
@@ -148,8 +127,8 @@ Expandd(context) {
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                          top: MediaQuery.of(context).size.width / 35,
-                          left: MediaQuery.of(context).size.width / 25),
+                          top: size.width / 35,
+                          left: size.width / 25),
                       child: SizedBox(
                         ///limit column
 
@@ -184,11 +163,11 @@ Expandd(context) {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height / 100,
+                      height: size.height / 100,
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.width / 25),
+                          left: size.width / 25),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children:  [
@@ -198,8 +177,8 @@ Expandd(context) {
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.width / 25,
-                          top: MediaQuery.of(context).size.height / 100),
+                          left: size.width / 25,
+                          top: size.height / 100),
                       child: Row(
                         children: [
                           Text('Contact Us |',
@@ -215,7 +194,7 @@ Expandd(context) {
                     ),
                     Padding(
                       padding: EdgeInsets.all(
-                          MediaQuery.of(context).size.width / 50),
+                          size.width / 50),
                       child: Row(
                         children: [
                           const Icon(
@@ -225,8 +204,8 @@ Expandd(context) {
                           ),
                           Padding(
                             padding: EdgeInsets.only(
-                              right: MediaQuery.of(context).size.width / 120,
-                              left: MediaQuery.of(context).size.width / 120,
+                              right: size.width / 120,
+                              left: size.width / 120,
                             ),
                             child: const FaIcon(
                               FontAwesomeIcons.instagram,
@@ -241,8 +220,8 @@ Expandd(context) {
                           ),
                           Padding(
                             padding: EdgeInsets.only(
-                              right: MediaQuery.of(context).size.width / 120,
-                              left: MediaQuery.of(context).size.width / 120,
+                              right: size.width / 120,
+                              left: size.width / 120,
                             ),
                             child: const FaIcon(
                               FontAwesomeIcons.youtube,
@@ -255,8 +234,8 @@ Expandd(context) {
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.width / 50,
-                          top: MediaQuery.of(context).size.height / 120),
+                          left: size.width / 50,
+                          top: size.height / 120),
                       child:  Row(
                         children: [
                           const Icon(
@@ -272,8 +251,8 @@ Expandd(context) {
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                          left: MediaQuery.of(context).size.width / 30,
-                          top: MediaQuery.of(context).size.height / 100),
+                          left: size.width / 30,
+                          top: size.height / 100),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children:  [
@@ -283,9 +262,34 @@ Expandd(context) {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height / 140,
+                      height: size.height / 140,
                     )
                   ],
                 )),
           ]));
+}
+
+Row titleExpanded() {
+  return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                   Text(
+                    'CORA’L',
+                    style: textStyle.bodySmall,
+                  ),
+                  Builder(builder: (context) {
+                    var controller =
+                        ExpandableController.of(context, required: true)!;
+                    return InkWell(
+                      onTap: () {
+                        controller.toggle();
+                      },
+                      child: const Icon(
+                        Icons.keyboard_arrow_up_outlined,
+                        color: Rang.blue,
+                      ),
+                    );
+                  })
+                ],
+              );
 }
