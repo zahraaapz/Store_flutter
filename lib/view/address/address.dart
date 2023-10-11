@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../../constant/widget/component.dart';
+import '../../constant/widget/widget.dart';
 
 class Address extends StatelessWidget {
   RxInt select = 0.obs;

@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import '../color/color.dart';
 
-// ButtonStyle buttonModel() {
-//     return ButtonStyle(
-//                 backgroundColor: const MaterialStatePropertyAll(Rang.blue),
-//                 shape: MaterialStateProperty.all(RoundedRectangleBorder(
-//                     borderRadius: BorderRadius.circular(15))));
-//   }
+
 
     Text contentEmptyPages(String title) {
     return Text(
@@ -137,7 +132,9 @@ fontWeight: FontWeight.bold
             mainAxisAlignment:
                 MainAxisAlignment.center,
             children: [
-             Icon(iconData,color: Colors.white,),
+             Visibility(
+              visible: iconData==null?false:true,
+              child: Icon(iconData,color: Colors.white,)),
               Text(title!,style: textStyle.headlineLarge,)
             ],
           ),
@@ -157,7 +154,7 @@ final String? title;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 350,
+      width: 320,
       height: 60,
       child: ElevatedButton(
         onPressed: onPressed,
@@ -178,7 +175,9 @@ final String? title;
                  
                     child: Row(mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-             Icon(iconData,color: Rang.blue,),
+             Visibility(
+              visible: iconData==null?false:true,
+              child: Icon(iconData,color: Rang.blue,)),
                         Text(
                          title!,
                          style: textStyle.displaySmall,

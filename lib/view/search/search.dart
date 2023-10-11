@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../model/Model.dart';
-import '../../constant/widget/component.dart';
+import '../../constant/widget/widget.dart';
 import 'searchResult.dart';
 
 

@@ -132,7 +132,7 @@ final size;
                       ),  Container(
                         
                         height: 10,
-                        width: 80,
+                        width: 70,
                         decoration: BoxDecoration(
                           color: Colors.grey,
                           borderRadius: BorderRadius.circular(20),

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:appstore/getList/getlist.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/constant/api/api.dart';
@@ -38,6 +40,7 @@ if (suggestlist.isEmpty) {
 
   
 }
+log(response.statusCode);
      waiting.value=false;
   }
 

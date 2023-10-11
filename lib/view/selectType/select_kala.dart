@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../shimmer.dart';
-import '../../constant/widget/component.dart';
+import '../../constant/widget/widget.dart';
 
 class Selectkala extends StatefulWidget {
   int select;

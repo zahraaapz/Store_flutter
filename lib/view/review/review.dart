@@ -2,7 +2,7 @@
 
 import 'package:appstore/constant/color/color.dart';
 import 'package:appstore/model/Model.dart';
-import 'package:appstore/constant/widget/component.dart';
+import 'package:appstore/constant/widget/widget.dart';
 
 import 'package:appstore/view/selectType/detail_kala.dart';
 

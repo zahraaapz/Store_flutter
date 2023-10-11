@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:appstore/controller/homeScreenController.dart';
-import 'package:appstore/constant/widget/component.dart';
+import 'package:appstore/constant/widget/widget.dart';
 import 'package:appstore/view/firstScreen/expandable.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/constant/color/color.dart';
@@ -106,7 +106,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                   ),
                 ),
                 //////suggest List
-
+const SizedBox(height: 5,),
                 suggList(size, fav),
                 Container(
                   ///collection container
@@ -395,6 +395,7 @@ Drawer drawer(size) {
           physics: const BouncingScrollPhysics(),
           itemCount: Model.modelList.length,
           itemBuilder: ((context, index) {
+           
             return Row(children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -441,7 +442,7 @@ SizedBox suggList(size, fav) {
     //suggestion List
 
     return SizedBox(
-      height: size.height / 4.2,
+      height: size.height / 4.7,
       width: double.infinity,
       child: Obx(
         () => homeScreenController.suggestlist.isNotEmpty

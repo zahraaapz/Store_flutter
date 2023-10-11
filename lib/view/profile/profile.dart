@@ -10,7 +10,7 @@ import 'package:appstore/controller/pick_file.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../constant/widget/component.dart';
+import '../../constant/widget/widget.dart';
 
 class Profile extends StatelessWidget {
    Profile({super.key});

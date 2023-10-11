@@ -3,10 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../constant/color/color.dart';
-import '../../constant/widget/component.dart';
+import '../../constant/widget/widget.dart';
 import '../profile/personal_info.dart';
 
 class Notif extends StatelessWidget {
+  const Notif({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -23,7 +25,7 @@ class Notif extends StatelessWidget {
                     child: const Icon(
                       Icons.arrow_back_ios_new,
                       color: Rang.blue,
-                      size: 30,
+                      size: 25,
                     ),
                   ),
                   const SizedBox(
@@ -54,26 +56,21 @@ class Notif extends StatelessWidget {
                   const SizedBox(
                     width: 36,
                   ),
-                  SizedBox(
-                    width: 320,
-                    height: 200,
-                   
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Upto 50% OFF⚡⚡',style: textStyle.bodyMedium),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                         Text('This winter gift your loved ones.',style: textStyle.bodyMedium),
-                                  const SizedBox(
-                                  height: 20,
-                                ),
-                                ButtonWidgetRevesed(
-                                  title:  'Shop now',
-                                  onPressed: _onPressed,
-                                ),  ],
-                    ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Upto 50% OFF⚡⚡',style: textStyle.bodyMedium),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                       Text('This winter gift your loved ones.',style: textStyle.bodyMedium),
+                                const SizedBox(
+                                height: 20,
+                              ),
+                              ButtonWidgetRevesed(
+                                title:  'Shop now',
+                                onPressed: _onPressed,
+                              ),  ],
                   ),
                 ],
               ),
@@ -90,19 +87,19 @@ class Notif extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                        SizedBox(
+                        const SizedBox(
                         height: 10,
                       ),
                       Image.asset('assets/image/icon.png'),
                       Text('Share your feedback',style: textStyle.bodyMedium),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Text(style: textStyle.bodyMedium,
                         '''Hey, ${Personal().box.read('fullName')??'--'}. Thanks for using CORAL. You know what? You can help us improve with just one click''',
                         textScaleFactor: 1.1,
                       )
-                  ,SizedBox(height: 10,)  ],
+                  ,const SizedBox(height: 10,)  ],
                   ),
                 ),
               )
