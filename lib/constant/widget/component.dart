@@ -1,4 +1,3 @@
-  import 'package:appstore/controller/homeScreenController.dart';
 import 'package:flutter/material.dart';
 import '../color/color.dart';
 
@@ -107,13 +106,13 @@ fontWeight: FontWeight.bold
  class ButtonWidget extends StatelessWidget {
  const ButtonWidget({
     super.key,
-    this.homeScreenController,
+
     this.onPressed,
     this.title,
     this.iconData,
   });
 
- final HomeScreenController?  homeScreenController;
+
  final  String? title;
  final  void Function()? onPressed;
  final  IconData? iconData;
@@ -179,8 +178,7 @@ final String? title;
                  
                     child: Row(mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-
-                       iconData!=null? Icon(iconData,color: Rang.blue,):SizedBox.shrink(),
+             Icon(iconData,color: Rang.blue,),
                         Text(
                          title!,
                          style: textStyle.displaySmall,
@@ -190,3 +188,25 @@ final String? title;
     );
   }
 }
+
+  Container myTextField({Size? size,double ?width,String ?hintText ,var controller,Color color=Rang.toosi}){
+    return Container(
+    //  padding: EdgeInsets.fromLTRB(left, top, right, bottom),
+              height:size!.height/15,
+              width:width,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15), color: color),
+              child: TextField(
+                controller: controller,
+                decoration: InputDecoration(
+                    hintText:hintText ,
+                    helperStyle: const TextStyle(color: Rang.grey),
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide.none,
+                        borderRadius: BorderRadius.circular(15)),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(15))),
+              ),
+            );
+  }

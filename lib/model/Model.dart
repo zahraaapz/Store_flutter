@@ -67,7 +67,7 @@ List<OrderDetail> orderDetail= [
   OrderDetail(title:'Sub Total' ),
   OrderDetail(title:'Discount' ),
   OrderDetail(title: 'Delivery'),
-  OrderDetail(title:'Grand Total' ),
+  OrderDetail(title:'Discount Total' ),
 ];
 
 

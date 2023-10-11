@@ -18,11 +18,11 @@ class Address extends StatelessWidget {
   TextEditingController street = TextEditingController();
   TextEditingController city = TextEditingController();
   final box = GetStorage();
-
-  Address({super.key});
+ Address({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final size=MediaQuery.sizeOf(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -42,73 +42,20 @@ class Address extends StatelessWidget {
                 endIndent: 5,
                 indent: 5,
               ),
-              Container(
-                height: 50,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15), color: Rang.toosi),
-                child: TextField(
-                  controller: fullname,
-                  decoration: InputDecoration(
-                      hintText: 'Full name',
-                      helperStyle: const TextStyle(color: Rang.grey),
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(15)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Rang.toosi),
-                          borderRadius: BorderRadius.circular(15))),
-                ),
-              ),
-              SizedBox(
+              myTextField(size: size,width: double.infinity,controller: fullname,hintText: 'Full Name'),
+              const SizedBox(
                 height: 15,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    height: 50,
-                    width: 70,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Rang.toosi),
-                    child: TextField(
-                      controller: preNum,
-                      keyboardType: TextInputType.phone,
-                      decoration: InputDecoration(
-                          hintText: '49',
-                          helperStyle: const TextStyle(color: Rang.grey),
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(15)),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Rang.toosi),
-                              borderRadius: BorderRadius.circular(15))),
-                    ),
-                  ),
-                  Container(
-                    height: 50,
-                    width: 310,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Rang.toosi),
-                    child: TextField(
-                      controller: number,
-                      keyboardType: TextInputType.phone,
-                      decoration: InputDecoration(
-                          hintText: 'Contact number',
-                          helperStyle: const TextStyle(color: Rang.grey),
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                              borderRadius: BorderRadius.circular(15)),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(color: Rang.toosi),
-                              borderRadius: BorderRadius.circular(15))),
-                    ),
-                  )
+                myTextField(size: size,controller: preNum,width: size.width/7.5,hintText: '49'),
+               myTextField(size: size,width:size.width/1.25,controller: number,hintText: 'Concate Number'),
+
+              
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 120,
               ),
               Text('Delivery Address', style: textStyle.bodyMedium),
@@ -118,68 +65,18 @@ class Address extends StatelessWidget {
                 endIndent: 5,
                 indent: 5,
               ),
-              Container(
-                height: 50,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15), color: Rang.toosi),
-                child: TextField(
-                  keyboardType: TextInputType.number,
-                  controller: pinCode,
-                  decoration: InputDecoration(
-                      hintText: 'Pin code',
-                      helperStyle: const TextStyle(color: Rang.grey),
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(15)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Rang.toosi),
-                          borderRadius: BorderRadius.circular(15))),
-                ),
-              ),
-              SizedBox(
+
+       myTextField(size: size,width: double.infinity,controller: pinCode,hintText: 'Pin Code'),
+   const SizedBox(
                 height: 15,
               ),
-              Container(
-                height: 50,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15), color: Rang.toosi),
-                child: TextField(
-                  controller: street,
-                  decoration: InputDecoration(
-                      hintText: 'Street Address',
-                      helperStyle: const TextStyle(color: Rang.grey),
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(15)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Rang.toosi),
-                          borderRadius: BorderRadius.circular(15))),
-                ),
-              ),
-              SizedBox(
+         myTextField(size: size,width: double.infinity,controller: street,hintText:'Street Address' ),
+
+              const SizedBox(
                 height: 15,
               ),
-              Container(
-                height: 50,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15), color: Rang.toosi),
-                child: TextField(
-                  controller: city,
-                  decoration: InputDecoration(
-                      hintText: 'City',
-                      helperStyle: const TextStyle(color: Rang.grey),
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(15)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Rang.toosi),
-                          borderRadius: BorderRadius.circular(15))),
-                ),
-              ),
-              SizedBox(
+         myTextField(size: size,width: double.infinity,controller: city,hintText:'City' ),
+           SizedBox(
                 height: 70,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -219,10 +116,13 @@ class Address extends StatelessWidget {
               const SizedBox(
                 height: 40,
               ),
-              ButtonWidget(
-                iconData: Icons.location_on,
-                title: 'Save Address',
-                onPressed: () => _onPressed,
+              SizedBox(
+                width: double.infinity,
+                child: ButtonWidget(
+                  iconData: Icons.location_on,
+                  title: 'Save Address',
+                  onPressed: () => _onPressed,
+                ),
               )
             ]),
           ),
@@ -230,6 +130,8 @@ class Address extends StatelessWidget {
       ),
     );
   }
+
+
 
   _onPressed(context) {
     box.write('fulName', fullname.text);
@@ -246,7 +148,7 @@ class Address extends StatelessWidget {
         number.text.isNotEmpty &&
         pinCode.text.isNotEmpty) {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => Payments()));
+          context, MaterialPageRoute(builder: (context) => const Payments()));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           backgroundColor: Color.fromARGB(255, 27, 75, 102),

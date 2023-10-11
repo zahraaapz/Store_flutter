@@ -680,9 +680,7 @@ SizedBox suggList(size, fav) {
                                                 iconData:
                                                     Icons.shopping_bag_outlined,
                                                 title: 'Add to Bags',
-                                                homeScreenController:
-                                                    homeScreenController,
-                                                onPressed: _onPressed(index),
+                                                onPressed:()=> _onPressed(index),
                                               ),
                                             ],
                                           ),
