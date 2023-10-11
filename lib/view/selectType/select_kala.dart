@@ -10,8 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../../constant/text_style.dart';
 import '../../shimmer.dart';
-import '../../constant/widget/widget.dart';
+
 
 class Selectkala extends StatefulWidget {
   int select;

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../constant/color/color.dart';
+import '../../constant/text_style.dart';
 import '../../constant/widget/widget.dart';
 import '../profile/personal_info.dart';
 

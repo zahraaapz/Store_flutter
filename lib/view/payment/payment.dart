@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../constant/color/color.dart';
+import '../../constant/text_style.dart';
 import '../../constant/widget/widget.dart';
 
 class Payments extends StatelessWidget {

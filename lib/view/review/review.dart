@@ -15,6 +15,7 @@ import 'dart:convert' as convert;
 
 import 'package:http/http.dart' as http;
 
+import '../../constant/text_style.dart';
 import 'chart.dart';
 
 class Review extends StatefulWidget {

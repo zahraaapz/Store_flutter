@@ -1,9 +1,11 @@
 import 'package:appstore/constant/color/color.dart';
-import 'package:appstore/constant/widget/widget.dart';
+
 import 'package:appstore/view/firstScreen/mainScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+
+import '../../constant/text_style.dart';
 
 
 class Splash extends StatefulWidget {

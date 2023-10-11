@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../constant/text_style.dart';
 import '../../constant/widget/widget.dart';
 import '../../constant/strings/string.dart';
 

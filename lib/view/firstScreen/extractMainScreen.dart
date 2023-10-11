@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import '../../constant/text_style.dart';
 import '../../shimmer.dart';
 import '../../controller/pick_file.dart';
 import '../notifition/notif.dart';
@@ -442,7 +443,7 @@ SizedBox suggList(size, fav) {
     //suggestion List
 
     return SizedBox(
-      height: size.height / 4.7,
+      height: size.height / 4.5,
       width: double.infinity,
       child: Obx(
         () => homeScreenController.suggestlist.isNotEmpty
@@ -771,7 +772,9 @@ SizedBox suggList(size, fav) {
                     ),
                   );
                 })
-            : ShimmerSuggestList(size: size,)
+            : 
+            
+            ShimmerSuggestList(size: size,)
       ),
     );
   }

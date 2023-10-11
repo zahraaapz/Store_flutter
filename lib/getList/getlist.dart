@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 
 class DioService{
 
-Future<dynamic> getList(String url)async{
+Future<dynamic> getList(String url)  async{
 
 Dio dio=Dio();
 

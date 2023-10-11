@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:appstore/getList/getlist.dart';
 import 'package:appstore/model/Model.dart';
@@ -33,6 +33,7 @@ class HomeScreenController extends GetxController {
     waiting.value=true;
 
     var response = await DioService().getList(ApiAddress().suggest);
+    print(response.statusCode+'LLLL');
 if (suggestlist.isEmpty) {
    response.data.forEach((element) {
       suggestlist.add(Kala.fromJson(element));
@@ -40,7 +41,7 @@ if (suggestlist.isEmpty) {
 
   
 }
-log(response.statusCode);
+
      waiting.value=false;
   }
 
