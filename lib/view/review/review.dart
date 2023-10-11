@@ -10,6 +10,7 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
 
 import 'dart:convert' as convert;
 
@@ -44,7 +45,7 @@ class _ReviewState extends State<Review> {
 
     List json = convert.jsonDecode(value.body);
     if (comment.isEmpty) {
-      ///:(
+     
       for (int i = 0; i < json.length; i++) {
         setState(() {
           comment.add(Comment(
@@ -135,7 +136,7 @@ class _ReviewState extends State<Review> {
                     ],
                   )),
             )
-          : SpinKitCircle(
+          : const SpinKitCircle(
               color: Rang.blue,
             ),
     );
@@ -143,16 +144,16 @@ class _ReviewState extends State<Review> {
 }
 
 collapseComment(context, List<Comment> comment) {
-  return Container(
-    height: 80,
+  return SizedBox(
+   height: Get.height/10,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
             Container(
-                height: 40,
-                width: 40,
+                height: Get.height/20,
+                width: Get.width/9,
                 decoration: BoxDecoration(
                     color: Rang.toosi, borderRadius: BorderRadius.circular(15)),
                 child: Row(
@@ -169,7 +170,7 @@ collapseComment(context, List<Comment> comment) {
                     ),
                   ],
                 )),
-            SizedBox(
+            const SizedBox(
               width: 6,
             ),
             Padding(
@@ -194,7 +195,7 @@ collapseComment(context, List<Comment> comment) {
           comment[1].review,
           style: textStyle.bodyMedium,
         ),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
         Builder(
@@ -221,7 +222,7 @@ expandedComment(context, List<Comment> comment) {
     crossAxisAlignment: CrossAxisAlignment.end,
     children: [
       SizedBox(
-        height: 490,
+        height: Get.height/1.5,
         child: ListView.builder(
             physics: const ClampingScrollPhysics(),
             itemCount: 5,
@@ -230,15 +231,15 @@ expandedComment(context, List<Comment> comment) {
               return Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: SizedBox(
-                  height: 80,
+                  height: Get.height/10,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
                           Container(
-                              height: 40,
-                              width: 40,
+                              height:Get.height/15 ,
+                              width: Get.width/10,
                               decoration: BoxDecoration(
                                   color: Rang.toosi,
                                   borderRadius: BorderRadius.circular(15)),
@@ -256,7 +257,7 @@ expandedComment(context, List<Comment> comment) {
                                   ),
                                 ],
                               )),
-                          SizedBox(
+                          const SizedBox(
                             width: 6,
                           ),
                           Padding(
@@ -304,7 +305,7 @@ expandedComment(context, List<Comment> comment) {
 write() {
   return Column(children: [
     SizedBox(
-      height: 300,
+      height: Get.height/25,
     ),
     Builder(builder: (context) {
       var controller = ExpandableController.of(context, required: true)!;
@@ -329,28 +330,14 @@ descripe() {
         'Review Description',
         style: textStyle.bodyMedium,
       ),
-      SizedBox(
-        height: 12,
-      ),
+SizedBox(height: 20,),
       Container(
-        width: double.infinity,
-        height: 200,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15), color: Rang.toosi),
-        child: TextField(
-          keyboardType: TextInputType.multiline,
-          maxLines: 3,
-          decoration: InputDecoration(
-              focusedBorder:
-                  OutlineInputBorder(borderSide: BorderSide(color: Rang.toosi)),
-              hintText: 'Enter Description',
-              border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.circular(15))),
-        ),
-      ),
-      SizedBox(
-        height: 100,
+        height: Get.height/4,
+        padding: const EdgeInsets.all(4),
+        child: myTextField(hintText:'Enter Description',size: Get.size,width: double.infinity )),
+ 
+      const SizedBox(
+        height: 80,
       ),
       SizedBox(
         width: double.infinity,

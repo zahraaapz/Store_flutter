@@ -4,6 +4,7 @@ import 'package:appstore/model/Model.dart';
 import 'package:appstore/constant/color/color.dart';
 import 'package:d_chart/d_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Chart extends StatelessWidget {
   Chart({super.key, required this.comment});
@@ -12,7 +13,8 @@ class Chart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 175,
+      height: Get.height/5,
+      
       child: DChartBar(
         verticalDirection: false,
         data: [

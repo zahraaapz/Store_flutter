@@ -1,6 +1,6 @@
 class ApiAddress{
 
-String suggest='https://api.npoint.io/bde8a4f154549826d426';
+String suggest='https://api.npoint.io/b26458905b022bf6df3e';
 String bag='https://api.npoint.io/9b749ec1cba3bde8985c';
 String shoes='https://api.npoint.io/8524f512efbe521971a9';
 String watch='https://api.npoint.io/799fff21ab388c806e64';

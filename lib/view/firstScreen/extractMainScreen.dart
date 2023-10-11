@@ -108,7 +108,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                 ),
                 //////suggest List
 const SizedBox(height: 5,),
-                suggList(size, fav),
+               suggList(size, fav),
                 Container(
                   ///collection container
                   color: Rang.blue,
@@ -384,7 +384,7 @@ Drawer drawer(size) {
     );
   }
 
-  SizedBox typeList(Size size) {
+SizedBox typeList(Size size) {
     //seslect clothes or...
 
     return SizedBox(
@@ -439,15 +439,17 @@ Drawer drawer(size) {
     );
   }
 
-SizedBox suggList(size, fav) {
+SizedBox suggList( Size size, fav) {
     //suggestion List
-
+     
     return SizedBox(
-      height: size.height / 4.5,
+      height: size.height / 4.49,
       width: double.infinity,
-      child: Obx(
-        () => homeScreenController.suggestlist.isNotEmpty
-            ? ListView.builder(
+      child:
+      
+       Obx(
+        () => homeScreenController.suggestlist.isNotEmpty?
+            ListView.builder(
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 itemCount: homeScreenController.suggestlist.length,
@@ -771,11 +773,11 @@ SizedBox suggList(size, fav) {
                       ),
                     ),
                   );
-                })
-            : 
+                }): 
             
             ShimmerSuggestList(size: size,)
-      ),
+          
+      )  ,
     );
   }
 

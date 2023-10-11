@@ -38,104 +38,65 @@ class Personal extends StatelessWidget {
                 endIndent: 5,
                 indent: 5,
               ),
-              Container(
-                height: 50,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15), color: Rang.toosi),
-                child: TextField(
-                  controller: fullname,
-                  decoration: InputDecoration(
-                      hintText: 'Full name',
-                      helperStyle: TextStyle(color: Rang.grey),
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(15)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Rang.toosi),
-                          borderRadius: BorderRadius.circular(15))),
-                ),
-              ),
+              myTextField(
+                  width: double.infinity,
+                  size: Get.size,
+                  hintText: 'Full Name',
+                  controller: fullname),
               const SizedBox(
                 height: 15,
               ),
-              Container(
-                height: 50,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15), color: Rang.toosi),
-                child: TextField(
-                  controller: number,
-                  keyboardType: TextInputType.phone,
-                  decoration: InputDecoration(
-                      hintText: 'Contact number',
-                      helperStyle: TextStyle(color: Rang.grey),
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(15)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Rang.toosi),
-                          borderRadius: BorderRadius.circular(15))),
-                ),
-              ),
+              myTextField(
+                  width: double.infinity,
+                  size: Get.size,
+                  hintText: 'Contact number',
+                  controller: number),
               const SizedBox(
                 height: 15,
               ),
-              Container(
-                height: 50,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15), color: Rang.toosi),
-                child: TextField(
-                  controller: email,
-                  decoration: InputDecoration(
-                      hintText: 'Email Address',
-                      helperStyle: TextStyle(color: Rang.grey),
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(15)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Rang.toosi),
-                          borderRadius: BorderRadius.circular(15))),
-                ),
-              ),
+              myTextField(
+                  width: double.infinity,
+                  size: Get.size,
+                  hintText: 'Email Address',
+                  controller: email),
               const SizedBox(
-                height: 20,
+                height: 300,
               ),
-         ButtonWidget(
-          onPressed: ()=>_onPressed(context),
-          title: 'Save Information',
-          
-         )
+              SizedBox(
+                width: double.infinity,
+                child: ButtonWidget(
+                  onPressed: () => _onPressed(context),
+                  title: 'Save Information',
+                ),
+              )
             ]),
           ),
         ),
       ),
     );
   }
-                    _onPressed (context) {
-                    box.write('fullName', fullname.text);
-                    box.write('email', email.text);
-                    box.write('number', number.text);
 
-                    if (fullname.text.isNotEmpty &&
-                        email.text.isNotEmpty &&
-                        number.text.isNotEmpty) {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Home()));
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          backgroundColor:
-                              const Color.fromARGB(255, 27, 75, 102),
-                          content: SizedBox(
-                            height: 60,
-                            child: Center(
-                              child: Text(
-                                'Enter information',
-                                style: textStyle.headlineLarge,
-                              ),
-                            ),
-                          )));
-                    }
-                  }
+  _onPressed(context) {
+    box.write('fullName', fullname.text);
+    box.write('email', email.text);
+    box.write('number', number.text);
+
+    if (fullname.text.isNotEmpty &&
+        email.text.isNotEmpty &&
+        number.text.isNotEmpty) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: const Color.fromARGB(255, 27, 75, 102),
+          content: SizedBox(
+            height: 60,
+            child: Center(
+              child: Text(
+                'Enter information',
+                style: textStyle.headlineLarge,
+              ),
+            ),
+          )));
+    }
+  }
 }

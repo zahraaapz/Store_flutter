@@ -89,29 +89,26 @@ void resultSeach(String query) {
               },
               child:const Icon(Icons.arrow_back_ios,color: Colors.black,)),
               const SizedBox(width:20,),      
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Rang.toosi, borderRadius: BorderRadius.all(Radius.circular(10))
-              ),
-              width: 350,
-              height: 50,
-              child: TextField(
+
+          Container(
+            decoration: const BoxDecoration(
+              color: Rang.toosi, borderRadius: BorderRadius.all(Radius.circular(10))
+            ),
+            padding: const EdgeInsets.all(6),
+            width: Get.width/1.25,
+            height: Get.height/15,
+            child: TextField(
            onSubmitted: resultSeach,
-                controller: searchController,
-                onChanged: filterItems,
-                decoration:InputDecoration(
-                    hintText: 'Search',
-                    hintStyle: const TextStyle(color: Rang.grey),
-                    suffixIcon: const Icon(
-                      Icons.search,
-                      color: Colors.black,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    )),
-              ),
+              controller: searchController,
+              onChanged: filterItems,
+              decoration:const InputDecoration(
+                  hintText: 'Search',
+                  hintStyle: TextStyle(color: Rang.grey),
+                  suffixIcon: Icon(
+                    Icons.search,
+                    color: Colors.black,
+                  ),
+                 ),
             ),
           ),
         ]),
@@ -124,8 +121,8 @@ void resultSeach(String query) {
                 children: [
 
                   Container(
-                    width: 70,
-                    height: 70,
+                    width: Get.width/6,
+                    height: Get.height/14,
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(Radius.circular(9)),
                       image: DecorationImage(

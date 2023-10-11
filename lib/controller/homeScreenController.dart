@@ -33,7 +33,7 @@ class HomeScreenController extends GetxController {
     waiting.value=true;
 
     var response = await DioService().getList(ApiAddress().suggest);
-    print(response.statusCode+'LLLL');
+
 if (suggestlist.isEmpty) {
    response.data.forEach((element) {
       suggestlist.add(Kala.fromJson(element));

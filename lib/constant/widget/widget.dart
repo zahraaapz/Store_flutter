@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../color/color.dart';
 import '../text_style.dart';
 
@@ -38,7 +39,27 @@ import '../text_style.dart';
               );
   }
 
- 
+   GestureDetector profileProperty(String title,Function() onTap) {
+    return GestureDetector(
+          onTap: onTap,
+          child:  Padding(
+            padding: const EdgeInsets.only(left:8.0,right:8),
+            child: SizedBox(
+              height:50,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    
+                    title,
+                      style: textStyle.headlineMedium,),
+                  const Icon(Icons.arrow_forward_ios_outlined)
+                ],
+              ),
+            ),
+          ),
+        );
+  }
 
  class ButtonWidget extends StatelessWidget {
  const ButtonWidget({
