@@ -1,7 +1,7 @@
 // ignore_for_file: no_logic_in_create_state
 
 import 'package:appstore/model/Model.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,6 +10,8 @@ import '../../constant/widget/widget.dart';
 import '../../constant/strings/string.dart';
 
 class Wish extends StatefulWidget {
+  const Wish({super.key});
+
 
 
 
@@ -53,17 +55,13 @@ class _WishState extends State<Wish> {
           const SizedBox(
             height: 100,
           ),
-          const SizedBox(
-            height: 50,
-            width: 250,
-            child: ButtonWidget(
-              title:'start shopping'
-              ),
-          )
+          const ButtonWidget(
+            title:'start shopping'
+            )
 
       ],)
       :SizedBox(
-        height: 670,
+        height: Get.height/1.2,
         child: GridView.builder(
           shrinkWrap: true,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -78,7 +76,7 @@ class _WishState extends State<Wish> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      height: 160,
+                      height: Get.height/5,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           image: DecorationImage(

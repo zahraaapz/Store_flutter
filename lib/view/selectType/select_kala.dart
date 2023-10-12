@@ -18,7 +18,7 @@ class Selectkala extends StatefulWidget {
   int select;
   RxList<Kala>? filterList = RxList();
   final HomeScreenController homeScreenController;
-  Selectkala(this.select, this.homeScreenController, {this.filterList});
+  Selectkala(this.select, this.homeScreenController, {super.key, this.filterList});
 
   @override
   // ignore: no_logic_in_create_state
@@ -77,7 +77,8 @@ class _SelectkalaState extends State<Selectkala> {
                   height: 450,
                   child: Column(children: [
                     SizedBox(
-                      height: 450,
+                   height: Get.height/1.9,
+
                       child: ListView.builder(
                         scrollDirection: Axis.vertical,
                         itemCount: brands?.length,
@@ -283,8 +284,8 @@ class _SelectkalaState extends State<Selectkala> {
                       builder: ((context) {
                         return StatefulBuilder(
                           builder: (context, setState) => Container(
-                            height: 230,
-                            decoration: const BoxDecoration(
+                         height: Get.height/5,
+                    decoration: const BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(30),
@@ -505,7 +506,7 @@ class _SelectkalaState extends State<Selectkala> {
           height: 10,
         ),
         SizedBox(
-          height: 650,
+          height: Get.height/1.28,
           child: GridView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
@@ -532,7 +533,7 @@ class _SelectkalaState extends State<Selectkala> {
                                       ))));
                         },
                         child: Container(
-                          height: 160,
+                          height: Get.height/5,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               image: DecorationImage(

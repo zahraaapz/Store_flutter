@@ -108,7 +108,10 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                 ),
                 //////suggest List
 const SizedBox(height: 5,),
-               suggList(size, fav),
+               Obx(()=> 
+               homeScreenController.suggestlist.isNotEmpty?
+               suggList(size, fav):
+               ShimmerSuggestList(size: size)),
                 Container(
                   ///collection container
                   color: Rang.blue,
@@ -446,10 +449,7 @@ SizedBox suggList( Size size, fav) {
       height: size.height / 4.49,
       width: double.infinity,
       child:
-      
-       Obx(
-        () => homeScreenController.suggestlist.isNotEmpty?
-            ListView.builder(
+      ListView.builder(
                 physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.horizontal,
                 itemCount: homeScreenController.suggestlist.length,
@@ -773,11 +773,7 @@ SizedBox suggList( Size size, fav) {
                       ),
                     ),
                   );
-                }): 
-            
-            ShimmerSuggestList(size: size,)
-          
-      )  ,
+                })
     );
   }
 

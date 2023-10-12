@@ -16,7 +16,7 @@ class DetailKala extends StatefulWidget {
   bool? isFavorite;
   int select;
   List<Kala> kalaList;
-  DetailKala(this.index, this.select, this.kalaList, {this.isFavorite});
+  DetailKala(this.index, this.select, this.kalaList, {super.key, this.isFavorite});
 
   @override
   State<DetailKala> createState() =>
@@ -61,7 +61,7 @@ class _DetailKalaState extends State<DetailKala> {
               child: Stack(
                 children: [
                   Container(
-                    height: 380,
+                    height: Get.height/2.4,
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             fit: BoxFit.fill,
@@ -72,12 +72,12 @@ class _DetailKalaState extends State<DetailKala> {
                     right: 20,
                     bottom: 30,
                     child: Container(
-                      width: 40,
-                      height: 40,
+                      width: Get.width/8,
+                      height: Get.height/16,
                       decoration: BoxDecoration(
-                          color: Color.fromARGB(110, 255, 255, 255),
+                          color: const Color.fromARGB(110, 255, 255, 255),
                           borderRadius: BorderRadius.circular(20)),
-                      child: Icon(Icons.view_carousel),
+                      child: const Icon(Icons.view_carousel),
                     ),
                   )
                 ],
@@ -125,7 +125,10 @@ class _DetailKalaState extends State<DetailKala> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                            height: 40,
+                         
+
+                      height: Get.height/18,                            
+
                             decoration: BoxDecoration(
                                 color: Rang.toosi,
                                 borderRadius: BorderRadius.circular(15)),
@@ -178,8 +181,8 @@ class _DetailKalaState extends State<DetailKala> {
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Container(
-                width: 400,
-                height: 70,
+             width: Get.width/1.02,
+                      height: Get.height/13,
                 decoration: BoxDecoration(
                     border: Border.all(color: Rang.blue, width: 2),
                     borderRadius: BorderRadius.circular(30)),
@@ -199,8 +202,8 @@ class _DetailKalaState extends State<DetailKala> {
                     Padding(
                       padding: const EdgeInsets.all(3.0),
                       child: Container(
-                        width: 100,
-                        height: 50,
+                        width: Get.width/5,
+                      height: Get.height/18,
                         decoration: BoxDecoration(
                             color: Rang.toosi,
                             borderRadius: BorderRadius.circular(20)),
@@ -246,8 +249,8 @@ class _DetailKalaState extends State<DetailKala> {
                       });
                     },
                     child: Container(
-                      width: 60,
-                      height: 60,
+                      width: Get.width/7,
+                      height: Get.height/16,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: Rang.toosi,
@@ -269,8 +272,7 @@ class _DetailKalaState extends State<DetailKala> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(
-                  right: 18.0, left: 18, top: 18, bottom: 18),
+              padding: const EdgeInsets.all(18),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -304,7 +306,7 @@ class _DetailKalaState extends State<DetailKala> {
               padding: const EdgeInsets.only(left: 15.0),
               child: SizedBox(
                 width: double.infinity,
-                height: 237,
+                height: Get.height/3.2,
                 child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: 2,
@@ -317,7 +319,7 @@ class _DetailKalaState extends State<DetailKala> {
                           width: 200,
                           child: Column(children: [
                             Container(
-                              height: 140,
+                              height: Get.height/6 ,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   image: DecorationImage(

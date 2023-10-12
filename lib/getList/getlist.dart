@@ -3,10 +3,10 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 
 class DioService{
-
+Dio dio=Dio();
 Future<dynamic> getList(String url)  async{
 
-Dio dio=Dio();
+
 
 dio.options.headers['Content-Type']='application/json';
 return await dio.get(url,options: Options(
@@ -20,4 +20,8 @@ return await dio.get(url,options: Options(
 
 
 }
+
+
+
+
 }
