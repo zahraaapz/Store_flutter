@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ShimmerList extends StatelessWidget {
@@ -18,13 +19,14 @@ class ShimmerList extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(
-                  height: 670,
+                  height: Get.height/1.24,
+
                   child: GridView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     itemCount: 10,
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      
+                    mainAxisSpacing: 1.5,
                       crossAxisCount: 2,
                     ),
                     itemBuilder: (context, index) {
@@ -35,7 +37,9 @@ class ShimmerList extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              height: 160,
+                            padding: const EdgeInsets.all(8),
+
+                              height: Get.height/5,
                               width:double.infinity,
                               decoration: BoxDecoration(
                                 color: Colors.grey,
@@ -43,8 +47,8 @@ class ShimmerList extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              margin: EdgeInsets.only(top:10,bottom: 8,right: 3),
-                              height: 10,
+                              margin: const EdgeInsets.only(top:10,bottom: 8,right: 3),
+                              height: Get.height/80 ,
                               width:double.infinity,
                               decoration: BoxDecoration(
                                 color: Colors.grey,
@@ -52,9 +56,9 @@ class ShimmerList extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              
-                              height: 10,
-                              width: 100,
+                              padding: const EdgeInsets.all(8),
+                             height:Get.height/80,
+                              width: Get.width/5,
                               decoration: BoxDecoration(
                                 color: Colors.grey,
                                 borderRadius: BorderRadius.circular(20),
@@ -85,12 +89,11 @@ final size;
   @override
   Widget build(BuildContext context) {
     return   SizedBox(
-       height: 200,
+       height: size.height/4.7,
        width: double.infinity,
         child:
           ListView.builder(
-          
-           scrollDirection: Axis.horizontal,
+          scrollDirection: Axis.horizontal,
             itemCount: 3,
              itemBuilder: (context,index)=>
             Padding(
@@ -111,7 +114,7 @@ final size;
                       ),
                       Container(
                         margin: const EdgeInsets.only(top:10,bottom: 8,right: 3),
-                        height: 10,
+                        height: size.height/80,
                          
                             width: size.width / 3.5,
                         decoration: BoxDecoration(
@@ -121,16 +124,16 @@ final size;
                       ),
                       Container(
                           margin: const EdgeInsets.only(bottom: 8,right: 3)
-,                        height: 10,
-                        width: 80,
+,                       height: size.height/80,
+                        width:size.width/5 ,
                         decoration: BoxDecoration(
                           color: Colors.grey,
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),  Container(
-                        
-                        height: 10,
-                        width: 70,
+                        height: size.height/80,
+                        width:size.width/6
+                        ,
                         decoration: BoxDecoration(
                           color: Colors.grey,
                           borderRadius: BorderRadius.circular(20),
