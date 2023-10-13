@@ -11,11 +11,12 @@ class ShimmerList extends StatelessWidget {
   Widget build(BuildContext context) {
     return  SingleChildScrollView(
           child: Column(
-        children: [
+        children: [   
+ 
           Shimmer.fromColors(
             enabled: true,
-            baseColor: const Color.fromARGB(155, 158, 158, 158),
-            highlightColor: const Color.fromARGB(90, 158, 158, 158),
+            baseColor:  Color(0xFFF4F4F4),
+            highlightColor:Color(0xFFEBEBF4) ,
             child: Column(
               children: [
                 SizedBox(
@@ -100,8 +101,8 @@ final size;
                 padding: const EdgeInsets.all(8.0),
                 child: Shimmer.fromColors(
                     enabled: true,
-            baseColor: const Color.fromARGB(155, 158, 158, 158),
-            highlightColor: const Color.fromARGB(90, 158, 158, 158),
+           baseColor:  Color(0xFFF4F4F4),
+            highlightColor:Color(0xFFEBEBF4) ,
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(

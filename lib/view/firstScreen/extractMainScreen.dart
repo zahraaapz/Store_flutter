@@ -14,6 +14,7 @@ import '../../constant/text_style.dart';
 import '../../constant/widget/shimmer.dart';
 import '../../controller/pick_file.dart';
 import '../notifition/notif.dart';
+import '../wish/wishlist.dart';
 
 class Extractmainscreen extends StatefulWidget {
   Extractmainscreen({super.key});
@@ -369,11 +370,11 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
           ),
           GestureDetector(
             child: Text('Wishlist', style: textStyle.bodyMedium),
-            // onTap: () {
-            //   Navigator.of(context).push(MaterialPageRoute(
-            //       builder: ((context) =>
-            //           Wish(fav, suggestList, select))));
-            // },
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: ((context) =>
+                      const Wish())));
+            },
           ),
         ]),
       ),

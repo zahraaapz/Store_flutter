@@ -5,7 +5,7 @@ import 'package:appstore/view/firstScreen/mainScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import '../../constant/text_style.dart';
+
 import '../../constant/widget/widget.dart';
 
 class Personal extends StatelessWidget {
@@ -26,7 +26,7 @@ class Personal extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(
             child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               iconANDtitle('My Information', Icons.arrow_back_ios),
               const SizedBox(
                 height: 9,
@@ -84,19 +84,10 @@ class Personal extends StatelessWidget {
     if (fullname.text.isNotEmpty &&
         email.text.isNotEmpty &&
         number.text.isNotEmpty) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          backgroundColor: const Color.fromARGB(255, 27, 75, 102),
-          content: SizedBox(
-            height: 60,
-            child: Center(
-              child: Text(
-                'Enter information',
-                style: textStyle.headlineLarge,
-              ),
-            ),
-          )));
+      massage('Enter information', context);
+     
     }
   }
 }

@@ -309,7 +309,7 @@ class _BagState extends State<Bag> {
   }
 
   _onPressed() {
-    Navigator.push(context, MaterialPageRoute(builder: ((context) => Home())));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: ((context) => Home())));
   }
 }
 

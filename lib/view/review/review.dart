@@ -3,9 +3,6 @@
 import 'package:appstore/constant/color/color.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/constant/widget/widget.dart';
-
-import 'package:appstore/view/selectType/detail_kala.dart';
-
 import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -89,10 +86,7 @@ class _ReviewState extends State<Review> {
                                 child: Row(children: [
                               IconButton(
                                   onPressed: (() {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: ((context) => DetailKala(
-                                                index, select, listkala))));
+                                    Navigator.of(context).pop();
                                   }),
                                   icon: const Icon(
                                     Icons.arrow_back_ios,
@@ -352,11 +346,7 @@ SizedBox(height: 20,),
 
 _onPressed(context, controller) {
   controller.toggle();
-  _snackbar(context);
+  massage('Saved :)',context);
 }
 
-_snackbar(context) {
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      backgroundColor: Rang.blue,
-      content: Text('Saved :)', style: textStyle.headlineLarge)));
-}
+

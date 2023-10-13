@@ -3,7 +3,6 @@
 import 'package:appstore/constant/color/color.dart';
 import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/model/Model.dart';
-import 'package:appstore/view/firstScreen/mainScreen.dart';
 
 import 'package:appstore/view/selectType/detail_kala.dart';
 import 'package:flutter/material.dart';
@@ -145,8 +144,7 @@ class _SelectkalaState extends State<Selectkala> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: ((context) => Home())));
+                            Navigator.of(context).pop();
                           },
                           child: const SizedBox(
                             height: 50,

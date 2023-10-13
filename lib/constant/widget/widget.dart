@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../color/color.dart';
 import '../text_style.dart';
@@ -21,14 +22,31 @@ import '../text_style.dart';
           );
   }
 
+      massage(String title,context){
+       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          backgroundColor: Color.fromARGB(204, 27, 75, 102),
+          content: SizedBox(
+            height: 60,
+            child: Center(
+              child: Text(
+                'Enter information',
+                style: TextStyle(
+                    color: Colors.white, fontSize: 18, fontFamily: 'Auliare'),
+              ),
+            ),
+          )));}
+
     Padding iconANDtitle(String title,IconData icon) {
     return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(children: [
-                  Icon(
-                    icon,
-                    color: Rang.blue,
-                    size: 30,
+                  GestureDetector(
+                    onTap: () => Get.back(),
+                    child: Icon(
+                      icon,
+                      color: Rang.blue,
+                      size: 30,
+                    ),
                   ),
                   const SizedBox(width: 20),
                   Text(
@@ -42,20 +60,17 @@ import '../text_style.dart';
    GestureDetector profileProperty(String title,Function() onTap) {
     return GestureDetector(
           onTap: onTap,
-          child:  Padding(
-            padding: const EdgeInsets.only(left:8.0,right:8),
-            child: SizedBox(
-              height:50,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    
-                    title,
-                      style: textStyle.headlineMedium,),
-                  const Icon(Icons.arrow_forward_ios_outlined)
-                ],
-              ),
+          child:  SizedBox(
+            height:50,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  
+                  title,
+                    style: textStyle.headlineMedium,),
+                const Icon(Icons.arrow_forward_ios_outlined)
+              ],
             ),
           ),
         );

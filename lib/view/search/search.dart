@@ -1,6 +1,5 @@
 import 'package:appstore/constant/color/color.dart';
 import 'package:appstore/controller/homeScreenController.dart';
-import 'package:appstore/view/firstScreen/mainScreen.dart';
 
 
 import 'package:flutter/material.dart';
@@ -81,11 +80,7 @@ void resultSeach(String query) {
         appBar: AppBar(backgroundColor: Colors.white,elevation: 0,
           actions: [GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Home(),
-                    ));
+                Navigator.pop(context);
               },
               child:const Icon(Icons.arrow_back_ios,color: Colors.black,)),
               const SizedBox(width:20,),      

@@ -21,7 +21,7 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Color.fromARGB(200, 244, 244, 244),
         body: Column(children: [
           Padding(
             padding: const EdgeInsets.all(9.0),
@@ -102,7 +102,7 @@ class Profile extends StatelessWidget {
             ),
           ),
           profileProperty('Personal Informantion', () => Get.to(Personal())),
-          profileProperty('My Address Book', () => Get.offAll(Address())),
+          profileProperty('My Address Book', () => Get.to(Address())),
           profileProperty('My Saved Cards', () {}),
           profileProperty('My Order', () {}),
           profileProperty('Refer and Earn', () {}),

@@ -78,7 +78,7 @@ class SearchResult extends StatelessWidget {
     );
   }
   _onPressed(context) {
-                  Navigator.push(context,
+                  Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: ((context) => Home())));
                 }
 

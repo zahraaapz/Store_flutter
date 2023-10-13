@@ -122,7 +122,7 @@ class Address extends StatelessWidget {
                 child: ButtonWidget(
                   iconData: Icons.location_on,
                   title: 'Save Address',
-                  onPressed: () => _onPressed,
+                  onPressed: ()=> onPressed(context),
                 ),
               )
             ]),
@@ -134,7 +134,7 @@ class Address extends StatelessWidget {
 
 
 
-  _onPressed(context) {
+  onPressed(context) {
     box.write('fulName', fullname.text);
     box.write('pin', pinCode.text);
     box.write('number', number.text);
@@ -151,18 +151,9 @@ class Address extends StatelessWidget {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const Payments()));
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          backgroundColor: Color.fromARGB(255, 27, 75, 102),
-          content: SizedBox(
-            height: 60,
-            child: Center(
-              child: Text(
-                'Enter information',
-                style: TextStyle(
-                    color: Colors.white, fontSize: 18, fontFamily: 'Auliare'),
-              ),
-            ),
-          )));
+
+      massage('Enter information',context);
+ 
     }
   }
 }
