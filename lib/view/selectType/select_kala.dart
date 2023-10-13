@@ -8,10 +8,10 @@ import 'package:appstore/view/firstScreen/mainScreen.dart';
 import 'package:appstore/view/selectType/detail_kala.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+
 
 import '../../constant/text_style.dart';
-import '../../shimmer.dart';
+import '../../constant/widget/shimmer.dart';
 
 
 class Selectkala extends StatefulWidget {
@@ -27,20 +27,26 @@ class Selectkala extends StatefulWidget {
 }
 
 class _SelectkalaState extends State<Selectkala> {
+
+  //for showing by filter,....//
   RxInt level = 0.obs;
-  String? selectRadioTile;
+  //filter 
+  List<bool>? checkBoxBrands;
+  String? selectedRadioTile;
+  RxList<Kala> filterPrice = RxList();
   RxList<Kala> filterListBrand = RxList();
   List<bool> checkBoxPriceBrand = [false, false];
   List selectedBrand = [];
-  RxList<Kala> filterPrice = RxList();
-  List<bool>? checkBoxBrands;
+  //
   int selectPage;
   late int lenght;
   final HomeScreenController homeScreenController;
   late List<bool> fav;
-  var box = GetStorage();
+
   List? brands;
-  List<double>? prices;
+  List<double>? prices; 
+
+  //for limit price
   RangeValues? val;
 
   _SelectkalaState(
@@ -52,7 +58,7 @@ class _SelectkalaState extends State<Selectkala> {
   initState() {
     super.initState();
     lenght = lenghtLists(selectPage, homeScreenController);
-    fav = List.generate(lenght, (index) => box.read('fav$index') ?? false);
+    fav = List.generate(lenght, (index) => false);
     checkBoxBrands = List.generate(lenght, (index) => false);
     brands = List.generate(
         lenght, (index) => brandItem(selectPage, index, homeScreenController));
@@ -105,7 +111,7 @@ class _SelectkalaState extends State<Selectkala> {
                                   filterListBrand.removeWhere(
                                       (e) => brands![index] == e.brand);
                                   selectedBrand.remove(brands![index]);
-                                  print(filterListBrand.length.toString());
+                             
                                   filterListBrand.isEmpty
                                       ? level.value = 0
                                       : level.value = 1;
@@ -200,172 +206,12 @@ class _SelectkalaState extends State<Selectkala> {
             children: [
               InkWell(
                   onTap: () {
-                    showModalBottomSheet(
-                        backgroundColor: Colors.transparent,
-                        context: context,
-                        builder: ((context) {
-                          return StatefulBuilder(
-                              builder: (context, setState) => Container(
-                                    decoration: const BoxDecoration(
-                                      borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(30),
-                                          topRight: Radius.circular(30)),
-                                      color: Colors.white,
-                                    ),
-                                    height: Get.height / 5,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Padding(
-                                          padding: EdgeInsets.all(15.0),
-                                          child: Text(
-                                            'Filter by',
-                                            style: TextStyle(
-                                                fontFamily: 'Auliare',
-                                                color: Rang.greylight,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        const Divider(
-                                          color: Rang.grey,
-                                          indent: 20,
-                                          endIndent: 30,
-                                          height: 1.5,
-                                        ),
-                                        CheckboxListTile(
-                                            title: Text(
-                                              'Brand',
-                                              style: textStyle.headlineMedium,
-                                            ),
-                                            fillColor:
-                                                MaterialStateProperty.all(
-                                                    Rang.blue),
-                                            value: checkBoxPriceBrand[0],
-                                            onChanged: (value) {
-                                              setState(() {
-                                                checkBoxPriceBrand[0] = value!;
-                                              });
-
-                                              checkBoxPriceBrand[0] == true
-                                                  ? showMyDialog()
-                                                  : null;
-                                            }),
-                                        CheckboxListTile(
-                                            title: Text(
-                                              'Price',
-                                              style: textStyle.headlineMedium,
-                                            ),
-                                            fillColor:
-                                                MaterialStateProperty.all(
-                                                    Rang.blue),
-                                            value: checkBoxPriceBrand[1],
-                                            onChanged: (value) {
-                                              setState(() {
-                                                checkBoxPriceBrand[1] = value!;
-                                              });
-                                              checkBoxPriceBrand[1] == true
-                                                  ? bottomSheetLimitedPrice(
-                                                      context)
-                                                  : null;
-                                            }),
-                                      ],
-                                    ),
-                                  ));
-                        }));
+                    filterBrandOrPrice(context);
                   },
                   child: const Icon(Icons.filter_alt_outlined)),
               InkWell(
                 onTap: (() {
-                  showModalBottomSheet(
-                      //bottomsheetfilter
-                      context: context,
-                      backgroundColor: Colors.transparent,
-                      builder: ((context) {
-                        return StatefulBuilder(
-                          builder: (context, setState) => Container(
-                         height: Get.height/5,
-                    decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(30),
-                                  topRight: Radius.circular(30)),
-                            ),
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Padding(
-                                    padding: EdgeInsets.only(
-                                        left: 25, bottom: 8, top: 15),
-                                    child: Text(
-                                      'Sort by',
-                                      style: TextStyle(
-                                          fontFamily: 'Auliare',
-                                          color: Rang.greylight,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                  const Divider(
-                                    color: Rang.grey,
-                                    indent: 40,
-                                    endIndent: 40,
-                                    height: 1.5,
-                                  ),
-                                  RadioListTile(
-                                    activeColor: Rang.blue,
-                                    title: Text('Price - Hight to Low',
-                                        style: textStyle.bodyMedium),
-                                    groupValue: selectRadioTile,
-                                    value: '0',
-                                    onChanged: (value) {
-                                      setState(() {
-                                        selectRadioTile = value.toString();
-                                        sortListHightoLow(
-                                            selectPage, homeScreenController);
-                                      });
-                                    },
-                                  ),
-                                  const Divider(
-                                    color: Rang.grey,
-                                    indent: 40,
-                                    endIndent: 40,
-                                    height: 1.5,
-                                  ),
-                                  RadioListTile(
-                                      activeColor: Rang.blue,
-                                      title: Text('Price - Low to Hight',
-                                          style: textStyle.bodyMedium),
-                                      groupValue: selectRadioTile,
-                                      value: '1',
-                                      onChanged: (value) {
-                                        setState(() {
-                                          selectRadioTile = value.toString();
-                                          sortLisLowtoHigh(
-                                              selectPage, homeScreenController);
-                                        });
-                                      }),
-                                  const Divider(
-                                    color: Rang.grey,
-                                    indent: 40,
-                                    endIndent: 40,
-                                    height: 1.5,
-                                  ),
-                                  RadioListTile(
-                                    activeColor: Rang.blue,
-                                    title: Text('Lasted product',
-                                        style: textStyle.bodyMedium),
-                                    groupValue: selectRadioTile,
-                                    value: '2',
-                                    onChanged: (value) {
-                                      setState(() {
-                                        selectRadioTile = value.toString();
-                                      });
-                                    },
-                                  ),
-                                ]),
-                          ),
-                        );
-                      }));
+                  filterBySort(context);
                 }),
                 child: const Icon(Icons.sort_rounded),
               ),
@@ -374,6 +220,174 @@ class _SelectkalaState extends State<Selectkala> {
         )
       ]),
     ));
+  }
+
+  Future<dynamic> filterBySort(BuildContext context) {
+    return showModalBottomSheet(
+                    //bottomsheetfilter
+                    context: context,
+                    backgroundColor: Colors.transparent,
+                    builder: ((context) {
+                      return StatefulBuilder(
+                        builder: (context, setState) => Container(
+                       height: Get.height/5,
+                  decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(30),
+                                topRight: Radius.circular(30)),
+                          ),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Padding(
+                                  padding: EdgeInsets.only(
+                                      left: 25, bottom: 8, top: 15),
+                                  child: Text(
+                                    'Sort by',
+                                    style: TextStyle(
+                                        fontFamily: 'Auliare',
+                                        color: Rang.greylight,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                const Divider(
+                                  color: Rang.grey,
+                                  indent: 40,
+                                  endIndent: 40,
+                                  height: 1.5,
+                                ),
+                                RadioListTile(
+                                  activeColor: Rang.blue,
+                                  title: Text('Price - Hight to Low',
+                                      style: textStyle.bodyMedium),
+                                  groupValue: selectedRadioTile,
+                                  value: '0',
+                                  onChanged: (value) {
+                                    setState(() {
+                                      selectedRadioTile = value.toString();
+                                      sortListHightoLow(
+                                          selectPage, homeScreenController);
+                                    });
+                                  },
+                                ),
+                                const Divider(
+                                  color: Rang.grey,
+                                  indent: 40,
+                                  endIndent: 40,
+                                  height: 1.5,
+                                ),
+                                RadioListTile(
+                                    activeColor: Rang.blue,
+                                    title: Text('Price - Low to Hight',
+                                        style: textStyle.bodyMedium),
+                                    groupValue: selectedRadioTile,
+                                    value: '1',
+                                    onChanged: (value) {
+                                      setState(() {
+                                        selectedRadioTile = value.toString();
+                                        sortLisLowtoHigh(
+                                            selectPage, homeScreenController);
+                                      });
+                                    }),
+                                const Divider(
+                                  color: Rang.grey,
+                                  indent: 40,
+                                  endIndent: 40,
+                                  height: 1.5,
+                                ),
+                                RadioListTile(
+                                  activeColor: Rang.blue,
+                                  title: Text('Lasted product',
+                                      style: textStyle.bodyMedium),
+                                  groupValue: selectedRadioTile,
+                                  value: '2',
+                                  onChanged: (value) {
+                                    setState(() {
+                                      selectedRadioTile = value.toString();
+                                    });
+                                  },
+                                ),
+                              ]),
+                        ),
+                      );
+                    }));
+  }
+
+  Future<dynamic> filterBrandOrPrice(BuildContext context) {
+    return showModalBottomSheet(
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: ((context) {
+                        return StatefulBuilder(
+                            builder: (context, setState) => Container(
+                                  decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(30),
+                                        topRight: Radius.circular(30)),
+                                    color: Colors.white,
+                                  ),
+                                  height: Get.height / 5,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Padding(
+                                        padding: EdgeInsets.all(15.0),
+                                        child: Text(
+                                          'Filter by',
+                                          style: TextStyle(
+                                              fontFamily: 'Auliare',
+                                              color: Rang.greylight,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                      const Divider(
+                                        color: Rang.grey,
+                                        indent: 20,
+                                        endIndent: 30,
+                                        height: 1.5,
+                                      ),
+                                      CheckboxListTile(
+                                          title: Text(
+                                            'Brand',
+                                            style: textStyle.headlineMedium,
+                                          ),
+                                          fillColor:
+                                              MaterialStateProperty.all(
+                                                  Rang.blue),
+                                          value: checkBoxPriceBrand[0],
+                                          onChanged: (value) {
+                                            setState(() {
+                                              checkBoxPriceBrand[0] = value!;
+                                            });
+
+                                            checkBoxPriceBrand[0] == true
+                                                ? showMyDialog()
+                                                : null;
+                                          }),
+                                      CheckboxListTile(
+                                          title: Text(
+                                            'Price',
+                                            style: textStyle.headlineMedium,
+                                          ),
+                                          fillColor:
+                                              MaterialStateProperty.all(
+                                                  Rang.blue),
+                                          value: checkBoxPriceBrand[1],
+                                          onChanged: (value) {
+                                            setState(() {
+                                              checkBoxPriceBrand[1] = value!;
+                                            });
+                                            checkBoxPriceBrand[1] == true
+                                                ? bottomSheetLimitedPrice(
+                                                    context)
+                                                : null;
+                                          }),
+                                    ],
+                                  ),
+                                ));
+                      }));
   }
 
   Future<dynamic> bottomSheetLimitedPrice(BuildContext context) {
@@ -547,18 +561,7 @@ class _SelectkalaState extends State<Selectkala> {
                           Text(style: textStyle.bodyMedium, list[index].name!),
                           GestureDetector(
                             onTap: () {
-                              setState(() {
-                                fav[index] = !fav[index];
-                                box.write('fav$index', fav[index]);
-                                if (fav[index] == true &&
-                                    !wishList.contains(list[index])) {
-                                  wishList.add(list[index]);
-                                }
-                                if (wishList.contains(list[index]) &&
-                                    fav[index] == false) {
-                                  wishList.remove(list[index]);
-                                }
-                              });
+                             
                             },
                             child: Icon(
                               fav[index] == false

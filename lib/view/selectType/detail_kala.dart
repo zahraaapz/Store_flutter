@@ -32,6 +32,9 @@ class _DetailKalaState extends State<DetailKala> {
   int index;
   bool? isFavorite;
   final int randomValue = Random().nextInt(500000);
+
+
+  
   @override
   Widget build(BuildContext context) {
     return SafeArea(

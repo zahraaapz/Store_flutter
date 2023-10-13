@@ -11,7 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../constant/text_style.dart';
-import '../../shimmer.dart';
+import '../../constant/widget/shimmer.dart';
 import '../../controller/pick_file.dart';
 import '../notifition/notif.dart';
 
@@ -28,7 +28,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   RxInt select = 0.obs;
   late List<bool> fav;
-  var box = GetStorage();
+ var box = GetStorage();
 
   @override
   void initState() {
@@ -138,7 +138,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -229,7 +229,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
           ])),
     );
   }
-
+//APP BAR
   Row appBar(Size size, BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -278,7 +278,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
       ],
     );
   }
-
+//DRAWER
   Drawer drawer(size) {
     return Drawer(
       backgroundColor: Colors.white,
@@ -379,7 +379,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
       ),
     );
   }
-
+//LIST INLUDE TYPE PRODUCT
   SizedBox typeList(Size size) {
     //seslect clothes or...
 
@@ -433,7 +433,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
           })),
     );
   }
-
+//SUGGEST LIST 
   SizedBox suggList(Size size, fav) {
     //suggestion List
  return SizedBox(
@@ -759,6 +759,10 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
   }
 }
 
+
+
+
+//* A BLUE BOX FOR INSTALL APP
 class Shortcut extends StatelessWidget {
   const Shortcut({
     Key? key,
@@ -831,6 +835,10 @@ class Shortcut extends StatelessWidget {
   }
 }
 
+
+
+
+//*KIND OF BRANDS
 class Brand extends StatelessWidget {
   const Brand({Key? key, this.size}) : super(key: key);
 
@@ -858,6 +866,7 @@ class Brand extends StatelessWidget {
   }
 }
 
+//COLLECTION INCLUDE 4 PHOTOS IN BLUE CONTAINER 
 class CollectionList extends StatelessWidget {
   const CollectionList({Key? key, this.size}) : super(key: key);
   final size;
@@ -889,6 +898,8 @@ class CollectionList extends StatelessWidget {
   }
 }
 
+
+//2 PHOTOS IN HEAD OF PAGE
 class Bannner extends StatelessWidget {
   const Bannner({
     Key? key,
