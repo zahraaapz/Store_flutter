@@ -10,6 +10,7 @@ import '../../model/Model.dart';
 import '../../constant/widget/widget.dart';
 import '../../constant/strings/string.dart';
 import '../firstScreen/mainScreen.dart';
+import '../profile/personal_info.dart';
 
 class Bag extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
@@ -298,7 +299,7 @@ class _BagState extends State<Bag> {
                       borderRadius: BorderRadius.circular(15))),
                   backgroundColor: MaterialStateProperty.all(Rang.blue)),
               onPressed: (() {
-                Address().box.read('street') == null
+                Personal().box.read('street') == null
                     ? Get.offAll(Address())
                     : Get.to(const Payments());
               }),

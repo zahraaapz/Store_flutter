@@ -4,7 +4,8 @@
 
 import 'package:file_picker/file_picker.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+
+import '../view/profile/personal_info.dart';
 
 class PickFileController extends GetxController{
 
@@ -17,8 +18,8 @@ PickFileController pickFileController=Get.put(PickFileController());
 
 
 Future getFile()async{
-var box=GetStorage();
+
 FilePickerResult? result=await FilePicker.platform.pickFiles(type:FileType.image) ;
 pickFileController.file.value=result!.files.first;
-box.write('ima', pickFileController.file.value.path);
+Personal().box.write('ima', pickFileController.file.value.path);
 }

@@ -3,32 +3,32 @@
 import 'package:appstore/constant/color/color.dart';
 import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/model/Model.dart';
-
 import 'package:appstore/view/selectType/detail_kala.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-
+import 'package:get_storage/get_storage.dart';
 import '../../constant/text_style.dart';
 import '../../constant/widget/shimmer.dart';
 
 
 class Selectkala extends StatefulWidget {
   int select;
-  RxList<Kala>? filterList = RxList();
-  final HomeScreenController homeScreenController;
-  Selectkala(this.select, this.homeScreenController, {super.key, this.filterList});
+ 
+ 
+
+  Selectkala(this.select, {super.key,});
 
   @override
   // ignore: no_logic_in_create_state
   State<Selectkala> createState() =>
-      _SelectkalaState(select, homeScreenController);
+      _SelectkalaState(select);
 }
 
 class _SelectkalaState extends State<Selectkala> {
 
   //for showing by filter,....//
   RxInt level = 0.obs;
+
   //filter 
   List<bool>? checkBoxBrands;
   String? selectedRadioTile;
@@ -39,7 +39,8 @@ class _SelectkalaState extends State<Selectkala> {
   //
   int selectPage;
   late int lenght;
-  final HomeScreenController homeScreenController;
+  var box=GetStorage();
+  final HomeScreenController homeScreenController=HomeScreenController();
   late List<bool> fav;
 
   List? brands;
@@ -50,7 +51,8 @@ class _SelectkalaState extends State<Selectkala> {
 
   _SelectkalaState(
     this.selectPage,
-    this.homeScreenController,
+
+   
   );
 
   @override
@@ -60,7 +62,7 @@ class _SelectkalaState extends State<Selectkala> {
     fav = List.generate(lenght, (index) => false);
     checkBoxBrands = List.generate(lenght, (index) => false);
     brands = List.generate(
-        lenght, (index) => brandItem(selectPage, index, homeScreenController));
+     lenght, (index) => brandItem(selectPage, index, homeScreenController));
 
     prices = List.generate(
         lenght,
@@ -559,7 +561,26 @@ class _SelectkalaState extends State<Selectkala> {
                           Text(style: textStyle.bodyMedium, list[index].name!),
                           GestureDetector(
                             onTap: () {
-                             
+                                setState(() {
+                                  fav[index] = !fav[index];
+
+                                
+
+                                  if (fav[index] == true &&
+                                      !wishList.contains(
+                                         list[index])) {
+                                    wishList.add(list[index]);
+                                  box.write('${list[index].name}'+ 
+                                  "${list[index].filter}", fav[index]); 
+                                   }
+                                  if (fav[index] == false &&
+                                      wishList.contains(list[index])) {
+                                    wishList.remove(list[index]);
+                                 box.remove('${list[index].name}'+ 
+                                  "${list[index].filter}");  
+                                   }
+                                  debugPrint(wishList.length.toString());
+                                });
                             },
                             child: Icon(
                               fav[index] == false

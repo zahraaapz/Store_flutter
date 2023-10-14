@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/constant/color/color.dart';
+import 'package:appstore/view/selectType/select_kala.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,7 +14,7 @@ import '../review/review.dart';
 
 class DetailKala extends StatefulWidget {
   int index;
-  bool? isFavorite;
+bool? isFavorite;
   int select;
   List<Kala> kalaList;
   DetailKala(this.index, this.select, this.kalaList, {super.key, this.isFavorite});
@@ -53,7 +54,7 @@ class _DetailKalaState extends State<DetailKala> {
                       color: Rang.blue,
                     ),
                     onPressed: () {
-                      Get.back();
+                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Selectkala(select)));
                     },
                   ),
                 ],
@@ -234,36 +235,39 @@ class _DetailKalaState extends State<DetailKala> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isFavorite = !isFavorite!;
-                        box.write('fav$index', isFavorite);
-                        if (isFavorite == false &&
-                            wishList.contains(kalalist[index])) {
-                          wishList.remove(kalalist[index]);
-                        }
-                        if (isFavorite == true &&
-                            !wishList.contains(kalalist[index])) {
-                          wishList.add(kalalist[index]);
-                        }
+                  Container(
+                    width: Get.width/7,
+                    height: Get.height/16,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Rang.toosi,
+                    ),
+                    child: IconButton(
+                      onPressed: () {
+                        isFavorite=!isFavorite!;
 
-                        debugPrint(wishList.length.toString());
-                      });
-                    },
-                    child: Container(
-                      width: Get.width/7,
-                      height: Get.height/16,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Rang.toosi,
-                      ),
-                      child: Icon(
-                        isFavorite == false
-                            ? Icons.favorite_border
-                            : Icons.favorite,
-                        color: Rang.blue,
-                      ),
+                                
+
+                                  if (isFavorite == true &&
+                                      !wishList.contains(
+                                         kalalist[index])) {
+                                    wishList.add(kalalist[index]);
+                                  box.write('${kalalist[index].name}'+ 
+                                  "${kalalist[index].filter}", isFavorite); 
+                                   }
+                                  if (isFavorite == false &&
+                                      wishList.contains(kalalist[index])) {
+                                    wishList.remove(kalalist[index]);
+                                 box.remove('${kalalist[index].name}'+ 
+                                  "${kalalist[index].filter}");  
+                                   }
+                                  debugPrint(wishList.length.toString());
+                      },
+                      icon:Icon(
+                      isFavorite == false
+                          ? Icons.favorite_border
+                          : Icons.favorite),
+                      color: Rang.blue,
                     ),
                   ),
                   ButtonWidget(

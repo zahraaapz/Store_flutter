@@ -14,7 +14,9 @@ import '../../constant/text_style.dart';
 import '../../constant/widget/shimmer.dart';
 import '../../controller/pick_file.dart';
 import '../notifition/notif.dart';
+import '../profile/personal_info.dart';
 import '../wish/wishlist.dart';
+
 
 class Extractmainscreen extends StatefulWidget {
   Extractmainscreen({super.key});
@@ -24,12 +26,14 @@ class Extractmainscreen extends StatefulWidget {
 }
 
 class _ExtractmainscreenState extends State<Extractmainscreen> {
+
   final HomeScreenController homeScreenController =
       Get.put(HomeScreenController());
+
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   RxInt select = 0.obs;
-  late List<bool> fav;
- var box = GetStorage();
+
+
 
   @override
   void initState() {
@@ -40,7 +44,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
     homeScreenController.getSkincareItem();
     homeScreenController.getWatcheItem();
     homeScreenController.getjewellery();
-    fav = List.generate(3, (index) => box.read('fav$index') ?? false);
+ 
     super.initState();
   }
 
@@ -111,7 +115,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                   height: 5,
                 ),
                 Obx(() => homeScreenController.suggestlist.isNotEmpty
-                    ? suggList(size, fav)
+                    ? suggList(size)
                     : ShimmerSuggestList(size: size)),
                 Container(
                   ///collection container
@@ -305,7 +309,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                                 ? const AssetImage(
                                     'assets/image/avatar.png',
                                   )
-                                : Image.file(File(box.read('ima'))).image,
+                                : Image.file(File(Personal().box.read('ima'))).image,
                             fit: BoxFit.cover)),
                   ),
                   const SizedBox(
@@ -315,15 +319,15 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          box.read('fullName') ?? '--',
+                          Personal().box.read('fullName') ?? '--',
                           style: textStyle.labelSmall,
                         ),
                         Text(
-                          box.read('number') ?? '--',
+                          Personal().box.read('number') ?? '--',
                           style: textStyle.labelSmall,
                         ),
                         Text(
-                          box.read('email') ?? '--',
+                          Personal().box.read('email') ?? '--',
                           style: textStyle.labelSmall,
                         ),
                       ]),
@@ -350,7 +354,8 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: ((context) => Selectkala(
                                   index,
-                                  homeScreenController,
+                                 
+                                 
                                 ))));
                       },
                     ),
@@ -405,7 +410,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => Selectkala(
                             index,
-                            homeScreenController,
+                          
                           ),
                         ));
                       },
@@ -435,7 +440,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
     );
   }
 //SUGGEST LIST 
-  SizedBox suggList(Size size, fav) {
+  SizedBox suggList(Size size,) {
     //suggestion List
  return SizedBox(
         height: size.height / 4.5,
@@ -706,36 +711,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                           children: [
                             Text(homeScreenController.suggestlist[index].name!,
                                 style: textStyle.bodyMedium),
-                            InkWell(
-                              onTap: () {
-                                setState(() {
-                                  fav[index] = !fav[index];
-
-                                  box.write('fav$index', fav[index]);
-
-                                  if (fav[index] == true &&
-                                      !wishList.contains(homeScreenController
-                                          .suggestlist[index])) {
-                                    wishList.add(homeScreenController
-                                        .suggestlist[index]);
-                                  }
-                                  if (fav[index] == false &&
-                                      wishList.contains(homeScreenController
-                                          .suggestlist[index])) {
-                                    wishList.remove(homeScreenController
-                                        .suggestlist[index]);
-                                  }
-                                  debugPrint(wishList.length.toString());
-                                });
-                              },
-                              child: Icon(
-                                fav[index] == false
-                                    ? Icons.favorite_border
-                                    : Icons.favorite,
-                                size: 20,
-                                color: Colors.black,
-                              ),
-                            )
+                          
                           ],
                         ),
                       ),

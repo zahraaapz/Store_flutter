@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
 import 'package:appstore/view/address/address.dart';
+import 'package:appstore/view/profile/personal_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -42,14 +43,14 @@ class Payments extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    Address().box.read('street'),
+                                    Personal().box.read('street'),
                                     style: textStyle.bodyMedium,
                                   ),
                                   const SizedBox(
                                     width: 10,
                                   ),
                                   Text(
-                                    Address().box.read('city'),
+                                  Personal().box.read('city'),
                                     style: textStyle.bodyMedium,
                                   ),
                                 ],

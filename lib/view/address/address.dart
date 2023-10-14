@@ -5,10 +5,11 @@ import 'package:appstore/model/Model.dart';
 import 'package:appstore/view/payment/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+
 
 import '../../constant/text_style.dart';
 import '../../constant/widget/widget.dart';
+import '../profile/personal_info.dart';
 
 class Address extends StatelessWidget {
   RxInt select = 0.obs;
@@ -18,7 +19,7 @@ class Address extends StatelessWidget {
   TextEditingController pinCode = TextEditingController();
   TextEditingController street = TextEditingController();
   TextEditingController city = TextEditingController();
-  final box = GetStorage();
+
  Address({super.key});
 
   @override
@@ -135,12 +136,12 @@ class Address extends StatelessWidget {
 
 
   onPressed(context) {
-    box.write('fulName', fullname.text);
-    box.write('pin', pinCode.text);
-    box.write('number', number.text);
-    box.write('preNum', preNum.text);
-    box.write('street', street.text);
-    box.write('city', city.text);
+    Personal().box.write('fulName', fullname.text);
+    Personal().box.write('pin', pinCode.text);
+    Personal().box.write('number', number.text);
+    Personal().box.write('preNum', preNum.text);
+    Personal().box.write('street', street.text);
+    Personal().box.write('city', city.text);
 
     if (street.text.isNotEmpty &&
         city.text.isNotEmpty &&
