@@ -17,7 +17,7 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   TextEditingController searchController = TextEditingController();
 
-  List<Kala> filteredItems = [];
+  List<Product> filteredItems = [];
   HomeScreenController homeScreenController = Get.put(HomeScreenController());
   @override
   void initState() {
@@ -27,7 +27,7 @@ class _SearchState extends State<Search> {
   }
 
   void filterItems(String query) {
-    List<Kala> temp = [];
+    List<Product> temp = [];
 
     temp.addAll(homeScreenController.searchKala);
 
@@ -45,7 +45,7 @@ class _SearchState extends State<Search> {
   }
 
   void resultSeach(String query) {
-    List<Kala> temp = [];
+    List<Product> temp = [];
 
     temp.addAll(homeScreenController.searchKala);
 

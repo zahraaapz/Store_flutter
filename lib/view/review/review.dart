@@ -22,7 +22,7 @@ class Review extends StatefulWidget {
       required this.listkala,
       required this.index,
       required this.select});
-  List<Kala> listkala = [];
+  List<Product> listkala = [];
   int index, select;
 
   @override
@@ -32,7 +32,7 @@ class Review extends StatefulWidget {
 
 class _ReviewState extends State<Review> {
   List<Comment> comment = [];
-  List<Kala> listkala = [];
+  List<Product> listkala = [];
   int index, select;
   _ReviewState(
       {required this.listkala, required this.index, required this.select});

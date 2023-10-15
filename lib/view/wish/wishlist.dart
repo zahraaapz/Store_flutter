@@ -24,7 +24,7 @@ class _WishState extends State<Wish> {
 
 
 
-  List<Kala> kalaList = [];
+  List<Product> kalaList = [];
 
   @override
   Widget build(BuildContext context) {

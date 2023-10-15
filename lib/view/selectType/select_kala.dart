@@ -3,20 +3,22 @@
 import 'package:appstore/constant/color/color.dart';
 import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/model/Model.dart';
+import 'package:appstore/view/firstScreen/mainScreen.dart';
 import 'package:appstore/view/selectType/detail_kala.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import '../../constant/text_style.dart';
 import '../../constant/widget/shimmer.dart';
+import '../profile/personal_info.dart';
 
 
 class Selectkala extends StatefulWidget {
   int select;
- 
+
+
  
 
-  Selectkala(this.select, {super.key,});
+  Selectkala(this.select, {super.key});
 
   @override
   // ignore: no_logic_in_create_state
@@ -32,15 +34,14 @@ class _SelectkalaState extends State<Selectkala> {
   //filter 
   List<bool>? checkBoxBrands;
   String? selectedRadioTile;
-  RxList<Kala> filterPrice = RxList();
-  RxList<Kala> filterListBrand = RxList();
+  RxList<Product> filterPrice = RxList();
+  RxList<Product> filterListBrand = RxList();
   List<bool> checkBoxPriceBrand = [false, false];
   List selectedBrand = [];
   //
   int selectPage;
   late int lenght;
-  var box=GetStorage();
-  final HomeScreenController homeScreenController=HomeScreenController();
+  final HomeScreenController homeScreenController=Get.put(HomeScreenController());
   late List<bool> fav;
 
   List? brands;
@@ -51,15 +52,13 @@ class _SelectkalaState extends State<Selectkala> {
 
   _SelectkalaState(
     this.selectPage,
-
-   
-  );
+ );
 
   @override
   initState() {
     super.initState();
     lenght = lenghtLists(selectPage, homeScreenController);
-    fav = List.generate(lenght, (index) => false);
+    fav = List.generate(lenght, (index) =>favoriteProcess(selectPage, index, homeScreenController));
     checkBoxBrands = List.generate(lenght, (index) => false);
     brands = List.generate(
      lenght, (index) => brandItem(selectPage, index, homeScreenController));
@@ -146,7 +145,7 @@ class _SelectkalaState extends State<Selectkala> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.of(context).pop();
+                           Get.offAll(Home());
                           },
                           child: const SizedBox(
                             height: 50,
@@ -501,7 +500,7 @@ class _SelectkalaState extends State<Selectkala> {
                 ))));
   }
 
-  Column mainList(RxList<Kala> list) {
+  Column mainList(RxList<Product> list) {
     return Column(
       children: [
         const SizedBox(
@@ -564,19 +563,17 @@ class _SelectkalaState extends State<Selectkala> {
                                 setState(() {
                                   fav[index] = !fav[index];
 
-                                
-
                                   if (fav[index] == true &&
                                       !wishList.contains(
                                          list[index])) {
                                     wishList.add(list[index]);
-                                  box.write('${list[index].name}'+ 
+                                  Personal().box.write('${list[index].name}'+ 
                                   "${list[index].filter}", fav[index]); 
                                    }
                                   if (fav[index] == false &&
                                       wishList.contains(list[index])) {
                                     wishList.remove(list[index]);
-                                 box.remove('${list[index].name}'+ 
+                                 Personal().box.remove('${list[index].name}'+ 
                                   "${list[index].filter}");  
                                    }
                                   debugPrint(wishList.length.toString());
@@ -640,7 +637,7 @@ String priceLists(
                       : homeScreenController.shoes[index].price!;
 }
 
-filterBrand(int selectPage, List<Kala> filterList, List selectedBrand,
+filterBrand(int selectPage, List<Product> filterList, List selectedBrand,
     HomeScreenController homeScreenController) {
   selectPage == 0
       ? filterList.assignAll(homeScreenController.skincare
@@ -728,4 +725,25 @@ sortListHightoLow(int selectPage, HomeScreenController homeScreenController) {
                       ? homeScreenController.eyewear.sort(
                           ((b, a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
                       : homeScreenController.shoes.sort(((b, a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())));
+}
+
+
+bool favoriteProcess(int selectPage,int index, HomeScreenController homeScreenController){
+   return selectPage == 0
+      ?  Personal().
+    box.read("${homeScreenController.skincare[index].name}"+"${homeScreenController.skincare[index].filter}")??false
+      : selectPage == 1
+          ?  Personal().
+    box.read("${homeScreenController.watche[index].name}"+"${homeScreenController.watche[index].filter}")??false
+          : selectPage == 2
+              ?  Personal().
+    box.read("${homeScreenController.bag[index].name}"+"${homeScreenController.bag[index].filter}")??false
+              : selectPage == 3
+                  ?  Personal().
+    box.read("${homeScreenController.jewellery[index].name}"+"${homeScreenController.jewellery[index].filter}")??false
+                  : selectPage == 4
+                      ?  Personal().
+    box.read("${homeScreenController.eyewear[index].name}"+"${homeScreenController.eyewear[index].filter}")??false
+                      :  Personal().
+    box.read("${homeScreenController.shoes[index].name}"+"${homeScreenController.shoes[index].filter}")??false;
 }

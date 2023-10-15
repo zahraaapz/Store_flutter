@@ -4,14 +4,14 @@ import 'package:appstore/constant/api/api.dart';
 import 'package:get/get.dart';
 
 class HomeScreenController extends GetxController {
-  RxList<Kala> suggestlist = RxList();
-  RxList<Kala> bag = RxList();
-  RxList<Kala> jewellery = RxList();
-  RxList<Kala> shoes = RxList();
-  RxList<Kala> eyewear = RxList();
-  RxList<Kala> watche = RxList();
-  RxList<Kala> skincare = RxList();
-  RxList<Kala> searchKala = RxList();
+  RxList<Product> suggestlist = RxList();
+  RxList<Product> bag = RxList();
+  RxList<Product> jewellery = RxList();
+  RxList<Product> shoes = RxList();
+  RxList<Product> eyewear = RxList();
+  RxList<Product> watche = RxList();
+  RxList<Product> skincare = RxList();
+  RxList<Product> searchKala = RxList();
   RxBool waiting=false.obs;
   @override
   void onInit() {
@@ -34,7 +34,7 @@ class HomeScreenController extends GetxController {
 
 if (suggestlist.isEmpty) {
    response.data.forEach((element) {
-      suggestlist.add(Kala.fromJson(element));
+      suggestlist.add(Product.fromJson(element));
     });
 
   
@@ -48,7 +48,7 @@ if (suggestlist.isEmpty) {
     var response = await DioService().getList(ApiAddress().bag);
     if (bag.isEmpty) {
         response.data.forEach((element) {
-      bag.add(Kala.fromJson(element));
+      bag.add(Product.fromJson(element));
     });
    searchKala.addAll(bag); }
      waiting.value=false;
@@ -62,7 +62,7 @@ if (suggestlist.isEmpty) {
   if (watche.isEmpty) {
   
       response.data.forEach((element) {
-      watche.add(Kala.fromJson(element));
+      watche.add(Product.fromJson(element));
     }); 
     
    searchKala.addAll(watche);
@@ -76,7 +76,7 @@ if (suggestlist.isEmpty) {
     var response = await DioService().getList(ApiAddress().jewellery);
 if (jewellery.isEmpty) {
     response.data.forEach((element) {
-      jewellery.add(Kala.fromJson(element));
+      jewellery.add(Product.fromJson(element));
     });
 
     searchKala.addAll(jewellery);
@@ -89,7 +89,7 @@ if (jewellery.isEmpty) {
     var response = await DioService().getList(ApiAddress().skincare);
     if (skincare.isEmpty) {
         response.data.forEach((element) {
-      skincare.add(Kala.fromJson(element));
+      skincare.add(Product.fromJson(element));
     });
    searchKala.addAll(skincare); }
   waiting.value=false;
@@ -102,7 +102,7 @@ if (jewellery.isEmpty) {
       
     
     response.data.forEach((element) {
-      shoes.add(Kala.fromJson(element));
+      shoes.add(Product.fromJson(element));
     });
     searchKala.addAll(shoes);}
     waiting.value=false;
@@ -113,7 +113,7 @@ if (jewellery.isEmpty) {
     var response = await DioService().getList(ApiAddress().eyewear);
     if (eyewear.isEmpty) {
        response.data.forEach((element) {
-      eyewear.add(Kala.fromJson(element));
+      eyewear.add(Product.fromJson(element));
     });
    searchKala.addAll(eyewear); }
   waiting.value=false;

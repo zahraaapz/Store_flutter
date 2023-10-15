@@ -3,39 +3,38 @@ import 'dart:math';
 import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/constant/color/color.dart';
+import 'package:appstore/view/profile/personal_info.dart';
 import 'package:appstore/view/selectType/select_kala.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import '../../constant/text_style.dart';
 import '../../constant/widget/widget.dart';
 import '../review/review.dart';
 
 class DetailKala extends StatefulWidget {
   int index;
-bool? isFavorite;
+  bool? isFavorite;
   int select;
-  List<Kala> kalaList;
-  DetailKala(this.index, this.select, this.kalaList, {super.key, this.isFavorite});
+  List<Product> kalaList;
+
+  DetailKala(this.index, this.select, this.kalaList,
+      {super.key, this.isFavorite});
 
   @override
   State<DetailKala> createState() =>
       // ignore: no_logic_in_create_state
-      _DetailKalaState(select, index, kalaList, isFavorite: isFavorite);
+      _DetailKalaState(select, index, kalaList, isFavorite!);
 }
 
 class _DetailKalaState extends State<DetailKala> {
-  _DetailKalaState(this.select, this.index, this.kalalist, {this.isFavorite});
-  List<Kala> kalalist;
+  _DetailKalaState(this.select, this.index, this.kalalist, this.isFavorite);
+  List<Product> kalalist;
   int select;
-  var box = GetStorage();
   int index;
-  bool? isFavorite;
+  bool isFavorite = false;
   final int randomValue = Random().nextInt(500000);
 
-
-  
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -54,7 +53,7 @@ class _DetailKalaState extends State<DetailKala> {
                       color: Rang.blue,
                     ),
                     onPressed: () {
-                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Selectkala(select)));
+                      Get.to(Selectkala(select,));
                     },
                   ),
                 ],
@@ -65,7 +64,7 @@ class _DetailKalaState extends State<DetailKala> {
               child: Stack(
                 children: [
                   Container(
-                    height: Get.height/2.4,
+                    height: Get.height / 2.4,
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             fit: BoxFit.fill,
@@ -76,8 +75,8 @@ class _DetailKalaState extends State<DetailKala> {
                     right: 20,
                     bottom: 30,
                     child: Container(
-                      width: Get.width/8,
-                      height: Get.height/16,
+                      width: Get.width / 8,
+                      height: Get.height / 16,
                       decoration: BoxDecoration(
                           color: const Color.fromARGB(110, 255, 255, 255),
                           borderRadius: BorderRadius.circular(20)),
@@ -129,10 +128,7 @@ class _DetailKalaState extends State<DetailKala> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                         
-
-                      height: Get.height/18,                            
-
+                            height: Get.height / 18,
                             decoration: BoxDecoration(
                                 color: Rang.toosi,
                                 borderRadius: BorderRadius.circular(15)),
@@ -185,8 +181,8 @@ class _DetailKalaState extends State<DetailKala> {
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Container(
-             width: Get.width/1.02,
-                      height: Get.height/13,
+                width: Get.width / 1.02,
+                height: Get.height / 13,
                 decoration: BoxDecoration(
                     border: Border.all(color: Rang.blue, width: 2),
                     borderRadius: BorderRadius.circular(30)),
@@ -206,8 +202,8 @@ class _DetailKalaState extends State<DetailKala> {
                     Padding(
                       padding: const EdgeInsets.all(3.0),
                       child: Container(
-                        width: Get.width/5,
-                      height: Get.height/18,
+                        width: Get.width / 5,
+                        height: Get.height / 18,
                         decoration: BoxDecoration(
                             color: Rang.toosi,
                             borderRadius: BorderRadius.circular(20)),
@@ -236,35 +232,33 @@ class _DetailKalaState extends State<DetailKala> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Container(
-                    width: Get.width/7,
-                    height: Get.height/16,
+                    width: Get.width / 7,
+                    height: Get.height / 16,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       color: Rang.toosi,
                     ),
                     child: IconButton(
                       onPressed: () {
-                        isFavorite=!isFavorite!;
-
-                                
-
-                                  if (isFavorite == true &&
-                                      !wishList.contains(
-                                         kalalist[index])) {
-                                    wishList.add(kalalist[index]);
-                                  box.write('${kalalist[index].name}'+ 
-                                  "${kalalist[index].filter}", isFavorite); 
-                                   }
-                                  if (isFavorite == false &&
-                                      wishList.contains(kalalist[index])) {
-                                    wishList.remove(kalalist[index]);
-                                 box.remove('${kalalist[index].name}'+ 
-                                  "${kalalist[index].filter}");  
-                                   }
-                                  debugPrint(wishList.length.toString());
+                        setState(() {
+                          isFavorite = !isFavorite;
+                          if (isFavorite == true &&
+                              !wishList.contains(kalalist[index])) {
+                            wishList.add(kalalist[index]);Personal().box.write(
+                                '${kalalist[index].name}'+
+                                    "${kalalist[index].filter}",
+                                isFavorite);
+                          }
+                          if (isFavorite == false &&
+                              wishList.contains(kalalist[index])) {
+                            wishList.remove(kalalist[index]);
+                            Personal().box.remove('${kalalist[index].name}'+
+                                "${kalalist[index].filter}");
+                          }
+                          debugPrint(wishList.length.toString());
+                        });
                       },
-                      icon:Icon(
-                      isFavorite == false
+                      icon: Icon(isFavorite == false
                           ? Icons.favorite_border
                           : Icons.favorite),
                       color: Rang.blue,
@@ -273,7 +267,7 @@ class _DetailKalaState extends State<DetailKala> {
                   ButtonWidget(
                     iconData: Icons.shopping_bag_outlined,
                     title: 'Add to Bags',
-                    onPressed: ()=>_onPressed(),
+                    onPressed: () => _onPressed(),
                   )
                 ],
               ),
@@ -313,7 +307,7 @@ class _DetailKalaState extends State<DetailKala> {
               padding: const EdgeInsets.only(left: 15.0),
               child: SizedBox(
                 width: double.infinity,
-                height: Get.height/3.2,
+                height: Get.height / 3.2,
                 child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: 2,
@@ -326,7 +320,7 @@ class _DetailKalaState extends State<DetailKala> {
                           width: 200,
                           child: Column(children: [
                             Container(
-                              height: Get.height/6 ,
+                              height: Get.height / 6,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
                                   image: DecorationImage(

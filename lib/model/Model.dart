@@ -15,21 +15,21 @@ class Model {
 }
 List<String> addresslist=['Office','Home','Other'];
 
-class Kala {
+class Product{
   String? ima;
   String ?name;
   String? filter;
   String? brand;
   String ?price;
 
-  Kala(
+  Product(
       {required this.name,
       required this.brand,
       required this.filter,
       required this.price,
       required this.ima});
 
-      Kala.fromJson(Map<String,dynamic>element){
+      Product.fromJson(Map<String,dynamic>element){
         ima=element['ima'];
         name=element['name'];
         filter=element['filter'];
@@ -61,8 +61,8 @@ List<IconData> ikon = [
   (Icons.shopping_bag_outlined),
 ];
 
-List<Kala> wishList = [];
-List<Kala> myBagList = [];
+List<Product> wishList = [];
+List<Product> myBagList = [];
 List<OrderDetail> orderDetail= [
   OrderDetail(title:'Sub Total' ),
   OrderDetail(title:'Discount' ),

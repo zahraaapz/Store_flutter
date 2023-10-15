@@ -80,7 +80,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                   ),
                 ),
                 ////type list
-                typeList(size),
+               typeList(size),
 
                 Padding(
                   padding: EdgeInsets.only(left: 10, right: 10),
@@ -410,7 +410,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => Selectkala(
                             index,
-                          
+                            // homeScreenController,
                           ),
                         ));
                       },
