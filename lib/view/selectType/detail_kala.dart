@@ -17,24 +17,28 @@ class DetailKala extends StatefulWidget {
   bool? isFavorite;
   int select;
   List<Product> kalaList;
-
-  DetailKala(this.index, this.select, this.kalaList,
+   HomeScreenController homeScreenController ;
+  DetailKala(this.index, this.select, this.kalaList,this.homeScreenController,
       {super.key, this.isFavorite});
 
   @override
   State<DetailKala> createState() =>
       // ignore: no_logic_in_create_state
-      _DetailKalaState(select, index, kalaList, isFavorite!);
+      _DetailKalaState(select, index,homeScreenController ,kalaList, isFavorite!);
 }
 
 class _DetailKalaState extends State<DetailKala> {
-  _DetailKalaState(this.select, this.index, this.kalalist, this.isFavorite);
+
+
+  _DetailKalaState(this.select, this.index,this.homeScreenController,this.kalalist, this.isFavorite);
+
+  
   List<Product> kalalist;
   int select;
   int index;
   bool isFavorite = false;
   final int randomValue = Random().nextInt(500000);
-
+   HomeScreenController homeScreenController;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -53,7 +57,7 @@ class _DetailKalaState extends State<DetailKala> {
                       color: Rang.blue,
                     ),
                     onPressed: () {
-                      Get.to(Selectkala(select,));
+                      Get.to(Selectkala(select,homeScreenController));
                     },
                   ),
                 ],
@@ -312,8 +316,7 @@ class _DetailKalaState extends State<DetailKala> {
                     scrollDirection: Axis.horizontal,
                     itemCount: 2,
                     itemBuilder: ((context, index) {
-                      HomeScreenController homeScreenController =
-                          Get.put(HomeScreenController());
+                   
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: SizedBox(

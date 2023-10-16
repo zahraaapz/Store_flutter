@@ -14,16 +14,17 @@ import '../profile/personal_info.dart';
 
 class Selectkala extends StatefulWidget {
   int select;
+  final HomeScreenController homeScreenController;
 
 
  
 
-  Selectkala(this.select, {super.key});
+  Selectkala(this.select,this.homeScreenController,{super.key});
 
   @override
   // ignore: no_logic_in_create_state
   State<Selectkala> createState() =>
-      _SelectkalaState(select);
+      _SelectkalaState(select,homeScreenController);
 }
 
 class _SelectkalaState extends State<Selectkala> {
@@ -41,7 +42,7 @@ class _SelectkalaState extends State<Selectkala> {
   //
   int selectPage;
   late int lenght;
-  final HomeScreenController homeScreenController=Get.put(HomeScreenController());
+  final HomeScreenController homeScreenController;
   late List<bool> fav;
 
   List? brands;
@@ -52,6 +53,7 @@ class _SelectkalaState extends State<Selectkala> {
 
   _SelectkalaState(
     this.selectPage,
+    this.homeScreenController,
  );
 
   @override
@@ -132,93 +134,97 @@ class _SelectkalaState extends State<Selectkala> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-      body: Stack(children: [
-        Obx(
-          () =>  Column(children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        const SizedBox(
-                          width: 15,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                           Get.offAll(Home());
-                          },
-                          child: const SizedBox(
-                            height: 50,
-                            child: Icon(
-                              Icons.arrow_back_ios_new,
-                              color: Rang.blue,
+        child: WillPopScope(
+          onWillPop: ()async =>false,
+          child: Scaffold(
+              body: Stack(children: [
+          Obx(
+            () =>  Column(children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                             Get.offAll(Home());
+                            },
+                            child: const SizedBox(
+                              height: 50,
+                              child: Icon(
+                                Icons.arrow_back_ios_new,
+                                color: Rang.blue,
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 25,
-                        ),
-                        Text(
-                          selectPage == 0
-                              ? 'Skincare'
-                              : selectPage == 1
-                                  ? 'Watches'
-                                  : selectPage == 2
-                                      ? 'Handbags'
-                                      : selectPage == 3
-                                          ? 'jewellery'
-                                          : selectPage == 4
-                                              ? 'Eyewear'
-                                              : 'Shoes',
-                          style: textStyle.headlineSmall,
-                        )
-                      ],
+                          const SizedBox(
+                            width: 25,
+                          ),
+                          Text(
+                            selectPage == 0
+                                ? 'Skincare'
+                                : selectPage == 1
+                                    ? 'Watches'
+                                    : selectPage == 2
+                                        ? 'Handbags'
+                                        : selectPage == 3
+                                            ? 'jewellery'
+                                            : selectPage == 4
+                                                ? 'Eyewear'
+                                                : 'Shoes',
+                            style: textStyle.headlineSmall,
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  homeScreenController.waiting.value == false?
-                  mainList(level.value == 2
-                      ? filterPrice
-                      : level.value == 1
-                          ? filterListBrand
-                          : selectPage == 0
-                              ? homeScreenController.skincare
-                              : selectPage == 1
-                                  ? homeScreenController.watche
-                                  : selectPage == 2
-                                      ? homeScreenController.bag
-                                      : selectPage == 3
-                                          ? homeScreenController.jewellery
-                                          : selectPage == 4
-                                              ? homeScreenController.eyewear
-                                              : homeScreenController.shoes):
-                                              const ShimmerList(),
-                ])
-               ,
-        ),
-        Positioned(
-          bottom: 10,
-          right: 0,
-          left: 0,
-          child: Row(
-         
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              InkWell(
-                  onTap: () {
-                    filterBrandOrPrice(context);
-                  },
-                  child: const Icon(Icons.filter_alt_outlined)),
-              InkWell(
-                onTap: (() {
-                  filterBySort(context);
-                }),
-                child: const Icon(Icons.sort_rounded),
-              ),
-            ],
+                    homeScreenController.waiting.value == false?
+                    mainList(
+                      level.value == 2
+                        ? filterPrice
+                        : level.value == 1
+                            ? filterListBrand
+                            : selectPage == 0
+                                ? homeScreenController.skincare
+                                : selectPage == 1
+                                    ? homeScreenController.watche
+                                    : selectPage == 2
+                                        ? homeScreenController.bag
+                                        : selectPage == 3
+                                            ? homeScreenController.jewellery
+                                            : selectPage == 4
+                                                ? homeScreenController.eyewear
+                                                : homeScreenController.shoes):
+                                                const ShimmerList(),
+                  ])
+                 ,
           ),
-        )
-      ]),
-    ));
+          Positioned(
+            bottom: 10,
+            right: 0,
+            left: 0,
+            child: Row(
+           
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                InkWell(
+                    onTap: () {
+                      filterBrandOrPrice(context);
+                    },
+                    child: const Icon(Icons.filter_alt_outlined)),
+                InkWell(
+                  onTap: (() {
+                    filterBySort(context);
+                  }),
+                  child: const Icon(Icons.sort_rounded),
+                ),
+              ],
+            ),
+          )
+              ]),
+            ),
+        ));
   }
 
   Future<dynamic> filterBySort(BuildContext context) {
@@ -541,7 +547,8 @@ class _SelectkalaState extends State<Selectkala> {
                                   builder: ((context) => DetailKala(
                                         index,
                                         selectPage,
-                                        list,
+                                         list,
+                                        homeScreenController,
                                         isFavorite: fav[index],
                                       ))));
                         },

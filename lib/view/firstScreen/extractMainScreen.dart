@@ -9,7 +9,6 @@ import 'package:appstore/view/selectType/select_kala.dart';
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
 import '../../constant/text_style.dart';
 import '../../constant/widget/shimmer.dart';
 import '../../controller/pick_file.dart';
@@ -83,7 +82,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                typeList(size),
 
                 Padding(
-                  padding: EdgeInsets.only(left: 10, right: 10),
+                  padding: const EdgeInsets.only(left: 10, right: 10),
                   child: SizedBox(
                     height: 30,
                     child: Row(
@@ -351,12 +350,13 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                       child: Text(Model.modelList[index].title,
                           style: textStyle.bodyLarge),
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
+                        Future.delayed(const Duration(milliseconds:700)).then((value) =>
+                   Navigator.of(context).push(MaterialPageRoute(
                             builder: ((context) => Selectkala(
                                   index,
+                                 homeScreenController
                                  
-                                 
-                                ))));
+                                )))));
                       },
                     ),
                   );
@@ -406,13 +406,13 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                     InkWell(
                       onTap: () {
                         select.value = index;
-
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => Selectkala(
-                            index,
-                            // homeScreenController,
-                          ),
-                        ));
+   Future.delayed(const Duration(milliseconds:700)).then((value) =>
+                   Navigator.of(context).push(MaterialPageRoute(
+                            builder: ((context) => Selectkala(
+                                  index,
+                                 homeScreenController
+                                 
+                                )))));
                       },
                       child: Container(
                         //list container
