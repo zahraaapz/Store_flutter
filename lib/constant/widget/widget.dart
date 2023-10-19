@@ -45,7 +45,7 @@ import '../text_style.dart';
                     child: Icon(
                       icon,
                       color: Rang.blue,
-                      size: 30,
+                      size: 25,
                     ),
                   ),
                   const SizedBox(width: 20),

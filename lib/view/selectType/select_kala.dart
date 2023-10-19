@@ -43,7 +43,7 @@ class _SelectkalaState extends State<Selectkala> {
   int selectPage;
   late int lenght;
   final HomeScreenController homeScreenController;
-  late List<bool> fav;
+
 
   List? brands;
   List<double>? prices; 
@@ -60,7 +60,7 @@ class _SelectkalaState extends State<Selectkala> {
   initState() {
     super.initState();
     lenght = lenghtLists(selectPage, homeScreenController);
-    fav = List.generate(lenght, (index) =>favoriteProcess(selectPage, index, homeScreenController));
+ 
     checkBoxBrands = List.generate(lenght, (index) => false);
     brands = List.generate(
      lenght, (index) => brandItem(selectPage, index, homeScreenController));
@@ -227,7 +227,7 @@ class _SelectkalaState extends State<Selectkala> {
         ));
   }
 
-  Future<dynamic> filterBySort(BuildContext context) {
+Future<dynamic> filterBySort(BuildContext context) {
     return showModalBottomSheet(
                     //bottomsheetfilter
                     context: context,
@@ -235,7 +235,7 @@ class _SelectkalaState extends State<Selectkala> {
                     builder: ((context) {
                       return StatefulBuilder(
                         builder: (context, setState) => Container(
-                       height: Get.height/5,
+                       height: Get.height/3.6,
                   decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
@@ -400,7 +400,7 @@ class _SelectkalaState extends State<Selectkala> {
         context: context,
         builder: (context) => StatefulBuilder(
             builder: (context, setState) => Container(
-                height: Get.height / 4,
+                height: Get.height /3.7,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(30),
@@ -534,6 +534,7 @@ class _SelectkalaState extends State<Selectkala> {
                 crossAxisCount: 2,
               ),
               itemBuilder: ((context, index) {
+                
                 return Padding(
                   padding: const EdgeInsets.only(right: 8, left: 8),
                   child: Column(
@@ -549,7 +550,7 @@ class _SelectkalaState extends State<Selectkala> {
                                         selectPage,
                                          list,
                                         homeScreenController,
-                                        isFavorite: fav[index],
+                                       
                                       ))));
                         },
                         child: Container(
@@ -565,35 +566,37 @@ class _SelectkalaState extends State<Selectkala> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(style: textStyle.bodyMedium, list[index].name!),
-                          GestureDetector(
-                            onTap: () {
-                                setState(() {
-                                  fav[index] = !fav[index];
+                          // GestureDetector(
+                          //   onTap: () {
+                          //       setState(() {
+                          //         fav[index] = !fav[index];
 
-                                  if (fav[index] == true &&
-                                      !wishList.contains(
-                                         list[index])) {
-                                    wishList.add(list[index]);
-                                  Personal().box.write('${list[index].name}'+ 
-                                  "${list[index].filter}", fav[index]); 
-                                   }
-                                  if (fav[index] == false &&
-                                      wishList.contains(list[index])) {
-                                    wishList.remove(list[index]);
-                                 Personal().box.remove('${list[index].name}'+ 
-                                  "${list[index].filter}");  
-                                   }
-                                  debugPrint(wishList.length.toString());
-                                });
-                            },
-                            child: Icon(
-                              fav[index] == false
-                                  ? Icons.favorite_border
-                                  : Icons.favorite,
-                              size: 19,
-                              color: Colors.black,
-                            ),
-                          ),
+                            //      if (fav[index] == true &&
+                          //             !wishList.contains(
+                          //                list[index])) {
+                          //           wishList.add(list[index]);
+                          //         Personal().box.write('${list[index].name}'+ 
+                          //         "${list[index].filter}", fav[index]); 
+                          //          }
+                          //         if (fav[index] == false &&
+                          //             wishList.contains(list[index])) {
+                          //           wishList.remove(list[index]);
+                          //        Personal().box.remove('${list[index].name}'+ 
+                          //         "${list[index].filter}");  
+                          //          }
+                          //         debugPrint(Personal().box.read('${list[index].name}'+ 
+                          //         "${list[index].filter}").toString());
+                          //         debugPrint(fav.toString());
+                          //       });
+                          //   },
+                          //   child: Icon(
+                          //     fav[index] == false
+                          //         ? Icons.favorite_border
+                          //         : Icons.favorite,
+                          //     size: 19,
+                          //     color: Colors.black,
+                          //   ),
+                          // ),
                         ],
                       ),
                       Row(
@@ -647,9 +650,10 @@ String priceLists(
 filterBrand(int selectPage, List<Product> filterList, List selectedBrand,
     HomeScreenController homeScreenController) {
   selectPage == 0
-      ? filterList.assignAll(homeScreenController.skincare
-          .where((p0) => selectedBrand.contains(p0.brand))
-          .toList())
+      ? 
+        filterList.assignAll(homeScreenController.skincare.where((p0) => selectedBrand.contains(p0.brand)).toList())
+
+          
       : selectPage == 1
           ? filterList.assignAll(homeScreenController.watche
               .where((p0) => selectedBrand.contains(p0.brand))
@@ -735,22 +739,11 @@ sortListHightoLow(int selectPage, HomeScreenController homeScreenController) {
 }
 
 
-bool favoriteProcess(int selectPage,int index, HomeScreenController homeScreenController){
-   return selectPage == 0
-      ?  Personal().
-    box.read("${homeScreenController.skincare[index].name}"+"${homeScreenController.skincare[index].filter}")??false
-      : selectPage == 1
-          ?  Personal().
-    box.read("${homeScreenController.watche[index].name}"+"${homeScreenController.watche[index].filter}")??false
-          : selectPage == 2
-              ?  Personal().
-    box.read("${homeScreenController.bag[index].name}"+"${homeScreenController.bag[index].filter}")??false
-              : selectPage == 3
-                  ?  Personal().
-    box.read("${homeScreenController.jewellery[index].name}"+"${homeScreenController.jewellery[index].filter}")??false
-                  : selectPage == 4
-                      ?  Personal().
-    box.read("${homeScreenController.eyewear[index].name}"+"${homeScreenController.eyewear[index].filter}")??false
-                      :  Personal().
-    box.read("${homeScreenController.shoes[index].name}"+"${homeScreenController.shoes[index].filter}")??false;
-}
+
+
+
+
+
+
+      
+

@@ -32,7 +32,8 @@ class Address extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(
             child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Column(crossAxisAlignment: CrossAxisAlignment.start, 
+                children: [
               iconANDtitle('My Address', Icons.arrow_back_ios),
               const SizedBox(
                 height: 9,
@@ -51,7 +52,7 @@ class Address extends StatelessWidget {
               Row(
                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                myTextField(size: size,controller: preNum,width: size.width/7.5,hintText: '49'),
+               myTextField(size: size,controller: preNum,width: size.width/7.5,hintText: '49'),
                myTextField(size: size,width:size.width/1.25,controller: number,hintText: 'Concate Number'),
 
               

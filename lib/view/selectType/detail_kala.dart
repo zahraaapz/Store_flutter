@@ -4,7 +4,7 @@ import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/constant/color/color.dart';
 import 'package:appstore/view/profile/personal_info.dart';
-import 'package:appstore/view/selectType/select_kala.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,29 +14,35 @@ import '../review/review.dart';
 
 class DetailKala extends StatefulWidget {
   int index;
-  bool? isFavorite;
+
   int select;
   List<Product> kalaList;
    HomeScreenController homeScreenController ;
   DetailKala(this.index, this.select, this.kalaList,this.homeScreenController,
-      {super.key, this.isFavorite});
+      {super.key, });
 
   @override
   State<DetailKala> createState() =>
       // ignore: no_logic_in_create_state
-      _DetailKalaState(select, index,homeScreenController ,kalaList, isFavorite!);
+      _DetailKalaState(select, index,homeScreenController ,kalaList);
 }
 
 class _DetailKalaState extends State<DetailKala> {
 
 
-  _DetailKalaState(this.select, this.index,this.homeScreenController,this.kalalist, this.isFavorite);
+  _DetailKalaState(this.select, this.index,this.homeScreenController,this.kalalist);
 
   
   List<Product> kalalist;
   int select;
   int index;
-  bool isFavorite = false;
+ late bool isFavorite ;
+  @override
+  void initState() {
+  isFavorite = Personal().box.read('${kalalist[index].name}'+ "${kalalist[index].filter}")??false;
+
+    super.initState();
+  }
   final int randomValue = Random().nextInt(500000);
    HomeScreenController homeScreenController;
   @override
@@ -57,7 +63,7 @@ class _DetailKalaState extends State<DetailKala> {
                       color: Rang.blue,
                     ),
                     onPressed: () {
-                      Get.to(Selectkala(select,homeScreenController));
+                      Get.back();
                     },
                   ),
                 ],
@@ -248,7 +254,8 @@ class _DetailKalaState extends State<DetailKala> {
                           isFavorite = !isFavorite;
                           if (isFavorite == true &&
                               !wishList.contains(kalalist[index])) {
-                            wishList.add(kalalist[index]);Personal().box.write(
+                            wishList.add(kalalist[index]);
+                            Personal().box.write(
                                 '${kalalist[index].name}'+
                                     "${kalalist[index].filter}",
                                 isFavorite);

@@ -20,7 +20,7 @@ class Bag extends StatefulWidget {
 }
 
 class _BagState extends State<Bag> {
-  List<int>? qnty = List.filled(4, 1);
+  List<int> qnty = List.filled(4, 1);
   int indexOfqnty = 0;
   double totalPrice = 0.0;
 
@@ -138,7 +138,7 @@ class _BagState extends State<Bag> {
                           GestureDetector(
                             onTap: () {
                               setState(() {
-                                qnty![index] = qnty![index] + 1;
+                                qnty[index] = qnty[index] + 1;
                                 indexOfqnty = index;
                               });
                             },
@@ -151,15 +151,15 @@ class _BagState extends State<Bag> {
                                   children: [
                                     Text(
                                         style: textStyle.bodyMedium,
-                                        'Qnty: ${qnty![index]}'),
+                                        'Qnty: ${qnty[index]}'),
                                     const Icon(Icons.add),
                                     GestureDetector(
                                       onTap: () {
                                         setState(() {
-                                          qnty![index] = qnty![index] - 1;
+                                          qnty[index] = qnty[index] - 1;
                                           indexOfqnty = index;
 
-                                          qnty![index] == 0
+                                          qnty[index] == 0
                                               ? myBagList
                                                   .remove(myBagList[index])
                                               : null;
@@ -177,7 +177,7 @@ class _BagState extends State<Bag> {
                           ),
                           Text(
                               style: textStyle.bodyMedium,
-                              '${int.parse(myBagList[index].price!) * qnty![index]}\$'),
+                              '${int.parse(myBagList[index].price!) * qnty[index]}\$'),
                         ],
                       ),
                     )
@@ -243,13 +243,13 @@ class _BagState extends State<Bag> {
       orderDetail[1].price = '20%';
       orderDetail[2].price = '20\$';
       for (int i = 0; i < myBagList.length; i++) {
-        sum = (double.parse(myBagList[i].price!) * qnty![i]) + sum;
+        sum = (double.parse(myBagList[i].price!) * qnty[i]) + sum;
       }
       orderDetail[3].price = (sum * 0.2 + 20).toStringAsFixed(2).toString();
 
       sum = 0.0;
       for (int i = 0; i < myBagList.length; i++) {
-        sum = (double.parse(myBagList[i].price!) * qnty![i]) + sum;
+        sum = (double.parse(myBagList[i].price!) * qnty[i]) + sum;
       }
       orderDetail[0].price = sum.toStringAsFixed(2).toString();
 
