@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable
 
+
+
 import 'package:appstore/constant/color/color.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/view/payment/payment.dart';
@@ -7,9 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 
+import '../../constant/storage.dart';
 import '../../constant/text_style.dart';
 import '../../constant/widget/widget.dart';
-import '../profile/personal_info.dart';
+
 
 class Address extends StatelessWidget {
   RxInt select = 0.obs;
@@ -137,12 +140,12 @@ class Address extends StatelessWidget {
 
 
   onPressed(context) {
-    Personal().box.write('fulName', fullname.text);
-    Personal().box.write('pin', pinCode.text);
-    Personal().box.write('number', number.text);
-    Personal().box.write('preNum', preNum.text);
-    Personal().box.write('street', street.text);
-    Personal().box.write('city', city.text);
+  MyStorage.box.write(StorageNames.fullName, fullname.text);
+  MyStorage.box.write(StorageNames.pin, pinCode.text);
+  MyStorage.box.write(StorageNames.number, number.text);
+  MyStorage.box.write(StorageNames.preNum, preNum.text);
+  MyStorage.box.write(StorageNames.street, street.text);
+  MyStorage.box.write(StorageNames.city, city.text);
 
     if (street.text.isNotEmpty &&
         city.text.isNotEmpty &&

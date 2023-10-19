@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../constant/text_style.dart';
 import '../../constant/widget/shimmer.dart';
-import '../profile/personal_info.dart';
+
 
 
 class Selectkala extends StatefulWidget {

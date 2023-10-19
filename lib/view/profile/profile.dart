@@ -10,6 +10,7 @@ import 'package:appstore/controller/pick_file.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../constant/storage.dart';
 import '../../constant/text_style.dart';
 import '../../constant/widget/widget.dart';
 
@@ -62,7 +63,7 @@ class Profile extends StatelessWidget {
                                             'assets/image/avatar.png',
                                           )
                                         : Image.file(File(
-                                                Personal().box.read('ima')))
+                                               MyStorage.box.read('ima')))
                                             .image,
                                     fit: BoxFit.cover)),
                           )),
@@ -79,15 +80,15 @@ class Profile extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          Personal().box.read('fullName') ?? '--',
+                          MyStorage.box.read(StorageNames.fullName) ?? '--',
                           style: textStyle.bodySmall,
                         ),
                         Text(
-                          Personal().box.read('number') ?? '--',
+                          MyStorage.box.read(StorageNames.number) ?? '--',
                           style: textStyle.bodySmall,
                         ),
                         Text(
-                          Personal().box.read('email') ?? '--',
+                          MyStorage.box.read(StorageNames.email) ?? '--',
                           style: textStyle.bodySmall,
                         ),
                       ],

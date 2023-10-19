@@ -3,9 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../constant/color/color.dart';
+import '../../constant/storage.dart';
 import '../../constant/text_style.dart';
 import '../../constant/widget/widget.dart';
-import '../profile/personal_info.dart';
+
 
 class Notif extends StatelessWidget {
   const Notif({super.key});
@@ -97,7 +98,7 @@ class Notif extends StatelessWidget {
                         height: 20,
                       ),
                       Text(style: textStyle.bodyMedium,
-                        '''Hey, ${Personal().box.read('fullName')??'--'}. Thanks for using CORAL. You know what? You can help us improve with just one click''',
+                        '''Hey, ${MyStorage.box.read(StorageNames.fullName)??'--'}. Thanks for using CORAL. You know what? You can help us improve with just one click''',
                         textScaleFactor: 1.1,
                       )
                   ,const SizedBox(height: 10,)  ],

@@ -5,10 +5,11 @@ import 'package:appstore/model/Model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../constant/storage.dart';
 import '../../constant/text_style.dart';
 import '../../constant/widget/widget.dart';
 import '../../constant/strings/string.dart';
-import '../profile/personal_info.dart';
+
 
 class Wish extends StatefulWidget {
   const Wish({super.key});
@@ -81,7 +82,7 @@ class _WishState extends State<Wish> {
                     Text(wishList[index].brand!, style: textStyle.bodyMedium),
                     InkWell(
                       onTap: (() {
-                           Personal().box.remove
+                           MyStorage.box.remove
                           ('${wishList[index].name}'+
                               "${wishList[index].filter}");
                         setState(() {

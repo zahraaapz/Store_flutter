@@ -9,11 +9,11 @@ import 'package:appstore/view/selectType/select_kala.dart';
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../constant/storage.dart';
 import '../../constant/text_style.dart';
 import '../../constant/widget/shimmer.dart';
 import '../../controller/pick_file.dart';
 import '../notifition/notif.dart';
-import '../profile/personal_info.dart';
 import '../wish/wishlist.dart';
 
 
@@ -308,7 +308,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                                 ? const AssetImage(
                                     'assets/image/avatar.png',
                                   )
-                                : Image.file(File(Personal().box.read('ima'))).image,
+                                : Image.file(File(MyStorage.box.read('ima'))).image,
                             fit: BoxFit.cover)),
                   ),
                   const SizedBox(
@@ -318,15 +318,15 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          Personal().box.read('fullName') ?? '--',
+                          MyStorage.box.read(StorageNames.fullName) ?? '--',
                           style: textStyle.labelSmall,
                         ),
                         Text(
-                          Personal().box.read('number') ?? '--',
+                          MyStorage.box.read(StorageNames.number) ?? '--',
                           style: textStyle.labelSmall,
                         ),
                         Text(
-                          Personal().box.read('email') ?? '--',
+                          MyStorage.box.read(StorageNames.email) ?? '--',
                           style: textStyle.labelSmall,
                         ),
                       ]),

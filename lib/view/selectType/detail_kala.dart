@@ -3,11 +3,11 @@ import 'dart:math';
 import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/constant/color/color.dart';
-import 'package:appstore/view/profile/personal_info.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../constant/storage.dart';
 import '../../constant/text_style.dart';
 import '../../constant/widget/widget.dart';
 import '../review/review.dart';
@@ -39,7 +39,7 @@ class _DetailKalaState extends State<DetailKala> {
  late bool isFavorite ;
   @override
   void initState() {
-  isFavorite = Personal().box.read('${kalalist[index].name}'+ "${kalalist[index].filter}")??false;
+  isFavorite = MyStorage.box.read('${kalalist[index].name}'+ "${kalalist[index].filter}")??false;
 
     super.initState();
   }
@@ -255,7 +255,7 @@ class _DetailKalaState extends State<DetailKala> {
                           if (isFavorite == true &&
                               !wishList.contains(kalalist[index])) {
                             wishList.add(kalalist[index]);
-                            Personal().box.write(
+                            MyStorage.box.write(
                                 '${kalalist[index].name}'+
                                     "${kalalist[index].filter}",
                                 isFavorite);
@@ -263,7 +263,7 @@ class _DetailKalaState extends State<DetailKala> {
                           if (isFavorite == false &&
                               wishList.contains(kalalist[index])) {
                             wishList.remove(kalalist[index]);
-                            Personal().box.remove('${kalalist[index].name}'+
+                            MyStorage.box.remove('${kalalist[index].name}'+
                                 "${kalalist[index].filter}");
                           }
                           debugPrint(wishList.length.toString());

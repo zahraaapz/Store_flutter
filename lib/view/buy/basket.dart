@@ -1,3 +1,4 @@
+import 'package:appstore/constant/storage.dart';
 import 'package:appstore/view/address/address.dart';
 import 'package:appstore/constant/color/color.dart';
 
@@ -10,7 +11,7 @@ import '../../model/Model.dart';
 import '../../constant/widget/widget.dart';
 import '../../constant/strings/string.dart';
 import '../firstScreen/mainScreen.dart';
-import '../profile/personal_info.dart';
+
 
 class Bag extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
@@ -299,7 +300,7 @@ class _BagState extends State<Bag> {
                       borderRadius: BorderRadius.circular(15))),
                   backgroundColor: MaterialStateProperty.all(Rang.blue)),
               onPressed: (() {
-                Personal().box.read('street') == null
+                MyStorage.box.read(StorageNames.street) == null
                     ? Get.offAll(Address())
                     : Get.to(const Payments());
               }),
