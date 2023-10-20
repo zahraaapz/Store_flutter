@@ -29,7 +29,7 @@ class Home extends StatelessWidget {
                  child: Obx(()=>
                   IndexedStack(
                       index: selectpg.value,
-                      children: [Extractmainscreen(),const Wish(), Profile(),  Bag(),]),
+                      children: [Extractmainscreen(),const Wish(), Profile(),  Basket(),]),
                  ),
                ),
              

@@ -1,11 +1,10 @@
 import 'package:appstore/constant/color/color.dart';
-
-import 'package:appstore/view/firstScreen/mainScreen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
 
 import '../../constant/text_style.dart';
+import '../../route_manager/route_name.dart';
 
 
 class Splash extends StatefulWidget {
@@ -18,8 +17,7 @@ class _SplashState extends State<Splash> {
   @override
 void initState() {
     Future.delayed(const Duration(seconds: 2)).then((value) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => Home()));
+Get.offNamed(RouteNames.home);
     });
 
  super.initState();

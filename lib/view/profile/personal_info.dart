@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:appstore/constant/color/color.dart';
-import 'package:appstore/view/firstScreen/mainScreen.dart';
+import 'package:appstore/route_manager/route_name.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -84,8 +84,7 @@ class Personal extends StatelessWidget {
     if (fullname.text.isNotEmpty &&
         email.text.isNotEmpty &&
         number.text.isNotEmpty) {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
-    } else {
+Get.offAllNamed(RouteNames.home);    } else {
       massage('Enter information', context);
      
     }

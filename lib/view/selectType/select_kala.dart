@@ -542,16 +542,16 @@ Future<dynamic> filterBySort(BuildContext context) {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: ((context) => DetailKala(
+                       
+
+
+                                      Get.to(DetailKala(
                                         index,
                                         selectPage,
                                          list,
                                         homeScreenController,
                                        
-                                      ))));
+                                      ));
                         },
                         child: Container(
                           height: Get.height/5,

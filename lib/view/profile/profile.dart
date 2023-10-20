@@ -1,28 +1,24 @@
-// ignore_for_file: must_be_immutable
+
 
 import 'dart:io';
-
 import 'package:appstore/view/profile/personal_info.dart';
 import 'package:appstore/view/address/address.dart';
 import 'package:appstore/constant/color/color.dart';
 import 'package:appstore/controller/pick_file.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../constant/storage.dart';
 import '../../constant/text_style.dart';
 import '../../constant/widget/widget.dart';
 
 class Profile extends StatelessWidget {
-  Profile({super.key});
+  const Profile({super.key});
 
-  PickFileController pickFileController = Get.put(PickFileController());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color.fromARGB(200, 244, 244, 244),
+        backgroundColor: const Color.fromARGB(200, 244, 244, 244),
         body: Column(children: [
           Padding(
             padding: const EdgeInsets.all(9.0),
@@ -48,7 +44,7 @@ class Profile extends StatelessWidget {
                   children: [
                     Stack(children: [
                       GestureDetector(
-                          onTap: () async {
+                          onTap: ()  {
                             getFile();
                           },
                           child: Container(
@@ -80,7 +76,7 @@ class Profile extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          MyStorage.box.read(StorageNames.fullName) ?? '--',
+                          MyStorage.box.read(StorageNames.fullName) ??'--',
                           style: textStyle.bodySmall,
                         ),
                         Text(

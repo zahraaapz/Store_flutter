@@ -18,18 +18,18 @@ class _SearchState extends State<Search> {
   TextEditingController searchController = TextEditingController();
 
   List<Product> filteredItems = [];
-  HomeScreenController homeScreenController = Get.put(HomeScreenController());
+
   @override
   void initState() {
     super.initState();
 
-    filteredItems.addAll(homeScreenController.suggestlist);
+    filteredItems.addAll(Get.find<HomeScreenController>().suggestlist);
   }
 
   void filterItems(String query) {
     List<Product> temp = [];
 
-    temp.addAll(homeScreenController.searchKala);
+    temp.addAll(Get.find<HomeScreenController>().searchKala);
 
     if (query.isNotEmpty) {
       temp.retainWhere((item) {
@@ -47,7 +47,7 @@ class _SearchState extends State<Search> {
   void resultSeach(String query) {
     List<Product> temp = [];
 
-    temp.addAll(homeScreenController.searchKala);
+    temp.addAll(Get.find<HomeScreenController>().searchKala);
 
     if (query.isNotEmpty) {
       if (temp.any((item) =>

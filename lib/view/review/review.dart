@@ -17,25 +17,15 @@ import '../../constant/text_style.dart';
 import 'chart.dart';
 
 class Review extends StatefulWidget {
-  Review(
-      {super.key,
-      required this.listkala,
-      required this.index,
-      required this.select});
-  List<Product> listkala = [];
-  int index, select;
+
 
   @override
   State<Review> createState() =>
-      _ReviewState(index: index, select: select, listkala: listkala);
+      _ReviewState();
 }
 
 class _ReviewState extends State<Review> {
   List<Comment> comment = [];
-  List<Product> listkala = [];
-  int index, select;
-  _ReviewState(
-      {required this.listkala, required this.index, required this.select});
   Future getcomment() async {
     var url = 'http://api.npoint.io/9139bbcee841b54f273f';
     var value = await http.get(Uri.parse(url));

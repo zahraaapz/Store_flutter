@@ -13,8 +13,10 @@ class HomeScreenController extends GetxController {
   RxList<Product> skincare = RxList();
   RxList<Product> searchKala = RxList();
   RxBool waiting=false.obs;
+
   @override
   void onInit() {
+    
     super.onInit();
     getHomeItem();
     getShoesItem();

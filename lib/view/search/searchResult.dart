@@ -1,7 +1,6 @@
 
 
 import 'package:appstore/constant/color/color.dart';
-import 'package:appstore/view/firstScreen/mainScreen.dart';
 
 import 'package:flutter/cupertino.dart';
 
@@ -12,6 +11,7 @@ import 'package:get/get.dart';
 import '../../constant/text_style.dart';
 import '../../constant/widget/widget.dart';
 import '../../constant/strings/string.dart';
+import '../../route_manager/route_name.dart';
 
 class SearchResult extends StatelessWidget {
   const SearchResult({super.key, });
@@ -78,8 +78,7 @@ class SearchResult extends StatelessWidget {
     );
   }
   _onPressed(context) {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: ((context) => Home())));
+                 Get.offAllNamed(RouteNames.home);
                 }
 
 }

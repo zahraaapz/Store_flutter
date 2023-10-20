@@ -1,9 +1,8 @@
 import 'dart:io';
-import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/constant/widget/widget.dart';
-import 'package:appstore/view/firstScreen/expandable.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/constant/color/color.dart';
+import 'package:appstore/route_manager/route_name.dart';
 import 'package:appstore/view/search/search.dart';
 import 'package:appstore/view/selectType/select_kala.dart';
 import 'package:get/get.dart';
@@ -11,9 +10,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../constant/storage.dart';
 import '../../constant/text_style.dart';
+import '../../constant/widget/expandable.dart';
 import '../../constant/widget/shimmer.dart';
+import '../../controller/homeScreenController.dart';
 import '../../controller/pick_file.dart';
-import '../notifition/notif.dart';
 import '../wish/wishlist.dart';
 
 
@@ -26,8 +26,6 @@ class Extractmainscreen extends StatefulWidget {
 
 class _ExtractmainscreenState extends State<Extractmainscreen> {
 
-  final HomeScreenController homeScreenController =
-      Get.put(HomeScreenController());
 
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   RxInt select = 0.obs;
@@ -36,13 +34,13 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
 
   @override
   void initState() {
-    homeScreenController.getHomeItem();
-    homeScreenController.getEyewearItem();
-    homeScreenController.getHandBagItem();
-    homeScreenController.getShoesItem();
-    homeScreenController.getSkincareItem();
-    homeScreenController.getWatcheItem();
-    homeScreenController.getjewellery();
+    Get.find<HomeScreenController>().getHomeItem();
+    Get.find<HomeScreenController>().getEyewearItem();
+    Get.find<HomeScreenController>().getHandBagItem();
+    Get.find<HomeScreenController>().getShoesItem();
+    Get.find<HomeScreenController>().getSkincareItem();
+    Get.find<HomeScreenController>().getWatcheItem();
+    Get.find<HomeScreenController>().getjewellery();
  
     super.initState();
   }
@@ -113,7 +111,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                 const SizedBox(
                   height: 5,
                 ),
-                Obx(() => homeScreenController.suggestlist.isNotEmpty
+                Obx(() => Get.find<HomeScreenController>().suggestlist.isNotEmpty
                     ? suggList(size)
                     : ShimmerSuggestList(size: size)),
                 Container(
@@ -270,11 +268,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                 }),
                 child: const Icon(Icons.search, color: Rang.blue)),
             GestureDetector(
-              onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Notif(),
-                  )),
+              onTap: () => Get.toNamed(RouteNames.notifition),
               child: const Icon(Icons.notifications_none, color: Rang.blue),
             )
           ]),
@@ -350,13 +344,13 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                       child: Text(Model.modelList[index].title,
                           style: textStyle.bodyLarge),
                       onTap: () {
-                        Future.delayed(const Duration(milliseconds:700)).then((value) =>
-                   Navigator.of(context).push(MaterialPageRoute(
-                            builder: ((context) => Selectkala(
+                  
+
+                                Get.to(Selectkala(
                                   index,
-                                 homeScreenController
+                                 Get.find<HomeScreenController>()
                                  
-                                )))));
+                                ));
                       },
                     ),
                   );
@@ -376,9 +370,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
           GestureDetector(
             child: Text('Wishlist', style: textStyle.bodyMedium),
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: ((context) =>
-                      const Wish())));
+             Get.to(const Wish());
             },
           ),
         ]),
@@ -410,7 +402,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                    Navigator.of(context).push(MaterialPageRoute(
                             builder: ((context) => Selectkala(
                                   index,
-                                 homeScreenController
+                                 Get.find<HomeScreenController>()
                                  
                                 )))));
                       },
@@ -448,7 +440,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
         child: ListView.builder(
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
-            itemCount: homeScreenController.suggestlist.length,
+            itemCount: Get.find<HomeScreenController>().suggestlist.length,
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
@@ -483,7 +475,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                                                 image: DecorationImage(
                                                     fit: BoxFit.fill,
                                                     image: Image.asset(
-                                                      homeScreenController
+                                                      Get.find<HomeScreenController>()
                                                           .suggestlist[index]
                                                           .ima!,
                                                     ).image)),
@@ -496,7 +488,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                  homeScreenController
+                                                  Get.find<HomeScreenController>()
                                                       .suggestlist[index]
                                                       .brand!,
                                                   style: textStyle.bodyMedium),
@@ -504,7 +496,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                                                 height: 12,
                                               ),
                                               Text(
-                                                homeScreenController
+                                                Get.find<HomeScreenController>()
                                                     .suggestlist[index].name!,
                                                 style: textStyle.bodyMedium,
                                               ),
@@ -512,7 +504,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                                                 height: 12,
                                               ),
                                               Text(
-                                                  '${homeScreenController.suggestlist[index].price}\$',
+                                                  '${Get.find<HomeScreenController>().suggestlist[index].price}\$',
                                                   style: textStyle.bodyMedium),
                                             ],
                                           )
@@ -570,7 +562,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                                       ),
                                     ),
                                     //////filter
-                                    homeScreenController
+                                    Get.find<HomeScreenController>()
                                                 .suggestlist[index].filter ==
                                             'shoes'
                                         ? Column(
@@ -700,7 +692,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                             image: DecorationImage(
                                 fit: BoxFit.fill,
                                 image: Image.asset(
-                                  homeScreenController.suggestlist[index].ima!,
+                                  Get.find<HomeScreenController>().suggestlist[index].ima!,
                                 ).image)),
                       ),
                       SizedBox(
@@ -709,18 +701,18 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(homeScreenController.suggestlist[index].name!,
+                            Text(Get.find<HomeScreenController>().suggestlist[index].name!,
                                 style: textStyle.bodyMedium),
                           
                           ],
                         ),
                       ),
-                      Text(homeScreenController.suggestlist[index].brand!,
+                      Text(Get.find<HomeScreenController>().suggestlist[index].brand!,
                           style: textStyle.bodyMedium),
                       const SizedBox(
                         height: 6,
                       ),
-                      Text("${homeScreenController.suggestlist[index].price}\$",
+                      Text("${Get.find<HomeScreenController>().suggestlist[index].price}\$",
                           style: textStyle.bodyMedium),
                     ],
                   ),
@@ -730,8 +722,8 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
   }
 
   _onPressed(int index) {
-    if (!myBagList.contains(homeScreenController.suggestlist[index])) {
-      myBagList.add(homeScreenController.suggestlist[index]);
+    if (!myBagList.contains(Get.find<HomeScreenController>().suggestlist[index])) {
+      myBagList.add(Get.find<HomeScreenController>().suggestlist[index]);
     }
   }
 }

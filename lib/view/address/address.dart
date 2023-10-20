@@ -4,7 +4,6 @@
 
 import 'package:appstore/constant/color/color.dart';
 import 'package:appstore/model/Model.dart';
-import 'package:appstore/view/payment/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +11,7 @@ import 'package:get/get.dart';
 import '../../constant/storage.dart';
 import '../../constant/text_style.dart';
 import '../../constant/widget/widget.dart';
+import '../../route_manager/route_name.dart';
 
 
 class Address extends StatelessWidget {
@@ -153,8 +153,7 @@ class Address extends StatelessWidget {
         preNum.text.isNotEmpty &&
         number.text.isNotEmpty &&
         pinCode.text.isNotEmpty) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const Payments()));
+   Get.toNamed(RouteNames.payment);
     } else {
 
       massage('Enter information',context);

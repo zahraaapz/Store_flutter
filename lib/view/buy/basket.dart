@@ -10,17 +10,17 @@ import '../../constant/text_style.dart';
 import '../../model/Model.dart';
 import '../../constant/widget/widget.dart';
 import '../../constant/strings/string.dart';
-import '../firstScreen/mainScreen.dart';
+import '../../route_manager/route_name.dart';
 
 
-class Bag extends StatefulWidget {
+class Basket extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
 
   @override
-  State<Bag> createState() => _BagState();
+  State<Basket> createState() => _BasketState();
 }
 
-class _BagState extends State<Bag> {
+class _BasketState extends State<Basket> {
   List<int> qnty = List.filled(4, 1);
   int indexOfqnty = 0;
   double totalPrice = 0.0;
@@ -311,8 +311,7 @@ class _BagState extends State<Bag> {
   }
 
   _onPressed() {
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: ((context) => Home())));
-  }
+Get.offAll(RouteNames.home);  }
 }
 
 class Cut extends CustomClipper<Path> {

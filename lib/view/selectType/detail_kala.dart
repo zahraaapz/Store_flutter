@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/constant/color/color.dart';
+import 'package:appstore/route_manager/route_name.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,6 @@ import 'package:get/get.dart';
 import '../../constant/storage.dart';
 import '../../constant/text_style.dart';
 import '../../constant/widget/widget.dart';
-import '../review/review.dart';
 
 class DetailKala extends StatefulWidget {
   int index;
@@ -291,11 +291,7 @@ class _DetailKalaState extends State<DetailKala> {
                   Text('43 Rating and 23 Reviews', style: textStyle.bodyMedium),
                   InkWell(
                     onTap: (() {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: ((context) => Review(
-                              index: index,
-                              select: select,
-                              listkala: kalalist))));
+                     Get.toNamed(RouteNames.review);
                     }),
                     child: const Icon(
                       Icons.arrow_forward_ios_outlined,

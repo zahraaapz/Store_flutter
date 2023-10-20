@@ -1,6 +1,8 @@
 
 
-import 'package:appstore/view/splash/splash-screen.dart';
+import 'package:appstore/route_manager/binding.dart';
+import 'package:appstore/route_manager/route.dart';
+import 'package:appstore/route_manager/route_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -22,6 +24,12 @@ class AppStore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(debugShowCheckedModeBanner: false, home:Splash());
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+       getPages: RoutePage.routePage,
+       initialRoute:RouteNames.root ,
+       initialBinding: HomeScreenBinding(),
+       
+       );
   }
 }
