@@ -4,16 +4,13 @@ import 'package:appstore/constant/color/color.dart';
 import 'package:appstore/route_manager/route_name.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
+import '../../constant/storage.dart';
+import '../../constant/textEditController.dart';
 import '../../constant/widget/widget.dart';
 
 class Personal extends StatelessWidget {
-  var box = GetStorage();
   RxInt select = 0.obs;
-  TextEditingController fullname = TextEditingController();
-  TextEditingController number = TextEditingController();
-  TextEditingController email = TextEditingController();
 
   Personal({super.key});
 
@@ -26,7 +23,7 @@ class Personal extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(
             child:
-             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               iconANDtitle('My Information', Icons.arrow_back_ios),
               const SizedBox(
                 height: 9,
@@ -42,7 +39,7 @@ class Personal extends StatelessWidget {
                   width: double.infinity,
                   size: Get.size,
                   hintText: 'Full Name',
-                  controller: fullname),
+                  controller: MyTextEditingController.fullName),
               const SizedBox(
                 height: 15,
               ),
@@ -50,7 +47,7 @@ class Personal extends StatelessWidget {
                   width: double.infinity,
                   size: Get.size,
                   hintText: 'Contact number',
-                  controller: number),
+                  controller: MyTextEditingController.number),
               const SizedBox(
                 height: 15,
               ),
@@ -58,7 +55,7 @@ class Personal extends StatelessWidget {
                   width: double.infinity,
                   size: Get.size,
                   hintText: 'Email Address',
-                  controller: email),
+                  controller: MyTextEditingController.email),
               const SizedBox(
                 height: 300,
               ),
@@ -77,16 +74,19 @@ class Personal extends StatelessWidget {
   }
 
   _onPressed(context) {
-    box.write('fullName', fullname.text);
-    box.write('email', email.text);
-    box.write('number', number.text);
+    MyStorage.box
+        .write(StorageNames.fullName, MyTextEditingController.fullName.text);
+    MyStorage.box
+        .write(StorageNames.number, MyTextEditingController.number.text);
+    MyStorage.box
+        .write(StorageNames.email, MyTextEditingController.number.text);
 
-    if (fullname.text.isNotEmpty &&
-        email.text.isNotEmpty &&
-        number.text.isNotEmpty) {
-Get.offAllNamed(RouteNames.home);    } else {
+    if (MyTextEditingController.fullName.text.isNotEmpty &&
+        MyTextEditingController.email.text.isNotEmpty &&
+        MyTextEditingController.number.text.isNotEmpty) {
+      Get.offAllNamed(RouteNames.home);
+    } else {
       massage('Enter information', context);
-     
     }
   }
 }

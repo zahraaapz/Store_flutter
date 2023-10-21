@@ -88,21 +88,19 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                       children: [
                         Text('New Arrivals', style: textStyle.headlineMedium),
                         SizedBox(
-                            child: InkWell(
-                          child: Row(
-                            children: [
-                              Text(
-                                'View all',
-                                style: textStyle.bodyMedium,
-                              ),
-                              const Icon(
-                                Icons.arrow_forward_ios_rounded,
-                                color: Rang.blue,
-                                size: 15,
-                              )
-                            ],
-                          ),
-                        ))
+                            child: Row(
+                              children: [
+                                Text(
+                                  'View all',
+                                  style: textStyle.bodyMedium,
+                                ),
+                                const Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  color: Rang.blue,
+                                  size: 15,
+                                )
+                              ],
+                            ))
                       ],
                     ),
                   ),

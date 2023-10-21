@@ -101,7 +101,9 @@ class _SearchState extends State<Search> {
               ),
             ),
           ),
-          const SizedBox(width: 10,)
+          const SizedBox(
+            width: 10,
+          )
         ]),
         body: ListView.builder(
           itemCount: filteredItems.length,

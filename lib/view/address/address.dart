@@ -1,33 +1,24 @@
 // ignore_for_file: must_be_immutable
 
-
-
 import 'package:appstore/constant/color/color.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 import '../../constant/storage.dart';
+import '../../constant/textEditController.dart';
 import '../../constant/text_style.dart';
 import '../../constant/widget/widget.dart';
 import '../../route_manager/route_name.dart';
 
-
 class Address extends StatelessWidget {
   RxInt select = 0.obs;
-  TextEditingController fullname = TextEditingController();
-  TextEditingController number = TextEditingController();
-  TextEditingController preNum = TextEditingController();
-  TextEditingController pinCode = TextEditingController();
-  TextEditingController street = TextEditingController();
-  TextEditingController city = TextEditingController();
 
- Address({super.key});
+  Address({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final size=MediaQuery.sizeOf(context);
+    final size = MediaQuery.sizeOf(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -35,8 +26,7 @@ class Address extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: SingleChildScrollView(
             child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, 
-                children: [
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               iconANDtitle('My Address', Icons.arrow_back_ios),
               const SizedBox(
                 height: 9,
@@ -48,17 +38,27 @@ class Address extends StatelessWidget {
                 endIndent: 5,
                 indent: 5,
               ),
-              myTextField(size: size,width: double.infinity,controller: fullname,hintText: 'Full Name'),
+              myTextField(
+                  size: size,
+                  width: double.infinity,
+                  controller: MyTextEditingController.fullName,
+                  hintText: 'Full Name'),
               const SizedBox(
                 height: 15,
               ),
               Row(
-               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-               myTextField(size: size,controller: preNum,width: size.width/7.5,hintText: '49'),
-               myTextField(size: size,width:size.width/1.25,controller: number,hintText: 'Concate Number'),
-
-              
+                  myTextField(
+                      size: size,
+                      controller: MyTextEditingController.preNum,
+                      width: size.width / 7.5,
+                      hintText: '49'),
+                  myTextField(
+                      size: size,
+                      width: size.width / 1.25,
+                      controller: MyTextEditingController.number,
+                      hintText: 'Concate Number'),
                 ],
               ),
               const SizedBox(
@@ -71,18 +71,28 @@ class Address extends StatelessWidget {
                 endIndent: 5,
                 indent: 5,
               ),
-
-       myTextField(size: size,width: double.infinity,controller: pinCode,hintText: 'Pin Code'),
-   const SizedBox(
-                height: 15,
-              ),
-         myTextField(size: size,width: double.infinity,controller: street,hintText:'Street Address' ),
-
+              myTextField(
+                  size: size,
+                  width: double.infinity,
+                  controller: MyTextEditingController.pinCode,
+                  hintText: 'Pin Code'),
               const SizedBox(
                 height: 15,
               ),
-         myTextField(size: size,width: double.infinity,controller: city,hintText:'City' ),
-           SizedBox(
+              myTextField(
+                  size: size,
+                  width: double.infinity,
+                  controller: MyTextEditingController.street,
+                  hintText: 'Street Address'),
+              const SizedBox(
+                height: 15,
+              ),
+              myTextField(
+                  size: size,
+                  width: double.infinity,
+                  controller: MyTextEditingController.city,
+                  hintText: 'City'),
+              SizedBox(
                 height: 70,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -127,7 +137,7 @@ class Address extends StatelessWidget {
                 child: ButtonWidget(
                   iconData: Icons.location_on,
                   title: 'Save Address',
-                  onPressed: ()=> onPressed(context),
+                  onPressed: () => onPressed(context),
                 ),
               )
             ]),
@@ -137,27 +147,27 @@ class Address extends StatelessWidget {
     );
   }
 
-
-
   onPressed(context) {
-  MyStorage.box.write(StorageNames.fullName, fullname.text);
-  MyStorage.box.write(StorageNames.pin, pinCode.text);
-  MyStorage.box.write(StorageNames.number, number.text);
-  MyStorage.box.write(StorageNames.preNum, preNum.text);
-  MyStorage.box.write(StorageNames.street, street.text);
-  MyStorage.box.write(StorageNames.city, city.text);
+    MyStorage.box
+        .write(StorageNames.fullName, MyTextEditingController.fullName.text);
+    MyStorage.box.write(StorageNames.pin, MyTextEditingController.pinCode.text);
+    MyStorage.box
+        .write(StorageNames.number, MyTextEditingController.number.text);
+    MyStorage.box
+        .write(StorageNames.preNum, MyTextEditingController.preNum.text);
+    MyStorage.box
+        .write(StorageNames.street, MyTextEditingController.street.text);
+    MyStorage.box.write(StorageNames.city, MyTextEditingController.city.text);
 
-    if (street.text.isNotEmpty &&
-        city.text.isNotEmpty &&
-        fullname.text.isNotEmpty &&
-        preNum.text.isNotEmpty &&
-        number.text.isNotEmpty &&
-        pinCode.text.isNotEmpty) {
-   Get.toNamed(RouteNames.payment);
+    if (MyTextEditingController.street.text.isNotEmpty &&
+        MyTextEditingController.city.text.isNotEmpty &&
+        MyTextEditingController.fullName.text.isNotEmpty &&
+        MyTextEditingController.preNum.text.isNotEmpty &&
+        MyTextEditingController.number.text.isNotEmpty &&
+        MyTextEditingController.pinCode.text.isNotEmpty) {
+      Get.toNamed(RouteNames.payment);
     } else {
-
-      massage('Enter information',context);
- 
+      massage('Enter information', context);
     }
   }
 }

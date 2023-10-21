@@ -9,6 +9,7 @@ class HomeScreenBinding implements Bindings{
 
 Get.put(HomeScreenController());
 
+
   }
 
 }

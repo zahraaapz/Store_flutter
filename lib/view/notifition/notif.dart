@@ -22,20 +22,8 @@ class Notif extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  GestureDetector(
-                    onTap: () {},
-                    child: const Icon(
-                      Icons.arrow_back_ios_new,
-                      color: Rang.blue,
-                      size: 25,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                   Text(
-                    'Notification',style: textStyle.displaySmall,
-                  ),
+                  iconANDtitle('Notification',Icons.arrow_back_ios_new)
+                ,
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 2,
                   ),
@@ -98,7 +86,7 @@ class Notif extends StatelessWidget {
                         height: 20,
                       ),
                       Text(style: textStyle.bodyMedium,
-                        '''Hey, ${MyStorage.box.read(StorageNames.fullName)??'--'}. Thanks for using CORAL. You know what? You can help us improve with just one click''',
+                        '''Hey, ${MyStorage.box.read(StorageNames.fullName)?? '--'}. Thanks for using CORAL. You know what? You can help us improve with just one click''',
                         textScaleFactor: 1.1,
                       )
                   ,const SizedBox(height: 10,)  ],

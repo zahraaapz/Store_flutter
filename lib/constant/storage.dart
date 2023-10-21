@@ -13,13 +13,13 @@ abstract class MyStorage{
 abstract class StorageNames{
 
 
- static var fullName;
- static var pin;
- static var number;
- static var preNum;
- static var street;
- static var city;
- static var email;
+ static String fullName='';
+ static String pin='';
+ static String number='';
+ static String preNum='';
+ static String street='';
+ static String city='';
+ static String email='';
 
 
 

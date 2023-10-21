@@ -17,11 +17,8 @@ import '../../constant/text_style.dart';
 import 'chart.dart';
 
 class Review extends StatefulWidget {
-
-
   @override
-  State<Review> createState() =>
-      _ReviewState();
+  State<Review> createState() => _ReviewState();
 }
 
 class _ReviewState extends State<Review> {
@@ -32,7 +29,6 @@ class _ReviewState extends State<Review> {
 
     List json = convert.jsonDecode(value.body);
     if (comment.isEmpty) {
-     
       for (int i = 0; i < json.length; i++) {
         setState(() {
           comment.add(Comment(
@@ -74,14 +70,7 @@ class _ReviewState extends State<Review> {
                           children: [
                             SizedBox(
                                 child: Row(children: [
-                              IconButton(
-                                  onPressed: (() {
-                                    Navigator.of(context).pop();
-                                  }),
-                                  icon: const Icon(
-                                    Icons.arrow_back_ios,
-                                    color: Rang.blue,
-                                  )),
+                              iconANDtitle('Review', Icons.arrow_back_ios_new),
                               Text(
                                 "${(comment[0].score + comment[1].score + comment[2].score + comment[3].score + comment[4].score) / 5}",
                                 style: textStyle.bodyMedium,
@@ -129,15 +118,15 @@ class _ReviewState extends State<Review> {
 
 collapseComment(context, List<Comment> comment) {
   return SizedBox(
-   height: Get.height/10,
+    height: Get.height / 10,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
             Container(
-                height: Get.height/20,
-                width: Get.width/9,
+                height: Get.height / 20,
+                width: Get.width / 9,
                 decoration: BoxDecoration(
                     color: Rang.toosi, borderRadius: BorderRadius.circular(15)),
                 child: Row(
@@ -206,7 +195,7 @@ expandedComment(context, List<Comment> comment) {
     crossAxisAlignment: CrossAxisAlignment.end,
     children: [
       SizedBox(
-        height: Get.height/1.5,
+        height: Get.height / 1.5,
         child: ListView.builder(
             physics: const ClampingScrollPhysics(),
             itemCount: 5,
@@ -215,15 +204,15 @@ expandedComment(context, List<Comment> comment) {
               return Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: SizedBox(
-                  height: Get.height/10,
+                  height: Get.height / 10,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
                           Container(
-                              height:Get.height/15 ,
-                              width: Get.width/10,
+                              height: Get.height / 15,
+                              width: Get.width / 10,
                               decoration: BoxDecoration(
                                   color: Rang.toosi,
                                   borderRadius: BorderRadius.circular(15)),
@@ -289,7 +278,7 @@ expandedComment(context, List<Comment> comment) {
 write() {
   return Column(children: [
     SizedBox(
-      height: Get.height/25,
+      height: Get.height / 25,
     ),
     Builder(builder: (context) {
       var controller = ExpandableController.of(context, required: true)!;
@@ -314,12 +303,16 @@ descripe() {
         'Review Description',
         style: textStyle.bodyMedium,
       ),
-SizedBox(height: 20,),
+      SizedBox(
+        height: 20,
+      ),
       Container(
-        height: Get.height/4,
-        padding: const EdgeInsets.all(4),
-        child: myTextField(hintText:'Enter Description',size: Get.size,width: double.infinity )),
- 
+          height: Get.height / 4,
+          padding: const EdgeInsets.all(4),
+          child: myTextField(
+              hintText: 'Enter Description',
+              size: Get.size,
+              width: double.infinity)),
       const SizedBox(
         height: 80,
       ),
@@ -336,7 +329,5 @@ SizedBox(height: 20,),
 
 _onPressed(context, controller) {
   controller.toggle();
-  massage('Saved :)',context);
+  massage('Saved :)', context);
 }
-
-

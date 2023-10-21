@@ -8,7 +8,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../constant/text_style.dart';
 import '../../constant/widget/widget.dart';
 import '../../constant/strings/string.dart';
 import '../../route_manager/route_name.dart';
@@ -29,20 +28,7 @@ class SearchResult extends StatelessWidget {
               child: Row(
                 children: [
                  
-                  GestureDetector(
-                    onTap: ()=>Get.back(),
-                    child: const Icon(
-                      Icons.arrow_back_ios_new,
-                      color: Rang.blue,size: 30,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                   Text(
-                    'Search results'
-                  ,style: textStyle.displaySmall,
-                  ),
+                 iconANDtitle('Search Result', Icons.arrow_back_ios_new),
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 2.2,
                   ),
