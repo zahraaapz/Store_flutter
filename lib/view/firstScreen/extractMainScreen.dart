@@ -265,7 +265,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                   Get.to(Search());
                 }),
                 child: const Icon(Icons.search, color: Rang.blue)),
-            GestureDetector(
+            InkWell(
               onTap: () => Get.toNamed(RouteNames.notifition),
               child: const Icon(Icons.notifications_none, color: Rang.blue),
             )
@@ -331,14 +331,14 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
           ),
           Text('Top Categories', style: textStyle.bodyMedium),
           SizedBox(
-            height: size.height / 4,
+            height: size.height /3.3,
             child: ListView.builder(
                 physics: const ClampingScrollPhysics(),
                 itemCount: Model.modelList.length,
                 itemBuilder: ((context, index) {
                   return Padding(
                     padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
-                    child: GestureDetector(
+                    child: InkWell(
                       child: Text(Model.modelList[index].title,
                           style: textStyle.bodyLarge),
                       onTap: () {
@@ -358,14 +358,14 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
           const SizedBox(
             height: 12,
           ),
-          GestureDetector(
+          InkWell(
             child: Text('Help & Support', style: textStyle.bodyMedium),
             onTap: () {},
           ),
           const SizedBox(
             height: 12,
           ),
-          GestureDetector(
+          InkWell(
             child: Text('Wishlist', style: textStyle.bodyMedium),
             onTap: () {
              Get.to(const Wish());
@@ -433,7 +433,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
   SizedBox suggList(Size size,) {
     //suggestion List
  return SizedBox(
-        height: size.height / 4.5,
+        height: size.height / 4.3,
         width: double.infinity,
         child: ListView.builder(
             physics: const BouncingScrollPhysics(),
@@ -442,239 +442,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
-                  showModalBottomSheet(
-                      context: context,
-                      backgroundColor: Colors.transparent,
-                      builder: ((context) {
-                        return StatefulBuilder(
-                          builder: (context, setState) {
-                            return Container(
-                              ////bottomsheet container
-                              height: size.height / 2.2,
-                              decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(45),
-                                      topRight: Radius.circular(45))),
-                              child: Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                            width: size.width / 3,
-                                            height: size.height / 8,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(15),
-                                                image: DecorationImage(
-                                                    fit: BoxFit.fill,
-                                                    image: Image.asset(
-                                                      Get.find<HomeScreenController>()
-                                                          .suggestlist[index]
-                                                          .ima!,
-                                                    ).image)),
-                                          ),
-                                          const SizedBox(
-                                            width: 15,
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                  Get.find<HomeScreenController>()
-                                                      .suggestlist[index]
-                                                      .brand!,
-                                                  style: textStyle.bodyMedium),
-                                              const SizedBox(
-                                                height: 12,
-                                              ),
-                                              Text(
-                                                Get.find<HomeScreenController>()
-                                                    .suggestlist[index].name!,
-                                                style: textStyle.bodyMedium,
-                                              ),
-                                              const SizedBox(
-                                                height: 12,
-                                              ),
-                                              Text(
-                                                  '${Get.find<HomeScreenController>().suggestlist[index].price}\$',
-                                                  style: textStyle.bodyMedium),
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                            width: size.width / 8,
-                                            height: size.height / 22,
-                                            decoration: BoxDecoration(
-                                                color: Rang.toosi,
-                                                borderRadius:
-                                                    BorderRadius.circular(10)),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                Text(
-                                                  '4.5',
-                                                  style: textStyle.bodyMedium,
-                                                ),
-                                                const Icon(
-                                                  CupertinoIcons.star_fill,
-                                                  color: Rang.orange,
-                                                  size: 17,
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Average Rating',
-                                                style: textStyle.bodyMedium,
-                                              ),
-                                              const SizedBox(
-                                                height: 8,
-                                              ),
-                                              Text(
-                                                '43 Ratings & 23 Reviews',
-                                                style: textStyle.bodyMedium,
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    //////filter
-                                    Get.find<HomeScreenController>()
-                                                .suggestlist[index].filter ==
-                                            'shoes'
-                                        ? Column(
-                                            children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      'Select Size',
-                                                      style:
-                                                          textStyle.bodyMedium,
-                                                    ),
-                                                    Text(
-                                                      ' (Uk Size)',
-                                                      style:
-                                                          textStyle.bodyMedium,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              ////size pa
-                                              SizedBox(
-                                                height: 55,
-                                                child: ListView.builder(
-                                                    scrollDirection:
-                                                        Axis.horizontal,
-                                                    itemCount: sizepa.length,
-                                                    itemBuilder:
-                                                        ((context, index) {
-                                                      return Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(2.0),
-                                                        child: GestureDetector(
-                                                          onTap: () {
-                                                            select.value =
-                                                                index;
-                                                          },
-                                                          child: Obx(
-                                                            () =>
-                                                                AnimatedContainer(
-                                                              height: 80,
-                                                              width: 50,
-                                                              decoration: BoxDecoration(
-                                                                  border: Border.all(
-                                                                      color: Rang
-                                                                          .blue),
-                                                                  color: select
-                                                                              .value ==
-                                                                          index
-                                                                      ? const Color
-                                                                              .fromARGB(
-                                                                          82,
-                                                                          61,
-                                                                          123,
-                                                                          159)
-                                                                      : Colors
-                                                                          .white,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              45)),
-                                                              duration:
-                                                                  const Duration(
-                                                                      milliseconds:
-                                                                          200),
-                                                              child: Center(
-                                                                child: Text(
-                                                                    sizepa[index]
-                                                                        .toString(),
-                                                                    style: textStyle
-                                                                        .bodyMedium),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      );
-                                                    })),
-                                              ),
-                                            ],
-                                          )
-                                        : const SizedBox(
-                                            height: 30,
-                                          ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(12.0),
-                                      child: Row(
-                                        children: [
-                                          const Icon(
-                                            Icons.qr_code_scanner,
-                                            color: Rang.blue,
-                                            size: 40,
-                                          ),
-                                          const SizedBox(
-                                            width: 20,
-                                          ),
-                                          ButtonWidget(
-                                            iconData:
-                                                Icons.shopping_bag_outlined,
-                                            title: 'Add to Bags',
-                                            onPressed: () => _onPressed(index),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ); ////bottomsheet container
-                          },
-                        );
-                      }));
+                  bottomSheetForSuggestList(context, size, index);
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10.0, top: 8, right: 10),
@@ -717,6 +485,242 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                 ),
               );
             }));
+  }
+
+  Future<dynamic> bottomSheetForSuggestList(BuildContext context, Size size, int index) {
+    return showModalBottomSheet(
+                    context: context,
+                    backgroundColor: Colors.transparent,
+                    builder: ((context) {
+                      return StatefulBuilder(
+                        builder: (context, setState) {
+                          return Container(
+                            ////bottomsheet container
+                            height: size.height / 2.2,
+                            decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(45),
+                                    topRight: Radius.circular(45))),
+                            child: Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: size.width / 3,
+                                          height: size.height / 8,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              image: DecorationImage(
+                                                  fit: BoxFit.fill,
+                                                  image: Image.asset(
+                                                    Get.find<HomeScreenController>()
+                                                        .suggestlist[index]
+                                                        .ima!,
+                                                  ).image)),
+                                        ),
+                                        const SizedBox(
+                                          width: 15,
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                                Get.find<HomeScreenController>()
+                                                    .suggestlist[index]
+                                                    .brand!,
+                                                style: textStyle.bodyMedium),
+                                            const SizedBox(
+                                              height: 12,
+                                            ),
+                                            Text(
+                                              Get.find<HomeScreenController>()
+                                                  .suggestlist[index].name!,
+                                              style: textStyle.bodyMedium,
+                                            ),
+                                            const SizedBox(
+                                              height: 12,
+                                            ),
+                                            Text(
+                                                '${Get.find<HomeScreenController>().suggestlist[index].price}\$',
+                                                style: textStyle.bodyMedium),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: size.width / 8,
+                                          height: size.height / 22,
+                                          decoration: BoxDecoration(
+                                              color: Rang.toosi,
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Text(
+                                                '4.5',
+                                                style: textStyle.bodyMedium,
+                                              ),
+                                              const Icon(
+                                                CupertinoIcons.star_fill,
+                                                color: Rang.orange,
+                                                size: 17,
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Average Rating',
+                                              style: textStyle.bodyMedium,
+                                            ),
+                                            const SizedBox(
+                                              height: 8,
+                                            ),
+                                            Text(
+                                              '43 Ratings & 23 Reviews',
+                                              style: textStyle.bodyMedium,
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  //////filter
+                                  Get.find<HomeScreenController>()
+                                              .suggestlist[index].filter ==
+                                          'shoes'
+                                      ? Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    'Select Size',
+                                                    style:
+                                                        textStyle.bodyMedium,
+                                                  ),
+                                                  Text(
+                                                    ' (Uk Size)',
+                                                    style:
+                                                        textStyle.bodyMedium,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            ////size pa
+                                            SizedBox(
+                                              height: 55,
+                                              child: ListView.builder(
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  itemCount: sizepa.length,
+                                                  itemBuilder:
+                                                      ((context, index) {
+                                                    return Padding(
+                                                      padding:
+                                                          const EdgeInsets
+                                                              .all(2.0),
+                                                      child: InkWell(
+                                                        onTap: () {
+                                                          select.value =
+                                                              index;
+                                                        },
+                                                        child: Obx(
+                                                          () =>
+                                                              AnimatedContainer(
+                                                            height: 80,
+                                                            width: 50,
+                                                            decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                    color: Rang
+                                                                        .blue),
+                                                                color: select
+                                                                            .value ==
+                                                                        index
+                                                                    ? const Color
+                                                                            .fromARGB(
+                                                                        82,
+                                                                        61,
+                                                                        123,
+                                                                        159)
+                                                                    : Colors
+                                                                        .white,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            45)),
+                                                            duration:
+                                                                const Duration(
+                                                                    milliseconds:
+                                                                        200),
+                                                            child: Center(
+                                                              child: Text(
+                                                                  sizepa[index]
+                                                                      .toString(),
+                                                                  style: textStyle
+                                                                      .bodyMedium),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  })),
+                                            ),
+                                          ],
+                                        )
+                                      : const SizedBox(
+                                          height: 30,
+                                        ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.qr_code_scanner,
+                                          color: Rang.blue,
+                                          size: 40,
+                                        ),
+                                        const SizedBox(
+                                          width: 20,
+                                        ),
+                                        ButtonWidget(
+                                          iconData:
+                                              Icons.shopping_bag_outlined,
+                                          title: 'Add to Bags',
+                                          onPressed: () => _onPressed(index),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ); ////bottomsheet container
+                        },
+                      );
+                    }));
   }
 
   _onPressed(int index) {

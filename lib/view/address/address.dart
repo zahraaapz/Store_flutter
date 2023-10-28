@@ -100,7 +100,7 @@ class Address extends StatelessWidget {
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: GestureDetector(
+                      child: InkWell(
                         onTap: () {
                           select.value = index;
                         },

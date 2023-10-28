@@ -9,6 +9,7 @@ import '../../constant/storage.dart';
 import '../../constant/text_style.dart';
 import '../../constant/widget/widget.dart';
 import '../../constant/strings/string.dart';
+import '../../route_manager/route_name.dart';
 
 
 class Wish extends StatefulWidget {
@@ -45,7 +46,9 @@ class _WishState extends State<Wish> {
                 const SizedBox(
                   height: 100,
                 ),
-                const ButtonWidget(title: 'start shopping')
+                 ButtonWidget(
+                  onPressed: () => Get.offAllNamed(RouteNames.home),
+                  title: 'start shopping')
               ],
             )
           : myWishList()

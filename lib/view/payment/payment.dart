@@ -55,7 +55,7 @@ class Payments extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              GestureDetector(
+                              InkWell(
                                 onTap: () {
                                   //To do:edit
                                   Get.offAll(Address());

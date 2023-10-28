@@ -39,7 +39,7 @@ Padding iconANDtitle(String title, IconData icon) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Row(children: [
-      GestureDetector(
+      InkWell(
         onTap: () => Get.back(),
         child: Icon(
           icon,
@@ -56,8 +56,8 @@ Padding iconANDtitle(String title, IconData icon) {
   );
 }
 
-GestureDetector profileProperty(String title, Function() onTap) {
-  return GestureDetector(
+InkWell profileProperty(String title, Function() onTap) {
+  return InkWell(
     onTap: onTap,
     child: SizedBox(
       height: 50,
@@ -176,7 +176,7 @@ Container myTextField(
         BoxDecoration(borderRadius: BorderRadius.circular(15), color: color),
     child: TextField(
       controller: controller,
-      decoration: InputDecoration(
+        decoration: InputDecoration(
           hintText: hintText,
           helperStyle: const TextStyle(color: Rang.grey),
           border: OutlineInputBorder(
@@ -184,7 +184,8 @@ Container myTextField(
               borderRadius: BorderRadius.circular(15)),
           focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.black),
-              borderRadius: BorderRadius.circular(15))),
+              borderRadius: BorderRadius.circular(15))
+              ),
     ),
   );
 }

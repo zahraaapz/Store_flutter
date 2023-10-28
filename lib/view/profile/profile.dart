@@ -43,7 +43,7 @@ class Profile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Stack(children: [
-                      GestureDetector(
+                      InkWell(
                           onTap: ()  {
                             getFile();
                           },

@@ -147,7 +147,7 @@ class _SelectkalaState extends State<Selectkala> {
                           const SizedBox(
                             width: 15,
                           ),
-                          GestureDetector(
+                          InkWell(
                             onTap: () {
                              Get.offAll(Home());
                             },
@@ -540,7 +540,7 @@ Future<dynamic> filterBySort(BuildContext context) {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      GestureDetector(
+                     InkWell(
                         onTap: () {
                        
 
@@ -554,7 +554,7 @@ Future<dynamic> filterBySort(BuildContext context) {
                                       ));
                         },
                         child: Container(
-                          height: Get.height/5,
+                          height: Get.height/4.5,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               image: DecorationImage(
@@ -562,43 +562,9 @@ Future<dynamic> filterBySort(BuildContext context) {
                                   image: Image.asset(list[index].ima!).image)),
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(style: textStyle.bodyMedium, list[index].name!),
-                          // GestureDetector(
-                          //   onTap: () {
-                          //       setState(() {
-                          //         fav[index] = !fav[index];
-
-                            //      if (fav[index] == true &&
-                          //             !wishList.contains(
-                          //                list[index])) {
-                          //           wishList.add(list[index]);
-                          //         Personal().box.write('${list[index].name}'+ 
-                          //         "${list[index].filter}", fav[index]); 
-                          //          }
-                          //         if (fav[index] == false &&
-                          //             wishList.contains(list[index])) {
-                          //           wishList.remove(list[index]);
-                          //        Personal().box.remove('${list[index].name}'+ 
-                          //         "${list[index].filter}");  
-                          //          }
-                          //         debugPrint(Personal().box.read('${list[index].name}'+ 
-                          //         "${list[index].filter}").toString());
-                          //         debugPrint(fav.toString());
-                          //       });
-                          //   },
-                          //   child: Icon(
-                          //     fav[index] == false
-                          //         ? Icons.favorite_border
-                          //         : Icons.favorite,
-                          //     size: 19,
-                          //     color: Colors.black,
-                          //   ),
-                          // ),
-                        ],
-                      ),
+                      SizedBox(height: 10,),
+                      Text(style: textStyle.bodyMedium, list[index].name!),
+                       SizedBox(height: 10,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

@@ -136,7 +136,7 @@ class _BasketState extends State<Basket> {
                           const SizedBox(
                             height: 10,
                           ),
-                          GestureDetector(
+                          InkWell(
                             onTap: () {
                               setState(() {
                                 qnty[index] = qnty[index] + 1;
@@ -154,7 +154,7 @@ class _BasketState extends State<Basket> {
                                         style: textStyle.bodyMedium,
                                         'Qnty: ${qnty[index]}'),
                                     const Icon(Icons.add),
-                                    GestureDetector(
+                                    InkWell(
                                       onTap: () {
                                         setState(() {
                                           qnty[index] = qnty[index] - 1;

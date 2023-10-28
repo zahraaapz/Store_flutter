@@ -64,7 +64,7 @@ class _SearchState extends State<Search> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(backgroundColor: Colors.white, elevation: 0, actions: [
-          GestureDetector(
+          InkWell(
               onTap: () {
                 Navigator.pop(context);
               },

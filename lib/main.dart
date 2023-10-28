@@ -29,6 +29,7 @@ class AppStore extends StatelessWidget {
        getPages: RoutePage.routePage,
        initialRoute:RouteNames.root ,
        initialBinding: HomeScreenBinding(),
+ 
        
        );
   }
