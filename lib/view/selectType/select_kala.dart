@@ -14,17 +14,16 @@ import '../../constant/widget/widget.dart';
 
 class Selectkala extends StatefulWidget {
   int select;
-  final HomeScreenController homeScreenController;
 
 
  
 
-  Selectkala(this.select,this.homeScreenController,{super.key});
+  Selectkala(this.select,{super.key});
 
   @override
   // ignore: no_logic_in_create_state
   State<Selectkala> createState() =>
-      _SelectkalaState(select,homeScreenController);
+      _SelectkalaState(select);
 }
 
 class _SelectkalaState extends State<Selectkala> {
@@ -42,8 +41,7 @@ class _SelectkalaState extends State<Selectkala> {
   //
   int selectPage;
   late int lenght;
-  final HomeScreenController homeScreenController;
-
+var homeScreenController=Get.find<HomeScreenController>();
 
   List? brands;
   List<double>? prices; 
@@ -52,8 +50,8 @@ class _SelectkalaState extends State<Selectkala> {
   RangeValues? val;
 
   _SelectkalaState(
-    this.selectPage,
-    this.homeScreenController,
+    this.selectPage
+  ,
  );
 
   @override
@@ -532,6 +530,7 @@ Future<dynamic> filterBySort(BuildContext context) {
               itemCount: list.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
+                mainAxisSpacing:15
               ),
               itemBuilder: ((context, index) {
                 
@@ -549,12 +548,12 @@ Future<dynamic> filterBySort(BuildContext context) {
                                         index,
                                         selectPage,
                                          list,
-                                        homeScreenController,
+                                       
                                        
                                       ));
                         },
                         child: Container(
-                          height: Get.height/4.5,
+                          height: Get.height/5.5,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               image: DecorationImage(

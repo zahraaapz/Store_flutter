@@ -4,7 +4,6 @@ import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/constant/color.dart';
 import 'package:appstore/route_manager/route_name.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,20 +16,19 @@ class DetailKala extends StatefulWidget {
 
   int select;
   List<Product> kalaList;
-   HomeScreenController homeScreenController ;
-  DetailKala(this.index, this.select, this.kalaList,this.homeScreenController,
+  DetailKala(this.index, this.select, this.kalaList,
       {super.key, });
 
   @override
   State<DetailKala> createState() =>
       // ignore: no_logic_in_create_state
-      _DetailKalaState(select, index,homeScreenController ,kalaList);
+      _DetailKalaState(select, index ,kalaList);
 }
 
 class _DetailKalaState extends State<DetailKala> {
 
 
-  _DetailKalaState(this.select, this.index,this.homeScreenController,this.kalalist);
+  _DetailKalaState(this.select, this.index,this.kalalist);
 
   
   List<Product> kalalist;
@@ -44,7 +42,7 @@ class _DetailKalaState extends State<DetailKala> {
     super.initState();
   }
   final int randomValue = Random().nextInt(500000);
-   HomeScreenController homeScreenController;
+   var homeScreenController=Get.find<HomeScreenController>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(

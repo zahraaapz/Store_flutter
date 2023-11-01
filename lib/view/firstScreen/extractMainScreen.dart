@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:appstore/constant/widget/widget.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/constant/color.dart';
@@ -8,11 +7,9 @@ import 'package:appstore/view/selectType/select_kala.dart';
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../constant/storage.dart';
 import '../../constant/text_style.dart';
 import '../../constant/widget/expandable.dart';
 import '../../controller/homeScreenController.dart';
-import '../../controller/pick_file.dart';
 import '../wish/wishlist.dart';
 
 
@@ -280,51 +277,11 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Container(
-            padding: const EdgeInsets.all(15),
-            width: size.width / 1.1,
-            height: size.height / 6,
-            decoration: BoxDecoration(
-                color: Rang.toosi, borderRadius: BorderRadius.circular(15)),
-            child: Obx(
-              () => Row(
-                children: [
-                  Container(
-                    width: size.width / 4.5,
-                    height: size.height / 10,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            image: pickFileController.file.value.name == 'not'
-                                ? const AssetImage(
-                                    'assets/image/avatar.png',
-                                  )
-                                : Image.file(File(MyStorage.box.read('ima'))).image,
-                            fit: BoxFit.cover)),
-                  ),
-                  const SizedBox(
-                    width: 50,
-                  ),
-                  Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          MyStorage.box.read(StorageNames.fullName) ?? '--',
-                          style: textStyle.labelSmall,
-                        ),
-                        Text(
-                          MyStorage.box.read(StorageNames.number) ?? '--',
-                          style: textStyle.labelSmall,
-                        ),
-                        Text(
-                          MyStorage.box.read(StorageNames.email) ?? '--',
-                          style: textStyle.labelSmall,
-                        ),
-                      ]),
-                ],
-              ),
-            ),
-          ),
+          
+                      
+            profileBox(width: size.width / 1.1,
+            height: size.height / 6,),
+         
           const SizedBox(
             height: 10,
           ),
@@ -345,7 +302,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
 
                                 Get.to(Selectkala(
                                   index,
-                                 controller
+                                
                                  
                                 ));
                       },
@@ -399,7 +356,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                    Navigator.of(context).push(MaterialPageRoute(
                             builder: ((context) => Selectkala(
                                   index,
-                                 controller
+                            
                                  
                                 )))));
                       },
