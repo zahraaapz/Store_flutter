@@ -2,7 +2,7 @@
 import 'dart:math';
 import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/model/Model.dart';
-import 'package:appstore/constant/color/color.dart';
+import 'package:appstore/constant/color.dart';
 import 'package:appstore/route_manager/route_name.dart';
 
 import 'package:flutter/cupertino.dart';

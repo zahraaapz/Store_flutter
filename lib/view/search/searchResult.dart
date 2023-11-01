@@ -1,6 +1,6 @@
 
 
-import 'package:appstore/constant/color/color.dart';
+import 'package:appstore/constant/color.dart';
 
 import 'package:flutter/cupertino.dart';
 
@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../constant/widget/widget.dart';
-import '../../constant/strings/string.dart';
+import '../../constant/string.dart';
 import '../../route_manager/route_name.dart';
 
 class SearchResult extends StatelessWidget {

@@ -1,6 +1,6 @@
  import 'package:flutter/material.dart';
 
-import 'color/color.dart';
+import 'color.dart';
 
 TextTheme textStyle=const TextTheme(
   labelSmall: TextStyle(

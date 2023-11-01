@@ -3,7 +3,7 @@
 import 'dart:io';
 import 'package:appstore/view/profile/personal_info.dart';
 import 'package:appstore/view/address/address.dart';
-import 'package:appstore/constant/color/color.dart';
+import 'package:appstore/constant/color.dart';
 import 'package:appstore/controller/pick_file.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

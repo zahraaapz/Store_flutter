@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:appstore/model/Model.dart';
-import 'package:appstore/constant/color/color.dart';
+import 'package:appstore/constant/color.dart';
 import 'package:d_chart/d_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

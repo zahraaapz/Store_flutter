@@ -1,6 +1,6 @@
 import 'package:appstore/getList/getlist.dart';
 import 'package:appstore/model/Model.dart';
-import 'package:appstore/constant/api/api.dart';
+import 'package:appstore/constant/api.dart';
 import 'package:get/get.dart';
 
 class HomeScreenController extends GetxController {

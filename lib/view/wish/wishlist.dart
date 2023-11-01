@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import '../../constant/storage.dart';
 import '../../constant/text_style.dart';
 import '../../constant/widget/widget.dart';
-import '../../constant/strings/string.dart';
+import '../../constant/string.dart';
 import '../../route_manager/route_name.dart';
 
 

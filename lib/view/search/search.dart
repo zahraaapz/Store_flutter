@@ -1,4 +1,4 @@
-import 'package:appstore/constant/color/color.dart';
+import 'package:appstore/constant/color.dart';
 import 'package:appstore/controller/homeScreenController.dart';
 
 import 'package:flutter/material.dart';
