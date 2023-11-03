@@ -1,6 +1,6 @@
 # appstore
 
-A new Flutter project.
+The best choice for your purchase,in our store.😉
 
 ## Getting Started
 ![Screenshot_20231103-154300](https://github.com/zahraaapz/Store_flutter/assets/109857263/5abddbc6-eceb-4964-b93a-a3098b491310)
