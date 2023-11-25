@@ -2,10 +2,12 @@ import 'package:appstore/view/firstScreen/mainScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../component/text_style.dart';
 import '../../constant/color.dart';
 import '../../constant/storage.dart';
-import '../../constant/text_style.dart';
-import '../../constant/widget/widget.dart';
+import '../../widget/ButtonWidgetRevesed.dart';
+import '../../widget/iconANDtitle.dart';
+
 
 
 class Notif extends StatelessWidget {

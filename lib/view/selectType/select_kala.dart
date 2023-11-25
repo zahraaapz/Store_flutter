@@ -7,8 +7,8 @@ import 'package:appstore/view/firstScreen/mainScreen.dart';
 import 'package:appstore/view/selectType/detail_kala.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../constant/text_style.dart';
-import '../../constant/widget/widget.dart';
+import '../../component/text_style.dart';
+import '../../widget/shimmerList.dart';
 
 class Selectkala extends StatefulWidget {
   int select;
@@ -536,11 +536,11 @@ class _SelectkalaState extends State<Selectkala> {
                                   image: Image.asset(list[index].ima!).image)),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Text(style: textStyle.bodyMedium, list[index].name!),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Row(

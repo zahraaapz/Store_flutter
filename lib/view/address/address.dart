@@ -2,13 +2,16 @@
 
 import 'package:appstore/constant/color.dart';
 import 'package:appstore/model/Model.dart';
+import 'package:appstore/widget/massageSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../component/text_style.dart';
 import '../../constant/storage.dart';
 import '../../constant/textEditController.dart';
-import '../../constant/text_style.dart';
-import '../../constant/widget/widget.dart';
 import '../../route_manager/route_name.dart';
+import '../../widget/ButtonWidget.dart';
+import '../../widget/iconANDtitle.dart';
+import '../../widget/myTextField.dart';
 
 class Address extends StatelessWidget {
   RxInt select = 0.obs;
@@ -166,7 +169,7 @@ class Address extends StatelessWidget {
         MyTextEditingController.pinCode.text.isNotEmpty) {
       Get.toNamed(RouteNames.payment);
     } else {
-      massage('Enter information', context);
+      massageSnackbar('Enter information', context);
     }
   }
 }

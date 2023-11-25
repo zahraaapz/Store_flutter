@@ -1,17 +1,19 @@
 import 'dart:async';
 
 import 'package:appstore/constant/color.dart';
-import 'package:appstore/constant/widget/widget.dart';
 import 'package:appstore/controller/homeScreenController.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
-import '../../constant/text_style.dart';
+import '../../component/text_style.dart';
 import '../../route_manager/route_name.dart';
+import '../../widget/ButtonWidget.dart';
 
 class Splash extends StatefulWidget {
+  const Splash({super.key});
+
   @override
   State<Splash> createState() => _SplashState();
 }
@@ -23,13 +25,13 @@ class _SplashState extends State<Splash> {
 
 
 
-  void CHECK() async {
+  void check() async {
 
-    var connectivityRESULT = await connectivity.checkConnectivity();
+    var connectivityResult = await connectivity.checkConnectivity();
     setState(() {
-      onLine = (connectivityRESULT == ConnectivityResult.mobile ||
-          connectivityRESULT == ConnectivityResult.wifi);
-      print(onLine.toString());
+      onLine = (connectivityResult == ConnectivityResult.mobile ||
+          connectivityResult == ConnectivityResult.wifi);
+   
     });
 
     onLine 
@@ -66,7 +68,7 @@ class _SplashState extends State<Splash> {
               iconData: Icons.refresh,
               onPressed: (){
                 Navigator.pop(context);
-                 CHECK();
+                 check();
                 Get.find<HomeScreenController>().getHomeItem();
               },
             )   ],
@@ -79,7 +81,7 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    CHECK();
+    check();
   }
 
   @override

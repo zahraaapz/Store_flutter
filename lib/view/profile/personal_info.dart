@@ -2,12 +2,15 @@
 
 import 'package:appstore/constant/color.dart';
 import 'package:appstore/route_manager/route_name.dart';
+import 'package:appstore/widget/massageSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../constant/storage.dart';
 import '../../constant/textEditController.dart';
-import '../../constant/widget/widget.dart';
+import '../../widget/ButtonWidget.dart';
+import '../../widget/iconANDtitle.dart';
+import '../../widget/myTextField.dart';
 
 class Personal extends StatelessWidget {
   RxInt select = 0.obs;
@@ -86,7 +89,7 @@ class Personal extends StatelessWidget {
         MyTextEditingController.number.text.isNotEmpty) {
       Get.offAllNamed(RouteNames.home);
     } else {
-      massage('Enter information', context);
+      massageSnackbar('Enter information', context);
     }
   }
 }

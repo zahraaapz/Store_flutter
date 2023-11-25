@@ -5,11 +5,15 @@ import 'package:appstore/model/Model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../component/text_style.dart';
 import '../../constant/storage.dart';
-import '../../constant/text_style.dart';
-import '../../constant/widget/widget.dart';
+
 import '../../constant/string.dart';
 import '../../route_manager/route_name.dart';
+import '../../widget/ButtonWidget.dart';
+import '../../widget/contentEmptyPages.dart';
+import '../../widget/iconANDtitle.dart';
+import '../../widget/titleEmtypage.dart';
 
 
 class Wish extends StatefulWidget {

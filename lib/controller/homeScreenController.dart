@@ -2,10 +2,11 @@
 
 
 
-import 'package:appstore/getList/getlist.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/constant/api.dart';
 import 'package:get/get.dart';
+
+import '../service/service.dart';
 
 class HomeScreenController extends GetxController {
   RxList<Product> suggestlist = RxList();

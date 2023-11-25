@@ -2,7 +2,7 @@
 
 import 'package:appstore/constant/color.dart';
 import 'package:appstore/model/Model.dart';
-import 'package:appstore/constant/widget/widget.dart';
+import 'package:appstore/widget/massageSnackbar.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,10 @@ import 'dart:convert' as convert;
 
 import 'package:http/http.dart' as http;
 
-import '../../constant/text_style.dart';
+import '../../component/text_style.dart';
+import '../../widget/ButtonWidget.dart';
+import '../../widget/iconANDtitle.dart';
+import '../../widget/myTextField.dart';
 import 'chart.dart';
 
 class Review extends StatefulWidget {
@@ -329,5 +332,5 @@ descripe() {
 
 _onPressed(context, controller) {
   controller.toggle();
-  massage('Saved :)', context);
+  massageSnackbar('Saved :)', context);
 }

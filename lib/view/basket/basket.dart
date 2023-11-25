@@ -6,14 +6,21 @@ import 'package:appstore/view/payment/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../constant/text_style.dart';
+import '../../component/text_style.dart';
 import '../../model/Model.dart';
-import '../../constant/widget/widget.dart';
+
 import '../../constant/string.dart';
 import '../../route_manager/route_name.dart';
+import '../../widget/ButtonWidget.dart';
+import '../../widget/contentEmptyPages.dart';
+import '../../widget/iconANDtitle.dart';
+import '../../widget/myTextField.dart';
+import '../../widget/titleEmtypage.dart';
 
 
 class Basket extends StatefulWidget {
+  const Basket({super.key});
+
   // ignore: use_key_in_widget_constructors
 
   @override

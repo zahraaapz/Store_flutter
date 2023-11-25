@@ -4,7 +4,7 @@ import 'package:appstore/controller/homeScreenController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../constant/text_style.dart';
+import '../../component/text_style.dart';
 import '../../model/Model.dart';
 
 import 'searchResult.dart';

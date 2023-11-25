@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:appstore/constant/widget/widget.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/constant/color.dart';
 import 'package:appstore/route_manager/route_name.dart';
@@ -9,9 +8,13 @@ import 'package:appstore/view/selectType/select_kala.dart';
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../constant/text_style.dart';
-import '../../constant/widget/expandable.dart';
+import '../../component/text_style.dart';
+
 import '../../controller/homeScreenController.dart';
+import '../../widget/ButtonWidget.dart';
+import '../../widget/expandableWidget.dart';
+import '../../widget/profileBox.dart';
+import '../../widget/shimmerList.dart';
 import '../wish/wishlist.dart';
 
 class Extractmainscreen extends StatefulWidget {

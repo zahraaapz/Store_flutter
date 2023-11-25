@@ -4,8 +4,8 @@ import 'package:appstore/constant/color.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../constant/text_style.dart';
 import '../../model/Model.dart';
+import '../component/text_style.dart';
 
 class Expandablee extends StatelessWidget {
    Expandablee({super.key});
