@@ -1,3 +1,7 @@
+
+
+
+
 import 'package:appstore/getList/getlist.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/constant/api.dart';
@@ -13,11 +17,14 @@ class HomeScreenController extends GetxController {
   RxList<Product> skincare = RxList();
   RxList<Product> searchKala = RxList();
   RxBool waiting=false.obs;
+ 
+
 
   @override
   void onInit() {
     
     super.onInit();
+    
     getHomeItem();
     getShoesItem();
     getHandBagItem();
@@ -25,8 +32,8 @@ class HomeScreenController extends GetxController {
     getSkincareItem();
     getWatcheItem();
     getEyewearItem();
+    
   }
-
 
 
   getHomeItem() async {

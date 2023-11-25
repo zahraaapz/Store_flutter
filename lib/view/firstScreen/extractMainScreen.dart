@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:appstore/constant/widget/widget.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/constant/color.dart';
@@ -12,7 +14,6 @@ import '../../constant/widget/expandable.dart';
 import '../../controller/homeScreenController.dart';
 import '../wish/wishlist.dart';
 
-
 class Extractmainscreen extends StatefulWidget {
   Extractmainscreen({super.key});
 
@@ -21,24 +22,26 @@ class Extractmainscreen extends StatefulWidget {
 }
 
 class _ExtractmainscreenState extends State<Extractmainscreen> {
-
-
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   RxInt select = 0.obs;
-  var controller=Get.find<HomeScreenController>();
-
-
+  var controller = Get.find<HomeScreenController>();
+  Timer? timer;
   @override
   void initState() {
-    controller.getHomeItem();
-    controller.getEyewearItem();
-    controller.getHandBagItem();
-    controller.getShoesItem();
-    controller.getSkincareItem();
-    controller.getWatcheItem();
-    controller.getjewellery();
- 
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (timer.tick == 5) {
+        timer.cancel();
+      }
+      controller.onInit();
+    });
+
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    timer!.cancel();
   }
 
   @override
@@ -73,7 +76,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                   ),
                 ),
                 ////type list
-               typeList(size),
+                typeList(size),
 
                 Padding(
                   padding: const EdgeInsets.only(left: 10, right: 10),
@@ -85,18 +88,18 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                         Text('New Arrivals', style: textStyle.headlineMedium),
                         SizedBox(
                             child: Row(
-                              children: [
-                                Text(
-                                  'View all',
-                                  style: textStyle.bodyMedium,
-                                ),
-                                const Icon(
-                                  Icons.arrow_forward_ios_rounded,
-                                  color: Rang.blue,
-                                  size: 15,
-                                )
-                              ],
-                            ))
+                          children: [
+                            Text(
+                              'View all',
+                              style: textStyle.bodyMedium,
+                            ),
+                            const Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: Rang.blue,
+                              size: 15,
+                            )
+                          ],
+                        ))
                       ],
                     ),
                   ),
@@ -108,6 +111,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                 Obx(() => controller.suggestlist.isNotEmpty
                     ? suggList(size)
                     : ShimmerSuggestList(size: size)),
+
                 Container(
                   ///collection container
                   color: Rang.blue,
@@ -225,6 +229,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
           ])),
     );
   }
+
 //APP BAR
   Row appBar(Size size, BuildContext context) {
     return Row(
@@ -270,6 +275,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
       ],
     );
   }
+
 //DRAWER
   Drawer drawer(size) {
     return Drawer(
@@ -277,17 +283,16 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          
-                      
-            profileBox(width: size.width / 1.1,
-            height: size.height / 6,),
-         
+          profileBox(
+            width: size.width / 1.1,
+            height: size.height / 6,
+          ),
           const SizedBox(
             height: 10,
           ),
           Text('Top Categories', style: textStyle.bodyMedium),
           SizedBox(
-            height: size.height /3.3,
+            height: size.height / 3.3,
             child: ListView.builder(
                 physics: const ClampingScrollPhysics(),
                 itemCount: Model.modelList.length,
@@ -298,13 +303,9 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                       child: Text(Model.modelList[index].title,
                           style: textStyle.bodyLarge),
                       onTap: () {
-                  
-
-                                Get.to(Selectkala(
-                                  index,
-                                
-                                 
-                                ));
+                        Get.to(Selectkala(
+                          index,
+                        ));
                       },
                     ),
                   );
@@ -324,13 +325,14 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
           InkWell(
             child: Text('Wishlist', style: textStyle.bodyMedium),
             onTap: () {
-             Get.to(const Wish());
+              Get.to(const Wish());
             },
           ),
         ]),
       ),
     );
   }
+
 //LIST INLUDE TYPE PRODUCT
   SizedBox typeList(Size size) {
     //seslect clothes or...
@@ -352,13 +354,12 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                     InkWell(
                       onTap: () {
                         select.value = index;
-   Future.delayed(const Duration(milliseconds:700)).then((value) =>
-                   Navigator.of(context).push(MaterialPageRoute(
-                            builder: ((context) => Selectkala(
-                                  index,
-                            
-                                 
-                                )))));
+                        Future.delayed(const Duration(milliseconds: 700)).then(
+                            (value) =>
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: ((context) => Selectkala(
+                                          index,
+                                        )))));
                       },
                       child: Container(
                         //list container
@@ -385,298 +386,272 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
           })),
     );
   }
-//SUGGEST LIST 
-  SizedBox suggList(Size size,) {
+
+  Future<void> ony() async {
+    setState(() {
+      controller.suggestlist.addAll(controller.suggestlist);
+    });
+    print(controller.suggestlist.length);
+  }
+
+//SUGGEST LIST
+  suggList(Size size) {
     //suggestion List
- return SizedBox(
-        height: size.height / 4.3,
-        width: double.infinity,
-        child: ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            itemCount: controller.suggestlist.length,
-            itemBuilder: (context, index) {
-              return InkWell(
-                onTap: () {
-                  bottomSheetForSuggestList(context, size, index);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10.0, top: 8, right: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: size.height / 9,
-                        width: size.width / 3.5,
-                        ////container suggestlist
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(13),
-                            image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: Image.asset(
-                                  controller.suggestlist[index].ima!,
-                                ).image)),
+    return SizedBox(
+      height: size.height / 4.3,
+      width: double.infinity,
+      child: ListView.builder(
+          physics: const BouncingScrollPhysics(),
+          scrollDirection: Axis.horizontal,
+          itemCount: controller.suggestlist.length,
+          itemBuilder: (context, index) {
+            return InkWell(
+              onTap: () {
+                bottomSheetForSuggestList(context, size, index);
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10.0, top: 8, right: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: size.height / 9,
+                      width: size.width / 3.5,
+                      ////container suggestlist
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(13),
+                          image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: Image.asset(
+                                controller.suggestlist[index].ima!,
+                              ).image)),
+                    ),
+                    SizedBox(
+                      width: size.width / 3.5,
+                      height: size.height / 19,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(controller.suggestlist[index].name!,
+                              style: textStyle.bodyMedium),
+                        ],
                       ),
-                      SizedBox(
-                        width: size.width / 3.5,
-                        height: size.height / 19,
+                    ),
+                    Text(controller.suggestlist[index].brand!,
+                        style: textStyle.bodyMedium),
+                    const SizedBox(
+                      height: 6,
+                    ),
+                    Text("${controller.suggestlist[index].price}\$",
+                        style: textStyle.bodyMedium),
+                  ],
+                ),
+              ),
+            );
+          }),
+    );
+  }
+
+  Future<dynamic> bottomSheetForSuggestList(
+      BuildContext context, Size size, int index) {
+    return showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.transparent,
+        builder: ((context) {
+          return StatefulBuilder(
+            builder: (context, setState) {
+              return Container(
+                ////bottomsheet container
+                height: size.height / 2.2,
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(45),
+                        topRight: Radius.circular(45))),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(controller.suggestlist[index].name!,
-                                style: textStyle.bodyMedium),
-                          
+                            Container(
+                              width: size.width / 3,
+                              height: size.height / 8,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  image: DecorationImage(
+                                      fit: BoxFit.fill,
+                                      image: Image.asset(
+                                        controller.suggestlist[index].ima!,
+                                      ).image)),
+                            ),
+                            const SizedBox(
+                              width: 15,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(controller.suggestlist[index].brand!,
+                                    style: textStyle.bodyMedium),
+                                const SizedBox(
+                                  height: 12,
+                                ),
+                                Text(
+                                  controller.suggestlist[index].name!,
+                                  style: textStyle.bodyMedium,
+                                ),
+                                const SizedBox(
+                                  height: 12,
+                                ),
+                                Text('${controller.suggestlist[index].price}\$',
+                                    style: textStyle.bodyMedium),
+                              ],
+                            )
                           ],
                         ),
                       ),
-                      Text(controller.suggestlist[index].brand!,
-                          style: textStyle.bodyMedium),
-                      const SizedBox(
-                        height: 6,
-                      ),
-                      Text("${controller.suggestlist[index].price}\$",
-                          style: textStyle.bodyMedium),
-                    ],
-                  ),
-                ),
-              );
-            }));
-  }
-
-  Future<dynamic> bottomSheetForSuggestList(BuildContext context, Size size, int index) {
-    return showModalBottomSheet(
-                    context: context,
-                    backgroundColor: Colors.transparent,
-                    builder: ((context) {
-                      return StatefulBuilder(
-                        builder: (context, setState) {
-                          return Container(
-                            ////bottomsheet container
-                            height: size.height / 2.2,
-                            decoration: const BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(45),
-                                    topRight: Radius.circular(45))),
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Column(
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: size.width / 8,
+                              height: size.height / 22,
+                              decoration: BoxDecoration(
+                                  color: Rang.toosi,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: size.width / 3,
-                                          height: size.height / 8,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              image: DecorationImage(
-                                                  fit: BoxFit.fill,
-                                                  image: Image.asset(
-                                                    controller
-                                                        .suggestlist[index]
-                                                        .ima!,
-                                                  ).image)),
-                                        ),
-                                        const SizedBox(
-                                          width: 15,
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                                controller
-                                                    .suggestlist[index]
-                                                    .brand!,
-                                                style: textStyle.bodyMedium),
-                                            const SizedBox(
-                                              height: 12,
-                                            ),
-                                            Text(
-                                              controller
-                                                  .suggestlist[index].name!,
-                                              style: textStyle.bodyMedium,
-                                            ),
-                                            const SizedBox(
-                                              height: 12,
-                                            ),
-                                            Text(
-                                                '${controller.suggestlist[index].price}\$',
-                                                style: textStyle.bodyMedium),
-                                          ],
-                                        )
-                                      ],
-                                    ),
+                                  Text(
+                                    '4.5',
+                                    style: textStyle.bodyMedium,
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: size.width / 8,
-                                          height: size.height / 22,
-                                          decoration: BoxDecoration(
-                                              color: Rang.toosi,
-                                              borderRadius:
-                                                  BorderRadius.circular(10)),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              Text(
-                                                '4.5',
-                                                style: textStyle.bodyMedium,
-                                              ),
-                                              const Icon(
-                                                CupertinoIcons.star_fill,
-                                                color: Rang.orange,
-                                                size: 17,
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Average Rating',
-                                              style: textStyle.bodyMedium,
-                                            ),
-                                            const SizedBox(
-                                              height: 8,
-                                            ),
-                                            Text(
-                                              '43 Ratings & 23 Reviews',
-                                              style: textStyle.bodyMedium,
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  //////filter
-                                  controller
-                                              .suggestlist[index].filter ==
-                                          'shoes'
-                                      ? Column(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    'Select Size',
-                                                    style:
-                                                        textStyle.bodyMedium,
-                                                  ),
-                                                  Text(
-                                                    ' (Uk Size)',
-                                                    style:
-                                                        textStyle.bodyMedium,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            ////size pa
-                                            SizedBox(
-                                              height: 55,
-                                              child: ListView.builder(
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  itemCount: sizepa.length,
-                                                  itemBuilder:
-                                                      ((context, index) {
-                                                    return Padding(
-                                                      padding:
-                                                          const EdgeInsets
-                                                              .all(2.0),
-                                                      child: InkWell(
-                                                        onTap: () {
-                                                          select.value =
-                                                              index;
-                                                        },
-                                                        child: Obx(
-                                                          () =>
-                                                              AnimatedContainer(
-                                                            height: 80,
-                                                            width: 50,
-                                                            decoration: BoxDecoration(
-                                                                border: Border.all(
-                                                                    color: Rang
-                                                                        .blue),
-                                                                color: select
-                                                                            .value ==
-                                                                        index
-                                                                    ? const Color
-                                                                            .fromARGB(
-                                                                        82,
-                                                                        61,
-                                                                        123,
-                                                                        159)
-                                                                    : Colors
-                                                                        .white,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            45)),
-                                                            duration:
-                                                                const Duration(
-                                                                    milliseconds:
-                                                                        200),
-                                                            child: Center(
-                                                              child: Text(
-                                                                  sizepa[index]
-                                                                      .toString(),
-                                                                  style: textStyle
-                                                                      .bodyMedium),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    );
-                                                  })),
-                                            ),
-                                          ],
-                                        )
-                                      : const SizedBox(
-                                          height: 30,
-                                        ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: Row(
-                                      children: [
-                                        const Icon(
-                                          Icons.qr_code_scanner,
-                                          color: Rang.blue,
-                                          size: 40,
-                                        ),
-                                        const SizedBox(
-                                          width: 20,
-                                        ),
-                                        ButtonWidget(
-                                          iconData:
-                                              Icons.shopping_bag_outlined,
-                                          title: 'Add to Bags',
-                                          onPressed: () => _onPressed(index),
-                                        ),
-                                      ],
-                                    ),
+                                  const Icon(
+                                    CupertinoIcons.star_fill,
+                                    color: Rang.orange,
+                                    size: 17,
                                   )
                                 ],
                               ),
                             ),
-                          ); ////bottomsheet container
-                        },
-                      );
-                    }));
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Average Rating',
+                                  style: textStyle.bodyMedium,
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  '43 Ratings & 23 Reviews',
+                                  style: textStyle.bodyMedium,
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                      //////filter
+                      controller.suggestlist[index].filter == 'shoes'
+                          ? Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Select Size',
+                                        style: textStyle.bodyMedium,
+                                      ),
+                                      Text(
+                                        ' (Uk Size)',
+                                        style: textStyle.bodyMedium,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                ////size pa
+                                SizedBox(
+                                  height: 55,
+                                  child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: sizepa.length,
+                                      itemBuilder: ((context, index) {
+                                        return Padding(
+                                          padding: const EdgeInsets.all(2.0),
+                                          child: InkWell(
+                                            onTap: () {
+                                              select.value = index;
+                                            },
+                                            child: Obx(
+                                              () => AnimatedContainer(
+                                                height: 80,
+                                                width: 50,
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Rang.blue),
+                                                    color: select.value == index
+                                                        ? const Color.fromARGB(
+                                                            82, 61, 123, 159)
+                                                        : Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            45)),
+                                                duration: const Duration(
+                                                    milliseconds: 200),
+                                                child: Center(
+                                                  child: Text(
+                                                      sizepa[index].toString(),
+                                                      style:
+                                                          textStyle.bodyMedium),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      })),
+                                ),
+                              ],
+                            )
+                          : const SizedBox(
+                              height: 30,
+                            ),
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.qr_code_scanner,
+                              color: Rang.blue,
+                              size: 40,
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            ButtonWidget(
+                              iconData: Icons.shopping_bag_outlined,
+                              title: 'Add to Bags',
+                              onPressed: () => _onPressed(index),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ); ////bottomsheet container
+            },
+          );
+        }));
   }
 
   _onPressed(int index) {
@@ -685,9 +660,6 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
     }
   }
 }
-
-
-
 
 //* A BLUE BOX FOR INSTALL APP
 class Shortcut extends StatelessWidget {
@@ -762,9 +734,6 @@ class Shortcut extends StatelessWidget {
   }
 }
 
-
-
-
 //*KIND OF BRANDS
 class Brand extends StatelessWidget {
   const Brand({Key? key, this.size}) : super(key: key);
@@ -793,7 +762,7 @@ class Brand extends StatelessWidget {
   }
 }
 
-//COLLECTION INCLUDE 4 PHOTOS IN BLUE CONTAINER 
+//COLLECTION INCLUDE 4 PHOTOS IN BLUE CONTAINER
 class CollectionList extends StatelessWidget {
   const CollectionList({Key? key, this.size}) : super(key: key);
   final size;
@@ -824,7 +793,6 @@ class CollectionList extends StatelessWidget {
         });
   }
 }
-
 
 //2 PHOTOS IN HEAD OF PAGE
 class Bannner extends StatelessWidget {

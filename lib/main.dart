@@ -1,5 +1,4 @@
 
-
 import 'package:appstore/route_manager/binding.dart';
 import 'package:appstore/route_manager/route.dart';
 import 'package:appstore/route_manager/route_name.dart';
@@ -7,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+
+
 
 
 void main() async{
@@ -19,6 +20,7 @@ void main() async{
   runApp(const AppStore());
 }
 
+
 class AppStore extends StatelessWidget {
   const AppStore({super.key});
 
@@ -29,7 +31,7 @@ class AppStore extends StatelessWidget {
        getPages: RoutePage.routePage,
        initialRoute:RouteNames.root ,
        initialBinding: HomeScreenBinding(),
- 
+
        
        );
   }
