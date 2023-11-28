@@ -1,4 +1,3 @@
-
 import 'package:appstore/route_manager/route_name.dart';
 import 'package:appstore/widget/ButtonWidget.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +16,7 @@ class SignupScreen extends StatelessWidget {
         children: [
           Container(
             height: Get.height / 1.22,
+            color: Colors.white,
             foregroundDecoration: const BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.bottomCenter,
@@ -24,7 +24,7 @@ class SignupScreen extends StatelessWidget {
                     colors: [
                   Color.fromARGB(230, 244, 244, 244),
                   Colors.transparent,
-                  Color.fromARGB(230, 244, 244, 244),
+                  Color.fromARGB(230, 255, 255, 255),
                 ])),
             child: Column(
               children: [

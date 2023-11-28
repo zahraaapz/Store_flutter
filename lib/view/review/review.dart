@@ -9,11 +9,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-
-import 'dart:convert' as convert;
-
-import 'package:http/http.dart' as http;
-
 import '../../component/text_style.dart';
 import '../../widget/ButtonWidget.dart';
 import '../../widget/iconANDtitle.dart';
@@ -27,16 +22,20 @@ class Review extends StatefulWidget {
 
 class _ReviewState extends State<Review> {
   List<Comment> comment = [];
-  Future getcomment() async {
-await
-  DioService().getList('http://api.npoint.io/9139bbcee841b54f273f').then((value) {
-    if (comment.isEmpty) {
-          value.data.forEach((e){
-      comment.add(e);
-    });
-    }
+ getcomment() async {
 
-  });
+ var response = await DioService().getList('https://api.npoint.io/9139bbcee841b54f273f');
+if (comment.isEmpty) {
+
+    response.data.forEach((element) {
+      setState(() {
+              comment.add(Comment.fromJson(element));
+
+      });
+    });
+
+    
+}
 
 }
 

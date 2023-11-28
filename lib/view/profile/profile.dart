@@ -1,12 +1,14 @@
 
 
 
+import 'package:appstore/route_manager/route_name.dart';
 import 'package:appstore/view/profile/personal_info.dart';
 import 'package:appstore/view/address/address.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../component/text_style.dart';
+import '../../constant/storage.dart';
 import '../../widget/ButtonWidgetRevesed.dart';
 import '../../widget/profileBox.dart';
 import '../../widget/profileProperty.dart';
@@ -40,11 +42,18 @@ class Profile extends StatelessWidget {
           profileProperty('My Saved Cards', () {}),
           profileProperty('My Order', () {}),
           profileProperty('Refer and Earn', () {}),
-          const Padding(
+           Padding(
             padding: EdgeInsets.all(8.0),
             child: SizedBox(
               width: double.infinity,
               child: ButtonWidgetRevesed(
+                onPressed: (){
+
+                    MyStorage.box.erase();       
+                    Get.offNamed(RouteNames.root);
+
+
+                },
                 title: 'Log Out',
                 iconData: Icons.exit_to_app,
               ),

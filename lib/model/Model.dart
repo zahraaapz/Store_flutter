@@ -107,10 +107,10 @@ class Comment {
       
 Comment.fromJson(Map<String,dynamic>element){
 name=element['name'];
-name=element['score'];
-name=element['date'];
-name=element['time'];
-name=element['review'];
+score=element['score'];
+date=element['date'];
+time=element['time'];
+review=element['review'];
 
 }
 

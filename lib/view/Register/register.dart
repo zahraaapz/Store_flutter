@@ -77,6 +77,8 @@ class RegisterScreen extends StatelessWidget {
                   size: Get.size,
                   width: Get.width / 1.02,
                   hintText: 'PASSWORD',
+                ),  SizedBox(
+                  height: 20,
                 ),
                 myTextField(
                   controller: MyTextEditingController.fullName,

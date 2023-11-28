@@ -49,10 +49,15 @@ Container profileBox({width,height}) {
                         MyStorage.box.read(StorageNames.fullName) ??'--',
                         style: textStyle.bodySmall,
                       ),
+                        SizedBox(
+                  height: 10,
+                ),
                       Text(
                         MyStorage.box.read(StorageNames.number) ?? '--',
                         style: textStyle.bodySmall,
-                      ),
+                      ),  SizedBox(
+                  height: 10,
+                ),
                       Text(
                         MyStorage.box.read(StorageNames.email) ?? '--',
                         style: textStyle.bodySmall,
