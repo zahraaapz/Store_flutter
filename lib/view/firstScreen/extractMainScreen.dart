@@ -390,12 +390,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
     );
   }
 
-  Future<void> ony() async {
-    setState(() {
-      controller.suggestlist.addAll(controller.suggestlist);
-    });
-    print(controller.suggestlist.length);
-  }
+
 
 //SUGGEST LIST
   suggList(Size size) {

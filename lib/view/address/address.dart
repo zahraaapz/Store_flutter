@@ -52,15 +52,17 @@ class Address extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   myTextField(
+                      textInputType: TextInputType.number,
                       size: size,
                       controller: MyTextEditingController.preNum,
                       width: size.width / 7.5,
                       hintText: '49'),
                   myTextField(
                       size: size,
+                      textInputType: TextInputType.number,
                       width: size.width / 1.25,
                       controller: MyTextEditingController.number,
-                      hintText: 'Concate Number'),
+                      hintText: 'Concat Number'),
                 ],
               ),
               const SizedBox(

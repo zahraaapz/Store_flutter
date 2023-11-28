@@ -2,6 +2,8 @@
 
 import 'package:appstore/route_manager/binding.dart';
 import 'package:appstore/route_manager/route_name.dart';
+import 'package:appstore/view/Register/register.dart';
+import 'package:appstore/view/Register/signup.dart';
 import 'package:appstore/view/address/address.dart';
 import 'package:appstore/view/firstScreen/mainScreen.dart';
 import 'package:appstore/view/notifition/notif.dart';
@@ -17,7 +19,9 @@ abstract class RoutePage{
 
  static List<GetPage<dynamic>>routePage=[
   GetPage(name: RouteNames.home, page: ()=>Home(),binding:HomeScreenBinding()),
+  GetPage(name: RouteNames.register, page: ()=>const RegisterScreen()),
   GetPage(name: RouteNames.address, page: ()=>Address()),
+  GetPage(name: RouteNames.signup, page: ()=>const SignupScreen()),
   GetPage(name: RouteNames.search, page: ()=>Search(),binding:HomeScreenBinding()),
   GetPage(name: RouteNames.searchResult, page: ()=>const SearchResult()),
   GetPage(name: RouteNames.notifition, page: ()=>const Notif()),

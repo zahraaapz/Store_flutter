@@ -52,6 +52,22 @@ List<Model> brands = [
   Model(ima: 'assets/image/brand/b5.png', title: ''),
   Model(ima: 'assets/image/brand/b6.png', title: ''),
 ];
+
+List<Model> signup = [
+  Model(ima: 'assets/image/s1.png', title: ''),
+  Model(ima: 'assets/image/s2.png', title: ''),
+  Model(ima: 'assets/image/s3.png', title: ''),
+  Model(ima: 'assets/image/s4.png', title: ''),
+  Model(ima: 'assets/image/s5.png', title: ''),
+  Model(ima: 'assets/image/s6.png', title: ''),
+  Model(ima: 'assets/image/s7.png', title: ''),
+  Model(ima: 'assets/image/s8.png', title: ''),
+  Model(ima: 'assets/image/s9.png', title: ''),
+  Model(ima: 'assets/image/s10.png', title: ''),
+];
+
+
+
 List<int> sizepa = [7, 8, 9, 10];
 
 List<IconData> ikon = [
@@ -78,8 +94,9 @@ class OrderDetail{
   
 }
 class Comment {
-  String name, date, time, review;
-  int score;
+ late String
+   name, date, time, review;
+ late int score;
 
   Comment(
       {required this.name,
@@ -87,6 +104,16 @@ class Comment {
       required this.date,
       required this.time,
       required this.review});
+      
+Comment.fromJson(Map<String,dynamic>element){
+name=element['name'];
+name=element['score'];
+name=element['date'];
+name=element['time'];
+name=element['review'];
+
+}
+
 }
 
 List expandableCat=['Personal Care','Skincare','Handbags','Apparels','Watches','Eye Wear','Jewellery'];

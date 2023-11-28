@@ -2,6 +2,7 @@
 
 import 'package:appstore/constant/color.dart';
 import 'package:appstore/model/Model.dart';
+import 'package:appstore/service/service.dart';
 import 'package:appstore/widget/massageSnackbar.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,24 +28,17 @@ class Review extends StatefulWidget {
 class _ReviewState extends State<Review> {
   List<Comment> comment = [];
   Future getcomment() async {
-    var url = 'http://api.npoint.io/9139bbcee841b54f273f';
-    var value = await http.get(Uri.parse(url));
-
-    List json = convert.jsonDecode(value.body);
+await
+  DioService().getList('http://api.npoint.io/9139bbcee841b54f273f').then((value) {
     if (comment.isEmpty) {
-      for (int i = 0; i < json.length; i++) {
-        setState(() {
-          comment.add(Comment(
-              date: json[i]['date'],
-              name: json[i]['name'],
-              time: json[i]['time'],
-              score: json[i]['score'],
-              review: json[i]['review']));
-        });
-      }
-      return value;
+          value.data.forEach((e){
+      comment.add(e);
+    });
     }
-  }
+
+  });
+
+}
 
   @override
   void initState() {

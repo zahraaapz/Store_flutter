@@ -5,6 +5,13 @@ import '../constant/color.dart';
 
 
 TextTheme textStyle=const TextTheme(
+  displayLarge: TextStyle(
+       fontFamily: 'Auliare',
+       fontSize: 30,
+       color: Rang.blue, 
+       fontWeight: FontWeight.bold
+       
+ ),
   labelSmall: TextStyle(
        fontFamily: 'Auliare',
        fontSize: 12,

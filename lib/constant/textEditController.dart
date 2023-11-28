@@ -9,4 +9,6 @@ abstract  class MyTextEditingController {
   static  TextEditingController street = TextEditingController();
   static  TextEditingController city = TextEditingController();
   static  TextEditingController email = TextEditingController();
+  static  TextEditingController password = TextEditingController();
+  static  TextEditingController userName = TextEditingController();
 }

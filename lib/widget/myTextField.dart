@@ -6,7 +6,8 @@ Container myTextField(
     {Size? size,
     double? width,
     String? hintText,
-    var controller,
+    TextEditingController? controller,
+    TextInputType? textInputType,
     Color color = Rang.toosi}) {
   return Container(
     //  padding: EdgeInsets.fromLTRB(left, top, right, bottom),
@@ -15,6 +16,8 @@ Container myTextField(
     decoration:
         BoxDecoration(borderRadius: BorderRadius.circular(15), color: color),
     child: TextField(
+
+keyboardType: textInputType ,   
       controller: controller,
         decoration: InputDecoration(
           hintText: hintText,

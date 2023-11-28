@@ -13,13 +13,15 @@ abstract class MyStorage{
 abstract class StorageNames{
 
 
- static String fullName='';
- static String pin='';
- static String number='';
- static String preNum='';
- static String street='';
- static String city='';
- static String email='';
+ static String fullName='fullName';
+ static String pin='pin';
+ static String number='number';
+ static String preNum='preNum';
+ static String street='Street';
+ static String city='city';
+ static String email='emaiL';
+ static String userName='userName';
+ static String password='password';
 
 
 
