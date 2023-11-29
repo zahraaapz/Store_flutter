@@ -1,10 +1,12 @@
-  import 'package:flutter/material.dart';
+  import 'package:appstore/component/extention.dart';
+import 'package:appstore/route_manager/route_name.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../component/dim.dart';
 import '../../component/text_style.dart';
 import '../../model/Model.dart';
 import '../../view/selectType/select_kala.dart';
-import '../../view/wish/wishlist.dart';
 import '../profileBox.dart';
 
 Drawer drawer(size) {
@@ -17,9 +19,8 @@ Drawer drawer(size) {
             width: size.width / 1.1,
             height: size.height / 6,
           ),
-          const SizedBox(
-            height: 10,
-          ),
+         
+           (Dim.large/2).height,
           Text('Top Categories', style: textStyle.bodyMedium),
           SizedBox(
             height: size.height / 3.3,
@@ -42,20 +43,18 @@ Drawer drawer(size) {
                 })),
           ),
           Text('Contact us', style: textStyle.bodyMedium),
-          const SizedBox(
-            height: 12,
-          ),
+        
+          (Dim.medium).height,
           InkWell(
             child: Text('Help & Support', style: textStyle.bodyMedium),
             onTap: () {},
           ),
-          const SizedBox(
-            height: 12,
-          ),
+        
+          (Dim.medium).height,
           InkWell(
             child: Text('Wishlist', style: textStyle.bodyMedium),
             onTap: () {
-              Get.to(const Wish());
+              Get.toNamed(RouteNames.wish);
             },
           ),
         ]),

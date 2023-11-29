@@ -1,7 +1,9 @@
-import 'package:appstore/view/firstScreen/mainScreen.dart';
+import 'package:appstore/component/extention.dart';
+import 'package:appstore/route_manager/route_name.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../component/dim.dart';
 import '../../component/text_style.dart';
 import '../../constant/color.dart';
 import '../../constant/storage.dart';
@@ -35,30 +37,21 @@ class Notif extends StatelessWidget {
                   )
                 ],
               ),
-              const SizedBox(
-                height: 10,
-              ),
+            
+               (Dim.large/2).height,
               Image.asset('assets/image/notf.png'),
-              const SizedBox(
-                height: 20,
-              ),
+              (Dim.large).height,
                Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    width: 36,
-                  ),
+                  (Dim.large*2).width,
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('Upto 50% OFF⚡⚡',style: textStyle.bodyMedium),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                       (Dim.large).height,
                        Text('This winter gift your loved ones.',style: textStyle.bodyMedium),
-                                const SizedBox(
-                                height: 20,
-                              ),
+                               (Dim.large).height,
                               ButtonWidgetRevesed(
                                 title:  'Shop now',
                                 onPressed: _onPressed,
@@ -67,9 +60,7 @@ class Notif extends StatelessWidget {
                 ],
               ),
 
-              const SizedBox(
-                height: 20,
-              ),
+              (Dim.large).height,
               Card(
                 shadowColor: Colors.black,
                 elevation: 1,
@@ -79,19 +70,15 @@ class Notif extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                        const SizedBox(
-                        height: 10,
-                      ),
+                       (Dim.large/2).height,
                       Image.asset('assets/image/icon.png'),
                       Text('Share your feedback',style: textStyle.bodyMedium),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                     (Dim.large).height,
                       Text(style: textStyle.bodyMedium,
                         '''Hey, ${MyStorage.box.read(StorageNames.fullName)?? '--'}. Thanks for using CORAL. You know what? You can help us improve with just one click''',
                         textScaleFactor: 1.1,
                       )
-                  ,const SizedBox(height: 10,)  ],
+                  , (Dim.large).height  ],
                   ),
                 ),
               )
@@ -101,5 +88,5 @@ class Notif extends StatelessWidget {
       ),
     );
   }
-   _onPressed () {Get.to(Home());}}
+   _onPressed () {Get.toNamed(RouteNames.home);}}
 

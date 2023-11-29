@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:appstore/component/extention.dart';
 import 'package:appstore/constant/color.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/service/service.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import '../../component/dim.dart';
 import '../../component/text_style.dart';
 import '../../widget/ButtonWidget.dart';
 import '../../widget/iconANDtitle.dart';
@@ -57,9 +59,7 @@ if (comment.isEmpty) {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(
-                        height: 15,
-                      ),
+                     (Dim.medium+3).height,
                       Padding(
                         padding: const EdgeInsets.all(3.0),
                         child: Row(
@@ -77,9 +77,7 @@ if (comment.isEmpty) {
                                 size: 20,
                               ),
                             ])),
-                            const SizedBox(
-                              width: 12,
-                            ),
+                            (Dim.medium).width,
                             Text(
                               'Avrage Rating',
                               style: textStyle.bodyMedium,
@@ -139,9 +137,7 @@ collapseComment(context, List<Comment> comment) {
                     ),
                   ],
                 )),
-            const SizedBox(
-              width: 6,
-            ),
+           (Dim.small-2).width,
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Column(
@@ -164,9 +160,7 @@ collapseComment(context, List<Comment> comment) {
           comment[1].review,
           style: textStyle.bodyMedium,
         ),
-        const SizedBox(
-          height: 5,
-        ),
+        (Dim.large/4).height,
         Builder(
           builder: (context) {
             var controller = ExpandableController.of(context, required: true)!;
@@ -226,9 +220,7 @@ expandedComment(context, List<Comment> comment) {
                                   ),
                                 ],
                               )),
-                          const SizedBox(
-                            width: 6,
-                          ),
+                          (Dim.medium-2).width,
                           Padding(
                             padding: const EdgeInsets.all(5.0),
                             child: Column(
@@ -299,9 +291,8 @@ descripe() {
         'Review Description',
         style: textStyle.bodyMedium,
       ),
-      SizedBox(
-        height: 20,
-      ),
+    
+       (Dim.large).height,
       Container(
           height: Get.height / 4,
           padding: const EdgeInsets.all(4),
@@ -309,9 +300,7 @@ descripe() {
               hintText: 'Enter Description',
               size: Get.size,
               width: double.infinity)),
-      const SizedBox(
-        height: 80,
-      ),
+       (Dim.large*4).height,
       SizedBox(
         width: double.infinity,
         child: ButtonWidget(

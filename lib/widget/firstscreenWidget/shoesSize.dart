@@ -39,8 +39,8 @@ Column shoesSize(select) {
                                           },
                                           child: Obx(
                                             () => AnimatedContainer(
-                                              height: 80,
-                                              width: 50,
+                                              width: Get.width/8,
+                                                      height: Get.height/12,
                                               decoration: BoxDecoration(
                                                   border: Border.all(
                                                       color: Rang.blue),

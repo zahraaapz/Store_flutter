@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
-import 'package:appstore/view/address/address.dart';
+import 'package:appstore/component/extention.dart';
+import 'package:appstore/route_manager/route_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import '../../component/dim.dart';
 import '../../component/text_style.dart';
 import '../../constant/color.dart';
 import '../../constant/storage.dart';
@@ -27,13 +29,9 @@ class Payments extends StatelessWidget {
                             color: Colors.white,
                             child:
                                 iconANDtitle('Payment', Icons.arrow_back_ios)),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                       (Dim.large).height,
                         Text('Delivering to', style: textStyle.bodyMedium),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                       (Dim.large).height,
                         Container(
                           width: double.infinity,
                           height: 80,
@@ -47,9 +45,8 @@ class Payments extends StatelessWidget {
                                 MyStorage.box.read(StorageNames.street),
                                     style: textStyle.bodyMedium,
                                   ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
+                                 
+                                   (Dim.large/2).width,
                                   Text(
                               MyStorage.box.read(StorageNames.city),
                                     style: textStyle.bodyMedium,
@@ -59,11 +56,11 @@ class Payments extends StatelessWidget {
                               InkWell(
                                 onTap: () {
                                   //To do:edit
-                                  Get.offAll(Address());
+                                  Get.off(RouteNames.address);
                                 },
                                 child: Container(
-                                    height: 50,
-                                    width: 70,
+                                    height: Get.height/14.5,
+                                    width: Get.width/7,
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15),
                                         color: Rang.blue),
@@ -75,7 +72,7 @@ class Payments extends StatelessWidget {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 10),
+                        (Dim.large/2).height,
                         Container(
                             width: double.infinity,
                             height: 50,
@@ -88,7 +85,7 @@ class Payments extends StatelessWidget {
                                     style: textStyle.bodyMedium),
                               ],
                             )),
-                        const SizedBox(height: 10),
+                        (Dim.large/2).height,
                         Container(
                             width: double.infinity,
                             height: 230,
@@ -96,57 +93,55 @@ class Payments extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const SizedBox(
-                                  height: 10,
-                                ),
+                                (Dim.large/2).height,
                                 Text('Select Payment Method',
                                     style: textStyle.bodyMedium),
-                                const SizedBox(height: 15),
+                                (Dim.medium).height,
                                 Text('Debit Card/Credit Card',
                                     style: textStyle.bodyMedium),
-                                const SizedBox(height: 15),
+                                (Dim.medium).height,
                                 Text('UPI', style: textStyle.bodyMedium),
-                                const SizedBox(height: 15),
+                                (Dim.medium).height,
                                 Row(
                                   children: [
-                                    const SizedBox(width: 9),
+                                     (Dim.large/2).width,
                                     SvgPicture.asset(
                                       'assets/image/google.svg',
-                                      width: 30,
-                                      height: 30,
+                                      width: Get.width/20,
+                                      height: Get.height/25,
                                     ),
-                                    const SizedBox(width: 10),
+                                    (Dim.large/2).width,
                                     Text(
                                       'Google pay',
                                       style: textStyle.bodyMedium,
                                     )
                                   ],
                                 ),
-                                const SizedBox(height: 10),
+                                (Dim.large/2).height,
                                 Row(
                                   children: [
                                     SvgPicture.asset(
                                       'assets/image/Paytm.svg',
-                                      width: 35,
-                                      height: 35,
+                                        width: Get.width/19,
+                                      height: Get.height/20,
                                     ),
-                                    const SizedBox(width: 4),
+                                    (Dim.small/2).width,
                                     Text(
                                       'paytm',
                                       style: textStyle.bodyMedium,
                                     )
                                   ],
                                 ),
-                                const SizedBox(height: 10),
+                                (Dim.large/2).height,
                                 Row(
                                   children: [
-                                    const SizedBox(width: 12),
+                                    (Dim.medium).width,
                                     SvgPicture.asset(
                                       'assets/image/phonepe.svg',
-                                      width: 30,
-                                      height: 30,
+                                         width: Get.width/20,
+                                      height: Get.height/22,
                                     ),
-                                    const SizedBox(width: 12),
+                                    (Dim.medium).width,
                                     Text(
                                       'Phonepe',
                                       style: textStyle.bodyMedium,
@@ -155,13 +150,12 @@ class Payments extends StatelessWidget {
                                 )
                               ],
                             )),
-                        const SizedBox(
-                          height: 80,
-                        ),
-                       const SizedBox(
+                        (Dim.large*4).height,
+                      SizedBox(
                         width: double.infinity,
                          child: ButtonWidget(
                           title: 'Pay now',
+                          onPressed: () => Get.offNamed(RouteNames.home),
                          ),
                        )
                       ]),

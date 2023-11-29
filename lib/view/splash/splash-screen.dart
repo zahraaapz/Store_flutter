@@ -1,11 +1,13 @@
 import 'dart:async';
 
+import 'package:appstore/component/extention.dart';
 import 'package:appstore/constant/color.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
+import '../../component/dim.dart';
 import '../../component/text_style.dart';
 import '../../constant/storage.dart';
 import '../../route_manager/route_name.dart';
@@ -61,9 +63,7 @@ class _SplashState extends State<Splash> {
               ),
               Text('Please check your connection',
                   style: textStyle.headlineSmall),
-              SizedBox(
-                height: 20,
-              ),
+              (Dim.large).height,
               ButtonWidget(
                 title: 'Check',
                 iconData: Icons.refresh,
@@ -103,12 +103,10 @@ class _SplashState extends State<Splash> {
                     'Wellcome...  ',
                     style: textStyle.headlineSmall,
                   ),
-                  const SizedBox(
-                    height: 40,
-                  ),
+                   (Dim.large*2).height,
                   const SpinKitCircle(
                     color: Rang.blue,
-                    size: 30,
+                    size: 40,
                   ),
                 ],
               ),

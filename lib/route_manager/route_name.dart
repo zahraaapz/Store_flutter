@@ -10,6 +10,8 @@ static String payment='/Payment';
 static String review='/Review';
 static String signup='/Signup';
 static String register='/Register';
+static String personal='/personal';
+static String wish='/wish';
 
 
 

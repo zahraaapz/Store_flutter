@@ -1,11 +1,11 @@
+import 'package:appstore/component/extention.dart';
 import 'package:appstore/constant/storage.dart';
-import 'package:appstore/view/address/address.dart';
 import 'package:appstore/constant/color.dart';
 
-import 'package:appstore/view/payment/payment.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../component/dim.dart';
 import '../../component/text_style.dart';
 import '../../model/Model.dart';
 
@@ -16,7 +16,6 @@ import '../../widget/contentEmptyPages.dart';
 import '../../widget/iconANDtitle.dart';
 import '../../widget/myTextField.dart';
 import '../../widget/titleEmtypage.dart';
-
 
 class Basket extends StatefulWidget {
   const Basket({super.key});
@@ -44,9 +43,7 @@ class _BasketState extends State<Basket> {
               myBagList.isEmpty
                   ? Column(
                       children: [
-                        const SizedBox(
-                          height: 90,
-                        ),
+                        (Dim.large * 2 - 10).height,
                         Image.asset('assets/image/emptyBag.png'),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -56,9 +53,7 @@ class _BasketState extends State<Basket> {
                           padding: const EdgeInsets.only(left: 20, right: 20),
                           child: contentEmptyPages(MyString.bagEmptyContent),
                         ),
-                        const SizedBox(
-                          height: 100,
-                        ),
+                        (Dim.large * 5).height,
                         ButtonWidget(
                           onPressed: () => _onPressed(),
                           title: 'continue shopping',
@@ -79,10 +74,10 @@ class _BasketState extends State<Basket> {
                             hintText: 'Apply Copon Code'),
                       ),
                       ClipPath(
-                        clipper: Cut(x:Get.width/9 , y: Get.height/30),
+                        clipper: Cut(x: Get.width / 9, y: Get.height / 30),
                         child: Container(
                           width: Get.width / 1.05,
-                          height: Get.height/3.16,
+                          height: Get.height / 3.16,
                           decoration: BoxDecoration(
                               color: Colors.white,
                               boxShadow: const [
@@ -120,8 +115,8 @@ class _BasketState extends State<Basket> {
                   children: [
                     Container(
                       margin: const EdgeInsets.all(8),
-                     height: size.height / 6,
-                     width:  size.width / 3,
+                      height: size.height / 6,
+                      width: size.width / 3,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                           image: DecorationImage(
@@ -135,14 +130,10 @@ class _BasketState extends State<Basket> {
                         children: [
                           Text(myBagList[index].brand!,
                               style: textStyle.bodyMedium),
-                          const SizedBox(
-                            height: 10,
-                          ),
+                          (Dim.large / 2).height,
                           Text(myBagList[index].name!,
                               style: textStyle.bodyMedium),
-                          const SizedBox(
-                            height: 10,
-                          ),
+                          (Dim.large / 2).height,
                           InkWell(
                             onTap: () {
                               setState(() {
@@ -152,7 +143,7 @@ class _BasketState extends State<Basket> {
                             },
                             child: Container(
                               color: Rang.toosi,
-                             height: size.height / 20,
+                              height: size.height / 20,
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Row(
@@ -180,9 +171,7 @@ class _BasketState extends State<Basket> {
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
+                          (Dim.large / 2).height,
                           Text(
                               style: textStyle.bodyMedium,
                               '${int.parse(myBagList[index].price!) * qnty[index]}\$'),
@@ -191,9 +180,7 @@ class _BasketState extends State<Basket> {
                     )
                   ],
                 ),
-                const SizedBox(
-                  height: 12,
-                ),
+                (Dim.large / 2).height,
                 const Divider(
                   height: 1,
                   thickness: 1,
@@ -201,19 +188,13 @@ class _BasketState extends State<Basket> {
                   indent: 3,
                   color: Rang.blue,
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
+                (Dim.large / 4).height,
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const SizedBox(
-                      width: 60,
-                    ),
+                    (Dim.small).width,
                     Text('Move to Wishlist', style: textStyle.displaySmall),
-                    const SizedBox(
-                      width: 8,
-                    ),
+                    (Dim.small).width,
                     const SizedBox(
                       height: 20,
                       child: VerticalDivider(
@@ -223,9 +204,7 @@ class _BasketState extends State<Basket> {
                         endIndent: 1,
                       ),
                     ),
-                    const SizedBox(
-                      width: 8,
-                    ),
+                    (Dim.small).width,
                     InkWell(
                       onTap: () {
                         setState(() {
@@ -266,12 +245,10 @@ class _BasketState extends State<Basket> {
     });
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      const SizedBox(
-        height: 15,
-      ),
+    Dim.medium.height,
       Text('Order detail', style: textStyle.displaySmall),
       SizedBox(
-        height: size.height/5,
+        height: size.height / 5,
         child: ListView.builder(
             itemCount: orderDetail.length,
             physics: const ClampingScrollPhysics(),
@@ -308,8 +285,8 @@ class _BasketState extends State<Basket> {
                   backgroundColor: MaterialStateProperty.all(Rang.blue)),
               onPressed: (() {
                 MyStorage.box.read(StorageNames.street) == null
-                    ? Get.offAll(Address())
-                    : Get.to(const Payments());
+                    ? Get.toNamed(RouteNames.address)
+                    : Get.toNamed(RouteNames.payment);
               }),
               child: Text('Place Order', style: textStyle.headlineLarge)),
         ],
@@ -318,7 +295,8 @@ class _BasketState extends State<Basket> {
   }
 
   _onPressed() {
-Get.offAll(RouteNames.home);  }
+    Get.offAll(RouteNames.home);
+  }
 }
 
 class Cut extends CustomClipper<Path> {

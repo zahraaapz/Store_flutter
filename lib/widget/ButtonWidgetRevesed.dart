@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../component/text_style.dart';
 import '../constant/color.dart';
@@ -13,8 +14,8 @@ class ButtonWidgetRevesed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 320,
-      height: 60,
+    width: Get.width/1.8,
+        height: Get.height/14,
       child: ElevatedButton(
           onPressed: onPressed,
           style: ButtonStyle(

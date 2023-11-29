@@ -1,11 +1,13 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:appstore/component/extention.dart';
 import 'package:appstore/constant/color.dart';
 import 'package:appstore/route_manager/route_name.dart';
 import 'package:appstore/widget/massageSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../component/dim.dart';
 import '../../constant/storage.dart';
 import '../../constant/textEditController.dart';
 import '../../widget/ButtonWidget.dart';
@@ -28,9 +30,7 @@ class Personal extends StatelessWidget {
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               iconANDtitle('My Information', Icons.arrow_back_ios),
-              const SizedBox(
-                height: 9,
-              ),
+              (Dim.small).height,
               const Text('Contact Information', style: TextStyle(fontSize: 16)),
               const Divider(
                 thickness: 1,
@@ -39,32 +39,43 @@ class Personal extends StatelessWidget {
                 indent: 5,
               ),
               myTextField(
-                maxLength: 8,
+                  maxLength: 8,
                   width: double.infinity,
                   size: Get.size,
                   hintText: 'Full Name',
                   controller: MyTextEditingController.fullName),
-              const SizedBox(
-                height: 15,
-              ),
+              (Dim.medium + 3).height,
               myTextField(
-                maxLength: 10,
+                  textInputType: TextInputType.number,
+                  maxLength: 10,
                   width: double.infinity,
                   size: Get.size,
-                  hintText: 'Contact number',
+                  hintText: '987654321',
                   controller: MyTextEditingController.number),
-              const SizedBox(
-                height: 15,
-              ),
+              (Dim.medium + 3).height,
               myTextField(
-                maxLength: 20,
+                  maxLength: 20,
                   width: double.infinity,
                   size: Get.size,
                   hintText: 'Email Address',
                   controller: MyTextEditingController.email),
-              const SizedBox(
-                height: 300,
-              ),
+            
+              (Dim.medium + 3).height,
+              myTextField(
+                  maxLength: 20,
+                  width: double.infinity,
+                  size: Get.size,
+                  hintText: 'Username',
+                  controller: MyTextEditingController.userName),
+            
+              (Dim.medium + 3).height,
+              myTextField(
+                  maxLength: 20,
+                  width: double.infinity,
+                  size: Get.size,
+                  hintText: 'Password',
+                  controller: MyTextEditingController.password),
+                (Dim.medium + 3).height,
               SizedBox(
                 width: double.infinity,
                 child: ButtonWidget(

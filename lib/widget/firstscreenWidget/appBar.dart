@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import '../../component/text_style.dart';
 import '../../constant/color.dart';
 import '../../route_manager/route_name.dart';
-import '../../view/search/search.dart';
 
 Row appBar(Size size, BuildContext context,GlobalKey<ScaffoldState>  _key) {
     return Row(
@@ -38,7 +37,7 @@ Row appBar(Size size, BuildContext context,GlobalKey<ScaffoldState>  _key) {
             const Icon(Icons.add_to_photos_rounded, color: Rang.blue),
             InkWell(
                 onTap: (() {
-                  Get.to(Search());
+                  Get.toNamed(RouteNames.search);
                 }),
                 child: const Icon(Icons.search, color: Rang.blue)),
             InkWell(

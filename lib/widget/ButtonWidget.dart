@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../component/text_style.dart';
 import '../constant/color.dart';
@@ -24,8 +25,8 @@ class ButtonWidget extends StatelessWidget {
             backgroundColor: MaterialStateProperty.all(Rang.blue)),
         onPressed: onPressed,
         child: SizedBox(
-          width: 270,
-          height: 50,
+        width: Get.width/1.7,
+        height: Get.height/15,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

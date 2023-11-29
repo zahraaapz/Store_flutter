@@ -2,11 +2,8 @@
 
 
 import 'package:appstore/route_manager/route_name.dart';
-import 'package:appstore/view/profile/personal_info.dart';
-import 'package:appstore/view/address/address.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../component/text_style.dart';
 import '../../constant/storage.dart';
 import '../../widget/ButtonWidgetRevesed.dart';
@@ -37,8 +34,8 @@ class Profile extends StatelessWidget {
             child: profileBox(   height: Get.height / 6,
               width: Get.width / 1.01,),
           ),
-          profileProperty('Personal Informantion', () => Get.to(Personal())),
-          profileProperty('My Address Book', () => Get.to(Address())),
+          profileProperty('Personal Informantion', () => Get.toNamed(RouteNames.personal)),
+          profileProperty('My Address Book', () => Get.toNamed(RouteNames.address)),
           profileProperty('My Saved Cards', () {}),
           profileProperty('My Order', () {}),
           profileProperty('Refer and Earn', () {}),

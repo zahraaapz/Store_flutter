@@ -1,6 +1,8 @@
+import 'package:appstore/component/extention.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../component/dim.dart';
 import '../component/text_style.dart';
 import '../constant/color.dart';
 
@@ -16,7 +18,8 @@ Padding iconANDtitle(String title, IconData icon) {
           size: 25,
         ),
       ),
-      const SizedBox(width: 20),
+      Dim.large.width,
+  
       Text(
         title,
         style: textStyle.displaySmall,

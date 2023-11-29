@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'package:appstore/component/extention.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/constant/color.dart';
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../component/dim.dart';
 import '../../component/text_style.dart';
 import '../../controller/homeScreenController.dart';
 import '../../widget/ButtonWidget.dart';
@@ -65,9 +67,9 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                 ///Bannner
                 const Baner(),
 
-                const SizedBox(
-                  height: 8,
-                ),
+              
+               (Dim.small).width,
+
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -110,6 +112,9 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                 const SizedBox(
                   height: 5,
                 ),
+
+                  (Dim.large/4).height,
+
                 Obx(() => controller.suggestlist.isNotEmpty
                     ? suggList(size)
                     : ShimmerSuggestList(size: size)),
@@ -223,9 +228,8 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                 Expandablee(),
 
                 ///expandble box
-                const SizedBox(
-                  height: 30,
-                )
+             (Dim.large+10).height,
+
               ]),
             ),
           ])),
@@ -276,9 +280,8 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                     ),
                     Text(controller.suggestlist[index].brand!,
                         style: textStyle.bodyMedium),
-                    const SizedBox(
-                      height: 6,
-                    ),
+                       (Dim.small).height,
+
                     Text("${controller.suggestlist[index].price}\$",
                         style: textStyle.bodyMedium),
                   ],
@@ -324,24 +327,19 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                                         controller.suggestlist[index].ima!,
                                       ).image)),
                             ),
-                            const SizedBox(
-                              width: 15,
-                            ),
+                            (Dim.xlarge/2).width,
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(controller.suggestlist[index].brand!,
                                     style: textStyle.bodyMedium),
-                                const SizedBox(
-                                  height: 12,
-                                ),
+                                (Dim.xlarge/2).height,
                                 Text(
                                   controller.suggestlist[index].name!,
                                   style: textStyle.bodyMedium,
                                 ),
-                                const SizedBox(
-                                  height: 12,
-                                ),
+                                (Dim.xlarge/2).height,
+
                                 Text('${controller.suggestlist[index].price}\$',
                                     style: textStyle.bodyMedium),
                               ],
@@ -375,9 +373,9 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                                 ],
                               ),
                             ),
-                            const SizedBox(
-                              width: 10,
-                            ),
+                          
+
+                             (Dim.large/2).width,
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -385,9 +383,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                                   'Average Rating',
                                   style: textStyle.bodyMedium,
                                 ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
+                                (Dim.large/2).height,
                                 Text(
                                   '43 Ratings & 23 Reviews',
                                   style: textStyle.bodyMedium,
@@ -400,9 +396,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                       //////filter
                       controller.suggestlist[index].filter == 'shoes'
                           ? shoesSize(select)
-                          : const SizedBox(
-                              height: 30,
-                            ),
+                          :  (Dim.large+10).height,
                       Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: Row(
@@ -412,9 +406,8 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                               color: Rang.blue,
                               size: 40,
                             ),
-                            const SizedBox(
-                              width: 20,
-                            ),
+                          
+                             (Dim.large).width,
                             ButtonWidget(
                               iconData: Icons.shopping_bag_outlined,
                               title: 'Add to Bags',

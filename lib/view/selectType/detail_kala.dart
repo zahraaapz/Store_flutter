@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 import 'dart:math';
+import 'package:appstore/component/extention.dart';
 import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/constant/color.dart';
@@ -7,6 +8,7 @@ import 'package:appstore/route_manager/route_name.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../component/dim.dart';
 import '../../component/text_style.dart';
 import '../../constant/storage.dart';
 import '../../widget/ButtonWidget.dart';
@@ -121,9 +123,7 @@ class _DetailKalaState extends State<DetailKala> {
                         strutStyle: const StrutStyle(height: 2),
                         style: textStyle.bodyMedium,
                       ),
-                      const SizedBox(
-                        width: 20,
-                      ),
+                      (Dim.large).width,
                       const Text(
                         '20%OFF',
                         textScaleFactor: 1.1,
@@ -153,9 +153,7 @@ class _DetailKalaState extends State<DetailKala> {
                                     '43.5',
                                     style: textStyle.bodyMedium,
                                   ),
-                                  const SizedBox(
-                                    width: 3,
-                                  ),
+                                 (Dim.small-5).width,
                                   const Icon(
                                     CupertinoIcons.star_fill,
                                     color: Rang.orange,
@@ -165,9 +163,7 @@ class _DetailKalaState extends State<DetailKala> {
                               ),
                             )),
                       ),
-                      const SizedBox(
-                        width: 100,
-                      ),
+                 
                       const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -203,7 +199,7 @@ class _DetailKalaState extends State<DetailKala> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: SizedBox(
-                        width: 200,
+                        width: Get.width/2.3,
                         child: Text(
                           'Get upto 30% of on order value above \$100',
                           style: textStyle.bodyMedium,

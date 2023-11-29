@@ -1,13 +1,14 @@
+import 'package:appstore/component/extention.dart';
 import 'package:appstore/constant/color.dart';
 import 'package:appstore/controller/homeScreenController.dart';
+import 'package:appstore/route_manager/route_name.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../../component/dim.dart';
 import '../../component/text_style.dart';
 import '../../model/Model.dart';
 
-import 'searchResult.dart';
 
 class Search extends StatefulWidget {
   @override
@@ -54,7 +55,7 @@ class _SearchState extends State<Search> {
               item.name!.toLowerCase().contains(query.toLowerCase()) ||
               item.brand!.toLowerCase().contains(query.toLowerCase())) ==
           false) {
-        Get.to(const SearchResult());
+        Get.toNamed(RouteNames.searchResult);
       }
     }
   }
@@ -72,9 +73,7 @@ class _SearchState extends State<Search> {
                 Icons.arrow_back_ios,
                 color: Colors.black,
               )),
-          const SizedBox(
-            width: 20,
-          ),
+         (Dim.large).width,
           Container(
             decoration: const BoxDecoration(
                 color: Rang.toosi,
@@ -101,9 +100,8 @@ class _SearchState extends State<Search> {
               ),
             ),
           ),
-          const SizedBox(
-            width: 10,
-          )
+         
+           (Dim.large/2).width,
         ]),
         body: ListView.builder(
           itemCount: filteredItems.length,
@@ -122,9 +120,8 @@ class _SearchState extends State<Search> {
                             image: Image.asset(filteredItems[index].ima!).image,
                             fit: BoxFit.cover)),
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
+                
+                   (Dim.large/2).width,
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -132,9 +129,9 @@ class _SearchState extends State<Search> {
                         'name:  ${filteredItems[index].name!}',
                         style: textStyle.bodyMedium,
                       ),
-                      const SizedBox(
-                        height: 25,
-                      ),
+                       (Dim.xlarge).height,
+                    
+              
                       Text(
                         'brand:  ${filteredItems[index].brand!}',
                         style: textStyle.bodyMedium,

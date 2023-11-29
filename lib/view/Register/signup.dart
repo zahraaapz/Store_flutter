@@ -31,7 +31,7 @@ class SignupScreen extends StatelessWidget {
               children: [
                 Transform.scale(
                   scaleY: 1.6,
-                  scaleX: 1.4,
+                  scaleX: 1.2,
                   origin: const Offset(-10, -70),
                   child: GridView(
                       shrinkWrap: true,
@@ -45,7 +45,7 @@ class SignupScreen extends StatelessWidget {
                           width: Get.width / 4,
                           height: Get.height / 3,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(10),
                               image: DecorationImage(
                                   image: AssetImage(signup[2].ima),
                                   fit: BoxFit.fill)),
@@ -54,7 +54,7 @@ class SignupScreen extends StatelessWidget {
                           width: Get.width / 4,
                           height: 600,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(10),
                               image: DecorationImage(
                                   image: AssetImage(signup[0].ima),
                                   fit: BoxFit.fill)),
@@ -63,7 +63,7 @@ class SignupScreen extends StatelessWidget {
                           width: Get.width / 4,
                           height: Get.height / 3,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(10),
                               image: DecorationImage(
                                   image: AssetImage(signup[5].ima),
                                   fit: BoxFit.fill)),
@@ -72,7 +72,7 @@ class SignupScreen extends StatelessWidget {
                 ),
                 Transform.scale(
                   scaleY: 2.3,
-                  scaleX: 1.8,
+                  scaleX: 1.6,
                   origin: const Offset(0, -120),
                   child: GridView(
                     shrinkWrap: true,
@@ -86,7 +86,7 @@ class SignupScreen extends StatelessWidget {
                         width: Get.width / 4,
                         height: Get.height / 3,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(10),
                             image: DecorationImage(
                                 image: AssetImage(signup[9].ima),
                                 fit: BoxFit.fill)),
@@ -95,7 +95,7 @@ class SignupScreen extends StatelessWidget {
                         width: Get.width / 4,
                         height: Get.height / 3,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(10),
                             image: DecorationImage(
                                 image: AssetImage(signup[3].ima),
                                 fit: BoxFit.fill)),
@@ -104,7 +104,7 @@ class SignupScreen extends StatelessWidget {
                         width: Get.width / 4,
                         height: Get.height / 3,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(10),
                             image: DecorationImage(
                                 image: AssetImage(signup[8].ima),
                                 fit: BoxFit.fill)),
@@ -113,7 +113,7 @@ class SignupScreen extends StatelessWidget {
                         width: Get.width / 4,
                         height: Get.height / 3,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(10),
                             image: DecorationImage(
                                 image: AssetImage(signup[4].ima),
                                 fit: BoxFit.fill)),
@@ -123,7 +123,7 @@ class SignupScreen extends StatelessWidget {
                 ),
                 Transform.scale(
                   scaleY: 1.6,
-                  scaleX: 1.4,
+                  scaleX: 1.2,
                   origin: const Offset(-10, -450),
                   child: GridView(
                     shrinkWrap: true,
@@ -137,7 +137,7 @@ class SignupScreen extends StatelessWidget {
                         width: Get.width / 4,
                         height: Get.height / 3,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(10),
                             image: DecorationImage(
                                 image: AssetImage(signup[7].ima),
                                 fit: BoxFit.fill)),
@@ -146,7 +146,7 @@ class SignupScreen extends StatelessWidget {
                         width: Get.width / 4,
                         height: Get.height / 3,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(10),
                             image: DecorationImage(
                                 image: AssetImage(signup[1].ima),
                                 fit: BoxFit.fill)),
@@ -155,7 +155,7 @@ class SignupScreen extends StatelessWidget {
                         width: Get.width / 4,
                         height: Get.height / 3,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(10),
                             image: DecorationImage(
                                 image: AssetImage(signup[6].ima),
                                 fit: BoxFit.fill)),
@@ -167,7 +167,7 @@ class SignupScreen extends StatelessWidget {
             ),
           ),
           Transform.translate(
-            offset: const Offset(-30, -20),
+            offset: const Offset(-30, -30),
             child: const Text(
               'The shopping \n destination you need',
               style: TextStyle(

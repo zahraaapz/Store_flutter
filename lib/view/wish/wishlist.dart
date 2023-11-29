@@ -1,10 +1,12 @@
 // ignore_for_file: no_logic_in_create_state
 
+import 'package:appstore/component/extention.dart';
 import 'package:appstore/model/Model.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../component/dim.dart';
 import '../../component/text_style.dart';
 import '../../constant/storage.dart';
 
@@ -30,15 +32,11 @@ class _WishState extends State<Wish> {
         child: Scaffold(
             body: Column(children: [
       iconANDtitle('Wishlist', Icons.arrow_back_ios),
-      const SizedBox(
-        height: 20,
-      ),
+      (Dim.large).height,
       wishList.isEmpty
           ? Column(
               children: [
-                const SizedBox(
-                  height: 90,
-                ),
+                 (Dim.large*5).height,
                 Image.asset('assets/image/wish.png'),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -47,9 +45,7 @@ class _WishState extends State<Wish> {
                 Padding(
                     padding: const EdgeInsets.only(left: 20, right: 20),
                     child: contentEmptyPages(MyString.wishEmptyContent)),
-                const SizedBox(
-                  height: 100,
-                ),
+                (Dim.large*5).height,
                  ButtonWidget(
                   onPressed: () => Get.offAllNamed(RouteNames.home),
                   title: 'start shopping')

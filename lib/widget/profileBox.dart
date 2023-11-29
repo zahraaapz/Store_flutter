@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:appstore/component/extention.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../component/dim.dart';
 import '../component/text_style.dart';
 import '../constant/color.dart';
 import '../constant/storage.dart';
@@ -49,22 +51,21 @@ Container profileBox({width,height}) {
                         MyStorage.box.read(StorageNames.fullName) ??'--',
                         style: textStyle.bodySmall,
                       ),
-                        SizedBox(
-                  height: 10,
-                ),
+                        
+                          (Dim.large/2).height,
                       Text(
                         MyStorage.box.read(StorageNames.number) ?? '--',
                         style: textStyle.bodySmall,
-                      ),  SizedBox(
-                  height: 10,
-                ),
+                      ),  
+                        (Dim.large/2).height,
                       Text(
                         MyStorage.box.read(StorageNames.email) ?? '--',
                         style: textStyle.bodySmall,
                       ),
                     ],
                   ),
-               const SizedBox(width: 30,)
+                 ( Dim.xlarge+6).width,
+             
                 ],
               ),
             ),

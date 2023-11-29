@@ -1,3 +1,4 @@
+import 'package:appstore/component/extention.dart';
 import 'package:appstore/component/text_style.dart';
 import 'package:appstore/constant/textEditController.dart';
 import 'package:appstore/widget/ButtonWidget.dart';
@@ -5,6 +6,7 @@ import 'package:appstore/widget/myTextField.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../component/dim.dart';
 import '../../constant/storage.dart';
 import '../../route_manager/route_name.dart';
 import '../../widget/massageSnackbar.dart';
@@ -22,16 +24,13 @@ class RegisterScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: 20,
-                ),
+              
+                Dim.large.height,
                 Text(
                   'Enter your \n Information',
                   style: textStyle.displayLarge,
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+              Dim.large.height,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -53,48 +52,38 @@ class RegisterScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+              Dim.large.height,
                 myTextField(
                   maxLength: 20,
                   controller: MyTextEditingController.email,
                   size: Get.size,
                   width: Get.width / 1.02,
-                  hintText: 'MYACCOUNT@GMAIL.COM',
+                  hintText: 'MyAccount@gmail.com',
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+              Dim.large.height,
                 myTextField(
                   controller: MyTextEditingController.userName,
                   size: Get.size,
                   width: Get.width / 1.02,
-                  hintText: 'USERNAME',
+                  hintText: 'Username',
                   maxLength: 9
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+              Dim.large.height,
                 myTextField(
                   controller: MyTextEditingController.password,
                   size: Get.size,
                   width: Get.width / 1.02,
-                  hintText: 'PASSWORD',
+                  hintText: 'Password',
                   maxLength: 8
-                ),  SizedBox(
-                  height: 20,
-                ),
+                ),Dim.large.height,
                 myTextField(
                   controller: MyTextEditingController.fullName,
                   size: Get.size,
                   width: Get.width / 1.02,
-                  hintText: 'FULLNAME',
+                  hintText: 'Full Name',
                   maxLength: 8
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+              Dim.large.height,
                 SizedBox(
                   width: double.infinity,
                   child: ButtonWidget(

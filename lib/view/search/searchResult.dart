@@ -1,5 +1,6 @@
 
 
+import 'package:appstore/component/extention.dart';
 import 'package:appstore/constant/color.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../component/dim.dart';
 import '../../constant/string.dart';
 import '../../route_manager/route_name.dart';
 import '../../widget/ButtonWidget.dart';
@@ -42,9 +44,8 @@ class SearchResult extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 90,
-            ),
+             (Dim.large*5).height,
+
             Image.asset('assets/image/search.png'),
              Padding(
               padding: const EdgeInsets.all(8.0),
@@ -54,9 +55,7 @@ class SearchResult extends StatelessWidget {
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: contentEmptyPages(MyString.searchEmptyContent)
             ),
-            const SizedBox(
-              height: 100,
-            ),
+           (Dim.large*5).height,
         ButtonWidget(
           onPressed:()=>_onPressed(context),
           title:  'Back to home',

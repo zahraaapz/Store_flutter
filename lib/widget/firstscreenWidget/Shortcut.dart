@@ -1,5 +1,7 @@
+import 'package:appstore/component/extention.dart';
 import 'package:flutter/material.dart';
 
+import '../../component/dim.dart';
 import '../../component/text_style.dart';
 import '../../constant/color.dart';
 
@@ -39,7 +41,7 @@ class Shortcut extends StatelessWidget {
                       )),
                   borderRadius: BorderRadius.circular(10)),
             ),
-            const SizedBox(width: 8),
+             (Dim.small).width,
             SizedBox(
               width: size.width / 2.2,
               child: const Text(

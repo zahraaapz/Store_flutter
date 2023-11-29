@@ -19,7 +19,7 @@ Padding randomList(select,homeScreenController) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: SizedBox(
-                        width: 200,
+                        width: Get.width/1.8,
                         child: Column(children: [
                           Container(
                             height: Get.height / 6,

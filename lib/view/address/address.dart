@@ -1,10 +1,12 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:appstore/component/extention.dart';
 import 'package:appstore/constant/color.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/widget/massageSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../component/dim.dart';
 import '../../component/text_style.dart';
 import '../../constant/storage.dart';
 import '../../constant/textEditController.dart';
@@ -30,9 +32,8 @@ class Address extends StatelessWidget {
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               iconANDtitle('My Address', Icons.arrow_back_ios),
-              const SizedBox(
-                height: 9,
-              ),
+                (Dim.small*5).width
+,
               Text('Contact Information', style: textStyle.bodyMedium),
               const Divider(
                 thickness: 1,
@@ -41,33 +42,34 @@ class Address extends StatelessWidget {
                 indent: 5,
               ),
               myTextField(
+                maxLength: 8,
                   size: size,
                   width: double.infinity,
                   controller: MyTextEditingController.fullName,
                   hintText: 'Full Name'),
-              const SizedBox(
-                height: 15,
-              ),
+                               (Dim.medium*5).height
+,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   myTextField(
+                    maxLength: 4,
                       textInputType: TextInputType.number,
                       size: size,
                       controller: MyTextEditingController.preNum,
-                      width: size.width / 7.5,
-                      hintText: '49'),
+                      width: size.width /6.5,
+                      hintText: '+11'),
                   myTextField(
+                    maxLength: 10,
                       size: size,
                       textInputType: TextInputType.number,
-                      width: size.width / 1.25,
+                      width: size.width / 1.27,
                       controller: MyTextEditingController.number,
-                      hintText: 'Concat Number'),
+                      hintText: '987654321'),
                 ],
               ),
-              const SizedBox(
-                height: 120,
-              ),
+                (Dim.large*6).height,
+
               Text('Delivery Address', style: textStyle.bodyMedium),
               const Divider(
                 thickness: 1,
@@ -76,22 +78,24 @@ class Address extends StatelessWidget {
                 indent: 5,
               ),
               myTextField(
+                maxLength: 6,
                   size: size,
                   width: double.infinity,
                   controller: MyTextEditingController.pinCode,
                   hintText: 'Pin Code'),
-              const SizedBox(
-                height: 15,
-              ),
+           
+               (Dim.medium).height,
+
               myTextField(
+                
                   size: size,
                   width: double.infinity,
                   controller: MyTextEditingController.street,
                   hintText: 'Street Address'),
-              const SizedBox(
-                height: 15,
-              ),
+                 (Dim.medium).height,
+
               myTextField(
+                maxLength: 20,
                   size: size,
                   width: double.infinity,
                   controller: MyTextEditingController.city,
@@ -133,9 +137,9 @@ class Address extends StatelessWidget {
                   },
                 ),
               ),
-              const SizedBox(
-                height: 40,
-              ),
+             
+                (Dim.large*2).height,
+
               SizedBox(
                 width: double.infinity,
                 child: ButtonWidget(

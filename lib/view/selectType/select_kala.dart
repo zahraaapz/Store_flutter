@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:appstore/component/extention.dart';
 import 'package:appstore/constant/color.dart';
 import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/model/Model.dart';
@@ -7,6 +8,7 @@ import 'package:appstore/view/firstScreen/mainScreen.dart';
 import 'package:appstore/view/selectType/detail_kala.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../component/dim.dart';
 import '../../component/text_style.dart';
 import '../../widget/shimmerList.dart';
 
@@ -77,7 +79,7 @@ showlist(){
         builder: (context) => StatefulBuilder(
               builder: (context, setState) => Dialog(
                 child: SizedBox(
-                  height: 450,
+                  height: Get.height/2.5,
                   child: Column(children: [
                     SizedBox(
                       height: Get.height / 1.9,
@@ -140,9 +142,8 @@ showlist(){
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    const SizedBox(
-                      width: 15,
-                    ),
+                  
+                    (Dim.medium+3).width,
                     InkWell(
                       onTap: () {
                         Get.offAll(Home());
@@ -155,9 +156,7 @@ showlist(){
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      width: 25,
-                    ),
+                     (Dim.xlarge).width,
                     Text(
                       selectPage == 0
                           ? 'Skincare'
@@ -500,21 +499,16 @@ showlist(){
   Column mainList(RxList<Product> list) {
     return Column(
       children: [
-        const SizedBox(
-          height: 5,
-        ),
+        (Dim.small-3).height,
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const SizedBox(
-              width: 30,
-            ),
+           
+             (Dim.xlarge+6).width,
             Text(style: textStyle.bodyMedium, '${list.length} products'),
           ],
         ),
-        const SizedBox(
-          height: 10,
-        ),
+        (Dim.large/2).height,
         SizedBox(
           height: Get.height / 1.28,
           child: GridView.builder(
@@ -546,13 +540,11 @@ showlist(){
                                   image: Image.asset(list[index].ima!).image)),
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                    
+                      (Dim.large/2).height,
                       Text(style: textStyle.bodyMedium, list[index].name!),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                    
+                      (Dim.large/2).height,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
