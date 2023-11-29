@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:appstore/constant/color.dart';
-import 'package:appstore/controller/homeScreenController.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -31,7 +30,7 @@ class _SplashState extends State<Splash> {
     });
 
  
-    if (onLine == false) {
+    if (onLine == false && MyStorage.box.read(StorageNames.userName)==null) {
       checkNetwork();
     } if (onLine == true && MyStorage.box.read(StorageNames.userName)==null){
       Get.offNamed(RouteNames.signup);
@@ -71,7 +70,7 @@ class _SplashState extends State<Splash> {
                 onPressed: () {
                   Navigator.pop(context);
                   check();
-                  Get.find<HomeScreenController>().getHomeItem();
+                 // Get.find<HomeScreenController>().getLists();
                 },
               )
             ],

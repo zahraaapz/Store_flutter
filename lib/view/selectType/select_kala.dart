@@ -25,46 +25,51 @@ class _SelectkalaState extends State<Selectkala> {
   RxInt level = 0.obs;
 
   //filter
-  List<bool>? checkBoxBrands;
-  String? selectedRadioTile;
+ late List<bool> checkBoxBrands;
+  String ?selectedRadioTile;
   RxList<Product> filterPrice = RxList();
   RxList<Product> filterListBrand = RxList();
   List<bool> checkBoxPriceBrand = [false, false];
   List selectedBrand = [];
   //
   int selectPage;
-  late int lenght;
-  var homeScreenController = Get.find<HomeScreenController>();
+   int ?lenght;
+  var homeScreenController= Get.find<HomeScreenController>();
 
-  List? brands;
-  List<double>? prices;
+
+ late List brands;
+ late List<double> prices;
 
   //for limit price
-  RangeValues? val;
+ late RangeValues val;
 
   _SelectkalaState(
     this.selectPage,
   );
 
-  @override
-  initState() {
-    super.initState();
-    lenght = lenghtLists(selectPage, homeScreenController);
 
-    checkBoxBrands = List.generate(lenght, (index) => false);
+showlist(){
+  setState(() {
+        lenght = lenghtLists(selectPage, homeScreenController);
+
+    checkBoxBrands = List.generate(lenght!, (index) => false);
     brands = List.generate(
-        lenght, (index) => brandItem(selectPage, index, homeScreenController));
+        lenght!, (index) => brandItem(selectPage, index, homeScreenController));
 
     prices = List.generate(
-        lenght,
+        lenght!,
         (index) => double.parse(
             priceLists(selectPage, homeScreenController, index).toString()));
-    prices!.sort();
+    prices.sort();
     val = RangeValues(
-      prices!.first,
-      prices!.last,
+      prices.first,
+      prices.last,
     );
-  }
+  });
+
+
+  
+}
 
   Future<void> showMyDialog() async {
     return showDialog<void>(
@@ -78,12 +83,12 @@ class _SelectkalaState extends State<Selectkala> {
                       height: Get.height / 1.9,
                       child: ListView.builder(
                         scrollDirection: Axis.vertical,
-                        itemCount: brands?.length,
+                        itemCount: brands.length,
                         shrinkWrap: true,
                         itemBuilder: (BuildContext context, int index) =>
                             CheckboxListTile(
                           title: Text(
-                            brands?[index],
+                            brands[index],
                             style: textStyle.headlineMedium,
                           ),
                           fillColor: MaterialStateProperty.all(Rang.blue),
@@ -91,18 +96,18 @@ class _SelectkalaState extends State<Selectkala> {
                             level.value = 0;
                             setState(
                               () {
-                                checkBoxBrands![index] = value!;
+                                checkBoxBrands[index] = value!;
 
-                                if (checkBoxBrands![index] == true) {
-                                  selectedBrand.add(brands![index]);
+                                if (checkBoxBrands[index] == true) {
+                                  selectedBrand.add(brands[index]);
 
                                   filterBrand(selectPage, filterListBrand,
                                       selectedBrand, homeScreenController);
                                   level.value = 1;
                                 } else {
                                   filterListBrand.removeWhere(
-                                      (e) => brands![index] == e.brand);
-                                  selectedBrand.remove(brands![index]);
+                                      (e) => brands[index] == e.brand);
+                                  selectedBrand.remove(brands[index]);
 
                                   filterListBrand.isEmpty
                                       ? level.value = 0
@@ -111,7 +116,7 @@ class _SelectkalaState extends State<Selectkala> {
                               },
                             );
                           },
-                          value: checkBoxBrands![index],
+                          value: checkBoxBrands[index],
                         ),
                       ),
                     )
@@ -123,6 +128,7 @@ class _SelectkalaState extends State<Selectkala> {
 
   @override
   Widget build(BuildContext context) {
+   
     return SafeArea(
         child: WillPopScope(
       onWillPop: () async => false,
@@ -197,12 +203,16 @@ class _SelectkalaState extends State<Selectkala> {
               children: [
                 InkWell(
                     onTap: () {
-                      filterBrandOrPrice(context);
+                        homeScreenController.suggestlist.isEmpty?null:
+                       filterBrandOrPrice(context);
+                      showlist();
                     },
                     child: const Icon(Icons.filter_alt_outlined)),
                 InkWell(
                   onTap: (() {
+                    homeScreenController.suggestlist.isEmpty?null:
                     filterBySort(context);
+                   showlist();
                   }),
                   child: const Icon(Icons.sort_rounded),
                 ),
@@ -398,9 +408,9 @@ class _SelectkalaState extends State<Selectkala> {
                       ),
                       child: RangeSlider(
                         labels: RangeLabels(
-                            val!.start.toString(), val!.end.toString()),
-                        min: prices!.first,
-                        max: prices!.last,
+                            val.start.toString(), val.end.toString()),
+                        min: prices.first,
+                        max: prices.last,
                         divisions: 15,
                         onChanged: (value) {
                           level.value = 0;
@@ -415,10 +425,10 @@ class _SelectkalaState extends State<Selectkala> {
                                       .where((element) =>
                                           double.tryParse(
                                                   element.price.toString())! >=
-                                              val!.start &&
+                                              val.start &&
                                           double.tryParse(
                                                   element.price.toString())! <=
-                                              val!.end));
+                                              val.end));
                                   break;
                                 case 1:
                                   filterPrice.assignAll(homeScreenController
@@ -426,20 +436,20 @@ class _SelectkalaState extends State<Selectkala> {
                                       .where((element) =>
                                           double.tryParse(
                                                   element.price.toString())! >=
-                                              val!.start &&
+                                              val.start &&
                                           double.tryParse(
                                                   element.price.toString())! <=
-                                              val!.end));
+                                              val.end));
                                   break;
                                 case 2:
                                   filterPrice.assignAll(homeScreenController.bag
                                       .where((element) =>
                                           double.tryParse(
                                                   element.price.toString())! >=
-                                              val!.start &&
+                                              val.start &&
                                           double.tryParse(
                                                   element.price.toString())! <=
-                                              val!.end));
+                                              val.end));
                                   break;
                                 case 3:
                                   filterPrice.assignAll(homeScreenController
@@ -447,10 +457,10 @@ class _SelectkalaState extends State<Selectkala> {
                                       .where((element) =>
                                           double.tryParse(
                                                   element.price.toString())! >=
-                                              val!.start &&
+                                              val.start &&
                                           double.tryParse(
                                                   element.price.toString())! <=
-                                              val!.end));
+                                              val.end));
                                   break;
                                 case 4:
                                   filterPrice.assignAll(homeScreenController
@@ -458,10 +468,10 @@ class _SelectkalaState extends State<Selectkala> {
                                       .where((element) =>
                                           double.tryParse(
                                                   element.price.toString())! >=
-                                              val!.start &&
+                                              val.start &&
                                           double.tryParse(
                                                   element.price.toString())! <=
-                                              val!.end));
+                                              val.end));
                                   break;
                                 case 5:
                                   filterPrice.assignAll(homeScreenController
@@ -469,10 +479,10 @@ class _SelectkalaState extends State<Selectkala> {
                                       .where((element) =>
                                           double.tryParse(
                                                   element.price.toString())! >=
-                                              val!.start &&
+                                              val.start &&
                                           double.tryParse(
                                                   element.price.toString())! <=
-                                              val!.end));
+                                              val.end));
                                   break;
                               }
 
@@ -480,7 +490,7 @@ class _SelectkalaState extends State<Selectkala> {
                             },
                           );
                         },
-                        values: val!,
+                        values: val,
                       ),
                     ),
                   ],

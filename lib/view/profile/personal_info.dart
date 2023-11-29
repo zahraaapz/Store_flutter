@@ -39,6 +39,7 @@ class Personal extends StatelessWidget {
                 indent: 5,
               ),
               myTextField(
+                maxLength: 8,
                   width: double.infinity,
                   size: Get.size,
                   hintText: 'Full Name',
@@ -47,6 +48,7 @@ class Personal extends StatelessWidget {
                 height: 15,
               ),
               myTextField(
+                maxLength: 10,
                   width: double.infinity,
                   size: Get.size,
                   hintText: 'Contact number',
@@ -55,6 +57,7 @@ class Personal extends StatelessWidget {
                 height: 15,
               ),
               myTextField(
+                maxLength: 20,
                   width: double.infinity,
                   size: Get.size,
                   hintText: 'Email Address',

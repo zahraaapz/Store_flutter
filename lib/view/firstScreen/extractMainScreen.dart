@@ -1,24 +1,25 @@
 import 'dart:async';
-
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/constant/color.dart';
-import 'package:appstore/route_manager/route_name.dart';
-import 'package:appstore/view/search/search.dart';
-import 'package:appstore/view/selectType/select_kala.dart';
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../component/text_style.dart';
-
 import '../../controller/homeScreenController.dart';
 import '../../widget/ButtonWidget.dart';
-import '../../widget/expandableWidget.dart';
-import '../../widget/profileBox.dart';
+import '../../widget/firstscreenWidget/expandableWidget.dart';
+import '../../widget/firstscreenWidget/Banner.dart';
+import '../../widget/firstscreenWidget/Brand.dart';
+import '../../widget/firstscreenWidget/CollectionList.dart';
+import '../../widget/firstscreenWidget/Drawer.dart';
+import '../../widget/firstscreenWidget/Shortcut.dart';
+import '../../widget/firstscreenWidget/appBar.dart';
+import '../../widget/firstscreenWidget/shoesSize.dart';
+import '../../widget/firstscreenWidget/typeList.dart';
 import '../../widget/shimmerList.dart';
-import '../wish/wishlist.dart';
 
 class Extractmainscreen extends StatefulWidget {
-  Extractmainscreen({super.key});
+  const Extractmainscreen({super.key});
 
   @override
   State<Extractmainscreen> createState() => _ExtractmainscreenState();
@@ -29,13 +30,11 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
   RxInt select = 0.obs;
   var controller = Get.find<HomeScreenController>();
   Timer? timer;
+
   @override
   void initState() {
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (timer.tick == 5) {
-        timer.cancel();
-      }
-      controller.onInit();
+      controller.suggestlist.isEmpty ? controller.onInit() : timer.cancel();
     });
 
     super.initState();
@@ -61,16 +60,16 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
               scrollDirection: Axis.vertical,
               child: Column(children: [
                 ////App Bar
-                appBar(size, context),
+                appBar(size, context, _key),
 
                 ///Bannner
-                const Bannner(),
+                const Baner(),
 
                 const SizedBox(
                   height: 8,
                 ),
                 Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -79,7 +78,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                   ),
                 ),
                 ////type list
-                typeList(size),
+                typeList(size,select),
 
                 Padding(
                   padding: const EdgeInsets.only(left: 10, right: 10),
@@ -233,166 +232,6 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
     );
   }
 
-//APP BAR
-  Row appBar(Size size, BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        SizedBox(
-          width: size.width / 4.6,
-          height: size.height / 20,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              InkWell(
-                onTap: () {
-                  _key.currentState?.openDrawer();
-                },
-                child: const Icon(
-                  Icons.menu,
-                  color: Rang.blue,
-                  size: 32,
-                ),
-              ),
-              Text(' Home', style: textStyle.displaySmall),
-            ],
-          ),
-        ),
-        SizedBox(
-          width: size.width / 2.4,
-          height: size.height / 20,
-          child:
-              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-            const Icon(Icons.add_to_photos_rounded, color: Rang.blue),
-            InkWell(
-                onTap: (() {
-                  Get.to(Search());
-                }),
-                child: const Icon(Icons.search, color: Rang.blue)),
-            InkWell(
-              onTap: () => Get.toNamed(RouteNames.notifition),
-              child: const Icon(Icons.notifications_none, color: Rang.blue),
-            )
-          ]),
-        )
-      ],
-    );
-  }
-
-//DRAWER
-  Drawer drawer(size) {
-    return Drawer(
-      backgroundColor: Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          profileBox(
-            width: size.width / 1.1,
-            height: size.height / 6,
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Text('Top Categories', style: textStyle.bodyMedium),
-          SizedBox(
-            height: size.height / 3.3,
-            child: ListView.builder(
-                physics: const ClampingScrollPhysics(),
-                itemCount: Model.modelList.length,
-                itemBuilder: ((context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
-                    child: InkWell(
-                      child: Text(Model.modelList[index].title,
-                          style: textStyle.bodyLarge),
-                      onTap: () {
-                        Get.to(Selectkala(
-                          index,
-                        ));
-                      },
-                    ),
-                  );
-                })),
-          ),
-          Text('Contact us', style: textStyle.bodyMedium),
-          const SizedBox(
-            height: 12,
-          ),
-          InkWell(
-            child: Text('Help & Support', style: textStyle.bodyMedium),
-            onTap: () {},
-          ),
-          const SizedBox(
-            height: 12,
-          ),
-          InkWell(
-            child: Text('Wishlist', style: textStyle.bodyMedium),
-            onTap: () {
-              Get.to(const Wish());
-            },
-          ),
-        ]),
-      ),
-    );
-  }
-
-//LIST INLUDE TYPE PRODUCT
-  SizedBox typeList(Size size) {
-    //seslect clothes or...
-
-    return SizedBox(
-      //sizedbox main
-      height: size.height / 6.6,
-      width: double.infinity,
-      child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          physics: const BouncingScrollPhysics(),
-          itemCount: Model.modelList.length,
-          itemBuilder: ((context, index) {
-            return Row(children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        select.value = index;
-                        Future.delayed(const Duration(milliseconds: 700)).then(
-                            (value) =>
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: ((context) => Selectkala(
-                                          index,
-                                        )))));
-                      },
-                      child: Container(
-                        //list container
-                        width: size.width / 6,
-                        height: size.height / 11,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image: AssetImage(Model.modelList[index].ima),
-                        )),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: Text(
-                        Model.modelList[index].title,
-                        style: textStyle.bodyMedium,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ]);
-          })),
-    );
-  }
-
-
-
-//SUGGEST LIST
   suggList(Size size) {
     //suggestion List
     return SizedBox(
@@ -560,66 +399,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
                       ),
                       //////filter
                       controller.suggestlist[index].filter == 'shoes'
-                          ? Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        'Select Size',
-                                        style: textStyle.bodyMedium,
-                                      ),
-                                      Text(
-                                        ' (Uk Size)',
-                                        style: textStyle.bodyMedium,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                ////size pa
-                                SizedBox(
-                                  height: 55,
-                                  child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: sizepa.length,
-                                      itemBuilder: ((context, index) {
-                                        return Padding(
-                                          padding: const EdgeInsets.all(2.0),
-                                          child: InkWell(
-                                            onTap: () {
-                                              select.value = index;
-                                            },
-                                            child: Obx(
-                                              () => AnimatedContainer(
-                                                height: 80,
-                                                width: 50,
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                        color: Rang.blue),
-                                                    color: select.value == index
-                                                        ? const Color.fromARGB(
-                                                            82, 61, 123, 159)
-                                                        : Colors.white,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            45)),
-                                                duration: const Duration(
-                                                    milliseconds: 200),
-                                                child: Center(
-                                                  child: Text(
-                                                      sizepa[index].toString(),
-                                                      style:
-                                                          textStyle.bodyMedium),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      })),
-                                ),
-                              ],
-                            )
+                          ? shoesSize(select)
                           : const SizedBox(
                               height: 30,
                             ),
@@ -652,162 +432,11 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
         }));
   }
 
+
+
   _onPressed(int index) {
     if (!myBagList.contains(controller.suggestlist[index])) {
       myBagList.add(controller.suggestlist[index]);
     }
-  }
-}
-
-//* A BLUE BOX FOR INSTALL APP
-class Shortcut extends StatelessWidget {
-  const Shortcut({
-    Key? key,
-    required this.size,
-  }) : super(key: key);
-
-  final Size size;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(children: [
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Container(
-          width: size.width / 1.12,
-          height: size.height / 4.7,
-          decoration: BoxDecoration(
-              color: Rang.blue, borderRadius: BorderRadius.circular(10)),
-        ),
-      ),
-      Positioned(
-        left: 20,
-        top: 40,
-        child: Row(
-          children: [
-            Container(
-              width: size.width / 3.5,
-              height: size.height / 7,
-              decoration: BoxDecoration(
-                  image: const DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage(
-                        'assets/image/PWA-CTA.png',
-                      )),
-                  borderRadius: BorderRadius.circular(10)),
-            ),
-            const SizedBox(width: 8),
-            SizedBox(
-              width: size.width / 2.2,
-              child: const Text(
-                  '''Discover your favrouite products faster with CORA’L web app.''',
-                  strutStyle: StrutStyle(height: 1.7),
-                  style: TextStyle(
-                      fontFamily: 'Auliare',
-                      fontSize: 14,
-                      color: Colors.white)),
-            )
-          ],
-        ),
-      ),
-      const Positioned(
-          left: 150,
-          top: 50,
-          child: Text(
-            '',
-            style: TextStyle(color: Colors.white),
-          )),
-      Positioned(
-        bottom: 20,
-        left: 150,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('Add shortcut ', style: textStyle.headlineLarge),
-            const Icon(Icons.arrow_forward, color: Colors.white)
-          ],
-        ),
-      )
-    ]);
-  }
-}
-
-//*KIND OF BRANDS
-class Brand extends StatelessWidget {
-  const Brand({Key? key, this.size}) : super(key: key);
-
-  final size;
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-        physics: const ClampingScrollPhysics(),
-        shrinkWrap: true,
-        itemCount: brands.length,
-        gridDelegate:
-            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-        itemBuilder: ((context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(image: AssetImage(brands[index].ima))),
-              width: size.width / 6,
-              height: size.height / 20,
-            ),
-          );
-        }));
-  }
-}
-
-//COLLECTION INCLUDE 4 PHOTOS IN BLUE CONTAINER
-class CollectionList extends StatelessWidget {
-  const CollectionList({Key? key, this.size}) : super(key: key);
-  final size;
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-
-        ///collection
-        physics: const ClampingScrollPhysics(),
-        shrinkWrap: true,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            childAspectRatio: 1, crossAxisCount: 2),
-        itemCount: cateList.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(7.0),
-            child: Container(
-              width: size.width / 3,
-              height: size.height / 7,
-              decoration: BoxDecoration(
-                color: Colors.blueGrey,
-                borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(
-                    fit: BoxFit.cover, image: AssetImage(cateList[index].ima)),
-              ),
-            ),
-          );
-        });
-  }
-}
-
-//2 PHOTOS IN HEAD OF PAGE
-class Bannner extends StatelessWidget {
-  const Bannner({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        physics: const BouncingScrollPhysics(),
-        child: Row(
-          children: [
-            Image.asset('assets/image/banner/spring.png'),
-            Image.asset('assets/image/banner/banner.png'),
-          ],
-        ));
   }
 }

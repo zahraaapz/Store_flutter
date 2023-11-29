@@ -24,6 +24,7 @@ class SignupScreen extends StatelessWidget {
                     colors: [
                   Color.fromARGB(230, 244, 244, 244),
                   Colors.transparent,
+                  Colors.transparent,
                   Color.fromARGB(230, 255, 255, 255),
                 ])),
             child: Column(

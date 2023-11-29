@@ -36,10 +36,11 @@ class RegisterScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     myTextField(
+                      maxLength: 4,
                       controller: MyTextEditingController.preNum,
                       textInputType: TextInputType.number,
                       size: Get.size,
-                      width: Get.width / 7.5,
+                      width: Get.width /6.5,
                       hintText: '+11',
                     ),
                     myTextField(
@@ -48,6 +49,7 @@ class RegisterScreen extends StatelessWidget {
                       width: Get.width / 1.25,
                       hintText: '987654321',
                       textInputType: TextInputType.number,
+                      maxLength: 10
                     ),
                   ],
                 ),
@@ -55,6 +57,7 @@ class RegisterScreen extends StatelessWidget {
                   height: 20,
                 ),
                 myTextField(
+                  maxLength: 20,
                   controller: MyTextEditingController.email,
                   size: Get.size,
                   width: Get.width / 1.02,
@@ -68,6 +71,7 @@ class RegisterScreen extends StatelessWidget {
                   size: Get.size,
                   width: Get.width / 1.02,
                   hintText: 'USERNAME',
+                  maxLength: 9
                 ),
                 SizedBox(
                   height: 20,
@@ -77,6 +81,7 @@ class RegisterScreen extends StatelessWidget {
                   size: Get.size,
                   width: Get.width / 1.02,
                   hintText: 'PASSWORD',
+                  maxLength: 8
                 ),  SizedBox(
                   height: 20,
                 ),
@@ -85,6 +90,7 @@ class RegisterScreen extends StatelessWidget {
                   size: Get.size,
                   width: Get.width / 1.02,
                   hintText: 'FULLNAME',
+                  maxLength: 8
                 ),
                 SizedBox(
                   height: 20,
@@ -112,7 +118,7 @@ class RegisterScreen extends StatelessWidget {
                           MyTextEditingController.preNum.text.isNotEmpty &&
                           MyTextEditingController.number.text.isNotEmpty &&
                           MyTextEditingController.password.text.isNotEmpty) {
-                        Get.offNamed(RouteNames.home);
+                              Get.offNamed(RouteNames.home);
                       } else {
                         massageSnackbar('Enter information', context);
                       }

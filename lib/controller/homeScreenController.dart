@@ -26,16 +26,22 @@ class HomeScreenController extends GetxController {
     
     super.onInit();
     
-    getHomeItem();
+   getLists();
+    
+  }
+getLists(){
+
+   getHomeItem();
     getShoesItem();
     getHandBagItem();
     getjewellery();
     getSkincareItem();
     getWatcheItem();
     getEyewearItem();
-    
-  }
 
+
+
+}
 
   getHomeItem() async {
     waiting.value=true;
