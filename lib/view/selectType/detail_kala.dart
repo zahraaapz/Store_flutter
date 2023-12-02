@@ -20,34 +20,38 @@ class DetailKala extends StatefulWidget {
 
   int select;
   List<Product> kalaList;
-  DetailKala(this.index, this.select, this.kalaList,
-      {super.key, });
+  DetailKala(
+    this.index,
+    this.select,
+    this.kalaList, {
+    super.key,
+  });
 
   @override
   State<DetailKala> createState() =>
       // ignore: no_logic_in_create_state
-      _DetailKalaState(select, index ,kalaList);
+      _DetailKalaState(select, index, kalaList);
 }
 
 class _DetailKalaState extends State<DetailKala> {
+  _DetailKalaState(this.select, this.index, this.kalalist);
 
-
-  _DetailKalaState(this.select, this.index,this.kalalist);
-
-  
   List<Product> kalalist;
   int select;
   int index;
-  RxInt sizepa=0.obs;
- late bool isFavorite ;
+  RxInt sizepa = 0.obs;
+  late bool isFavorite;
   @override
   void initState() {
-  isFavorite = MyStorage.box.read('${kalalist[index].name}'+ "${kalalist[index].filter}")??false;
+    isFavorite = MyStorage.box
+            .read('${kalalist[index].name}' + "${kalalist[index].filter}") ??
+        false;
 
     super.initState();
   }
+
   final int randomValue = Random().nextInt(500000);
-   var homeScreenController=Get.find<HomeScreenController>();
+  var homeScreenController = Get.find<HomeScreenController>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -153,7 +157,7 @@ class _DetailKalaState extends State<DetailKala> {
                                     '43.5',
                                     style: textStyle.bodyMedium,
                                   ),
-                                 (Dim.small-5).width,
+                                  (Dim.small - 5).width,
                                   const Icon(
                                     CupertinoIcons.star_fill,
                                     color: Rang.orange,
@@ -163,7 +167,6 @@ class _DetailKalaState extends State<DetailKala> {
                               ),
                             )),
                       ),
-                 
                       const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -199,7 +202,7 @@ class _DetailKalaState extends State<DetailKala> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: SizedBox(
-                        width: Get.width/2.3,
+                        width: Get.width / 2.3,
                         child: Text(
                           'Get upto 30% of on order value above \$100',
                           style: textStyle.bodyMedium,
@@ -233,10 +236,7 @@ class _DetailKalaState extends State<DetailKala> {
                 ),
               ),
             ),
-            Visibility(
-              visible: select==5,
-              child: shoesSize(sizepa))
-           ,
+            Visibility(visible: select == 5, child: shoesSize(sizepa)),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -257,15 +257,17 @@ class _DetailKalaState extends State<DetailKala> {
                               !wishList.contains(kalalist[index])) {
                             wishList.add(kalalist[index]);
                             MyStorage.box.write(
-                                '${kalalist[index].name}'+
-                                    "${kalalist[index].filter}",
+                                '${kalalist[index].name}'
+                                        "${kalalist[index].filter}" 
+                                    "$MyStorage.box.read(StorageNames.userName)",
                                 isFavorite);
                           }
                           if (isFavorite == false &&
                               wishList.contains(kalalist[index])) {
                             wishList.remove(kalalist[index]);
-                            MyStorage.box.remove('${kalalist[index].name}'+
-                                "${kalalist[index].filter}");
+                            MyStorage.box.remove('${kalalist[index].name}'
+                                    "${kalalist[index].filter}" 
+                                "$MyStorage.box.read(StorageNames.userName)");
                           }
                           debugPrint(wishList.length.toString());
                         });
@@ -292,7 +294,7 @@ class _DetailKalaState extends State<DetailKala> {
                   Text('43 Rating and 23 Reviews', style: textStyle.bodyMedium),
                   InkWell(
                     onTap: (() {
-                     Get.toNamed(RouteNames.review);
+                      Get.toNamed(RouteNames.review);
                     }),
                     child: const Icon(
                       Icons.arrow_forward_ios_outlined,
@@ -311,7 +313,7 @@ class _DetailKalaState extends State<DetailKala> {
                 ],
               ),
             ),
-       randomList(select,homeScreenController),
+            randomList(select, homeScreenController),
           ],
         ),
       )),

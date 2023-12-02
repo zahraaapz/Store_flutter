@@ -35,7 +35,9 @@ class _BasketState extends State<Basket> {
   Widget build(BuildContext context) {
     var size = MediaQuery.sizeOf(context);
     return SafeArea(
+      
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
           backgroundColor: const Color.fromARGB(31, 116, 114, 114),
           body: Column(
             children: [
@@ -68,6 +70,7 @@ class _BasketState extends State<Basket> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: myTextField(
+                            context:context,
                             width: double.infinity,
                             color: Colors.white,
                             size: size,

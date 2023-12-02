@@ -88,5 +88,5 @@ class Notif extends StatelessWidget {
       ),
     );
   }
-   _onPressed () {Get.toNamed(RouteNames.home);}}
+   _onPressed () {Get.offNamed(RouteNames.home);}}
 

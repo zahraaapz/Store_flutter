@@ -9,37 +9,33 @@ import 'package:appstore/view/wish/wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class Home extends StatelessWidget {
- 
-
   RxInt selectpg = 0.obs;
 
   Home({super.key});
   @override
   Widget build(BuildContext context) {
-   
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: Stack(children: [
-        
-            
-               Positioned.fill(
-                 child: Obx(()=>
-                  IndexedStack(
-                      index: selectpg.value,
-                      children: [Extractmainscreen(),const Wish(), Profile(),  Basket(),]),
-                 ),
-               ),
-             
-          
+        bottomNavigationBar: Stack(children: [
+          Positioned.fill(
+            bottom: 0,
+            right: 0,
+            left: 0,
+            child: Obx(
+              () => IndexedStack(index: selectpg.value, children: [
+                Extractmainscreen(),
+                const Wish(),
+                Profile(),
+                Basket(),
+              ]),
+            ),
+          ),
           Buttonbar(
               selectpg: selectpg,
               changeScreen: (int newpg) {
-              
-                  selectpg.value = newpg;
-               
+                selectpg.value = newpg;
               }),
         ]),
       ),
@@ -48,13 +44,10 @@ class Home extends StatelessWidget {
 }
 
 class Buttonbar extends StatelessWidget {
-
-
-
-  Buttonbar({Key? key, required this.changeScreen, required this.selectpg}): super(key: key);
+  Buttonbar({Key? key, required this.changeScreen, required this.selectpg})
+      : super(key: key);
   final Function(int n) changeScreen;
- RxInt  selectpg;
-
+  RxInt selectpg;
 
   @override
   Widget build(BuildContext context) {
@@ -67,9 +60,10 @@ class Buttonbar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             for (int i = 0; i < ikon.length; i++)
-              Obx(()=> IconButton(
+              Obx(
+                () => IconButton(
                     onPressed: (() {
-                     changeScreen(i);
+                      changeScreen(i);
                     }),
                     icon: Icon(
                       ikon[i],

@@ -32,12 +32,12 @@ class _SplashState extends State<Splash> {
     });
 
  
-    if (onLine == false && MyStorage.box.read(StorageNames.userName)==null) {
+    if (onLine == false) {
       checkNetwork();
     } if (onLine == true && MyStorage.box.read(StorageNames.userName)==null){
       Get.offNamed(RouteNames.signup);
     }
-      else {
+       if(onLine == true && MyStorage.box.read(StorageNames.userName)!=null) {
       Get.offNamed(RouteNames.home);
     }
   }

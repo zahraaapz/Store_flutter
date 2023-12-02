@@ -35,6 +35,7 @@ class SignupScreen extends StatelessWidget {
                   origin: const Offset(-10, -70),
                   child: GridView(
                       shrinkWrap: true,
+                      physics: const ClampingScrollPhysics(),
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 3,
@@ -75,6 +76,7 @@ class SignupScreen extends StatelessWidget {
                   scaleX: 1.6,
                   origin: const Offset(0, -120),
                   child: GridView(
+                    physics: const ClampingScrollPhysics(),
                     shrinkWrap: true,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
@@ -127,6 +129,7 @@ class SignupScreen extends StatelessWidget {
                   origin: const Offset(-10, -450),
                   child: GridView(
                     shrinkWrap: true,
+                    physics: const ClampingScrollPhysics(),
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,

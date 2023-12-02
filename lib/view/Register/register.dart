@@ -58,7 +58,7 @@ class RegisterScreen extends StatelessWidget {
                   controller: MyTextEditingController.email,
                   size: Get.size,
                   width: Get.width / 1.02,
-                  hintText: 'MyAccount@gmail.com',
+                  hintText: 'Myaccount@gmail.com',
                 ),
               Dim.large.height,
                 myTextField(
