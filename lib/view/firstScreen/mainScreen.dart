@@ -24,9 +24,9 @@ class Home extends StatelessWidget {
             right: 0,
             left: 0,
             child: Obx(
-              () => IndexedStack(index: selectpg.value, children: [
+              () => IndexedStack(index: selectpg.value, children:  [
                 Extractmainscreen(),
-                const Wish(),
+                Wish(),
                 Profile(),
                 Basket(),
               ]),

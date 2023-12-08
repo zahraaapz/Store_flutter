@@ -2,21 +2,14 @@
 
 import 'package:appstore/component/extention.dart';
 import 'package:appstore/model/Model.dart';
-
+import 'package:appstore/widget/emptyColumn.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../component/dim.dart';
 import '../../component/text_style.dart';
 import '../../constant/storage.dart';
-
 import '../../constant/string.dart';
-import '../../route_manager/route_name.dart';
-import '../../widget/ButtonWidget.dart';
-import '../../widget/contentEmptyPages.dart';
 import '../../widget/iconANDtitle.dart';
-import '../../widget/titleEmtypage.dart';
-
 
 class Wish extends StatefulWidget {
   const Wish({super.key});
@@ -34,22 +27,10 @@ class _WishState extends State<Wish> {
       iconANDtitle('Wishlist', Icons.arrow_back_ios),
       (Dim.large).height,
       wishList.isEmpty
-          ? Column(
-              children: [
-                 (Dim.large*5).height,
-                Image.asset('assets/image/wish.png'),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: titleEmtypage(MyString.wishEmptytitle),
-                ),
-                Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: contentEmptyPages(MyString.wishEmptyContent)),
-                (Dim.large*5).height,
-                 ButtonWidget(
-                  onPressed: () => Get.offAllNamed(RouteNames.home),
-                  title: 'start shopping')
-              ],
+          ? const EmptyColumn(
+              image: 'assets/image/wish.png',
+              title: MyString.wishEmptytitle,
+              content: MyString.wishEmptyContent,
             )
           : myWishList()
     ])));
@@ -85,14 +66,11 @@ class _WishState extends State<Wish> {
                     Text(wishList[index].brand!, style: textStyle.bodyMedium),
                     InkWell(
                       onTap: (() {
-                           MyStorage.box.remove
-                          ('${wishList[index].name}'+
-                              "${wishList[index].filter}");
+                        MyStorage.box.remove('${wishList[index].name}'
+                            "${wishList[index].filter}"
+                            "$MyStorage.box.read(StorageNames.userName)");
                         setState(() {
                           wishList.remove(wishList[index]);
-
-                       
-
                         });
                       }),
                       child: const Icon(Icons.close, size: 20),

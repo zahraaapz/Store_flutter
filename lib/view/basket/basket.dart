@@ -1,67 +1,50 @@
 import 'package:appstore/component/extention.dart';
 import 'package:appstore/constant/storage.dart';
 import 'package:appstore/constant/color.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../component/dim.dart';
 import '../../component/text_style.dart';
 import '../../model/Model.dart';
-
-import '../../constant/string.dart';
 import '../../route_manager/route_name.dart';
-import '../../widget/ButtonWidget.dart';
-import '../../widget/contentEmptyPages.dart';
 import '../../widget/iconANDtitle.dart';
+import '../../widget/emptyColumn.dart';
 import '../../widget/myTextField.dart';
-import '../../widget/titleEmtypage.dart';
+import '../../constant/string.dart';
 
 class Basket extends StatefulWidget {
   const Basket({super.key});
-
-  // ignore: use_key_in_widget_constructors
 
   @override
   State<Basket> createState() => _BasketState();
 }
 
 class _BasketState extends State<Basket> {
-  List<int> qnty = List.filled(4, 1);
+  List<int>? qnty ;
   int indexOfqnty = 0;
   double totalPrice = 0.0;
 
+
+
+
   @override
   Widget build(BuildContext context) {
+    qnty = List.filled(myBagList.length, 1);
     var size = MediaQuery.sizeOf(context);
     return SafeArea(
-      
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: false,
           backgroundColor: const Color.fromARGB(31, 116, 114, 114),
           body: Column(
             children: [
               iconANDtitle('My Bag', Icons.close),
-              myBagList.isEmpty
-                  ? Column(
-                      children: [
-                        (Dim.large * 2 - 10).height,
-                        Image.asset('assets/image/emptyBag.png'),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: titleEmtypage(MyString.bagEmptytile),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20, right: 20),
-                          child: contentEmptyPages(MyString.bagEmptyContent),
-                        ),
-                        (Dim.large * 5).height,
-                        ButtonWidget(
-                          onPressed: () => _onPressed(),
-                          title: 'continue shopping',
-                        )
-                      ],
-                    )
+              myBagList.isEmpty ?
+               const EmptyColumn(
+                    image: 'assets/image/emptyBag.png',
+                    title: MyString.bagEmptytile,
+                    content: MyString.bagEmptyContent,
+                   
+                  )
                   : Column(children: [
                       SizedBox(
                         height: Get.height / 2.5,
@@ -70,7 +53,6 @@ class _BasketState extends State<Basket> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: myTextField(
-                            context:context,
                             width: double.infinity,
                             color: Colors.white,
                             size: size,
@@ -98,6 +80,8 @@ class _BasketState extends State<Basket> {
           )),
     );
   }
+
+
 
   ListView basketList(size) {
     return ListView.builder(
@@ -137,47 +121,49 @@ class _BasketState extends State<Basket> {
                           Text(myBagList[index].name!,
                               style: textStyle.bodyMedium),
                           (Dim.large / 2).height,
-                          InkWell(
-                            onTap: () {
-                              setState(() {
-                                qnty[index] = qnty[index] + 1;
-                                indexOfqnty = index;
-                              });
-                            },
-                            child: Container(
-                              color: Rang.toosi,
-                              height: size.height / 20,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                        style: textStyle.bodyMedium,
-                                        'Qnty: ${qnty[index]}'),
-                                    const Icon(Icons.add),
-                                    InkWell(
-                                      onTap: () {
+                          Container(
+                            color: Rang.toosi,
+                            height: size.height / 20,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  Text(
+                                      style: textStyle.bodyMedium,
+                                      'Qnty: ${qnty![index]}'),
+                                   InkWell(
+                                    onTap: () {
                                         setState(() {
-                                          qnty[index] = qnty[index] - 1;
-                                          indexOfqnty = index;
-
-                                          qnty[index] == 0
-                                              ? myBagList
-                                                  .remove(myBagList[index])
-                                              : null;
-                                        });
-                                      },
-                                      child: const Icon(Icons.remove),
-                                    ),
-                                  ],
-                                ),
+                                        qnty![index] = qnty![index] + 1;
+                                        indexOfqnty = index;
+                                        print(myBagList.toString());
+                                      
+                                      });
+                                    },
+                                    
+                                    child: const Icon(Icons.add)),
+                                  InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        qnty![index] = qnty![index] - 1;
+                                        indexOfqnty = index;
+                                        print(myBagList.toString());
+                                        qnty![index] == 0
+                                            ? myBagList
+                                                .remove(myBagList[index])
+                                            : null;
+                                      });
+                                    },
+                                    child: const Icon(Icons.remove),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
                           (Dim.large / 2).height,
                           Text(
                               style: textStyle.bodyMedium,
-                              '${int.parse(myBagList[index].price!) * qnty[index]}\$'),
+                              '${int.parse(myBagList[index].price!) * qnty![index]}\$'),
                         ],
                       ),
                     )
@@ -233,13 +219,13 @@ class _BasketState extends State<Basket> {
       orderDetail[1].price = '20%';
       orderDetail[2].price = '20\$';
       for (int i = 0; i < myBagList.length; i++) {
-        sum = (double.parse(myBagList[i].price!) * qnty[i]) + sum;
+        sum = (double.parse(myBagList[i].price!) * qnty![i]) + sum;
       }
       orderDetail[3].price = (sum * 0.2 + 20).toStringAsFixed(2).toString();
 
       sum = 0.0;
       for (int i = 0; i < myBagList.length; i++) {
-        sum = (double.parse(myBagList[i].price!) * qnty[i]) + sum;
+        sum = (double.parse(myBagList[i].price!) * qnty![i]) + sum;
       }
       orderDetail[0].price = sum.toStringAsFixed(2).toString();
 
@@ -248,7 +234,7 @@ class _BasketState extends State<Basket> {
     });
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-    Dim.medium.height,
+      Dim.medium.height,
       Text('Order detail', style: textStyle.displaySmall),
       SizedBox(
         height: size.height / 5,
@@ -297,9 +283,7 @@ class _BasketState extends State<Basket> {
     ]);
   }
 
-  _onPressed() {
-    Get.offAll(RouteNames.home);
-  }
+
 }
 
 class Cut extends CustomClipper<Path> {

@@ -428,8 +428,11 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
 
 
   _onPressed(int index) {
-    if (!myBagList.contains(controller.suggestlist[index])) {
+    setState(() {
+     if (!myBagList.contains(controller.suggestlist[index])) {
       myBagList.add(controller.suggestlist[index]);
     }
+    });
+ 
   }
 }

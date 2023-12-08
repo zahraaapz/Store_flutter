@@ -11,15 +11,16 @@ import 'package:get/get.dart';
 import '../../component/dim.dart';
 import '../../component/text_style.dart';
 import '../../widget/shimmerList.dart';
+import 'selectTypeMethod/method.dart';
 
 class Selectkala extends StatefulWidget {
-  int select;
+  int selectPage;
 
-  Selectkala(this.select, {super.key});
+  Selectkala(this.selectPage, {super.key});
 
   @override
   // ignore: no_logic_in_create_state
-  State<Selectkala> createState() => _SelectkalaState(select);
+  State<Selectkala> createState() => _SelectkalaState();
 }
 
 class _SelectkalaState extends State<Selectkala> {
@@ -34,7 +35,7 @@ class _SelectkalaState extends State<Selectkala> {
   List<bool> checkBoxPriceBrand = [false, false];
   List selectedBrand = [];
   //
-  int selectPage;
+
    int ?lenght;
   var homeScreenController= Get.find<HomeScreenController>();
 
@@ -46,22 +47,22 @@ class _SelectkalaState extends State<Selectkala> {
  late RangeValues val;
 
   _SelectkalaState(
-    this.selectPage,
+
   );
 
 
 showlist(){
   setState(() {
-        lenght = lenghtLists(selectPage, homeScreenController);
+        lenght = lenghtLists(widget.selectPage, homeScreenController);
 
     checkBoxBrands = List.generate(lenght!, (index) => false);
     brands = List.generate(
-        lenght!, (index) => brandItem(selectPage, index, homeScreenController));
+        lenght!, (index) => brandItem(widget.selectPage, index, homeScreenController));
 
     prices = List.generate(
         lenght!,
         (index) => double.parse(
-            priceLists(selectPage, homeScreenController, index).toString()));
+            priceLists(widget.selectPage, homeScreenController, index).toString()));
     prices.sort();
     val = RangeValues(
       prices.first,
@@ -103,7 +104,7 @@ showlist(){
                                 if (checkBoxBrands[index] == true) {
                                   selectedBrand.add(brands[index]);
 
-                                  filterBrand(selectPage, filterListBrand,
+                                  filterBrand(widget.selectPage, filterListBrand,
                                       selectedBrand, homeScreenController);
                                   level.value = 1;
                                 } else {
@@ -132,96 +133,83 @@ showlist(){
   Widget build(BuildContext context) {
    
     return SafeArea(
-        child: WillPopScope(
-      onWillPop: () async => false,
-      child: Scaffold(
-        body: Stack(children: [
-          Obx(
-            () => Column(children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                  
-                    (Dim.medium+3).width,
-                    InkWell(
-                      onTap: () {
-                        Get.offAll(Home());
-                      },
-                      child: const SizedBox(
-                        height: 50,
-                        child: Icon(
-                          Icons.arrow_back_ios_new,
-                          color: Rang.blue,
-                        ),
-                      ),
+        child: Scaffold(
+          body: Stack(children: [
+            Obx(
+              () => Column(children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                    
+                      (Dim.medium+3).width,
+                          IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back_ios,
+                      color: Rang.blue,
                     ),
-                     (Dim.xlarge).width,
-                    Text(
-                      selectPage == 0
-                          ? 'Skincare'
-                          : selectPage == 1
-                              ? 'Watches'
-                              : selectPage == 2
-                                  ? 'Handbags'
-                                  : selectPage == 3
-                                      ? 'jewellery'
-                                      : selectPage == 4
-                                          ? 'Eyewear'
-                                          : 'Shoes',
-                      style: textStyle.headlineSmall,
-                    )
-                  ],
-                ),
-              ),
-              homeScreenController.bag.isNotEmpty
-                  ? mainList(level.value == 2
-                      ? filterPrice
-                      : level.value == 1
-                          ? filterListBrand
-                          : selectPage == 0
-                              ? homeScreenController.skincare
-                              : selectPage == 1
-                                  ? homeScreenController.watche
-                                  : selectPage == 2
-                                      ? homeScreenController.bag
-                                      : selectPage == 3
-                                          ? homeScreenController.jewellery
-                                          : selectPage == 4
-                                              ? homeScreenController.eyewear
-                                              : homeScreenController.shoes)
-                  : const ShimmerList(),
-            ]),
-          ),
-          Positioned(
-            bottom: 10,
-            right: 0,
-            left: 0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                InkWell(
-                    onTap: () {
-                        homeScreenController.suggestlist.isEmpty?null:
-                       filterBrandOrPrice(context);
-                      showlist();
+                    onPressed: () {
+                     Get.offAll(Home());
                     },
-                    child: const Icon(Icons.filter_alt_outlined)),
-                InkWell(
-                  onTap: (() {
-                    homeScreenController.suggestlist.isEmpty?null:
-                    filterBySort(context);
-                   showlist();
-                  }),
-                  child: const Icon(Icons.sort_rounded),
+                  ),
+                      
+                       (Dim.xlarge).width,
+                      Text(
+                        widget.selectPage == 0
+                            ? 'Skincare'
+                            : widget.selectPage == 1
+                                ? 'Watches'
+                                : widget.selectPage == 2
+                                    ? 'Handbags'
+                                    : widget.selectPage == 3
+                                        ? 'jewellery'
+                                        : widget.selectPage == 4
+                                            ? 'Eyewear'
+                                            : 'Shoes',
+                        style: textStyle.headlineSmall,
+                      )
+                    ],
+                  ),
                 ),
-              ],
+                homeScreenController.bag.isNotEmpty
+                    ? mainList(level.value == 2
+                        ? filterPrice
+                        : level.value == 1
+                            ? filterListBrand
+                            : selectList(widget.selectPage,homeScreenController))
+                    : const ShimmerList(),
+              ]),
             ),
-          )
-        ]),
-      ),
-    ));
+            Positioned(
+              bottom: 10,
+              right: 0,
+              left: 0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  InkWell(
+                      onTap: () {
+                          homeScreenController.suggestlist.isEmpty?null:
+                         filterBrandOrPrice(context);
+                        showlist();
+                      },
+                      child: const Icon(Icons.filter_alt_outlined)),
+                  InkWell(
+                    onTap: (() {
+                      homeScreenController.suggestlist.isEmpty?null:
+                      filterBySort(context);
+                     showlist();
+                    }),
+                    child: const Icon(Icons.sort_rounded),
+                  ),
+                ],
+              ),
+            )
+          ]),
+        ));
   }
+
+
 
   Future<dynamic> filterBySort(BuildContext context) {
     return showModalBottomSheet(
@@ -267,7 +255,7 @@ showlist(){
                         level.value = 0;
                         setState(() {
                           selectedRadioTile = value.toString();
-                          sortListHightoLow(selectPage, homeScreenController);
+                          sortListHightoLow(widget.selectPage, homeScreenController);
                         });
                       },
                     ),
@@ -287,7 +275,7 @@ showlist(){
                           level.value = 0;
                           setState(() {
                             selectedRadioTile = value.toString();
-                            sortLisLowtoHigh(selectPage, homeScreenController);
+                            sortLisLowtoHigh(widget.selectPage, homeScreenController);
                           });
                         }),
                     const Divider(
@@ -417,7 +405,7 @@ showlist(){
                             () {
                               val = value;
 
-                              switch (selectPage) {
+                              switch (widget.selectPage) {
                                 case 0:
                                   filterPrice.assignAll(homeScreenController
                                       .skincare
@@ -527,7 +515,7 @@ showlist(){
                         onTap: () {
                           Get.to(DetailKala(
                             index,
-                            selectPage,
+                            widget.selectPage,
                             list,
                           ));
                         },
@@ -564,121 +552,4 @@ showlist(){
   }
 }
 
-int lenghtLists(int selectPage, HomeScreenController homeScreenController) {
-  return selectPage == 0
-      ? homeScreenController.skincare.length
-      : selectPage == 1
-          ? homeScreenController.watche.length
-          : selectPage == 2
-              ? homeScreenController.bag.length
-              : selectPage == 3
-                  ? homeScreenController.jewellery.length
-                  : selectPage == 4
-                      ? homeScreenController.eyewear.length
-                      : homeScreenController.shoes.length;
-}
 
-String priceLists(
-    int selectPage, HomeScreenController homeScreenController, int index) {
-  return selectPage == 0
-      ? homeScreenController.skincare[index].price!
-      : selectPage == 1
-          ? homeScreenController.watche[index].price!
-          : selectPage == 2
-              ? homeScreenController.bag[index].price!
-              : selectPage == 3
-                  ? homeScreenController.jewellery[index].price!
-                  : selectPage == 4
-                      ? homeScreenController.eyewear[index].price!
-                      : homeScreenController.shoes[index].price!;
-}
-
-filterBrand(int selectPage, List<Product> filterList, List selectedBrand,
-    HomeScreenController homeScreenController) {
-  selectPage == 0
-      ? filterList.assignAll(homeScreenController.skincare
-          .where((p0) => selectedBrand.contains(p0.brand))
-          .toList())
-      : selectPage == 1
-          ? filterList.assignAll(homeScreenController.watche
-              .where((p0) => selectedBrand.contains(p0.brand))
-              .toList())
-          : selectPage == 2
-              ? filterList.assignAll(homeScreenController.bag
-                  .where((p0) => selectedBrand.contains(p0.brand))
-                  .toList())
-              : selectPage == 3
-                  ? filterList.assignAll(homeScreenController.jewellery
-                      .where((p0) => selectedBrand.contains(p0.brand))
-                      .toList())
-                  : selectPage == 4
-                      ? filterList.assignAll(homeScreenController.eyewear
-                          .where((p0) => selectedBrand.contains(p0.brand))
-                          .toList())
-                      : filterList.assignAll(homeScreenController.shoes
-                          .where((p0) => selectedBrand.contains(p0.brand))
-                          .toList());
-}
-
-String brandItem(
-    int selectPage, int index, HomeScreenController homeScreenController) {
-  return selectPage == 0
-      ? homeScreenController.skincare[index].brand!
-      : selectPage == 1
-          ? homeScreenController.watche[index].brand!
-          : selectPage == 2
-              ? homeScreenController.bag[index].brand!
-              : selectPage == 3
-                  ? homeScreenController.jewellery[index].brand!
-                  : selectPage == 4
-                      ? homeScreenController.eyewear[index].brand!
-                      : homeScreenController.shoes[index].brand!;
-}
-
-sortLisLowtoHigh(int selectPage, HomeScreenController homeScreenController) {
-  selectPage == 0
-      ? homeScreenController.skincare.sort(((a, b) => double.parse(a.price!)
-          .toString()
-          .compareTo(double.parse(b.price!).toString())))
-      : selectPage == 1
-          ? homeScreenController.watche.sort(((a, b) => double.parse(a.price!)
-              .toString()
-              .compareTo(double.parse(b.price!).toString())))
-          : selectPage == 2
-              ? homeScreenController.bag.sort(((a, b) => double.parse(a.price!)
-                  .toString()
-                  .compareTo(double.parse(b.price!).toString())))
-              : selectPage == 3
-                  ? homeScreenController.jewellery.sort(((a, b) =>
-                      double.parse(a.price!)
-                          .toString()
-                          .compareTo(double.parse(b.price!).toString())))
-                  : selectPage == 4
-                      ? homeScreenController.eyewear.sort(
-                          ((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
-                      : homeScreenController.shoes.sort(((a, b) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())));
-}
-
-sortListHightoLow(int selectPage, HomeScreenController homeScreenController) {
-  selectPage == 0
-      ? homeScreenController.skincare.sort(((b, a) => double.parse(a.price!)
-          .toString()
-          .compareTo(double.parse(b.price!).toString())))
-      : selectPage == 1
-          ? homeScreenController.watche.sort(((b, a) => double.parse(a.price!)
-              .toString()
-              .compareTo(double.parse(b.price!).toString())))
-          : selectPage == 2
-              ? homeScreenController.bag.sort(((b, a) => double.parse(a.price!)
-                  .toString()
-                  .compareTo(double.parse(b.price!).toString())))
-              : selectPage == 3
-                  ? homeScreenController.jewellery.sort(((b, a) =>
-                      double.parse(a.price!)
-                          .toString()
-                          .compareTo(double.parse(b.price!).toString())))
-                  : selectPage == 4
-                      ? homeScreenController.eyewear.sort(
-                          ((b, a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())))
-                      : homeScreenController.shoes.sort(((b, a) => double.parse(a.price!).toString().compareTo(double.parse(b.price!).toString())));
-}

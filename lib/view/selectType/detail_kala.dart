@@ -5,6 +5,7 @@ import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/constant/color.dart';
 import 'package:appstore/route_manager/route_name.dart';
+import 'package:appstore/view/selectType/selectTypeMethod/method.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,37 +17,36 @@ import '../../widget/firstscreenWidget/shoesSize.dart';
 import '../../widget/ranlomList.dart';
 
 class DetailKala extends StatefulWidget {
-  int index;
 
+  int index;
   int select;
-  List<Product> kalaList;
+  List<Product> kalalist;
   DetailKala(
     this.index,
     this.select,
-    this.kalaList, {
+    this.kalalist, {
     super.key,
   });
 
   @override
   State<DetailKala> createState() =>
       // ignore: no_logic_in_create_state
-      _DetailKalaState(select, index, kalaList);
+      _DetailKalaState();
 }
 
 class _DetailKalaState extends State<DetailKala> {
-  _DetailKalaState(this.select, this.index, this.kalalist);
-
-  List<Product> kalalist;
-  int select;
-  int index;
+ 
+ 
+  _DetailKalaState();
   RxInt sizepa = 0.obs;
-  late bool isFavorite;
+  bool isFavorite = false;
+
   @override
   void initState() {
-    isFavorite = MyStorage.box
-            .read('${kalalist[index].name}' + "${kalalist[index].filter}") ??
+    isFavorite = MyStorage.box.read('${widget.kalalist[widget.index].name}'
+            "${widget.kalalist[widget.index].filter}"
+            "$MyStorage.box.read(StorageNames.userName)") ??
         false;
-
     super.initState();
   }
 
@@ -85,7 +85,7 @@ class _DetailKalaState extends State<DetailKala> {
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             fit: BoxFit.fill,
-                            image: Image.asset(kalalist[index].ima!).image),
+                            image: Image.asset(widget.kalalist[widget.index].ima!).image),
                         borderRadius: BorderRadius.circular(30)),
                   ),
                   Positioned(
@@ -109,12 +109,12 @@ class _DetailKalaState extends State<DetailKala> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    kalalist[index].name!,
+                    widget.kalalist[widget.index].name!,
                     textScaleFactor: 1.9,
                     style: textStyle.headlineMedium,
                   ),
                   Text(
-                    kalalist[index].brand!,
+                    widget.kalalist[widget.index].brand!,
                     textScaleFactor: 1.1,
                     style: textStyle.bodyMedium,
                     strutStyle: const StrutStyle(height: 2),
@@ -122,7 +122,7 @@ class _DetailKalaState extends State<DetailKala> {
                   Row(
                     children: [
                       Text(
-                        '${kalalist[index].price}\$',
+                        '${widget.kalalist[widget.index].price}\$',
                         textScaleFactor: 1.6,
                         strutStyle: const StrutStyle(height: 2),
                         style: textStyle.bodyMedium,
@@ -236,7 +236,7 @@ class _DetailKalaState extends State<DetailKala> {
                 ),
               ),
             ),
-            Visibility(visible: select == 5, child: shoesSize(sizepa)),
+            Visibility(visible: widget.select == 5, child: shoesSize(sizepa)),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -254,19 +254,19 @@ class _DetailKalaState extends State<DetailKala> {
                         setState(() {
                           isFavorite = !isFavorite;
                           if (isFavorite == true &&
-                              !wishList.contains(kalalist[index])) {
-                            wishList.add(kalalist[index]);
+                              !wishList.contains(widget.kalalist[widget.index])) {
+                            wishList.add(widget.kalalist[widget.index]);
                             MyStorage.box.write(
-                                '${kalalist[index].name}'
-                                        "${kalalist[index].filter}" 
-                                    "$MyStorage.box.read(StorageNames.userName)",
+                                '${widget.kalalist[widget.index].name}'
+                                "${widget.kalalist[widget.index].filter}"
+                                "$MyStorage.box.read(StorageNames.userName)",
                                 isFavorite);
                           }
                           if (isFavorite == false &&
-                              wishList.contains(kalalist[index])) {
-                            wishList.remove(kalalist[index]);
-                            MyStorage.box.remove('${kalalist[index].name}'
-                                    "${kalalist[index].filter}" 
+                              wishList.contains(widget.kalalist[widget.index])) {
+                            wishList.remove(widget.kalalist[widget.index]);
+                            MyStorage.box.remove('${widget.kalalist[widget.index].name}'
+                                "${widget.kalalist[widget.index].filter}"
                                 "$MyStorage.box.read(StorageNames.userName)");
                           }
                           debugPrint(wishList.length.toString());
@@ -313,7 +313,7 @@ class _DetailKalaState extends State<DetailKala> {
                 ],
               ),
             ),
-            randomList(select, homeScreenController),
+            randomlist(list:selectList(widget.select, homeScreenController)),
           ],
         ),
       )),
@@ -321,11 +321,11 @@ class _DetailKalaState extends State<DetailKala> {
   }
 
   _onPressed() {
-    if (!myBagList.contains(kalalist[index])) {
-      setState(() {
-        myBagList.add(kalalist[index]);
+    setState(() {
+      if (!myBagList.contains(widget.kalalist[widget.index])) {
+        myBagList.add(widget.kalalist[widget.index]);
         debugPrint(myBagList.length.toString());
-      });
-    }
+      }
+    });
   }
 }

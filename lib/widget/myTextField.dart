@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 import '../constant/color.dart';
@@ -10,35 +8,34 @@ Container myTextField(
     double? height,
     int? maxLength,
     String? hintText,
-    bool border=true,
-    context,
+    bool border = true,
     TextEditingController? controller,
     TextInputType? textInputType,
     Color color = Rang.toosi}) {
   return Container(
-    decoration:BoxDecoration
-    ( borderRadius: BorderRadius.circular(15), color:height==null?null: Rang.toosi),
-    height:  height ?? size!.height / 15,
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: height == null ? null : Rang.toosi),
+    height: height ?? size!.height / 15,
     width: width,
     child: TextField(
-      //scrollPadding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       textAlignVertical: TextAlignVertical.bottom,
       maxLength: maxLength,
       keyboardType: textInputType,
       controller: controller,
       decoration: InputDecoration(
-        filled: true,
+          filled: true,
           hintText: hintText,
-          fillColor:  Rang.toosi,
+          fillColor: Rang.toosi,
           helperStyle: const TextStyle(color: Rang.grey),
           border: OutlineInputBorder(
-            
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(15)),
-          focusedBorder:border?
-           OutlineInputBorder(
-              borderSide: const BorderSide(color: Colors.blue),
-              borderRadius: BorderRadius.circular(15)):null),
+          focusedBorder: border
+              ? OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.blue),
+                  borderRadius: BorderRadius.circular(15))
+              : null),
     ),
   );
 }
