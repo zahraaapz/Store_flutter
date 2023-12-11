@@ -187,20 +187,20 @@ showlist(){
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  InkWell(
-                      onTap: () {
+                  IconButton(
+                      onPressed: () {
                           homeScreenController.suggestlist.isEmpty?null:
                          filterBrandOrPrice(context);
                         showlist();
                       },
-                      child: const Icon(Icons.filter_alt_outlined)),
-                  InkWell(
-                    onTap: (() {
+                      icon: const Icon(Icons.filter_alt_outlined)),
+                  IconButton(
+                    onPressed: (() {
                       homeScreenController.suggestlist.isEmpty?null:
                       filterBySort(context);
                      showlist();
                     }),
-                    child: const Icon(Icons.sort_rounded),
+                    icon: const Icon(Icons.sort_rounded),
                   ),
                 ],
               ),

@@ -65,11 +65,11 @@ class _SearchState extends State<Search> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(backgroundColor: Colors.white, elevation: 0, actions: [
-          InkWell(
-              onTap: () {
+          IconButton(
+              onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Icon(
+              icon: const Icon(
                 Icons.arrow_back_ios,
                 color: Colors.black,
               )),

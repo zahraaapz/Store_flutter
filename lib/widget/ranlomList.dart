@@ -5,20 +5,30 @@ import '../component/text_style.dart';
 
 
 class randomlist  extends StatefulWidget {
-randomlist({super.key,this.list});
-RxList <Product> ?list;
+randomlist({this.list});
 
-  @override
-  State<randomlist> createState() => _randomlistState();
+RxList <Product> ? list;
+@override
+State<randomlist> createState() => _randomlistState();
 }
 
 class _randomlistState extends State<randomlist> {
 
+List <Product>  change=[];
 
-
+@override
+void initState(){
+change.addAll(widget.list!);
+  super.initState();
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+   change.shuffle();
+   });
+}
 
   @override
   Widget build(BuildContext context) {
+
+
        return SizedBox(
       width: double.infinity,
       height: Get.height / 3.2,
@@ -27,6 +37,7 @@ class _randomlistState extends State<randomlist> {
           scrollDirection: Axis.horizontal,
           itemCount: 2,
           itemBuilder: ((context, index) {
+           
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
@@ -38,7 +49,7 @@ class _randomlistState extends State<randomlist> {
                           borderRadius: BorderRadius.circular(20),
                           image: DecorationImage(
                               fit: BoxFit.fill,
-                              image: AssetImage(widget.list![index].ima!))
+                              image: AssetImage(change![index].ima!))
                               ),
                     ),
                     Padding(
@@ -49,12 +60,12 @@ class _randomlistState extends State<randomlist> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              widget.list![index].brand!,
+                              change[index].brand!,
                               style: textStyle.bodyMedium,
                             ),
-                            Text(widget.list![index].name!,
+                            Text(change[index].name!,
                                 style: textStyle.bodyMedium),
-                            Text(widget.list![index].price!,
+                            Text(change[index].price!,
                                 strutStyle: const StrutStyle(height: 2),
                                 style: textStyle.bodyMedium),
                           ],

@@ -10,16 +10,16 @@ Row appBar(Size size, BuildContext context,GlobalKey<ScaffoldState>  _key) {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         SizedBox(
-          width: size.width / 4.6,
+          width: size.width /3.8,
           height: size.height / 20,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              InkWell(
-                onTap: () {
+              IconButton(
+                onPressed: () {
                   _key.currentState?.openDrawer();
                 },
-                child: const Icon(
+                icon: const Icon(
                   Icons.menu,
                   color: Rang.blue,
                   size: 32,
@@ -35,14 +35,14 @@ Row appBar(Size size, BuildContext context,GlobalKey<ScaffoldState>  _key) {
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
             const Icon(Icons.add_to_photos_rounded, color: Rang.blue),
-            InkWell(
-                onTap: (() {
+            IconButton(
+                onPressed: (() {
                   Get.toNamed(RouteNames.search);
                 }),
-                child: const Icon(Icons.search, color: Rang.blue)),
-            InkWell(
-              onTap: () => Get.toNamed(RouteNames.notifition),
-              child: const Icon(Icons.notifications_none, color: Rang.blue),
+                icon: const Icon(Icons.search, color: Rang.blue)),
+            IconButton(
+              onPressed: () => Get.toNamed(RouteNames.notifition),
+              icon: const Icon(Icons.notifications_none, color: Rang.blue),
             )
           ]),
         )

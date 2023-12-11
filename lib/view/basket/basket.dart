@@ -13,23 +13,21 @@ import '../../widget/myTextField.dart';
 import '../../constant/string.dart';
 
 class Basket extends StatefulWidget {
-  const Basket({super.key});
-
+  Basket({super.key}) {
+    qnty = List.generate(myBagList.length, (index) => 1);
+    print(qnty!.length);
+  }
+  List<int>? qnty;
   @override
   State<Basket> createState() => _BasketState();
 }
 
 class _BasketState extends State<Basket> {
-  List<int>? qnty ;
   int indexOfqnty = 0;
   double totalPrice = 0.0;
 
-
-
-
   @override
   Widget build(BuildContext context) {
-    qnty = List.filled(myBagList.length, 1);
     var size = MediaQuery.sizeOf(context);
     return SafeArea(
       child: Scaffold(
@@ -38,17 +36,16 @@ class _BasketState extends State<Basket> {
           body: Column(
             children: [
               iconANDtitle('My Bag', Icons.close),
-              myBagList.isEmpty ?
-               const EmptyColumn(
-                    image: 'assets/image/emptyBag.png',
-                    title: MyString.bagEmptytile,
-                    content: MyString.bagEmptyContent,
-                   
-                  )
+             myBagList.isEmpty
+                  ? const EmptyColumn(
+                      image: 'assets/image/emptyBag.png',
+                      title: MyString.bagEmptytile,
+                      content: MyString.bagEmptyContent,
+                    )
                   : Column(children: [
                       SizedBox(
                         height: Get.height / 2.5,
-                        child: basketList(size),
+                        child: basketList(size, widget.qnty!),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -71,7 +68,7 @@ class _BasketState extends State<Basket> {
                               borderRadius: BorderRadius.circular(15)),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: columnPrices(size),
+                            child: columnPrices(size, widget.qnty),
                           ),
                         ),
                       )
@@ -81,9 +78,7 @@ class _BasketState extends State<Basket> {
     );
   }
 
-
-
-  ListView basketList(size) {
+  ListView basketList(size, List<int> qnty) {
     return ListView.builder(
         physics: const BouncingScrollPhysics(),
         itemCount: myBagList.length,
@@ -124,46 +119,48 @@ class _BasketState extends State<Basket> {
                           Container(
                             color: Rang.toosi,
                             height: size.height / 20,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Row(
-                                children: [
-                                  Text(
-                                      style: textStyle.bodyMedium,
-                                      'Qnty: ${qnty![index]}'),
-                                   InkWell(
-                                    onTap: () {
-                                        setState(() {
-                                        qnty![index] = qnty![index] + 1;
-                                        indexOfqnty = index;
-                                        print(myBagList.toString());
-                                      
-                                      });
-                                    },
-                                    
-                                    child: const Icon(Icons.add)),
-                                  InkWell(
-                                    onTap: () {
+                            child: Row(
+                              children: [
+                                Text(
+                                    style: textStyle.bodyMedium,
+                                    'Qnty: ${qnty[index]}'),
+                                IconButton(
+                                    onPressed: () {
                                       setState(() {
-                                        qnty![index] = qnty![index] - 1;
+                                      qnty[index] = qnty[index] + 1;
                                         indexOfqnty = index;
-                                        print(myBagList.toString());
-                                        qnty![index] == 0
-                                            ? myBagList
-                                                .remove(myBagList[index])
-                                            : null;
+                                      
+                                         
                                       });
                                     },
-                                    child: const Icon(Icons.remove),
-                                  ),
-                                ],
-                              ),
+                                    icon: const Icon(Icons.add)),
+                                IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      indexOfqnty = index;
+                                      qnty[index] = qnty[index] - 1;
+                                       
+                                   if(qnty.contains(0)){
+
+                                    myBagList.removeAt(index);
+                                    
+                                    qnty.removeAt(index);
+                                  
+                                      }});
+                                                
+                                      
+                                    
+                                  
+                                },
+                                  icon: const Icon(Icons.remove),
+                                ),
+                              ],
                             ),
                           ),
                           (Dim.large / 2).height,
                           Text(
                               style: textStyle.bodyMedium,
-                              '${int.parse(myBagList[index].price!) * qnty![index]}\$'),
+                              '${int.parse(myBagList[index].price!) * qnty[index]}\$'),
                         ],
                       ),
                     )
@@ -213,7 +210,7 @@ class _BasketState extends State<Basket> {
         }));
   }
 
-  Column columnPrices(size) {
+  Column columnPrices(size, qnty) {
     var sum = 0.0;
     setState(() {
       orderDetail[1].price = '20%';
@@ -282,8 +279,6 @@ class _BasketState extends State<Basket> {
       )
     ]);
   }
-
-
 }
 
 class Cut extends CustomClipper<Path> {

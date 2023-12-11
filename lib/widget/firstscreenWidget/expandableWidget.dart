@@ -42,11 +42,11 @@ collapse(context,size) {
               Builder(builder: (context) {
                 var controller =
                     ExpandableController.of(context, required: true)!;
-                return InkWell(
-                  onTap: () {
+                return IconButton(
+                  onPressed: () {
                     controller.toggle();
                   },
-                  child: const Icon(
+                  icon: const Icon(
                     Icons.keyboard_arrow_down_outlined,
                     color: Rang.blue,
                   ),
@@ -280,11 +280,11 @@ Row titleExpanded() {
                   Builder(builder: (context) {
                     var controller =
                         ExpandableController.of(context, required: true)!;
-                    return InkWell(
-                      onTap: () {
+                    return IconButton(
+                      onPressed: () {
                         controller.toggle();
                       },
-                      child: const Icon(
+                      icon: const Icon(
                         Icons.keyboard_arrow_up_outlined,
                         color: Rang.blue,
                       ),

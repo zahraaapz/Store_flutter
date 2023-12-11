@@ -10,14 +10,13 @@ Padding iconANDtitle(String title, IconData icon) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Row(children: [
-      InkWell(
-        onTap: () => Get.back(),
-        child: Icon(
+      IconButton(onPressed: ()=>Get.back(), 
+      icon:  Icon(
           icon,
           color: Rang.blue,
           size: 25,
-        ),
-      ),
+        ),)
+  ,
       Dim.large.width,
   
       Text(

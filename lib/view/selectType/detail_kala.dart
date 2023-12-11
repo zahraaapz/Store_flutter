@@ -31,20 +31,21 @@ class DetailKala extends StatefulWidget {
   @override
   State<DetailKala> createState() =>
       // ignore: no_logic_in_create_state
-      _DetailKalaState();
+      _DetailKalaState(index,kalalist);
 }
 
 class _DetailKalaState extends State<DetailKala> {
  
  
-  _DetailKalaState();
+  _DetailKalaState(this.index,this.kalalist);
   RxInt sizepa = 0.obs;
   bool isFavorite = false;
-
+  final index;
+  List<Product> kalalist;
   @override
   void initState() {
-    isFavorite = MyStorage.box.read('${widget.kalalist[widget.index].name}'
-            "${widget.kalalist[widget.index].filter}"
+    isFavorite = MyStorage.box.read('${kalalist[index].name}'
+            "${kalalist[index].filter}"
             "$MyStorage.box.read(StorageNames.userName)") ??
         false;
     super.initState();
@@ -85,7 +86,7 @@ class _DetailKalaState extends State<DetailKala> {
                     decoration: BoxDecoration(
                         image: DecorationImage(
                             fit: BoxFit.fill,
-                            image: Image.asset(widget.kalalist[widget.index].ima!).image),
+                            image: Image.asset(kalalist[index].ima!).image),
                         borderRadius: BorderRadius.circular(30)),
                   ),
                   Positioned(
@@ -109,12 +110,12 @@ class _DetailKalaState extends State<DetailKala> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.kalalist[widget.index].name!,
+                    kalalist[index].name!,
                     textScaleFactor: 1.9,
                     style: textStyle.headlineMedium,
                   ),
                   Text(
-                    widget.kalalist[widget.index].brand!,
+                    kalalist[index].brand!,
                     textScaleFactor: 1.1,
                     style: textStyle.bodyMedium,
                     strutStyle: const StrutStyle(height: 2),
@@ -122,7 +123,7 @@ class _DetailKalaState extends State<DetailKala> {
                   Row(
                     children: [
                       Text(
-                        '${widget.kalalist[widget.index].price}\$',
+                        '${kalalist[index].price}\$',
                         textScaleFactor: 1.6,
                         strutStyle: const StrutStyle(height: 2),
                         style: textStyle.bodyMedium,
@@ -254,19 +255,19 @@ class _DetailKalaState extends State<DetailKala> {
                         setState(() {
                           isFavorite = !isFavorite;
                           if (isFavorite == true &&
-                              !wishList.contains(widget.kalalist[widget.index])) {
-                            wishList.add(widget.kalalist[widget.index]);
+                              !wishList.contains(kalalist[index])) {
+                            wishList.add(kalalist[index]);
                             MyStorage.box.write(
-                                '${widget.kalalist[widget.index].name}'
-                                "${widget.kalalist[widget.index].filter}"
+                                '${kalalist[index].name}'
+                                "${kalalist[index].filter}"
                                 "$MyStorage.box.read(StorageNames.userName)",
                                 isFavorite);
                           }
                           if (isFavorite == false &&
-                              wishList.contains(widget.kalalist[widget.index])) {
-                            wishList.remove(widget.kalalist[widget.index]);
-                            MyStorage.box.remove('${widget.kalalist[widget.index].name}'
-                                "${widget.kalalist[widget.index].filter}"
+                              wishList.contains(kalalist[index])) {
+                            wishList.remove(kalalist[index]);
+                            MyStorage.box.remove('${kalalist[index].name}'
+                                "${kalalist[index].filter}"
                                 "$MyStorage.box.read(StorageNames.userName)");
                           }
                           debugPrint(wishList.length.toString());
@@ -292,11 +293,11 @@ class _DetailKalaState extends State<DetailKala> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text('43 Rating and 23 Reviews', style: textStyle.bodyMedium),
-                  InkWell(
-                    onTap: (() {
+                  IconButton(
+                    onPressed: (() {
                       Get.toNamed(RouteNames.review);
                     }),
-                    child: const Icon(
+                    icon: const Icon(
                       Icons.arrow_forward_ios_outlined,
                       size: 15,
                       color: Rang.blue,
@@ -322,8 +323,8 @@ class _DetailKalaState extends State<DetailKala> {
 
   _onPressed() {
     setState(() {
-      if (!myBagList.contains(widget.kalalist[widget.index])) {
-        myBagList.add(widget.kalalist[widget.index]);
+      if (!myBagList.contains(kalalist[index])) {
+        myBagList.add(kalalist[index]);
         debugPrint(myBagList.length.toString());
       }
     });
