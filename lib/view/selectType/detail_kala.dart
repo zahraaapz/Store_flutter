@@ -314,7 +314,7 @@ class _DetailKalaState extends State<DetailKala> {
                 ],
               ),
             ),
-            randomlist(list:selectList(widget.select, homeScreenController)),
+            Randomlist(list:selectList(widget.select, homeScreenController)),
           ],
         ),
       )),

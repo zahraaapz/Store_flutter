@@ -23,7 +23,7 @@ class SearchResult extends StatelessWidget {
                  
                  iconANDtitle('Search Result', Icons.arrow_back_ios_new),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width / 2.2,
+                    width: MediaQuery.of(context).size.width / 2.6,
                   ),
                   const Icon(
                     CupertinoIcons.ellipsis_vertical,

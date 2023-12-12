@@ -5,11 +5,13 @@ import 'package:appstore/constant/color.dart';
 import 'package:appstore/controller/homeScreenController.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/view/firstScreen/mainScreen.dart';
-import 'package:appstore/view/selectType/detail_kala.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../component/dim.dart';
 import '../../component/text_style.dart';
+import '../../widget/selectkalaWidget/bottomsheetLimitedPrice.dart';
+import '../../widget/selectkalaWidget/columnList.dart';
+import '../../widget/selectkalaWidget/dialog.dart';
 import '../../widget/shimmerList.dart';
 import 'selectTypeMethod/method.dart';
 
@@ -28,188 +30,127 @@ class _SelectkalaState extends State<Selectkala> {
   RxInt level = 0.obs;
 
   //filter
- late List<bool> checkBoxBrands;
-  String ?selectedRadioTile;
+  late List<bool> checkBoxBrands;
+  String? selectedRadioTile;
   RxList<Product> filterPrice = RxList();
   RxList<Product> filterListBrand = RxList();
   List<bool> checkBoxPriceBrand = [false, false];
   List selectedBrand = [];
   //
 
-   int ?lenght;
-  var homeScreenController= Get.find<HomeScreenController>();
+  int? lenght;
+  var homeScreenController = Get.find<HomeScreenController>();
 
-
- late List brands;
- late List<double> prices;
+  late List brands;
+  late List<double> prices;
 
   //for limit price
- late RangeValues val;
+  late RangeValues val;
 
-  _SelectkalaState(
+  _SelectkalaState();
 
-  );
+  showlist() {
+    setState(() {
+      lenght = lenghtLists(widget.selectPage, homeScreenController);
 
+      checkBoxBrands = List.generate(lenght!, (index) => false);
+      brands = List.generate(lenght!,
+          (index) => brandItem(widget.selectPage, index, homeScreenController));
 
-showlist(){
-  setState(() {
-        lenght = lenghtLists(widget.selectPage, homeScreenController);
-
-    checkBoxBrands = List.generate(lenght!, (index) => false);
-    brands = List.generate(
-        lenght!, (index) => brandItem(widget.selectPage, index, homeScreenController));
-
-    prices = List.generate(
-        lenght!,
-        (index) => double.parse(
-            priceLists(widget.selectPage, homeScreenController, index).toString()));
-    prices.sort();
-    val = RangeValues(
-      prices.first,
-      prices.last,
-    );
-  });
-
-
-  
-}
-
-  Future<void> showMyDialog() async {
-    return showDialog<void>(
-        context: context,
-        builder: (context) => StatefulBuilder(
-              builder: (context, setState) => Dialog(
-                child: SizedBox(
-                  height: Get.height/2.5,
-                  child: Column(children: [
-                    SizedBox(
-                      height: Get.height / 1.9,
-                      child: ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        itemCount: brands.length,
-                        shrinkWrap: true,
-                        itemBuilder: (BuildContext context, int index) =>
-                            CheckboxListTile(
-                          title: Text(
-                            brands[index],
-                            style: textStyle.headlineMedium,
-                          ),
-                          fillColor: MaterialStateProperty.all(Rang.blue),
-                          onChanged: (bool? value) {
-                            level.value = 0;
-                            setState(
-                              () {
-                                checkBoxBrands[index] = value!;
-
-                                if (checkBoxBrands[index] == true) {
-                                  selectedBrand.add(brands[index]);
-
-                                  filterBrand(widget.selectPage, filterListBrand,
-                                      selectedBrand, homeScreenController);
-                                  level.value = 1;
-                                } else {
-                                  filterListBrand.removeWhere(
-                                      (e) => brands[index] == e.brand);
-                                  selectedBrand.remove(brands[index]);
-
-                                  filterListBrand.isEmpty
-                                      ? level.value = 0
-                                      : level.value = 1;
-                                }
-                              },
-                            );
-                          },
-                          value: checkBoxBrands[index],
-                        ),
-                      ),
-                    )
-                  ]),
-                ),
-              ),
-            ));
+      prices = List.generate(
+          lenght!,
+          (index) => double.parse(
+              priceLists(widget.selectPage, homeScreenController, index)
+                  .toString()));
+      prices.sort();
+      val = RangeValues(
+        prices.first,
+        prices.last,
+      );
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-   
     return SafeArea(
         child: Scaffold(
-          body: Stack(children: [
-            Obx(
-              () => Column(children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                    
-                      (Dim.medium+3).width,
-                          IconButton(
+      body: Stack(children: [
+        Obx(
+          () => Column(children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  (Dim.medium + 3).width,
+                  IconButton(
                     icon: const Icon(
                       Icons.arrow_back_ios,
                       color: Rang.blue,
                     ),
                     onPressed: () {
-                     Get.offAll(Home());
+                      Get.offAll(Home());
                     },
                   ),
-                      
-                       (Dim.xlarge).width,
-                      Text(
-                        widget.selectPage == 0
-                            ? 'Skincare'
-                            : widget.selectPage == 1
-                                ? 'Watches'
-                                : widget.selectPage == 2
-                                    ? 'Handbags'
-                                    : widget.selectPage == 3
-                                        ? 'jewellery'
-                                        : widget.selectPage == 4
-                                            ? 'Eyewear'
-                                            : 'Shoes',
-                        style: textStyle.headlineSmall,
-                      )
-                    ],
-                  ),
-                ),
-                homeScreenController.bag.isNotEmpty
-                    ? mainList(level.value == 2
+                  (Dim.xlarge).width,
+                  Text(
+                    widget.selectPage == 0
+                        ? 'Skincare'
+                        : widget.selectPage == 1
+                            ? 'Watches'
+                            : widget.selectPage == 2
+                                ? 'Handbags'
+                                : widget.selectPage == 3
+                                    ? 'jewellery'
+                                    : widget.selectPage == 4
+                                        ? 'Eyewear'
+                                        : 'Shoes',
+                    style: textStyle.headlineSmall,
+                  )
+                ],
+              ),
+            ),
+            homeScreenController.bag.isNotEmpty
+                ? mainList(
+                    level.value == 2
                         ? filterPrice
                         : level.value == 1
                             ? filterListBrand
-                            : selectList(widget.selectPage,homeScreenController))
-                    : const ShimmerList(),
-              ]),
-            ),
-            Positioned(
-              bottom: 10,
-              right: 0,
-              left: 0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconButton(
-                      onPressed: () {
-                          homeScreenController.suggestlist.isEmpty?null:
-                         filterBrandOrPrice(context);
-                        showlist();
-                      },
-                      icon: const Icon(Icons.filter_alt_outlined)),
-                  IconButton(
-                    onPressed: (() {
-                      homeScreenController.suggestlist.isEmpty?null:
-                      filterBySort(context);
-                     showlist();
-                    }),
-                    icon: const Icon(Icons.sort_rounded),
-                  ),
-                ],
-              ),
-            )
+                            : selectList(
+                                widget.selectPage, homeScreenController),
+                    widget.selectPage)
+                : const ShimmerList(),
           ]),
-        ));
+        ),
+        Positioned(
+          bottom: 10,
+          right: 0,
+          left: 0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(
+                  onPressed: () {
+                    homeScreenController.suggestlist.isEmpty
+                        ? null
+                        : filterBrandOrPrice(context);
+                    showlist();
+                  },
+                  icon: const Icon(Icons.filter_alt_outlined)),
+              IconButton(
+                onPressed: (() {
+                  homeScreenController.suggestlist.isEmpty
+                      ? null
+                      : filterBySort(context);
+                  showlist();
+                }),
+                icon: const Icon(Icons.sort_rounded),
+              ),
+            ],
+          ),
+        )
+      ]),
+    ));
   }
-
-
 
   Future<dynamic> filterBySort(BuildContext context) {
     return showModalBottomSheet(
@@ -255,7 +196,8 @@ showlist(){
                         level.value = 0;
                         setState(() {
                           selectedRadioTile = value.toString();
-                          sortListHightoLow(widget.selectPage, homeScreenController);
+                          sortListHightoLow(
+                              widget.selectPage, homeScreenController);
                         });
                       },
                     ),
@@ -275,7 +217,8 @@ showlist(){
                           level.value = 0;
                           setState(() {
                             selectedRadioTile = value.toString();
-                            sortLisLowtoHigh(widget.selectPage, homeScreenController);
+                            sortLisLowtoHigh(
+                                widget.selectPage, homeScreenController);
                           });
                         }),
                     const Divider(
@@ -348,7 +291,16 @@ showlist(){
                               });
 
                               checkBoxPriceBrand[0] == true
-                                  ? showMyDialog()
+                                  ? showMyDialog(
+                                      context,
+                                      filterBrand,
+                                      widget.selectPage,
+                                      homeScreenController,
+                                      brands,
+                                      level,
+                                      checkBoxBrands,
+                                      filterListBrand,
+                                      selectedBrand)
                                   : null;
                             }),
                         CheckboxListTile(
@@ -363,7 +315,14 @@ showlist(){
                                 checkBoxPriceBrand[1] = value!;
                               });
                               checkBoxPriceBrand[1] == true
-                                  ? bottomSheetLimitedPrice(context)
+                                  ? bottomSheetLimitedPrice(
+                                      context,
+                                      val,
+                                      prices,
+                                      filterPrice,
+                                      homeScreenController,
+                                      widget.selectPage,
+                                      level)
                                   : null;
                             }),
                       ],
@@ -371,185 +330,4 @@ showlist(){
                   ));
         }));
   }
-
-  Future<dynamic> bottomSheetLimitedPrice(BuildContext context) {
-    return showModalBottomSheet(
-        context: context,
-        builder: (context) => StatefulBuilder(
-            builder: (context, setState) => Container(
-                height: Get.height / 3.7,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30)),
-                  color: Colors.white,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SliderTheme(
-                      data: SliderTheme.of(context).copyWith(
-                        activeTrackColor: Rang.blue,
-                        inactiveTrackColor: Rang.greylight,
-                        thumbColor: Rang.blue,
-                      ),
-                      child: RangeSlider(
-                        labels: RangeLabels(
-                            val.start.toString(), val.end.toString()),
-                        min: prices.first,
-                        max: prices.last,
-                        divisions: 15,
-                        onChanged: (value) {
-                          level.value = 0;
-                          setState(
-                            () {
-                              val = value;
-
-                              switch (widget.selectPage) {
-                                case 0:
-                                  filterPrice.assignAll(homeScreenController
-                                      .skincare
-                                      .where((element) =>
-                                          double.tryParse(
-                                                  element.price.toString())! >=
-                                              val.start &&
-                                          double.tryParse(
-                                                  element.price.toString())! <=
-                                              val.end));
-                                  break;
-                                case 1:
-                                  filterPrice.assignAll(homeScreenController
-                                      .watche
-                                      .where((element) =>
-                                          double.tryParse(
-                                                  element.price.toString())! >=
-                                              val.start &&
-                                          double.tryParse(
-                                                  element.price.toString())! <=
-                                              val.end));
-                                  break;
-                                case 2:
-                                  filterPrice.assignAll(homeScreenController.bag
-                                      .where((element) =>
-                                          double.tryParse(
-                                                  element.price.toString())! >=
-                                              val.start &&
-                                          double.tryParse(
-                                                  element.price.toString())! <=
-                                              val.end));
-                                  break;
-                                case 3:
-                                  filterPrice.assignAll(homeScreenController
-                                      .jewellery
-                                      .where((element) =>
-                                          double.tryParse(
-                                                  element.price.toString())! >=
-                                              val.start &&
-                                          double.tryParse(
-                                                  element.price.toString())! <=
-                                              val.end));
-                                  break;
-                                case 4:
-                                  filterPrice.assignAll(homeScreenController
-                                      .eyewear
-                                      .where((element) =>
-                                          double.tryParse(
-                                                  element.price.toString())! >=
-                                              val.start &&
-                                          double.tryParse(
-                                                  element.price.toString())! <=
-                                              val.end));
-                                  break;
-                                case 5:
-                                  filterPrice.assignAll(homeScreenController
-                                      .shoes
-                                      .where((element) =>
-                                          double.tryParse(
-                                                  element.price.toString())! >=
-                                              val.start &&
-                                          double.tryParse(
-                                                  element.price.toString())! <=
-                                              val.end));
-                                  break;
-                              }
-
-                              level.value = 2;
-                            },
-                          );
-                        },
-                        values: val,
-                      ),
-                    ),
-                  ],
-                ))));
-  }
-
-  Column mainList(RxList<Product> list) {
-    return Column(
-      children: [
-        (Dim.small-3).height,
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-           
-             (Dim.xlarge+6).width,
-            Text(style: textStyle.bodyMedium, '${list.length} products'),
-          ],
-        ),
-        (Dim.large/2).height,
-        SizedBox(
-          height: Get.height / 1.28,
-          child: GridView.builder(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemCount: list.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, mainAxisSpacing: 15),
-              itemBuilder: ((context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(right: 8, left: 8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Get.to(DetailKala(
-                            index,
-                            widget.selectPage,
-                            list,
-                          ));
-                        },
-                        child: Container(
-                          height: Get.height / 5.5,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              image: DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: Image.asset(list[index].ima!).image)),
-                        ),
-                      ),
-                    
-                      (Dim.large/2).height,
-                      Text(style: textStyle.bodyMedium, list[index].name!),
-                    
-                      (Dim.large/2).height,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(style: textStyle.bodyMedium, list[index].brand!),
-                          Text(
-                              style: textStyle.bodyMedium,
-                              '${list[index].price}\$'),
-                        ],
-                      ),
-                    ],
-                  ),
-                );
-              })),
-        ),
-      ],
-    );
-  }
 }
-
-

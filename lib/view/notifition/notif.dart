@@ -29,7 +29,7 @@ class Notif extends StatelessWidget {
                   iconANDtitle('Notification',Icons.arrow_back_ios_new)
                 ,
                   SizedBox(
-                    width: MediaQuery.of(context).size.width / 2,
+                    width: MediaQuery.of(context).size.width /2.3,
                   ),
                   const Icon(
                     CupertinoIcons.ellipsis_vertical,
@@ -52,9 +52,12 @@ class Notif extends StatelessWidget {
                        (Dim.large).height,
                        Text('This winter gift your loved ones.',style: textStyle.bodyMedium),
                                (Dim.large).height,
-                              ButtonWidgetRevesed(
-                                title:  'Shop now',
-                                onPressed: _onPressed,
+                              SizedBox(
+                                width: Get.width/1.3,
+                                child: ButtonWidgetRevesed(
+                                  title:  'Shop now',
+                                  onPressed: _onPressed,
+                                ),
                               ),  ],
                   ),
                 ],

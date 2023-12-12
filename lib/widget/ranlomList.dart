@@ -4,26 +4,30 @@ import 'package:get/get.dart';
 import '../component/text_style.dart';
 
 
-class randomlist  extends StatefulWidget {
-randomlist({this.list});
+class Randomlist  extends StatefulWidget {
+const Randomlist({super.key, this.list});
 
-RxList <Product> ? list;
+final  RxList <Product> ? list;
 @override
-State<randomlist> createState() => _randomlistState();
+State<Randomlist> createState() => _RandomlistState();
 }
 
-class _randomlistState extends State<randomlist> {
+class _RandomlistState extends State<Randomlist> {
 
-List <Product>  change=[];
+ final  RxList <Product>  change=RxList();
 
 @override
 void initState(){
-change.addAll(widget.list!);
+
   super.initState();
   WidgetsBinding.instance.addPostFrameCallback((_) {
    change.shuffle();
    });
+change.addAll(widget.list!);
+ 
 }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -42,37 +46,39 @@ change.addAll(widget.list!);
               padding: const EdgeInsets.all(8.0),
               child: SizedBox(
                 width: Get.width / 1.8,
-                child:  Column(children: [
-                    Container(
-                      height: Get.height / 6,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage(change![index].ima!))
+                child:  Obx(()=>
+                  Column(children: [
+                      Container(
+                        height: Get.height / 6,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: AssetImage(change[index].ima!))
+                                ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: SizedBox(
+                          width: Get.width / 2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                change[index].brand!,
+                                style: textStyle.bodyMedium,
                               ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-                        width: Get.width / 2,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              change[index].brand!,
-                              style: textStyle.bodyMedium,
-                            ),
-                            Text(change[index].name!,
-                                style: textStyle.bodyMedium),
-                            Text(change[index].price!,
-                                strutStyle: const StrutStyle(height: 2),
-                                style: textStyle.bodyMedium),
-                          ],
+                              Text(change[index].name!,
+                                  style: textStyle.bodyMedium),
+                              Text(change[index].price!,
+                                  strutStyle: const StrutStyle(height: 2),
+                                  style: textStyle.bodyMedium),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ]),
+                    ]),
+                ),
                 ),
              
             );
