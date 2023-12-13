@@ -30,127 +30,135 @@ class _SelectkalaState extends State<Selectkala> {
   RxInt level = 0.obs;
 
   //filter
-  late List<bool> checkBoxBrands;
-  String? selectedRadioTile;
+ late List<bool> checkBoxBrands;
+  String ?selectedRadioTile;
   RxList<Product> filterPrice = RxList();
   RxList<Product> filterListBrand = RxList();
   List<bool> checkBoxPriceBrand = [false, false];
   List selectedBrand = [];
   //
 
-  int? lenght;
-  var homeScreenController = Get.find<HomeScreenController>();
+   int ?lenght;
+  var homeScreenController= Get.find<HomeScreenController>();
 
-  late List brands;
-  late List<double> prices;
+
+ late List brands;
+ late List<double> prices;
 
   //for limit price
-  late RangeValues val;
+ late RangeValues val;
 
-  _SelectkalaState();
+  _SelectkalaState(
 
-  showlist() {
-    setState(() {
-      lenght = lenghtLists(widget.selectPage, homeScreenController);
+  );
 
-      checkBoxBrands = List.generate(lenght!, (index) => false);
-      brands = List.generate(lenght!,
-          (index) => brandItem(widget.selectPage, index, homeScreenController));
 
-      prices = List.generate(
-          lenght!,
-          (index) => double.parse(
-              priceLists(widget.selectPage, homeScreenController, index)
-                  .toString()));
-      prices.sort();
-      val = RangeValues(
-        prices.first,
-        prices.last,
-      );
-    });
-  }
+showlist(){
+  setState(() {
+        lenght = lenghtLists(widget.selectPage, homeScreenController);
+
+    checkBoxBrands = List.generate(lenght!, (index) => false);
+    brands = List.generate(
+        lenght!, (index) => brandItem(widget.selectPage, index, homeScreenController));
+
+    prices = List.generate(
+        lenght!,
+        (index) => double.parse(
+            priceLists(widget.selectPage, homeScreenController, index).toString()));
+    prices.sort();
+    val = RangeValues(
+      prices.first,
+      prices.last,
+    );
+  });
+
+
+  
+}
+
+
 
   @override
   Widget build(BuildContext context) {
+   
     return SafeArea(
         child: Scaffold(
-      body: Stack(children: [
-        Obx(
-          () => Column(children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  (Dim.medium + 3).width,
-                  IconButton(
+          body: Stack(children: [
+            Obx(
+              () => Column(children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                    
+                      (Dim.medium+3).width,
+                          IconButton(
                     icon: const Icon(
                       Icons.arrow_back_ios,
                       color: Rang.blue,
                     ),
                     onPressed: () {
-                      Get.offAll(Home());
+                     Get.offAll(Home());
                     },
                   ),
-                  (Dim.xlarge).width,
-                  Text(
-                    widget.selectPage == 0
-                        ? 'Skincare'
-                        : widget.selectPage == 1
-                            ? 'Watches'
-                            : widget.selectPage == 2
-                                ? 'Handbags'
-                                : widget.selectPage == 3
-                                    ? 'jewellery'
-                                    : widget.selectPage == 4
-                                        ? 'Eyewear'
-                                        : 'Shoes',
-                    style: textStyle.headlineSmall,
-                  )
-                ],
-              ),
-            ),
-            homeScreenController.bag.isNotEmpty
-                ? mainList(
-                    level.value == 2
+                      
+                       (Dim.xlarge).width,
+                      Text(
+                        widget.selectPage == 0
+                            ? 'Skincare'
+                            : widget.selectPage == 1
+                                ? 'Watches'
+                                : widget.selectPage == 2
+                                    ? 'Handbags'
+                                    : widget.selectPage == 3
+                                        ? 'jewellery'
+                                        : widget.selectPage == 4
+                                            ? 'Eyewear'
+                                            : 'Shoes',
+                        style: textStyle.headlineSmall,
+                      )
+                    ],
+                  ),
+                ),
+                homeScreenController.bag.isNotEmpty
+                    ? mainList(level.value == 2
                         ? filterPrice
                         : level.value == 1
                             ? filterListBrand
-                            : selectList(
-                                widget.selectPage, homeScreenController),
-                    widget.selectPage)
-                : const ShimmerList(),
-          ]),
-        ),
-        Positioned(
-          bottom: 10,
-          right: 0,
-          left: 0,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              IconButton(
-                  onPressed: () {
-                    homeScreenController.suggestlist.isEmpty
-                        ? null
-                        : filterBrandOrPrice(context);
-                    showlist();
-                  },
-                  icon: const Icon(Icons.filter_alt_outlined)),
-              IconButton(
-                onPressed: (() {
-                  homeScreenController.suggestlist.isEmpty
-                      ? null
-                      : filterBySort(context);
-                  showlist();
-                }),
-                icon: const Icon(Icons.sort_rounded),
+                            : selectList(widget.selectPage,homeScreenController),widget.selectPage)
+                    : const ShimmerList(),
+              ]),
+            ),
+            Positioned(
+              bottom: 10,
+              right: 0,
+              left: 0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  IconButton(
+                      onPressed: () {
+                          homeScreenController.suggestlist.isEmpty?null:
+                         filterBrandOrPrice(context);
+                        showlist();
+                      },
+                      icon: const Icon(Icons.filter_alt_outlined)),
+                  IconButton(
+                    onPressed: (() {
+                      homeScreenController.suggestlist.isEmpty?null:
+                      filterBySort(context);
+                     showlist();
+                    }),
+                    icon: const Icon(Icons.sort_rounded),
+                  ),
+                ],
               ),
-            ],
-          ),
-        )
-      ]),
-    ));
+            )
+          ]),
+        ));
   }
+
+
 
   Future<dynamic> filterBySort(BuildContext context) {
     return showModalBottomSheet(
@@ -196,8 +204,7 @@ class _SelectkalaState extends State<Selectkala> {
                         level.value = 0;
                         setState(() {
                           selectedRadioTile = value.toString();
-                          sortListHightoLow(
-                              widget.selectPage, homeScreenController);
+                          sortListHightoLow(widget.selectPage, homeScreenController);
                         });
                       },
                     ),
@@ -217,8 +224,7 @@ class _SelectkalaState extends State<Selectkala> {
                           level.value = 0;
                           setState(() {
                             selectedRadioTile = value.toString();
-                            sortLisLowtoHigh(
-                                widget.selectPage, homeScreenController);
+                            sortLisLowtoHigh(widget.selectPage, homeScreenController);
                           });
                         }),
                     const Divider(
@@ -291,16 +297,7 @@ class _SelectkalaState extends State<Selectkala> {
                               });
 
                               checkBoxPriceBrand[0] == true
-                                  ? showMyDialog(
-                                      context,
-                                      filterBrand,
-                                      widget.selectPage,
-                                      homeScreenController,
-                                      brands,
-                                      level,
-                                      checkBoxBrands,
-                                      filterListBrand,
-                                      selectedBrand)
+                                  ? showMyDialog(context,filterBrand,widget.selectPage,homeScreenController,brands, level,checkBoxBrands,filterListBrand,selectedBrand)
                                   : null;
                             }),
                         CheckboxListTile(
@@ -315,14 +312,7 @@ class _SelectkalaState extends State<Selectkala> {
                                 checkBoxPriceBrand[1] = value!;
                               });
                               checkBoxPriceBrand[1] == true
-                                  ? bottomSheetLimitedPrice(
-                                      context,
-                                      val,
-                                      prices,
-                                      filterPrice,
-                                      homeScreenController,
-                                      widget.selectPage,
-                                      level)
+                                  ? bottomSheetLimitedPrice(context,val,prices,filterPrice,homeScreenController,widget.selectPage, level)
                                   : null;
                             }),
                       ],
@@ -330,4 +320,10 @@ class _SelectkalaState extends State<Selectkala> {
                   ));
         }));
   }
+
+
+
+
 }
+
+

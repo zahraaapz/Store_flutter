@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 
 import '../../constant/color.dart';
 
-Future<dynamic> bottomSheetLimitedPrice(context,val,prices,filterPrice,homeScreenController,selectPage,RxInt level) {
+Future<dynamic> bottomSheetLimitedPrice(
+ context,RangeValues  val,List  prices,List   filterPrice,var  homeScreenController,int selectPage,RxInt level) {
     return showModalBottomSheet(
         context: context,
         builder: (context) => StatefulBuilder(
@@ -26,7 +27,7 @@ Future<dynamic> bottomSheetLimitedPrice(context,val,prices,filterPrice,homeScree
                       ),
                       child: RangeSlider(
                         labels: RangeLabels(
-                            val.start.toString(), val.end.toString()),
+                            val.start.toStringAsFixed(2), val.end.toStringAsFixed(2)),
                         min: prices.first,
                         max: prices.last,
                         divisions: 15,
