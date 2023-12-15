@@ -1,10 +1,8 @@
-import 'package:appstore/component/extention.dart';
-import 'package:appstore/constant/color.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../component/dim.dart';
-import '../../component/text_style.dart';
 import '../../model/Model.dart';
+import '../../widget/basketWidget/basketList.dart';
 import '../../widget/basketWidget/cut.dart';
 import '../../widget/basketWidget/factorWidget.dart';
 import '../../widget/iconANDtitle.dart';
@@ -36,7 +34,7 @@ class _BasketState extends State<Basket> {
           body: Column(
             children: [
               iconANDtitle('My Bag', Icons.close),
-             myBagList.isEmpty
+              myBagList.isEmpty
                   ? const EmptyColumn(
                       image: 'assets/image/emptyBag.png',
                       title: MyString.bagEmptytile,
@@ -78,136 +76,30 @@ class _BasketState extends State<Basket> {
     );
   }
 
-ListView basketList(size, List<int> qnty) {
+  ListView basketList(size, List<int> qnty) {
     return ListView.builder(
         physics: const BouncingScrollPhysics(),
         itemCount: myBagList.length,
         scrollDirection: Axis.vertical,
         itemBuilder: ((context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: size.height / 4,
-              decoration: BoxDecoration(
-                  boxShadow: const [BoxShadow(blurRadius: 1.6)],
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15)),
-              child: Column(children: [
-                Row(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.all(8),
-                      height: size.height / 6,
-                      width: size.width / 3,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          image: DecorationImage(
-                              image: AssetImage(myBagList[index].ima!),
-                              fit: BoxFit.fill)),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(myBagList[index].brand!,
-                              style: textStyle.bodyMedium),
-                          (Dim.large / 2).height,
-                          Text(myBagList[index].name!,
-                              style: textStyle.bodyMedium),
-                          (Dim.large / 2).height,
-                          Container(
-                            color: Rang.toosi,
-                            height: size.height / 20,
-                            child: Row(
-                              children: [
-                                Text(
-                                    style: textStyle.bodyMedium,
-                                    'Qnty: ${qnty[index]}'),
-                                IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                      qnty[index] = qnty[index] + 1;
-                                        indexOfqnty = index;
-                                       });
-                                    },
-                                    icon: const Icon(Icons.add)),
-                                IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      indexOfqnty = index;
-                                      qnty[index] = qnty[index] - 1;
-                                       
-                                   if(qnty.contains(0)){
-
-                                    myBagList.removeAt(index);
-                                    
-                                    qnty.removeAt(index);
-                                  
-                                      }});
-                                       
-                                },
-                                  icon: const Icon(Icons.remove),
-                                ),
-                              ],
-                            ),
-                          ),
-                          (Dim.large / 2).height,
-                          Text(
-                              style: textStyle.bodyMedium,
-                              '${int.parse(myBagList[index].price!) * qnty[index]}\$'),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-                (Dim.large / 2).height,
-                const Divider(
-                  height: 1,
-                  thickness: 1,
-                  endIndent: 3,
-                  indent: 3,
-                  color: Rang.blue,
-                ),
-                (Dim.large / 4).height,
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    (Dim.small).width,
-                    Center(child: Text('Move to Wishlist', style: textStyle.displaySmall)),
-                    (Dim.small).width,
-                    const SizedBox(
-                      height: 20,
-                      child: VerticalDivider(
-                        color: Rang.blue,
-                        thickness: 1,
-                        indent: 3,
-                        endIndent: 1,
-                      ),
-                    ),
-                    (Dim.small).width,
-                    InkWell(
-                      onTap: () {
-                        setState(() {
-                          myBagList.remove(myBagList[index]);
-                        });
-                      },
-                      child: Text(
-                        'Remove',
-                        style: textStyle.displaySmall,
-                      ),
-                    ) ,
-                    (Dim.large*2).width,
-                  ],
-                )
-              ]),
-            ),
+          return BasketList(
+            size: size,
+            index: index,
+            reduce: () {
+              reduce(index);
+            },
+            remove: () {
+              remove(index);
+            },
+            inc: () {
+              inc(index);
+            },
+            qnty: qnty,
           );
         }));
   }
 
- columnPrices(size, qnty) {
+  columnPrices(size, qnty) {
     var sum = 0.0;
     setState(() {
       orderDetail[1].price = '20%';
@@ -227,10 +119,37 @@ ListView basketList(size, List<int> qnty) {
           double.parse(orderDetail[3].price!);
     });
 
-    return factorWidget(totalPrice: totalPrice,size: size,);
+    return factorWidget(
+      totalPrice: totalPrice,
+      size: size,
+    );
+  }
+
+  remove(index) {
+    setState(() {
+      myBagList.remove(myBagList[index]);
+    });
+  }
+
+  inc(index) {
+    setState(() {
+      widget.qnty![index] = widget.qnty![index] + 1;
+      indexOfqnty = index;
+    });
+  }
+
+  reduce(index) {
+    setState(() {
+      indexOfqnty = index;
+      widget.qnty![index] = widget.qnty![index] - 1;
+
+      if (widget.qnty!.contains(0)) {
+        myBagList.removeAt(index);
+
+        widget.qnty!.removeAt(index);
+      }
+    });
   }
 }
-
-
 
 
