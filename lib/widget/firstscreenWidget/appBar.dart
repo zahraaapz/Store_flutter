@@ -11,22 +11,26 @@ Row appBar(Size size, BuildContext context,GlobalKey<ScaffoldState>  _key) {
       children: [
         SizedBox(
           width: size.width /3.8,
-          height: size.height / 20,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              IconButton(
-                onPressed: () {
-                  _key.currentState?.openDrawer();
-                },
-                icon: const Icon(
-                  Icons.menu,
-                  color: Rang.blue,
-                  size: 32,
+          height: size.height /20,
+         
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    _key.currentState?.openDrawer();
+                  },
+                  icon: const Icon(
+                    Icons.menu,
+                    color: Rang.blue,
+                  size: 30,
+                  ),
                 ),
-              ),
-              Text(' Home', style: textStyle.displaySmall),
-            ],
+                Text(' Home', style: textStyle.displaySmall,),
+              ],
+            ),
           ),
         ),
         SizedBox(
@@ -34,7 +38,9 @@ Row appBar(Size size, BuildContext context,GlobalKey<ScaffoldState>  _key) {
           height: size.height / 20,
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-            const Icon(Icons.add_to_photos_rounded, color: Rang.blue),
+         IconButton(onPressed: () {
+           
+         },icon:const Icon(Icons.add_to_photos_rounded), color: Rang.blue),
             IconButton(
                 onPressed: (() {
                   Get.toNamed(RouteNames.search);
