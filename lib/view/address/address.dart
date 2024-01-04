@@ -3,7 +3,6 @@
 import 'package:appstore/component/extention.dart';
 import 'package:appstore/constant/color.dart';
 import 'package:appstore/model/Model.dart';
-import 'package:appstore/widget/massageSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../component/dim.dart';
@@ -156,16 +155,7 @@ class Address extends StatelessWidget {
   }
 
   onPressed(context) {
-    MyStorage.box
-        .write(StorageNames.fullName, MyTextEditingController.fullName.text);
-    MyStorage.box.write(StorageNames.pin, MyTextEditingController.pinCode.text);
-    MyStorage.box
-        .write(StorageNames.number, MyTextEditingController.number.text);
-    MyStorage.box
-        .write(StorageNames.preNum, MyTextEditingController.preNum.text);
-    MyStorage.box
-        .write(StorageNames.street, MyTextEditingController.street.text);
-    MyStorage.box.write(StorageNames.city, MyTextEditingController.city.text);
+MyStorage().saveInfo();
 
     if (MyTextEditingController.street.text.isNotEmpty &&
         MyTextEditingController.city.text.isNotEmpty &&
@@ -175,7 +165,8 @@ class Address extends StatelessWidget {
         MyTextEditingController.pinCode.text.isNotEmpty) {
       Get.toNamed(RouteNames.payment);
     } else {
-      massageSnackbar('Enter information', context);
+    
+      Get.snackbar('Address', 'Enter your information');
     }
   }
 }

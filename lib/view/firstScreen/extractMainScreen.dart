@@ -52,7 +52,7 @@ class _ExtractmainscreenState extends State<Extractmainscreen> {
       child: Scaffold(
           key: _key,
           backgroundColor: Colors.white,
-          drawer: drawer(size),
+          drawer: Mydrawer(size:size),
           body: Stack(children: [
             SingleChildScrollView(
               physics: const BouncingScrollPhysics(),

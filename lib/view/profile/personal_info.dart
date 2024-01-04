@@ -3,10 +3,8 @@
 import 'package:appstore/component/extention.dart';
 import 'package:appstore/constant/color.dart';
 import 'package:appstore/route_manager/route_name.dart';
-import 'package:appstore/widget/massageSnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../component/dim.dart';
 import '../../constant/storage.dart';
 import '../../constant/textEditController.dart';
@@ -103,7 +101,7 @@ class Personal extends StatelessWidget {
         MyTextEditingController.number.text.isNotEmpty) {
       Get.offAllNamed(RouteNames.home);
     } else {
-      massageSnackbar('Enter information', context);
+      Get.snackbar('Information','Enter your information');
     }
   }
 }

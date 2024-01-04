@@ -8,7 +8,6 @@ import '../../widget/iconANDtitle.dart';
 import '../../widget/emptyColumn.dart';
 import '../../widget/myTextField.dart';
 import '../../constant/string.dart';
-
 class Basket extends StatefulWidget {
   Basket({super.key}) {
     qnty = List.generate(myBagList.length, (index) => 1);

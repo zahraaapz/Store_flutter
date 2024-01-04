@@ -4,7 +4,6 @@ import 'package:appstore/component/extention.dart';
 import 'package:appstore/constant/color.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/service/service.dart';
-import 'package:appstore/widget/massageSnackbar.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -302,5 +301,7 @@ descripe() {
 
 _onPressed(context, controller) {
   controller.toggle();
-  massageSnackbar('Saved :)', context);
+  Get.snackbar('Review', 'Saved :)');
+  
+ 
 }

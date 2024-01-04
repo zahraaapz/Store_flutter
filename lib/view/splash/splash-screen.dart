@@ -1,12 +1,10 @@
 import 'dart:async';
-
 import 'package:appstore/component/extention.dart';
 import 'package:appstore/constant/color.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-
 import '../../component/dim.dart';
 import '../../component/text_style.dart';
 import '../../constant/storage.dart';
@@ -31,14 +29,16 @@ class _SplashState extends State<Splash> {
           connectivityResult == ConnectivityResult.wifi);
     });
 
- 
     if (onLine == false) {
       checkNetwork();
-    } if (onLine == true && MyStorage.box.read(StorageNames.userName)==null){
-      Get.offNamed(RouteNames.signup);
     }
-       if(onLine == true && MyStorage.box.read(StorageNames.userName)!=null) {
+    if (onLine == true && MyStorage().checkAuthCondition()) {
+      Get.offNamed(RouteNames.signup);
+     
+    }
+    if (onLine == true && !MyStorage().checkAuthCondition()) {
       Get.offNamed(RouteNames.home);
+      print(MyStorage.box.read(StorageNames.userName).toString());
     }
   }
 
@@ -70,7 +70,7 @@ class _SplashState extends State<Splash> {
                 onPressed: () {
                   Navigator.pop(context);
                   check();
-                 // Get.find<HomeScreenController>().getLists();
+                  // Get.find<HomeScreenController>().getLists();
                 },
               )
             ],
@@ -85,8 +85,6 @@ class _SplashState extends State<Splash> {
     super.initState();
     check();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +101,7 @@ class _SplashState extends State<Splash> {
                     'Wellcome...  ',
                     style: textStyle.headlineSmall,
                   ),
-                   (Dim.large*2).height,
+                  (Dim.large * 2).height,
                   const SpinKitCircle(
                     color: Rang.blue,
                     size: 40,

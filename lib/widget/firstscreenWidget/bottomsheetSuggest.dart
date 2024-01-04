@@ -1,24 +1,44 @@
-  import 'package:appstore/component/extention.dart';
+import 'package:appstore/component/extention.dart';
 import 'package:appstore/widget/firstscreenWidget/shoesSize.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import '../../component/dim.dart';
 import '../../component/text_style.dart';
 import '../../constant/color.dart';
+import '../../model/Model.dart';
 import '../ButtonWidget.dart';
 
+
 Future<dynamic> bottomSheetForSuggestList(
-      _onPressed, select,controller,context, Size size, int index) {
+     select,controller,context, int index) {
     return showModalBottomSheet(
         context: context,
         backgroundColor: Colors.transparent,
         builder: ((context) {
           return StatefulBuilder(
             builder: (context, setState) {
+
+   _onPressed(int index) {
+    setState(() {
+     if (!myBagList.contains(controller.suggestlist[index])) {
+      myBagList.add(controller.suggestlist[index]);
+     Get.snackbar('Basket', 'This item added');
+    }
+    else{
+       Get.snackbar('Basket', 'This item was added');
+    }
+    });
+ 
+
+  }
+
+
+
+
               return Container(
                 ////bottomsheet container
-                height: size.height / 2.2,
+                height: Get.height / 2.2,
                 decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -33,14 +53,14 @@ Future<dynamic> bottomSheetForSuggestList(
                         child: Row(
                           children: [
                             Container(
-                              width: size.width / 3,
-                              height: size.height / 8,
+                              width: Get.width / 3,
+                              height: Get.height / 8,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   image: DecorationImage(
                                       fit: BoxFit.fill,
                                       image: Image.asset(
-                                        controller.suggestlist[index].ima!,
+                                       controller.suggestlist[index].ima!,
                                       ).image)),
                             ),
                             (Dim.xlarge/2).width,
@@ -68,8 +88,8 @@ Future<dynamic> bottomSheetForSuggestList(
                         child: Row(
                           children: [
                             Container(
-                              width: size.width / 8,
-                              height: size.height / 22,
+                              width: Get.width / 8,
+                              height: Get.height / 22,
                               decoration: BoxDecoration(
                                   color: Rang.toosi,
                                   borderRadius: BorderRadius.circular(10)),
@@ -127,7 +147,8 @@ Future<dynamic> bottomSheetForSuggestList(
                             ButtonWidget(
                               iconData: Icons.shopping_bag_outlined,
                               title: 'Add to Bags',
-                              onPressed: () => _onPressed(index),
+                              onPressed: () { _onPressed(index);
+                              },
                             ),
                           ],
                         ),
@@ -139,5 +160,7 @@ Future<dynamic> bottomSheetForSuggestList(
             },
           );
         }));
+        
   }
 
+ 

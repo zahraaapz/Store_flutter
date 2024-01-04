@@ -10,8 +10,8 @@ Row appBar(Size size, BuildContext context,GlobalKey<ScaffoldState>  _key) {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         SizedBox(
-          width: size.width /3.8,
-          height: size.height /20,
+          width: size.width /3.9,
+          height: size.height /24,
          
           child: Center(
             child: Row(

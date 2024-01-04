@@ -8,16 +8,27 @@ import '../../component/text_style.dart';
 import '../../model/Model.dart';
 import '../../view/selectType/select_kala.dart';
 import '../profileBox.dart';
-
-Drawer drawer(size) {
+class Mydrawer extends StatelessWidget {
+   Mydrawer({super.key, required this.size});
+Size size;
+  @override
+  Widget build(BuildContext context) {
+  
     return Drawer(
       backgroundColor: Colors.white,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          profileBox(
-            width: size.width / 1.1,
+        child: Column(
+        
+          crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Container(
+           width: size.width / 1.1,
             height: size.height / 6,
+            decoration:BoxDecoration(
+              borderRadius: BorderRadiusDirectional.circular(15),
+              image: const DecorationImage(fit:BoxFit.fill,image:AssetImage('assets/image/drawerImage.jpg'))
+            ),
+          
           ),
          
            (Dim.large/2).height,
@@ -60,4 +71,4 @@ Drawer drawer(size) {
         ]),
       ),
     );
-  }
+  }}

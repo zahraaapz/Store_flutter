@@ -31,7 +31,7 @@ class Profile extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(10.0),
-            child: profileBox(   height: Get.height / 6,
+            child: ProfileBox(   height: Get.height / 6,
               width: Get.width / 1.01,),
           ),
           profileProperty('Personal Informantion', () => Get.toNamed(RouteNames.personal)),
@@ -40,16 +40,15 @@ class Profile extends StatelessWidget {
           profileProperty('My Order', () {}),
           profileProperty('Refer and Earn', () {}),
            Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: SizedBox(
               width: double.infinity,
               child: ButtonWidgetRevesed(
                 onPressed: (){
-
-                    MyStorage.box.erase();       
-                    Get.offNamed(RouteNames.root);
-
-
+              
+               MyStorage.box.erase();       
+               Get.offNamed(RouteNames.root);
+               
                 },
                 title: 'Log Out',
                 iconData: Icons.exit_to_app,

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../component/dim.dart';
 import '../../component/text_style.dart';
-import '../../model/Model.dart';
+
 
 
 
@@ -41,7 +41,7 @@ class _SuggListState extends State<SuggList> {
           itemBuilder: (context, index) {
             return InkWell(
               onTap: () {
-                bottomSheetForSuggestList(_onPressed(index) ,widget.select,widget.controller,context,widget.size,index);
+                bottomSheetForSuggestList(widget.select,widget.controller,context,index);
               },
               child: Padding(
                 padding: const EdgeInsets.only(left: 10.0, top: 8, right: 10),
@@ -84,12 +84,5 @@ class _SuggListState extends State<SuggList> {
           }),
     );
   }
-    _onPressed(int index) {
-    setState(() {
-     if (!myBagList.contains(widget.controller.suggestlist[index])) {
-      myBagList.add(widget.controller.suggestlist[index]);
-    }
-    });
- 
-  }
+
 }

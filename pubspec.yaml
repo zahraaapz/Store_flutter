@@ -42,11 +42,13 @@ dependencies:
   d_chart: ^2.2.11
   dio: ^5.2.1+1
   get: ^4.6.5
-  file_picker: ^5.3.3
   get_storage: ^2.1.1
   flutter_svg: ^2.0.7 
   shimmer: ^3.0.0
   connectivity_plus: ^5.0.1
+  path_provider: ^2.1.1
+  path: ^1.8.3
+  image_picker: ^1.0.5
 
 
 

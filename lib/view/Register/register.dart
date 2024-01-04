@@ -1,15 +1,13 @@
 import 'package:appstore/component/extention.dart';
 import 'package:appstore/component/text_style.dart';
+import 'package:appstore/constant/storage.dart';
 import 'package:appstore/constant/textEditController.dart';
 import 'package:appstore/widget/ButtonWidget.dart';
 import 'package:appstore/widget/myTextField.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../component/dim.dart';
-import '../../constant/storage.dart';
 import '../../route_manager/route_name.dart';
-import '../../widget/massageSnackbar.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
@@ -89,27 +87,20 @@ class RegisterScreen extends StatelessWidget {
                   child: ButtonWidget(
                     title: 'Next',
                     onPressed: () {
-                      MyStorage.box.write(StorageNames.preNum,
-                          MyTextEditingController.preNum.text);
-                      MyStorage.box.write(StorageNames.number,
-                          MyTextEditingController.number.text);
-                      MyStorage.box.write(StorageNames.email,
-                          MyTextEditingController.email.text);
-                      MyStorage.box.write(StorageNames.password,
-                          MyTextEditingController.password.text);
-                      MyStorage.box.write(StorageNames.userName,
-                          MyTextEditingController.userName.text);
-                      MyStorage.box.write(StorageNames.fullName,
-                          MyTextEditingController.fullName.text);
 
-                      if (MyTextEditingController.fullName.text.isNotEmpty &&
-                          MyTextEditingController.userName.text.isNotEmpty &&
-                          MyTextEditingController.preNum.text.isNotEmpty &&
-                          MyTextEditingController.number.text.isNotEmpty &&
-                          MyTextEditingController.password.text.isNotEmpty) {
+
+
+                       MyStorage().saveInfo();
+                             
+        
+                      if (
+                        MyStorage().checkCondition()
+                          ) {
                               Get.offNamed(RouteNames.home);
                       } else {
-                        massageSnackbar('Enter information', context);
+                    
+                        Get.snackbar('Information', 'Enter your information');
+
                       }
                     },
                   ),
@@ -121,4 +112,6 @@ class RegisterScreen extends StatelessWidget {
       ),
     );
   }
+
+
 }
