@@ -17,7 +17,6 @@ import '../../widget/firstscreenWidget/shoesSize.dart';
 import '../../widget/ranlomList.dart';
 
 class DetailKala extends StatefulWidget {
-
   int index;
   int select;
   List<Product> kalalist;
@@ -31,13 +30,11 @@ class DetailKala extends StatefulWidget {
   @override
   State<DetailKala> createState() =>
       // ignore: no_logic_in_create_state
-      _DetailKalaState(index,kalalist);
+      _DetailKalaState(index, kalalist);
 }
 
 class _DetailKalaState extends State<DetailKala> {
- 
- 
-  _DetailKalaState(this.index,this.kalalist);
+  _DetailKalaState(this.index, this.kalalist);
   RxInt sizepa = 0.obs;
   bool isFavorite = false;
   final index;
@@ -262,6 +259,7 @@ class _DetailKalaState extends State<DetailKala> {
                                 "${kalalist[index].filter}"
                                 "$MyStorage.box.read(StorageNames.userName)",
                                 isFavorite);
+                            Get.snackbar('Wishlist', 'This item added');
                           }
                           if (isFavorite == false &&
                               wishList.contains(kalalist[index])) {
@@ -269,6 +267,8 @@ class _DetailKalaState extends State<DetailKala> {
                             MyStorage.box.remove('${kalalist[index].name}'
                                 "${kalalist[index].filter}"
                                 "$MyStorage.box.read(StorageNames.userName)");
+
+                            Get.snackbar('Wishlist', 'This item removed');
                           }
                           debugPrint(wishList.length.toString());
                         });
@@ -314,7 +314,7 @@ class _DetailKalaState extends State<DetailKala> {
                 ],
               ),
             ),
-            Randomlist(list:selectList(widget.select, homeScreenController)),
+            Randomlist(list: selectList(widget.select, homeScreenController)),
           ],
         ),
       )),
@@ -325,7 +325,9 @@ class _DetailKalaState extends State<DetailKala> {
     setState(() {
       if (!myBagList.contains(kalalist[index])) {
         myBagList.add(kalalist[index]);
-        debugPrint(myBagList.length.toString());
+        Get.snackbar('Basket', 'This item added');
+      } else {
+        Get.snackbar('Basket', 'This item was added');
       }
     });
   }

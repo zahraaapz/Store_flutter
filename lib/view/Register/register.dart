@@ -35,7 +35,7 @@ class RegisterScreen extends StatelessWidget {
                     myTextField(
                       maxLength: 4,
                       controller: MyTextEditingController.preNum,
-                      textInputType: TextInputType.number,
+                      textInputType: TextInputType.phone,
                       size: Get.size,
                       width: Get.width /6.5,
                       hintText: '+11',

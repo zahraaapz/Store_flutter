@@ -53,7 +53,7 @@ class Address extends StatelessWidget {
                 children: [
                   myTextField(
                     maxLength: 4,
-                      textInputType: TextInputType.number,
+                      textInputType: TextInputType.phone,
                       size: size,
                       controller: MyTextEditingController.preNum,
                       width: size.width /6.5,

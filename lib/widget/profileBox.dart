@@ -9,21 +9,22 @@ import '../component/text_style.dart';
 import '../constant/color.dart';
 import '../constant/storage.dart';
 class ProfileBox extends StatefulWidget {
-const ProfileBox({super.key,this.height,this.width});
+ ProfileBox({super.key,this.height,this.width});
 final height;
 final width;
+File? image;
   @override
-  State<ProfileBox> createState() => _ProfileBoxState();
+  State<ProfileBox> createState() => _ProfileBoxState(image);
 
   
 }
 
 class _ProfileBoxState extends State<ProfileBox> {
 
-String ?appDocPath;
-File? _image;
+String ? appDocPath;
+File? image;
 
-
+_ProfileBoxState(this.image);
 
 Future<void> getApplicationDirectory()async{
  Directory directory=await getApplicationDocumentsDirectory();
@@ -38,38 +39,27 @@ appDocPath=directory.path;
   }
 Future _getImage()async{
 
-final picker=ImagePicker();
 
-final pickedfile=await picker.pickImage(source:ImageSource.gallery);
 
-if(pickedfile==null) return;
+final pickedfile=await ImagePicker().pickImage(source:ImageSource.gallery);
 
-_image=File(pickedfile.path);
 
-const name='bg';
-final File localImage=await _image!.copy('$appDocPath/$name');
+image=File(pickedfile!.path);
+
+
+final File localImage=await image!.copy('$appDocPath/bg');
 
 setState(() {
-  
+
 });
 
 
 }
 
 
-
   @override
   Widget build(BuildContext context) {
-    
- late Image ima;
-   var haslocalImage=File('$appDocPath/bg').existsSync();
 
-   if (haslocalImage) {
-     var byte=File('$appDocPath/bg').readAsBytesSync();
- 
-   
-    ima=Image.memory(byte,fit: BoxFit.fill,width: 90,height: 100,);
-   }
     return Container(
             height: widget.height ,
             width: widget.width ,
@@ -88,12 +78,12 @@ setState(() {
                       },
                       
                       child:
-                      File('$appDocPath/bg').existsSync()?
+                   image!=null?
                   
                        ClipRRect(
                        
                       borderRadius: BorderRadius.circular(40),
-                      child: ima,)
+                      child: Image.file(image!,width: 100,height:110,fit: BoxFit.fill,),)
                     :
                       const Icon(CupertinoIcons.profile_circled,size: 110,color: Rang.grey,)),
                   Column(
