@@ -1,7 +1,15 @@
+import 'dart:io';
+
+import 'package:appstore/component/extention.dart';
 import 'package:appstore/route_manager/route_name.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
+import '../../component/dim.dart';
 import '../../component/text_style.dart';
+import '../../constant/color.dart';
 import '../../constant/storage.dart';
 import '../../widget/ButtonWidgetRevesed.dart';
 import '../../widget/profileBox.dart';
@@ -15,8 +23,52 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+
+
+String? appDocPath;
+File? image;
+
+  Future<void> getApplicationDirectory() async {
+    Directory directory = await getApplicationDocumentsDirectory();
+    appDocPath = directory.path;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getApplicationDirectory();
+  }
+
+
+
+
+  Future _getImage() async {
+    final pickedfile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    image = File(pickedfile!.path);
+
+    final File localImage = await image!.copy('$appDocPath/bg');
+
+    setState(() {
+
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+ Image? ima;
+    var hasLocalImage = File('$appDocPath/bg').existsSync();
+    if (hasLocalImage) {
+          var byte = File('$appDocPath/bg').readAsBytesSync();
+            ima = Image.memory(
+        byte,
+        width: 100,
+        height: 110,
+        fit: BoxFit.fill,
+      );
+    }
+  
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -30,13 +82,8 @@ class _ProfileState extends State<Profile> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: ProfileBox(
-              height: Get.height / 6,
-              width: Get.width / 1.01,
-            ),
-          ),
+      profileBox(ima,_getImage),
+      
           profileProperty(
               'Personal Informantion', () => Get.toNamed(RouteNames.personal)),
           profileProperty(
@@ -49,23 +96,23 @@ class _ProfileState extends State<Profile> {
             child: SizedBox(
               width: double.infinity,
               child: ButtonWidgetRevesed(
-                onPressed: () {
+                onPressed: ()async {
                   MyStorage.box.erase();
                   Get.offNamed(RouteNames.root);
+              try {
+                  if (File('$appDocPath/bg').existsSync()) {
+                    await File('$appDocPath/bg').delete();
+                    setState(() {
+                      ima = null;
+                    });
+                  }
+                } catch (e) {
+                  // Error in getting access to the file.
+                  print('$e');
+                }
 
-              Future<void>del()async{
- 
-       if (ProfileBox().image!=null) {
-        await ProfileBox().image!.delete();
-      setState(() {
-        ProfileBox().image=null;
-      });
-           
-  
- }
 
 
-}
                 },
                 title: 'Log Out',
                 iconData: Icons.exit_to_app,
@@ -76,6 +123,8 @@ class _ProfileState extends State<Profile> {
       ),
     );
   }
+
+
 }
 
 
