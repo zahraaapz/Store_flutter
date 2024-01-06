@@ -42,13 +42,13 @@ class Payments extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                MyStorage.box.read(StorageNames.street),
+                                MyStorage.box.read(StorageNames.street)??'--',
                                     style: textStyle.bodyMedium,
                                   ),
                                  
                                    (Dim.large/2).width,
                                   Text(
-                              MyStorage.box.read(StorageNames.city),
+                              MyStorage.box.read(StorageNames.city)??'--',
                                     style: textStyle.bodyMedium,
                                   ),
                                 ],
@@ -56,7 +56,7 @@ class Payments extends StatelessWidget {
                               InkWell(
                                 onTap: () {
                                   //To do:edit
-                                  Get.off(RouteNames.address);
+                                  Get.offNamed(RouteNames.address);
                                 },
                                 child: Container(
                                     height: Get.height/14.5,

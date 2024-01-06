@@ -31,7 +31,8 @@ import 'package:get_storage/get_storage.dart';
   }
 
   void saveInfo() {
-      box.write(StorageNames.preNum,
+      box.write(
+        StorageNames.preNum,
        MyTextEditingController.preNum.text);
                           box.write(StorageNames.number,
        MyTextEditingController.number.text);
@@ -42,6 +43,12 @@ import 'package:get_storage/get_storage.dart';
                           box.write(StorageNames.userName,
        MyTextEditingController.userName.text);
                           box.write(StorageNames.fullName,
+       MyTextEditingController.fullName.text); 
+           box.write(StorageNames.city,
+       MyTextEditingController.fullName.text);  
+          box.write(StorageNames.street,
+       MyTextEditingController.fullName.text); 
+          box.write(StorageNames.pin,
        MyTextEditingController.fullName.text);
   }
 

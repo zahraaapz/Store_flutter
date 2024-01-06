@@ -284,37 +284,46 @@ showlist(){
                           endIndent: 30,
                           height: 1.5,
                         ),
-                        CheckboxListTile(
-                            title: Text(
+        RadioListTile(  
+          
+          groupValue:selectedRadioTile ,
+           title: Text(
                               'Brand',
                               style: textStyle.headlineMedium,
                             ),
-                            fillColor: MaterialStateProperty.all(Rang.blue),
-                            value: checkBoxPriceBrand[0],
+                            activeColor:Rang.blue,
+                            value: '3',
                             onChanged: (value) {
                               setState(() {
-                                checkBoxPriceBrand[0] = value!;
+                               selectedRadioTile= value.toString();
+                               checkBoxPriceBrand[0] = true;
                               });
 
                               checkBoxPriceBrand[0] == true
                                   ? showMyDialog(context,filterBrand,widget.selectPage,homeScreenController,brands, level,checkBoxBrands,filterListBrand,selectedBrand)
                                   : null;
                             }),
-                        CheckboxListTile(
-                            title: Text(
+                            RadioListTile(
+                              groupValue: selectedRadioTile,
+                                   title: Text(
                               'Price',
                               style: textStyle.headlineMedium,
                             ),
                             fillColor: MaterialStateProperty.all(Rang.blue),
-                            value: checkBoxPriceBrand[1],
+                            value: '4',
                             onChanged: (value) {
                               setState(() {
-                                checkBoxPriceBrand[1] = value!;
+                                selectedRadioTile = value.toString();
+                      checkBoxPriceBrand[1] = true;
+
                               });
                               checkBoxPriceBrand[1] == true
                                   ? bottomSheetLimitedPrice(context,val,prices,filterPrice,homeScreenController,widget.selectPage, level)
                                   : null;
-                            }),
+                            }
+                            )
+                     
+                    
                       ],
                     ),
                   ));

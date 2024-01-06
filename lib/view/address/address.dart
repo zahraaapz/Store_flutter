@@ -155,7 +155,7 @@ class Address extends StatelessWidget {
   }
 
   onPressed(context) {
-MyStorage().saveInfo();
+    MyStorage().saveInfo();
 
     if (MyTextEditingController.street.text.isNotEmpty &&
         MyTextEditingController.city.text.isNotEmpty &&
