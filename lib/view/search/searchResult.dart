@@ -4,7 +4,7 @@ import 'package:appstore/widget/emptyColumn.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../constant/string.dart';
-import '../../widget/iconANDtitle.dart';
+import '../../widget/icon&title.dart';
 
 class SearchResult extends StatelessWidget {
   const SearchResult({super.key, });
@@ -21,7 +21,7 @@ class SearchResult extends StatelessWidget {
               child: Row(
                 children: [
                  
-                 iconANDtitle('Search Result', Icons.arrow_back_ios_new),
+                 iconAndTitle('Search Result', Icons.arrow_back_ios_new),
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 2.6,
                   ),

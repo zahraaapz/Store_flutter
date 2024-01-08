@@ -1,12 +1,12 @@
 import 'package:appstore/component/extention.dart';
 import 'package:appstore/component/text_style.dart';
-import 'package:appstore/constant/storage.dart';
-import 'package:appstore/constant/textEditController.dart';
 import 'package:appstore/widget/ButtonWidget.dart';
 import 'package:appstore/widget/myTextField.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../component/dim.dart';
+import '../../component/storage.dart';
+import '../../component/textEditController.dart';
+import '../../constant/dim.dart';
 import '../../route_manager/route_name.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -52,7 +52,7 @@ class RegisterScreen extends StatelessWidget {
                 ),
               Dim.large.height,
                 myTextField(
-                  maxLength: 20,
+                  maxLength: 35,
                   controller: MyTextEditingController.email,
                   size: Get.size,
                   width: Get.width / 1.02,
@@ -64,7 +64,7 @@ class RegisterScreen extends StatelessWidget {
                   size: Get.size,
                   width: Get.width / 1.02,
                   hintText: 'Username',
-                  maxLength: 9
+                  maxLength:20
                 ),
               Dim.large.height,
                 myTextField(

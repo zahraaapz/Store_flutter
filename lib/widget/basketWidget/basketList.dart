@@ -1,9 +1,9 @@
 import 'package:appstore/component/extention.dart';
 import 'package:flutter/material.dart';
-import '../../component/dim.dart';
 import '../../component/text_style.dart';
 import '../../constant/color.dart';
-import '../../model/Model.dart';
+import '../../constant/dim.dart';
+import '../../model/model.dart';
 
 class BasketList extends StatelessWidget {
   BasketList({

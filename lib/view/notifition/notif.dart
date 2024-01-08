@@ -3,12 +3,12 @@ import 'package:appstore/route_manager/route_name.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../component/dim.dart';
+import '../../component/storage.dart';
 import '../../component/text_style.dart';
 import '../../constant/color.dart';
-import '../../constant/storage.dart';
+import '../../constant/dim.dart';
 import '../../widget/ButtonWidgetRevesed.dart';
-import '../../widget/iconANDtitle.dart';
+import '../../widget/icon&title.dart';
 
 
 
@@ -26,7 +26,7 @@ class Notif extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  iconANDtitle('Notification',Icons.arrow_back_ios_new)
+                  iconAndTitle('Notification',Icons.arrow_back_ios_new)
                 ,
                   SizedBox(
                     width: MediaQuery.of(context).size.width /2.3,

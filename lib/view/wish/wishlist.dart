@@ -5,11 +5,11 @@ import 'package:appstore/model/Model.dart';
 import 'package:appstore/widget/emptyColumn.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../component/dim.dart';
+import '../../component/storage.dart';
 import '../../component/text_style.dart';
-import '../../constant/storage.dart';
+import '../../constant/dim.dart';
 import '../../constant/string.dart';
-import '../../widget/iconANDtitle.dart';
+import '../../widget/icon&title.dart';
 
 class Wish extends StatefulWidget {
   const Wish({super.key});
@@ -24,7 +24,7 @@ class _WishState extends State<Wish> {
     return SafeArea(
         child: Scaffold(
             body: Column(children: [
-      iconANDtitle('Wishlist', Icons.arrow_back_ios),
+      iconAndTitle('Wishlist', Icons.arrow_back_ios),
       (Dim.large).height,
       wishList.isEmpty
           ? const EmptyColumn(

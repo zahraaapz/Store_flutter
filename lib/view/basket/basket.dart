@@ -4,7 +4,7 @@ import '../../model/Model.dart';
 import '../../widget/basketWidget/basketList.dart';
 import '../../widget/basketWidget/cut.dart';
 import '../../widget/basketWidget/factorWidget.dart';
-import '../../widget/iconANDtitle.dart';
+import '../../widget/icon&title.dart';
 import '../../widget/emptyColumn.dart';
 import '../../widget/myTextField.dart';
 import '../../constant/string.dart';
@@ -31,7 +31,7 @@ class _BasketState extends State<Basket> {
           backgroundColor: const Color.fromARGB(31, 116, 114, 114),
           body: Column(
             children: [
-              iconANDtitle('My Bag', Icons.close),
+              iconAndTitle('My Bag', Icons.close),
               myBagList.isEmpty
                   ? const EmptyColumn(
                       image: 'assets/image/emptyBag.png',

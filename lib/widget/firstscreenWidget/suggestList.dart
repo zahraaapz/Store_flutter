@@ -4,7 +4,7 @@ import 'package:appstore/component/extention.dart';
 import 'package:appstore/widget/firstscreenWidget/bottomsheetSuggest.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../component/dim.dart';
+import '../../constant/dim.dart';
 import '../../component/text_style.dart';
 
 

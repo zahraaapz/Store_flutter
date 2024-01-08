@@ -1,4 +1,4 @@
-import 'package:appstore/constant/textEditController.dart';
+import 'package:appstore/component/textEditController.dart';
 import 'package:get_storage/get_storage.dart';
 
  class  MyStorage{

@@ -2,11 +2,10 @@
 import 'package:appstore/route_manager/route_name.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../component/dim.dart';
+import '../../constant/dim.dart';
 import '../../component/text_style.dart';
 import '../../model/Model.dart';
-import '../../view/selectType/select_kala.dart';
+import '../../view/SelectType/select_kala.dart';
 import '../profileBox.dart';
 class Mydrawer extends StatelessWidget {
    Mydrawer({super.key, required this.size});

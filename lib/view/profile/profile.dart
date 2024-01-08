@@ -1,16 +1,13 @@
 import 'dart:io';
 
-import 'package:appstore/component/extention.dart';
 import 'package:appstore/route_manager/route_name.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
-import '../../component/dim.dart';
+import '../../component/storage.dart';
 import '../../component/text_style.dart';
-import '../../constant/color.dart';
-import '../../constant/storage.dart';
 import '../../widget/ButtonWidgetRevesed.dart';
 import '../../widget/profileBox.dart';
 import '../../widget/profileProperty.dart';

@@ -4,18 +4,18 @@ import 'package:appstore/route_manager/binding.dart';
 import 'package:appstore/route_manager/route_name.dart';
 import 'package:appstore/view/Register/register.dart';
 import 'package:appstore/view/Register/signup.dart';
-import 'package:appstore/view/address/address.dart';
-import 'package:appstore/view/firstScreen/mainScreen.dart';
-import 'package:appstore/view/notifition/notif.dart';
-import 'package:appstore/view/payment/payment.dart';
-import 'package:appstore/view/profile/personal_info.dart';
-import 'package:appstore/view/review/review.dart';
-import 'package:appstore/view/search/search.dart';
-import 'package:appstore/view/search/searchResult.dart';
+import 'package:appstore/view/Address/address.dart';
+import 'package:appstore/view/FirstScreen/mainScreen.dart';
+import 'package:appstore/view/Notifition/notif.dart';
+import 'package:appstore/view/Payment/payment.dart';
+import 'package:appstore/view/Profile/personal_info.dart';
+import 'package:appstore/view/Review/review.dart';
+import 'package:appstore/view/Search/search.dart';
+import 'package:appstore/view/Search/searchResult.dart';
 import 'package:get/get.dart';
 
-import '../view/splash/splash-screen.dart';
-import '../view/wish/wishlist.dart';
+import '../view/Splash/splash-screen.dart';
+import '../view/Wish/wishlist.dart';
 
 abstract class RoutePage{
 

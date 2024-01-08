@@ -1,12 +1,11 @@
 import 'package:appstore/component/extention.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../component/dim.dart';
+import '../constant/dim.dart';
 import '../component/text_style.dart';
 import '../constant/color.dart';
 
-Padding iconANDtitle(String title, IconData icon) {
+Padding iconAndTitle(String title, IconData icon) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: Row(children: [

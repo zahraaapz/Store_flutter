@@ -9,10 +9,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import '../../component/dim.dart';
 import '../../component/text_style.dart';
+import '../../constant/dim.dart';
 import '../../widget/ButtonWidget.dart';
-import '../../widget/iconANDtitle.dart';
+import '../../widget/icon&title.dart';
 import '../../widget/myTextField.dart';
 import 'chart.dart';
 
@@ -58,7 +58,7 @@ class _ReviewState extends State<Review> {
                           children: [
                             SizedBox(
                                 child: Row(children: [
-                              iconANDtitle('Review', Icons.arrow_back_ios_new),
+                              iconAndTitle('Review', Icons.arrow_back_ios_new),
                               Text(
                                 "${(comment[0].score + comment[1].score + comment[2].score + comment[3].score + comment[4].score) / 5}",
                                 style: textStyle.bodyMedium,

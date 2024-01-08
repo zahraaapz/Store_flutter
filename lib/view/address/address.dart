@@ -5,13 +5,13 @@ import 'package:appstore/constant/color.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../component/dim.dart';
+import '../../component/storage.dart';
+import '../../component/textEditController.dart';
 import '../../component/text_style.dart';
-import '../../constant/storage.dart';
-import '../../constant/textEditController.dart';
+import '../../constant/dim.dart';
 import '../../route_manager/route_name.dart';
 import '../../widget/ButtonWidget.dart';
-import '../../widget/iconANDtitle.dart';
+import '../../widget/icon&title.dart';
 import '../../widget/myTextField.dart';
 
 class Address extends StatelessWidget {
@@ -30,7 +30,7 @@ class Address extends StatelessWidget {
           child: SingleChildScrollView(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              iconANDtitle('My Address', Icons.arrow_back_ios),
+              iconAndTitle('My Address', Icons.arrow_back_ios),
                 (Dim.small*5).width
 ,
               Text('Contact Information', style: textStyle.bodyMedium),

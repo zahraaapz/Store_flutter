@@ -5,11 +5,11 @@ import 'package:appstore/constant/color.dart';
 import 'package:appstore/route_manager/route_name.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../component/dim.dart';
-import '../../constant/storage.dart';
-import '../../constant/textEditController.dart';
+import '../../component/storage.dart';
+import '../../component/textEditController.dart';
+import '../../constant/dim.dart';
 import '../../widget/ButtonWidget.dart';
-import '../../widget/iconANDtitle.dart';
+import '../../widget/icon&title.dart';
 import '../../widget/myTextField.dart';
 
 class Personal extends StatelessWidget {
@@ -27,7 +27,7 @@ class Personal extends StatelessWidget {
           child: SingleChildScrollView(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              iconANDtitle('My Information', Icons.arrow_back_ios),
+              iconAndTitle('My Information', Icons.arrow_back_ios),
               (Dim.small).height,
               const Text('Contact Information', style: TextStyle(fontSize: 16)),
               const Divider(
@@ -52,7 +52,7 @@ class Personal extends StatelessWidget {
                   controller: MyTextEditingController.number),
               (Dim.medium + 3).height,
               myTextField(
-                  maxLength: 20,
+                  maxLength: 35,
                   width: double.infinity,
                   size: Get.size,
                   hintText: 'Email Address',

@@ -3,9 +3,9 @@ import 'package:appstore/widget/firstscreenWidget/shoesSize.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../component/dim.dart';
 import '../../component/text_style.dart';
 import '../../constant/color.dart';
+import '../../constant/dim.dart';
 import '../../model/Model.dart';
 import '../ButtonWidget.dart';
 

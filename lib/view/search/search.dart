@@ -5,8 +5,8 @@ import 'package:appstore/route_manager/route_name.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../component/dim.dart';
 import '../../component/text_style.dart';
+import '../../constant/dim.dart';
 import '../../model/Model.dart';
 
 

@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:appstore/view/basket/basket.dart';
-import 'package:appstore/view/firstScreen/extractMainScreen.dart';
+import 'package:appstore/view/Basket/basket.dart';
+import 'package:appstore/view/FirstScreen/extractMainScreen.dart';
 import 'package:appstore/model/Model.dart';
 import 'package:appstore/constant/color.dart';
 import 'package:appstore/view/profile/profile.dart';

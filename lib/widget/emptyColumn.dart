@@ -4,7 +4,7 @@ import '../../widget/contentEmptyPages.dart';
 import 'package:flutter/material.dart';
 import '../../widget/titleEmtypage.dart';
 import 'package:appstore/component/extention.dart';
-import '../../component/dim.dart';
+import '../constant/dim.dart';
 
 class EmptyColumn extends StatelessWidget {
   const EmptyColumn({super.key, this.image, this.title, this.content});

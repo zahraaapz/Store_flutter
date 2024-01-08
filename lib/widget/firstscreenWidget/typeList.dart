@@ -2,7 +2,7 @@
 
 import '../../component/text_style.dart';
 import '../../model/Model.dart';
-import '../../view/selectType/select_kala.dart';
+import '../../view/SelectType/select_kala.dart';
 
 SizedBox typeList(Size size,select) {
     //seslect clothes or...
