@@ -11,6 +11,7 @@ Container profileBox(Image? ima ,Function () _getImage) {
     return Container(
     height:Get.height/6,
     width:Get.width/1.01,
+    margin:const EdgeInsets.all(10.0),
     padding: const EdgeInsets.all(15),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(15),
@@ -24,10 +25,16 @@ Container profileBox(Image? ima ,Function () _getImage) {
               _getImage();
             },
             child: ima != null
-                ? ClipRRect(
-                    borderRadius: BorderRadius.circular(40),
-                    child: ima,
-                  )
+                ? 
+                Container(
+                 
+                  width: 100,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(image: ima.image,fit:BoxFit.fill)
+                  ),
+                )
+                
                 : const Icon(
                     CupertinoIcons.profile_circled,
                     size: 110,

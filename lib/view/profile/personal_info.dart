@@ -94,7 +94,7 @@ class Personal extends StatelessWidget {
     MyStorage.box
         .write(StorageNames.number, MyTextEditingController.number.text);
     MyStorage.box
-        .write(StorageNames.email, MyTextEditingController.number.text);
+        .write(StorageNames.email, MyTextEditingController.email.text);
 
     if (MyTextEditingController.fullName.text.isNotEmpty &&
         MyTextEditingController.email.text.isNotEmpty &&

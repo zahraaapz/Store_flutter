@@ -1,6 +1,5 @@
-  import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../component/text_style.dart';
 import '../../constant/color.dart';
 import '../../route_manager/route_name.dart';
@@ -35,7 +34,7 @@ Row appBar(Size size, BuildContext context,GlobalKey<ScaffoldState>  _key) {
         ),
         SizedBox(
           width: size.width / 2.4,
-          height: size.height / 20,
+          height: size.height / 30,
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
          IconButton(onPressed: () {
